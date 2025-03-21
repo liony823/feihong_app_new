@@ -1,5 +1,5 @@
 import 'package:ducafe_ui_core/ducafe_ui_core.dart';
-import 'package:feihong_app_new/widgets/widgets.dart';
+import 'package:feihong/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
 import 'style.dart';

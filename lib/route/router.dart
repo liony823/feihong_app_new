@@ -1,5 +1,5 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:feihong_app_new/global.dart';
+import 'package:feihong/global.dart';
 
 @AutoRouterConfig(
     replaceInRouteName: 'Page,Route',

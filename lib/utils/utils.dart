@@ -1,7 +1,7 @@
 import 'package:azlistview/azlistview.dart';
 import 'package:ducafe_ui_core/ducafe_ui_core.dart';
-import 'package:feihong_app_new/i18n/localized.g.dart';
-import 'package:feihong_app_new/theme/style.dart';
+import 'package:feihong/i18n/localized.g.dart';
+import 'package:feihong/theme/style.dart';
 import 'package:flutter/material.dart';
 import 'package:toastification/toastification.dart';
 import 'package:world_countries/world_countries.dart';

@@ -1,11 +1,10 @@
 import 'package:dio/dio.dart';
-import 'package:feihong_app_new/utils/utils.dart';
+import 'package:feihong/utils/utils.dart';
 import '../config.dart';
 import '../global.dart';
 import '../i18n/localized.g.dart';
 
 var dio = Dio();
-
 
 class HttpUtil {
   static void init() {
@@ -16,7 +15,6 @@ class HttpUtil {
     }, onError: (DioException e, handler) {
       return handler.next(e); //continue
     }));
-
 
     dio.options.baseUrl = Config.apiURL;
     dio.options.connectTimeout = const Duration(seconds: 10); //30s
