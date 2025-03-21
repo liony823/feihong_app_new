@@ -1,3 +1,14 @@
 {
-    "appNmae":"飞宏"
+    "appNmae":"飞宏",
+    "httpError(map)": {
+        "title":"发生错误",
+        "networkError": "网络连接超时，请检查网络或者代理",
+        "connectionTimeout": "网络连接超时，请检查网络或者代理",
+        "sendTimeout": "网络请求超时，请检查网络或者代理",
+        "receiveTimeout": "网络请求超时，请检查网络或者代理",
+        "badCertificate": "证书错误，请联系管理员",
+        "badResponse": "服务器错误，请联系管理员",
+        "connectionError": "与服务器无法建立连接，请检查网络或者代理",
+        "unknown": "服务器错误，请联系管理员"
+    }
 }
