@@ -1,9 +1,11 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:feihong/global.dart';
 
+import 'router.gr.dart';
+
 @AutoRouterConfig(
     replaceInRouteName: 'Page,Route',
-    generateForDir: ['lib/pages'],
+    generateForDir: ['lib/pages/ui'],
     deferredLoading: true)
 class AppRouter extends RootStackRouter {
   AppRouter() : super(navigatorKey: Global.navigatorKey);
@@ -26,5 +28,22 @@ class AppRouter extends RootStackRouter {
   RouteType get defaultRouteType => RouteType.adaptive();
 
   @override
-  List<AutoRoute> get routes => [];
+  List<AutoRoute> get routes => [
+        AutoRoute(
+          page: SplashRoute.page,
+          initial: true,
+        ),
+        AutoRoute(
+          page: SignupRoute.page,
+        ),
+        AutoRoute(
+          page: SigninRoute.page,
+        ),
+        AutoRoute(
+          page: HomeRoute.page,
+        ),
+        AutoRoute(
+          page: LangRoute.page,
+        )
+      ];
 }

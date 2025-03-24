@@ -10,6 +10,9 @@ class DataSp {
   static const String _appLang = 'appLang';
   static const String _appTheme = 'appTheme';
 
+  static String get uid => getUserCertification()?.uid ?? '';
+  static String get token => getUserCertification()?.token ?? '';
+
   static init() async {
     await SpUtil().init();
   }

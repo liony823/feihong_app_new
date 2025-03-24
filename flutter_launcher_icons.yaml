@@ -1,9 +1,10 @@
-flutter_icons:
+flutter_launcher_icons:
   android: true
   ios: true
   remove_alpha_ios: true
   image_path: "launcher_icon/icon.png"
-
+  padding: 12
+  background_color: "#FFFFFF"
 
 
 #  flutter pub get

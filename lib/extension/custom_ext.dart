@@ -143,7 +143,6 @@ class SvgView extends StatelessWidget {
   Widget build(BuildContext context) {
     return SvgPicture.asset(
       icon,
-      package: "common",
       width: width ?? 24.w,
       height: height ?? 24.w,
       fit: fit ?? BoxFit.contain,
@@ -179,7 +178,6 @@ class ImageView extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Image.asset(
         name,
-        package: 'common',
         width: width,
         height: height,
         color: color,

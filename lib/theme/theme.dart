@@ -109,7 +109,7 @@ class AppTheme {
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
           padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 4.h),
-          side: BorderSide(color: Styles.primaryDark, width: 2),
+          side: BorderSide(color: Styles.brandColorLight, width: 2),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8.r),
           ),
@@ -388,7 +388,7 @@ class AppTheme {
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
           padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 4.h),
-          side: BorderSide(color: Styles.primaryDark, width: 2),
+          side: BorderSide(color: Styles.brandColorDark, width: 2),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8.r),
           ),

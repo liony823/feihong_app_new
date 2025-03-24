@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 
 class Styles {
   // 品牌色 - Brand Colors
-  static const brandColor = Color(0xFF1E88E5); // 主色调 - teal blue
+  static const brandColor = Color(0xFF0089FF); // 主色调 - teal blue
+  static const brandColorLight = Color(0xFF0089FF); // 主色调 - teal blue
+  static const brandColorDark =
+      Color.fromARGB(255, 73, 105, 233); // 主色调 - teal blue
   static const primaryLight = Color(0xFFFFFFFF); // 主色浅色
   static const primaryDark = Color(0xFF262626); // 主色深色
   static const secondaryColor = Color(0xFF000000); // 次要品牌色 - coral orange

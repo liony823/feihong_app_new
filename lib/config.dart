@@ -9,7 +9,6 @@ import 'utils/data_sp.dart';
 import 'utils/http_util.dart';
 
 class Config {
-  static const apiURL = 'https://api.feihong.com';
   static late String appName;
 
   static Future init(Function() runApp) async {
