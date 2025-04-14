@@ -1,49 +1,46 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:feihong/global.dart';
+import 'package:common/common.dart';
 
-import 'router.gr.dart';
+import './router.gr.dart';
+export 'router.gr.dart';
 
 @AutoRouterConfig(
     replaceInRouteName: 'Page,Route',
-    generateForDir: ['lib/pages/ui'],
+    generateForDir: ['lib/ui'],
     deferredLoading: true)
 class AppRouter extends RootStackRouter {
   AppRouter() : super(navigatorKey: Global.navigatorKey);
-
-  static const String splash = 'Splash';
-
-  static const String signup = 'Signup';
-  static const String signin = 'Signin';
-
-  static const String verifyCode = 'VerifyCode';
-  static const String forgetPassword = 'ForgetPassword';
-
-  static const String resetPassword = 'ResetPassword';
-
-  static const String home = 'Home';
-
-  static const String profile = 'Profile';
 
   @override
   RouteType get defaultRouteType => RouteType.adaptive();
 
   @override
   List<AutoRoute> get routes => [
-        AutoRoute(
+        CustomRoute(
           page: SplashRoute.page,
+          keepHistory: false,
           initial: true,
+          transitionsBuilder: TransitionsBuilders.noTransition,
         ),
         AutoRoute(
           page: SignupRoute.page,
         ),
-        AutoRoute(
+        CustomRoute(
           page: SigninRoute.page,
+          transitionsBuilder: TransitionsBuilders.noTransition,
+        ),
+        CustomRoute(
+          page: LoginWithDeviceRoute.page,
+          transitionsBuilder: TransitionsBuilders.noTransition,
         ),
         AutoRoute(
           page: HomeRoute.page,
         ),
         AutoRoute(
           page: LangRoute.page,
+        ),
+        AutoRoute(
+          page: WebViewRoute.page,
         )
       ];
 }

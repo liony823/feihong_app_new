@@ -1,0 +1,60 @@
+{
+  "appNmae": "Fei-hong",
+  "agreement": {
+    "checkbox(rich)": "I have read and agree to $userAgreement and $privacyPolicy",
+    "hint": "In order to better protect your legitimate rights and interests, please read and agree to the following agreement",
+    "privacyPolicy": "Privacy Policy",
+    "title": "User Agreement and Privacy Policy",
+    "userAgreement": "User Agreement"
+  },
+  "httpError(map)": {
+    "badCertificate": "Certificate error, please contact the administrator",
+    "badResponse": "Server error, please contact the administrator",
+    "connectionError": "The connection cannot be established with the server, please check the network or proxy",
+    "connectionTimeout": "The network connection timed out, please check the network or agent",
+    "networkError": "The network connection timed out, please check the network or agent",
+    "receiveTimeout": "Network request timeout, please check the network or proxy",
+    "sendTimeout": "Network request timeout, please check the network or proxy",
+    "title": "An error occurred",
+    "unknown": "Server error, please contact the administrator"
+  },
+  "login": {
+    "forgotPassword": "forget the password?",
+    "loginWithAutoRegisterHint": "Whether to register an account and log in according to your mobile phone device number",
+    "loginWithDevice": "Automatic device registration and login",
+    "loginWithName": "Username login",
+    "loginWithPhone": "Mobile phone number login",
+    "nameLabel": "username",
+    "namePlaceholder": "Please enter your username",
+    "noAccountYet": "Don't have an account yet?",
+    "passwordLabel": "password",
+    "passwordPlaceholder": "Please enter your password",
+    "phoneLabel": "Phone number",
+    "phonePlaceholder": "Please enter your mobile phone number",
+    "submit": "Log in now"
+  },
+  "register": {
+    "hasAccount": "Already have an account?",
+    "invitationCode": "Invitation code",
+    "invitationCodePlaceholder": "Please enter your invitation code",
+    "nameLabel": "username",
+    "namePlaceholder": "Please enter your username",
+    "passwordLabel": "password",
+    "passwordPlaceholder": "Please enter your password",
+    "phoneLabel": "Phone number",
+    "phonePlaceholder": "Please enter your mobile phone number",
+    "registerWithAutoRegisterHint": "Whether to register an account based on your mobile phone device number",
+    "registerWithDevice": "Automatic device registration",
+    "registerWithName": "Username registration",
+    "registerWithPhone": "Mobile phone number registration",
+    "submit": "Register now"
+  },
+  "verify": {
+    "plsEnterVerificationCode": "Please enter your verification code",
+    "resendVerificationCode": "Resend verification code",
+    "sendVerificationCode": "Send verification code",
+    "verificationCode": "Verification code",
+    "verificationCodeTimingReminder": "Retrieve the verification code after %sS"
+  },
+  "welcome": "Welcome to Feihong"
+}

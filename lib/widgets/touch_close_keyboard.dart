@@ -25,10 +25,10 @@ class TouchCloseSoftKeyboard extends StatelessWidget {
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   colors: [
-                    const Color.fromARGB(255, 210, 240, 255), // 浅蓝色
-                    const Color.fromARGB(255, 225, 245, 255), // 更浅的蓝色
-                    const Color.fromARGB(255, 240, 250, 255), // 接近白色的浅蓝
-                    Colors.white, // 纯白色
+                    const Color.fromARGB(255, 210, 240, 255),
+                    const Color.fromARGB(255, 225, 245, 255),
+                    const Color.fromARGB(255, 240, 250, 255),
+                    const Color(0xFFFBFBFD),
                   ],
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,

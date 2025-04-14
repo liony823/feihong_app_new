@@ -84,6 +84,7 @@ dependencies:
   shared_preferences: ^2.5.2
   stack_trace: ^1.12.1
   scroll_to_index: ^3.0.1
+  flutter_native_splash: ^2.4.6
 
 
   # 网络请求
@@ -94,6 +95,9 @@ dependencies:
     git:
       url: https://github.com/liony823/WuKongIMFlutterSDK.git
       ref: master
+
+  common:
+    path: ./common
 
 dev_dependencies:
   flutter_test:
@@ -108,10 +112,7 @@ dev_dependencies:
   build_runner: ^2.4.6
   json_serializable: ^6.9.0
   flutter_lints: ^5.0.0
-  freezed: ^3.0.3
-  slang_build_runner: ^4.4.2
   flutter_launcher_icons: ^0.13.1
-  flutter_native_splash: ^2.2.19
   riverpod_generator: ^2.6.5
   auto_route_generator: ^10.0.1
 
@@ -133,6 +134,7 @@ flutter:
   assets:
     - assets/images/
     - assets/svgs/
+    - assets/fonts/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
@@ -144,28 +146,26 @@ flutter:
   # in this "flutter" section. Each entry in this list should have a
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
-  # example:
   fonts:
     - family: NotoSansSC
       fonts:
-        - asset: fonts/NotoSansSC-Thin.ttf
+        - asset: assets/fonts/NotoSansSC-Thin.ttf
           weight: 100
-        - asset: fonts/NotoSansSC-ExtraLight.ttf
+        - asset: assets/fonts/NotoSansSC-ExtraLight.ttf
           weight: 200
-        - asset: fonts/NotoSansSC-Light.ttf
+        - asset: assets/fonts/NotoSansSC-Light.ttf
           weight: 300
-        - asset: fonts/NotoSansSC-Regular.ttf
+        - asset: assets/fonts/NotoSansSC-Regular.ttf
           weight: 400
-        - asset: fonts/NotoSansSC-Medium.ttf
+        - asset: assets/fonts/NotoSansSC-Medium.ttf
           weight: 500
-        - asset: fonts/NotoSansSC-SemiBold.ttf
+        - asset: assets/fonts/NotoSansSC-SemiBold.ttf
           weight: 600
-        - asset: fonts/NotoSansSC-Bold.ttf
+        - asset: assets/fonts/NotoSansSC-Bold.ttf
           weight: 700
-        - asset: fonts/NotoSansSC-Black.ttf
+        - asset: assets/fonts/NotoSansSC-Black.ttf
           weight: 800
-        - asset: fonts/NotoSansSC-ExtraBold.ttf
+        - asset: assets/fonts/NotoSansSC-ExtraBold.ttf
           weight: 900
-  #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package

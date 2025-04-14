@@ -1,21 +1,24 @@
 import 'dart:io';
 
+import 'package:common/common.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-
-import 'i18n/localized.g.dart';
-import 'utils/data_sp.dart';
-import 'utils/http_util.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 class Config {
   static late String appName;
+  static AppConfig? appConfig;
 
   static Future init(Function() runApp) async {
-    WidgetsFlutterBinding.ensureInitialized();
+    WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+    FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
     await DataSp.init();
+    await LocaleSettings.useDeviceLocale();
     HttpUtil.init();
-    LocaleSettings.useDeviceLocale();
+    await getAppConfig();
+
+    FlutterNativeSplash.remove();
 
     runApp();
 
@@ -33,5 +36,17 @@ class Config {
 
     final packageInfo = await PackageInfo.fromPlatform();
     appName = packageInfo.appName;
+  }
+
+  // 获取应用配置
+  static Future<AppConfig> getAppConfig() async {
+    // 获取应用版本信息
+    final packageInfo = await PackageInfo.fromPlatform();
+    final version = double.tryParse(packageInfo.version) ?? 1.0;
+
+    // 调用 API 获取应用配置
+    final config = await Apis.getAppConfig(version);
+    appConfig = AppConfig.fromJson(config);
+    return appConfig!;
   }
 }
