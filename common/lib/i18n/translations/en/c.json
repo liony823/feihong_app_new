@@ -1,22 +1,14 @@
 {
-  "appNmae": "Fei-hong",
   "agreement": {
     "checkbox(rich)": "I have read and agree to $userAgreement and $privacyPolicy",
-    "hint": "In order to better protect your legitimate rights and interests, please read and agree to the following agreement",
+    "hint": "In order to better protect your legitimate rights and interests, please read and agree to the User Agreement and Privacy Policy",
     "privacyPolicy": "Privacy Policy",
     "title": "User Agreement and Privacy Policy",
     "userAgreement": "User Agreement"
   },
-  "httpError(map)": {
-    "badCertificate": "Certificate error, please contact the administrator",
-    "badResponse": "Server error, please contact the administrator",
-    "connectionError": "The connection cannot be established with the server, please check the network or proxy",
-    "connectionTimeout": "The network connection timed out, please check the network or agent",
-    "networkError": "The network connection timed out, please check the network or agent",
-    "receiveTimeout": "Network request timeout, please check the network or proxy",
-    "sendTimeout": "Network request timeout, please check the network or proxy",
-    "title": "An error occurred",
-    "unknown": "Server error, please contact the administrator"
+  "appNmae": "Feihong",
+  "language": {
+    "title": "Language settings"
   },
   "login": {
     "forgotPassword": "forget the password?",
@@ -30,31 +22,54 @@
     "passwordLabel": "password",
     "passwordPlaceholder": "Please enter your password",
     "phoneLabel": "Phone number",
+    "phoneOrPasswordEmpty": "Mobile phone number or password cannot be empty",
     "phonePlaceholder": "Please enter your mobile phone number",
-    "submit": "Log in now"
+    "submit": "Log in now",
+    "usernameOrPasswordEmpty": "Username or password cannot be empty",
+    "usernameOrPasswordError": "Incorrect username or password"
   },
   "register": {
+    "confirmPasswordEmpty": "Please fill in the confirmation password",
+    "confirmPasswordError": "Passwords are inconsistent",
+    "confirmPasswordLabel": "Confirm Password",
+    "confirmPasswordPlaceholder": "Please confirm your password",
     "hasAccount": "Already have an account?",
     "invitationCode": "Invitation code",
+    "invitationCodeEmpty": "Please fill in the invitation code",
+    "invitationCodeError": "Invitation code error",
     "invitationCodePlaceholder": "Please enter your invitation code",
     "nameLabel": "username",
     "namePlaceholder": "Please enter your username",
+    "passwordEmpty": "Please enter your password",
+    "passwordError": "Password format error (6-18 characters, letters or numbers)",
     "passwordLabel": "password",
     "passwordPlaceholder": "Please enter your password",
+    "phoneEmpty": "Please enter your mobile phone number",
+    "phoneError": "Mobile phone number format error",
     "phoneLabel": "Phone number",
     "phonePlaceholder": "Please enter your mobile phone number",
     "registerWithAutoRegisterHint": "Whether to register an account based on your mobile phone device number",
     "registerWithDevice": "Automatic device registration",
     "registerWithName": "Username registration",
     "registerWithPhone": "Mobile phone number registration",
-    "submit": "Register now"
+    "submit": "Register now",
+    "title": "Register an account",
+    "usernameEmpty": "Please enter your username",
+    "usernameError": "Username format wrong (6-18-bit characters, cannot contain illegal characters)"
   },
   "verify": {
+    "confirmSend": "Confirm send",
     "plsEnterVerificationCode": "Please enter your verification code",
     "resendVerificationCode": "Resend verification code",
     "sendVerificationCode": "Send verification code",
     "verificationCode": "Verification code",
-    "verificationCodeTimingReminder": "Retrieve the verification code after %sS"
+    "verificationCodeTimingReminder": "Retrieve verification code after $seconds S"
   },
-  "welcome": "Welcome to Feihong"
+  "welcome": "Welcome to Feihong",
+  "zone": {
+    "cancel": "Cancel",
+    "search": "Search for countries/regions",
+    "select": "choose",
+    "title": "Select a country/region"
+  }
 }

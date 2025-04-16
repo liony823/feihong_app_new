@@ -57,7 +57,7 @@ class LangPage extends HookConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(context.t.language.title),
+        title: Text(context.t.c.language.title),
       ),
       body: ListView.builder(
         padding: EdgeInsets.symmetric(vertical: 16.w),

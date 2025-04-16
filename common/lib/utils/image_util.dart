@@ -1,11 +1,8 @@
 import 'dart:io';
 
 import 'package:common/common.dart';
-import 'package:ducafe_ui_core/ducafe_ui_core.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
-
-import '../resource/images.dart';
 
 class ImageUtil {
   ImageUtil._();

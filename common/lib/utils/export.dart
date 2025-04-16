@@ -6,3 +6,6 @@ export 'package:common/utils/apis.dart';
 export 'package:common/utils/global.dart';
 export 'package:common/utils/image_util.dart';
 export 'package:common/utils/im_util.dart';
+export 'package:common/utils/constants.dart';
+export 'package:common/utils/regex_util.dart';
+export 'package:common/utils/view_util.dart';

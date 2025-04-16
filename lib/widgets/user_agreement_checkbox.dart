@@ -20,7 +20,7 @@ class UserAgreementCheckbox extends StatelessWidget {
     final htmlContent = Config.appConfig?.userAgreementContent;
     Global.context!.router.push(WebViewRoute(
       htmlContent: htmlContent,
-      title: context.t.agreement.userAgreement,
+      title: context.t.c.agreement.userAgreement,
     ));
   }
 
@@ -28,7 +28,7 @@ class UserAgreementCheckbox extends StatelessWidget {
     final htmlContent = Config.appConfig?.privacyPolicyContent;
     Global.context!.router.push(WebViewRoute(
       htmlContent: htmlContent,
-      title: context.t.agreement.privacyPolicy,
+      title: context.t.c.agreement.privacyPolicy,
     ));
   }
 
@@ -44,10 +44,10 @@ class UserAgreementCheckbox extends StatelessWidget {
           Checkbox(value: isChecked, onChanged: onCheck),
           Text.rich(
             style: TextStyle(fontSize: 12.sp, color: Styles.neutral600),
-            context.t.agreement.checkbox(
+            context.t.c.agreement.checkbox(
               userAgreement: TextSpan(
                 recognizer: TapGestureRecognizer()..onTap = _onTapUserAgreement,
-                text: context.t.agreement.userAgreement,
+                text: context.t.c.agreement.userAgreement,
                 style: TextStyle(
                     fontSize: 12.sp,
                     color: Styles.brandColor,
@@ -56,7 +56,7 @@ class UserAgreementCheckbox extends StatelessWidget {
               ),
               privacyPolicy: TextSpan(
                 recognizer: TapGestureRecognizer()..onTap = _onTapPrivacyPolicy,
-                text: context.t.agreement.privacyPolicy,
+                text: context.t.c.agreement.privacyPolicy,
                 style: TextStyle(
                     fontSize: 12.sp,
                     color: Styles.brandColor,

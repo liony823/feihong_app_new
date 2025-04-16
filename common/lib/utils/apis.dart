@@ -1,4 +1,5 @@
 import 'package:common/common.dart';
+import 'package:dio/dio.dart';
 import 'package:wukongimfluttersdk/entity/channel.dart';
 import 'package:wukongimfluttersdk/entity/conversation.dart';
 import 'package:wukongimfluttersdk/entity/msg.dart';
@@ -15,8 +16,20 @@ class Apis {
     return response;
   }
 
-  static getAvatarUrl(String uid) {
+  static Future<List<Country>> getCountryList() async {
+    final response = await HttpUtil.get('$apiURL/common/countries');
+    final countries =
+        (response as List).map((e) => Country.fromJson(e)).toList();
+    return countries;
+  }
+
+  static Future<String> getAvatarUrl(String uid) async {
     return "$apiURL/users/$uid/avatar";
+  }
+
+  static Future<UserInfo> getUserInfo(String uid) async {
+    final response = await HttpUtil.get('$apiURL/users/$uid');
+    return UserInfo.fromJson(response);
   }
 
   static getGroupAvatarUrl(String gid) {
@@ -35,18 +48,137 @@ class Apis {
     return ip;
   }
 
-  static Future<bool> login(String uid, String token) async {
+  static Future<UserCertification?> registerByPhone({
+    required String zone,
+    required String phone,
+    required String code,
+    required String password,
+    required String deviceId,
+    required String deviceName,
+    required String deviceModel,
+    String? name,
+    String? inviteCode,
+  }) async {
     try {
-      await HttpUtil.post(
-        "$apiURL/user/login",
-        data: {'uid': uid, 'token': token, 'device_flag': 0, 'device_level': 1},
+      final response = await HttpUtil.post(
+        '$apiURL/user/register',
+        data: {
+          "zone": zone,
+          "phone": phone,
+          "code": code,
+          "flag": DeviceFlag.mobile,
+          "password": password,
+          "name": name,
+          "invite_code": inviteCode,
+          "device": {
+            "device_id": deviceId,
+            "device_name": deviceName,
+            "device_model": deviceModel,
+          },
+        },
       );
-      return true;
+      if (response['data'] != null) {
+        return UserCertification.fromJson(response['data']);
+      }
+      return null;
     } catch (e) {
-      Logger.print(e);
+      Logger.print("用户通过手机号注册失败$e", isError: true);
+      return null;
+    }
+  }
+
+  static Future<UserCertification?> registerByUsername({
+    required String username,
+    required String password,
+    required String deviceId,
+    required String deviceName,
+    required String deviceModel,
+    String? name,
+    String? inviteCode,
+  }) async {
+    try {
+      final response = await HttpUtil.post(
+        '$apiURL/user/usernameregister',
+        data: {
+          "username": username,
+          "password": password,
+          "name": name,
+          "invite_code": inviteCode,
+          "flag": DeviceFlag.mobile,
+          "device": {
+            "device_id": deviceId,
+            "device_name": deviceName,
+            "device_model": deviceModel,
+          },
+        },
+      );
+      if (response['data'] != null) {
+        return UserCertification.fromJson(response['data']);
+      }
+      return null;
+    } catch (e) {
+      Logger.print("用户通过用户名注册失败$e", isError: true);
+      return null;
+    }
+  }
+
+  static Future<UserCertification> loginByUsername({
+    required String username,
+    required String password,
+    required String deviceId,
+    required String deviceName,
+    required String deviceModel,
+  }) async {
+    final response = await HttpUtil.post(
+      '$apiURL/user/login',
+      data: {
+        'username': username,
+        'password': password,
+        'flag': DeviceFlag.mobile,
+        'device': {
+          'device_id': deviceId,
+          'device_name': deviceName,
+          'device_model': deviceModel,
+        },
+      },
+    );
+    return UserCertification.fromJson(response);
+  }
+
+  static Future<UserCertification> loginByPhone({
+    required String phone,
+    required String password,
+  }) async {
+    final response = await HttpUtil.post(
+      '$apiURL/user/login',
+      data: {'phone': phone, 'password': password},
+    );
+    return UserCertification.fromJson(response);
+  }
+
+  static Future<bool> sendRegisterSmsCode({
+    required String phone,
+    required String zone,
+  }) async {
+    zone = zone.replaceAll('+', '00');
+    try {
+      final response = await HttpUtil.post(
+        '$apiURL/user/sms/registercode',
+        data: {'phone': phone, 'zone': zone},
+      );
+      return response["exist"] == 0;
+    } catch (e) {
       return false;
     }
   }
+
+  static Future updateCurrentUser({
+    required String shortNo,
+    required String name,
+  }) => HttpUtil.put(
+    '$apiURL/user/current',
+    data: {'short_no': shortNo, 'name': name},
+  );
 
   static syncMsgExtra(String channelId, int channelType, int version) async {
     final uid = DataSp.uid;
@@ -84,19 +216,19 @@ class Apis {
     }
   }
 
-  static Future<bool> getUserInfo(String uid) async {
-    try {
-      final response = await HttpUtil.get('$apiURL/users/$uid');
-      var channel = WKChannel(uid, WKChannelType.personal);
-      channel.channelName = response['name'];
-      channel.avatar = response['avatar'];
-      WKIM.shared.channelManager.addOrUpdateChannel(channel);
-      return true;
-    } catch (e) {
-      Logger.print("获取用户信息失败$e");
-      return false;
-    }
-  }
+  // static Future<bool> getUserInfo(String uid) async {
+  //   try {
+  //     final response = await HttpUtil.get('$apiURL/users/$uid');
+  //     var channel = WKChannel(uid, WKChannelType.personal);
+  //     channel.channelName = response['name'];
+  //     channel.avatar = response['avatar'];
+  //     WKIM.shared.channelManager.addOrUpdateChannel(channel);
+  //     return true;
+  //   } catch (e) {
+  //     Logger.print("获取用户信息失败$e");
+  //     return false;
+  //   }
+  // }
 
   static Future<bool> getGroupInfo(String gid) async {
     try {
@@ -249,5 +381,45 @@ class Apis {
     extra.readedCount = extraJson['readed_count'] ?? 0;
     extra.isMutualDeleted = extraJson['is_mutual_deleted'] ?? 0;
     return extra;
+  }
+
+  /// 上传文件
+  static Future<String?> uploadFile(
+    String path, {
+    FileType fileType = FileType.common,
+  }) async {
+    try {
+      final formData = FormData.fromMap({
+        'file': await MultipartFile.fromFile(path),
+      });
+      final response = await HttpUtil.post(
+        '$apiURL/file/upload',
+        data: formData,
+        queryParameters: {"type": fileType.name, "path": path},
+        options: Options(headers: {'Content-Type': 'multipart/form-data'}),
+      );
+      return response['path'];
+    } catch (e) {
+      Logger.print("用户上传文件失败$e", isError: true);
+      return null;
+    }
+  }
+
+  /// 上传头像
+  static Future<bool> uploadAvatar(String path) async {
+    final formData = FormData.fromMap({
+      'file': await MultipartFile.fromFile(path),
+    });
+    try {
+      await HttpUtil.post(
+        '$apiURL/users/${DataSp.uid}/avatar',
+        data: formData,
+        options: Options(headers: {'Content-Type': 'multipart/form-data'}),
+      );
+      return true;
+    } catch (e) {
+      Logger.print("用户上传头像失败$e", isError: true);
+      return false;
+    }
   }
 }

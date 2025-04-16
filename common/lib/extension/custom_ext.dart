@@ -1,13 +1,11 @@
 import 'dart:io';
 
-import 'package:ducafe_ui_core/ducafe_ui_core.dart';
+import 'package:common/common.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
 import 'package:rxdart/rxdart.dart';
 
-import '../theme/style.dart';
 
 extension NumberFormatExt on double {
   String get formatCurrency =>
@@ -49,7 +47,6 @@ extension TextEdCtrlExt on TextEditingController {
 }
 
 extension StrExt on String {
-
   Locale get toLocale {
     return Locale(this);
   }
@@ -68,12 +65,6 @@ extension StrExt on String {
 
   String fixAutoLines() {
     return Characters(this).join('\u{200B}');
-  }
-}
-
-extension LoadingExt on Widget {
-  LoadingView get toLoading {
-    return LoadingView(child: this);
   }
 }
 
@@ -98,38 +89,10 @@ extension TextExt on String {
       .paddingHorizontal(16.w)
       .paddingVertical(8.w);
 
-  Widget get appBarText =>
-      Text(this).fontSize(16.sp).fontWeight(FontWeight.w500);
+  Widget get appBarText => Text(
+    this,
+  ).fontSize(18.sp).fontWeight(FontWeight.w500).fontFamily(AppTheme.fontFamily);
 }
-
-class LoadingView extends StatelessWidget {
-  bool? loading;
-  final Widget child;
-  LoadingView({super.key, this.loading, required this.child});
-
-  @override
-  Widget build(BuildContext context) {
-    return (loading ?? false)
-        ? Stack(
-          alignment: Alignment.center,
-          children: [
-            child,
-            Positioned(
-              child: SizedBox(
-                width: 24.w,
-                height: 24.w,
-                child: CircularProgressIndicator(
-                  strokeWidth: 3,
-                  color: Styles.primaryLight,
-                ),
-              ),
-            ),
-          ],
-        )
-        : child;
-  }
-}
-
 class SvgView extends StatelessWidget {
   SvgView({
     super.key,

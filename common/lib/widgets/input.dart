@@ -98,7 +98,6 @@ class _InputState extends State<Input> {
   final TextEditingController _controller = TextEditingController(text: "");
   final FocusNode _focusNode = FocusNode();
 
-  String inputValue = "";
   double keyboardHeight = 0;
 
   @override
@@ -106,6 +105,7 @@ class _InputState extends State<Input> {
     super.initState();
     initValue();
     _focusNode.addListener(() {
+      final inputValue = _controller.text;
       if (_focusNode.hasFocus) {
         if (widget.keyboardHeightChange != null) {
           widget.keyboardHeightChange!(
@@ -132,9 +132,6 @@ class _InputState extends State<Input> {
     _controller.selection = TextSelection.fromPosition(
       TextPosition(offset: widget.value.length),
     );
-    setState(() {
-      inputValue = widget.value;
-    });
   }
 
   /// 键盘输入时触发
@@ -148,9 +145,6 @@ class _InputState extends State<Input> {
         widget.onChanged!(value);
       }
     }
-    setState(() {
-      inputValue = value ?? '';
-    });
   }
 
   /// 点击完成按钮时触发
@@ -166,9 +160,6 @@ class _InputState extends State<Input> {
       widget.onChanged!("");
     }
     _controller.clear();
-    setState(() {
-      inputValue = "";
-    });
   }
 
   @override

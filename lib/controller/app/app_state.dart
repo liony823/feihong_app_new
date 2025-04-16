@@ -1,3 +1,5 @@
+import 'package:common/common.dart';
+
 class AppState {
   final bool isInitialized;
 
@@ -7,7 +9,8 @@ class AppState {
 
   AppState copyWith({
     bool? isInitialized,
-  }) {
+    List<Country>? countries,
+    }) {
     return AppState(
       isInitialized: isInitialized ?? this.isInitialized,
     );

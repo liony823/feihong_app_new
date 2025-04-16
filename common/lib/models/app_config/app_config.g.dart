@@ -38,7 +38,6 @@ _AppConfig _$AppConfigFromJson(Map<String, dynamic> json) => _AppConfig(
   chargeAndPayoutVisible: (json['charge_and_payout_visible'] as num).toInt(),
   voiceCallVisible: (json['voice_call_visible'] as num).toInt(),
   videoCallVisible: (json['video_call_visible'] as num).toInt(),
-  signupInviteCodeVisible: (json['signup_invite_code_visible'] as num).toInt(),
   signinAuthCodeVisible: (json['signin_auth_code_visible'] as num).toInt(),
   friendOnlineStatusVisible:
       (json['friend_online_status_visible'] as num).toInt(),
@@ -101,7 +100,6 @@ Map<String, dynamic> _$AppConfigToJson(
   'charge_and_payout_visible': instance.chargeAndPayoutVisible,
   'voice_call_visible': instance.voiceCallVisible,
   'video_call_visible': instance.videoCallVisible,
-  'signup_invite_code_visible': instance.signupInviteCodeVisible,
   'signin_auth_code_visible': instance.signinAuthCodeVisible,
   'friend_online_status_visible': instance.friendOnlineStatusVisible,
   'mobile_msg_read_status_visible': instance.mobileMsgReadStatusVisible,

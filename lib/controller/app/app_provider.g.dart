@@ -6,12 +6,12 @@ part of 'app_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$appControllerHash() => r'5c806251d8c0295b96b19b6560c15a4c16275367';
+String _$appControllerHash() => r'90b835d279602e153ff8b3fa33037017e01cee38';
 
 /// See also [AppController].
 @ProviderFor(AppController)
 final appControllerProvider =
-    NotifierProvider<AppController, AppState>.internal(
+    AsyncNotifierProvider<AppController, AppState>.internal(
   AppController.new,
   name: r'appControllerProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -21,6 +21,6 @@ final appControllerProvider =
   allTransitiveDependencies: null,
 );
 
-typedef _$AppController = Notifier<AppState>;
+typedef _$AppController = AsyncNotifier<AppState>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

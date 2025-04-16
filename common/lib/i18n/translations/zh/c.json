@@ -1,0 +1,107 @@
+{
+    "appNmae":"飞宏",
+    "welcome":"欢迎来到飞宏",
+    "confirm":"确 认",
+    "cancel":"取 消",
+    "toolboxAlbum":"相册",
+    "toolboxCamera":"相机",
+    "supportsTypeHint":"仅支持png、jpg、jpeg、gif、bmp及webp格式。",
+    "tapTooShort":"点击时间太短",
+    "talkTooShort": "说话时间太短",
+    "permissionDeniedTitle": "权限被拒绝",
+    "permissionDeniedHint": "请在设置中允许使用%s权限。",
+
+    "agreement":{
+        "userAgreement":"《用户协议》",
+        "privacyPolicy":"《隐私政策》",
+        "checkbox(rich)":"我已阅读并同意 $userAgreement 和 $privacyPolicy",
+        "title":"用户协议和隐私政策",
+        "hint":"为了更好地保障您的合法权益，请您阅读并同意《用户协议》 和 《隐私政策》"
+    },
+
+    "language": {
+        "title":"语言设置"
+    },
+
+    "zone": {
+        "title": "选择国家/地区",
+        "search": "搜索国家/地区",
+        "cancel": "取消",
+        "select": "选择"
+    },
+
+    "login":{
+        "loginWithPhone":"手机号登录",
+        "loginWithName":"用户名登录",
+        "loginWithDevice":"设备自动注册登录",
+        "loginWithAutoRegisterHint":"是否根据手机设备号注册账号并登录",
+        "phoneLabel":"手机号",
+        "nameLabel":"用户名",
+        "passwordLabel":"密码",
+        "phonePlaceholder":"请输入手机号",
+        "namePlaceholder":"请输入用户名",
+        "passwordPlaceholder":"请输入密码",
+        "forgotPassword":"忘记密码？",
+        "noAccountYet":"还没有账号？",
+        "submit":"立即登录",
+        "usernameOrPasswordError":"用户名或密码错误",
+        "usernameOrPasswordEmpty":"用户名或密码不能为空",
+        "phoneOrPasswordEmpty":"手机号或密码不能为空"
+    },
+
+    "register":{
+        "title": "注册账号",
+        "registerWithPhone":"手机号注册",
+        "registerWithName":"用户名注册",
+        "registerWithDevice":"设备自动注册",
+        "registerWithAutoRegisterHint":"是否根据手机设备号注册账号",
+        "invitationCode": "邀请码",
+        "invitationCodePlaceholder": "请输入您的邀请码",
+        "phoneLabel":"手机号",
+        "nameLabel":"用户名",
+        "passwordLabel":"密码",
+        "phonePlaceholder":"请输入手机号",
+        "namePlaceholder":"请输入用户名",
+        "passwordPlaceholder":"请输入密码",
+        "confirmPasswordLabel":"确认密码",
+        "confirmPasswordPlaceholder":"请确认密码",
+        "hasAccount":"已经有账号？",
+        "submit":"立即注册",
+        "usernameEmpty":"请输入用户名",
+        "phoneEmpty":"请输入手机号",
+        "passwordEmpty":"请输入密码",
+        "confirmPasswordEmpty":"请填写确认密码",
+        "invitationCodeEmpty":"请填写邀请码",
+        "invitationCodeError":"邀请码错误",
+        "usernameError":"用户名格式错误（6-18位字符，不能包含非法字符）",
+        "phoneError":"手机号格式错误",
+        "passwordError":"密码格式错误（6-18位字符， 字母或者数字）",
+        "confirmPasswordError":"密码不一致"
+    },
+
+    "verify": {
+        "verificationCode": "验证码",
+        "sendVerificationCode": "发送验证码",
+        "resendVerificationCode": "重发验证码",
+        "verificationCodeTimingReminder": "$seconds秒后重新获取验证码",
+        "plsEnterVerificationCode": "请输入您的验证码",
+        "confirm": "确 认",
+        "sendSuccess": "发送成功"
+    },
+
+    "profile": {
+        "plsCompleteInfo":"请完善个人信息",
+        "plsSetAvatar":"点击设置头像",
+        "plsEnterNickname":"请输入您的昵称",
+        "plsEnterUsername":"请输入您的用户名",
+        "username":"用户名",
+        "nickname":"昵称",
+        "avatar":"头像",
+        "usernameValidateError":"用户名格式错误（6-18位字符，不能包含非法字符）",
+        "nicknameValidateError":"昵称格式错误（2-12位字符，不能包含非法字符）",
+        "usernameHelperText":"用户名仅可修改一次。",
+        "submit":"提交",
+        "submitSuccess":"提交成功",
+        "submitFailed":"提交失败"
+    }
+}

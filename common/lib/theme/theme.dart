@@ -166,7 +166,7 @@ class AppTheme {
           return Styles.primaryLight;
         }),
       ),
-      cardTheme: CardTheme(
+      cardTheme: CardThemeData(
         color: Styles.backgroundColor,
         elevation: 0,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.r)),

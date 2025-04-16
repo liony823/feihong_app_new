@@ -28,7 +28,7 @@ class LoginWithDevicePage extends HookConsumerWidget {
               ..width = 64.w
               ..height = 64.h,
             16.verticalSpace,
-            Text(context.t.welcome)
+            Text(context.t.c.welcome)
                 .fontSize(18.sp)
                 .textColor(Styles.brandColor)
                 .fontWeight(FontWeight.w500),
@@ -38,7 +38,7 @@ class LoginWithDevicePage extends HookConsumerWidget {
               spacing: 24.h,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                LoginTab(title: context.t.login.loginWithDevice),
+                LoginTab(title: context.t.c.login.loginWithDevice),
                 _buildAutoRegisterForm(context),
                 Container(
                   width: double.infinity,
@@ -46,7 +46,7 @@ class LoginWithDevicePage extends HookConsumerWidget {
                   child: FilledButton(
                     onPressed:
                         state.isChecked ? controller.signinWithDevice : null,
-                    child: Text(context.t.login.submit),
+                    child: Text(context.t.c.login.submit),
                   ),
                 )
               ],
@@ -72,7 +72,7 @@ class LoginWithDevicePage extends HookConsumerWidget {
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 36.w, vertical: 24.h),
             child: Center(
-              child: Text(context.t.login.loginWithAutoRegisterHint)
+              child: Text(context.t.c.login.loginWithAutoRegisterHint)
                   .fontSize(15.sp)
                   .textColor(Styles.neutral700)
                   .fontWeight(FontWeight.w500),

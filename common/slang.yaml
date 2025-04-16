@@ -1,0 +1,10 @@
+base_locale: zh
+fallback_strategy: base_locale
+input_file_pattern: ".json"
+input_directory: lib/i18n/translations
+output_directory: lib/i18n
+output_file_name: localized.g.dart
+class_name: Localized
+namespaces: true
+maps:
+interfaces:

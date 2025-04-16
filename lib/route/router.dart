@@ -41,6 +41,12 @@ class AppRouter extends RootStackRouter {
         ),
         AutoRoute(
           page: WebViewRoute.page,
+        ),
+        AutoRoute(
+          page: VerifyPhoneRoute.page,
+        ),
+        AutoRoute(
+          page: SetSelfInfoRoute.page,
         )
       ];
 }

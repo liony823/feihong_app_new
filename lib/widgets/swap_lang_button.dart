@@ -1,16 +1,21 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:common/common.dart';
-import 'package:feihong/controller/auth/signin_provier.dart';
+import 'package:feihong/route/router.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:world_countries/world_countries.dart';
 
 class SwapLangButton extends HookConsumerWidget {
   const SwapLangButton({super.key});
+
+  void _onPressed() {
+    Global.context!.router.push(const LangRoute());
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final controller = ref.read(signinControllerProvider.notifier);
     return TextButton(
-      onPressed: controller.toLangPage,
+      onPressed: _onPressed,
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [

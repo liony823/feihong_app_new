@@ -11,20 +11,25 @@ class SplashPage extends HookConsumerWidget {
   const SplashPage({super.key});
 
   _initialApp() async {
-    final uid = DataSp.uid;
-    final token = DataSp.token;
-    if (uid.isEmpty || token.isEmpty) {
-      if (Config.appConfig?.loginType == 4) {
-        Global.context!.router.replace(const LoginWithDeviceRoute());
-      } else {
-        Global.context!.router.replace(const SigninRoute());
-      }
+    if (Config.appConfig?.loginType == 4) {
+      Global.context!.router.replace(const LoginWithDeviceRoute());
     } else {
-      await IMUtils.initIM(uid, token);
-      Future.delayed(const Duration(milliseconds: 1500), () {
-        Global.context!.router.replace(const HomeRoute());
-      });
+      Global.context!.router.replace(const SigninRoute());
     }
+    // final uid = DataSp.uid;
+    // final token = DataSp.token;
+    // if (uid.isEmpty || token.isEmpty) {
+    //   if (Config.appConfig?.loginType == 4) {
+    //     Global.context!.router.replace(const LoginWithDeviceRoute());
+    //   } else {
+    //     Global.context!.router.replace(const SigninRoute());
+    //   }
+    // } else {
+    //   await IMUtils.initIM(uid, token);
+    //   Future.delayed(const Duration(milliseconds: 1500), () {
+    //     Global.context!.router.replace(const HomeRoute());
+    //   });
+    // }
   }
 
   @override

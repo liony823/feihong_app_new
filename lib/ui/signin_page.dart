@@ -19,7 +19,6 @@ class SigninPage extends StatefulHookConsumerWidget {
 
 class _State extends ConsumerState<SigninPage> with TickerProviderStateMixin {
   late TabController _tabController;
-  final _formKey = GlobalKey<FormBuilderState>();
 
   @override
   void initState() {
@@ -52,7 +51,7 @@ class _State extends ConsumerState<SigninPage> with TickerProviderStateMixin {
                   ..width = 64.w
                   ..height = 64.h,
                 16.verticalSpace,
-                Text(context.t.welcome)
+                Text(context.t.c.welcome)
                     .fontSize(18.sp)
                     .textColor(Styles.brandColor)
                     .fontWeight(FontWeight.w500),
@@ -69,14 +68,15 @@ class _State extends ConsumerState<SigninPage> with TickerProviderStateMixin {
   }
 
   Widget _buildForm(BuildContext context, {ValueNotifier<bool>? obscure}) {
+    final controller = ref.watch(signinControllerProvider.notifier);
     final List<String> tabs = [
       if (Config.appConfig?.loginType == 3 || Config.appConfig?.loginType == 1)
-        context.t.login.loginWithName,
+        context.t.c.login.loginWithName,
       if (Config.appConfig?.loginType == 3 || Config.appConfig?.loginType == 2)
-        context.t.login.loginWithPhone,
+        context.t.c.login.loginWithPhone,
     ];
     return FormBuilder(
-      key: _formKey,
+      key: controller.formKey,
       child: SizedBox(
         height: 446.h,
         child: Column(spacing: 24.w, children: [
@@ -115,11 +115,11 @@ class _State extends ConsumerState<SigninPage> with TickerProviderStateMixin {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               _buildFormLabelView(context,
-                  label: context.t.login.nameLabel,
+                  label: context.t.c.login.nameLabel,
                   icon: EvaIcons.person_outline),
               Input(
                 name: 'username',
-                placeholder: context.t.login.namePlaceholder,
+                placeholder: context.t.c.login.namePlaceholder,
                 keyboardType: TextInputType.text,
                 textInputAction: TextInputAction.next,
               ),
@@ -130,11 +130,11 @@ class _State extends ConsumerState<SigninPage> with TickerProviderStateMixin {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               _buildFormLabelView(context,
-                  label: context.t.login.passwordLabel,
+                  label: context.t.c.login.passwordLabel,
                   icon: EvaIcons.lock_outline),
               Input(
                 name: 'password',
-                placeholder: context.t.login.passwordPlaceholder,
+                placeholder: context.t.c.login.passwordPlaceholder,
                 keyboardType: TextInputType.visiblePassword,
                 suffixIcon: IconButton(
                   onPressed: () => obscure.value = !obscure.value,
@@ -151,8 +151,14 @@ class _State extends ConsumerState<SigninPage> with TickerProviderStateMixin {
               SizedBox(
                 width: double.infinity,
                 child: FilledButton(
-                  onPressed: state.isChecked ? controller.signin : null,
-                  child: Text(context.t.login.submit),
+                  onPressed: () {
+                    if (state.isChecked) {
+                      controller.signin('username');
+                    } else {
+                      Utils.simpleToast(context.t.c.agreement.hint);
+                    }
+                  },
+                  child: Text(context.t.c.login.submit),
                 ),
               ),
               _buildFormBottomView(context),
@@ -178,13 +184,17 @@ class _State extends ConsumerState<SigninPage> with TickerProviderStateMixin {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               _buildFormLabelView(context,
-                  label: context.t.login.phoneLabel,
+                  label: context.t.c.login.phoneLabel,
                   icon: EvaIcons.phone_outline),
               Input(
                 name: 'phone',
-                placeholder: context.t.login.phonePlaceholder,
+                placeholder: context.t.c.login.phonePlaceholder,
                 keyboardType: TextInputType.phone,
                 textInputAction: TextInputAction.next,
+                prefixIcon: InputPhoneCode(
+                  onOpenPicker: controller.onOpenZonePicker,
+                  areaCode: state.zone,
+                ),
               ),
             ],
           ),
@@ -192,11 +202,11 @@ class _State extends ConsumerState<SigninPage> with TickerProviderStateMixin {
             spacing: 12.w,
             children: [
               _buildFormLabelView(context,
-                  label: context.t.login.passwordLabel,
+                  label: context.t.c.login.passwordLabel,
                   icon: EvaIcons.lock_outline),
               Input(
                 name: 'password',
-                placeholder: context.t.login.passwordPlaceholder,
+                placeholder: context.t.c.login.passwordPlaceholder,
                 keyboardType: TextInputType.visiblePassword,
                 textInputAction: TextInputAction.done,
                 suffixIcon: IconButton(
@@ -214,8 +224,14 @@ class _State extends ConsumerState<SigninPage> with TickerProviderStateMixin {
               SizedBox(
                 width: double.infinity,
                 child: FilledButton(
-                  onPressed: state.isChecked ? controller.signin : null,
-                  child: Text(context.t.login.submit),
+                  onPressed: () {
+                    if (state.isChecked) {
+                      controller.signin('phone');
+                    } else {
+                      Utils.simpleToast(context.t.c.agreement.hint);
+                    }
+                  },
+                  child: Text(context.t.c.login.submit),
                 ),
               ),
               _buildFormBottomView(context),
@@ -243,19 +259,20 @@ class _State extends ConsumerState<SigninPage> with TickerProviderStateMixin {
 
   /// 忘记密码和立即注册
   Widget _buildFormBottomView(BuildContext context) {
+    final controller = ref.read(signinControllerProvider.notifier);
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         TextButton(
           onPressed: () {},
-          child: Text(context.t.login.forgotPassword)
+          child: Text(context.t.c.login.forgotPassword)
               .fontSize(12.sp)
               .textColor(Styles.neutral600),
         ),
         TextButton(
-          onPressed: () {},
-          child: Text(context.t.login.noAccountYet)
+          onPressed: controller.toSignup,
+          child: Text(context.t.c.login.noAccountYet)
               .fontSize(12.sp)
               .textColor(Styles.deepBlueColor),
         ),

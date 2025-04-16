@@ -41,22 +41,25 @@ class RectIndicator extends Decoration {
     this.height = 2,
   });
   @override
-  _CustomPainter createBoxPainter([VoidCallback? onChanged]) {
-    return _CustomPainter(this, onChanged,
-        bottomLeftRadius: bottomLeftRadius,
-        bottomRightRadius: bottomRightRadius,
-        color: color,
-        gradient: gradient,
-        topLeftRadius: topLeftRadius,
-        topRightRadius: topRightRadius,
-        bottomPadding: bottomPadding,
-        leftPadding: leftPadding,
-        width: width,
-        height: height);
+  CustomPainter createBoxPainter([VoidCallback? onChanged]) {
+    return CustomPainter(
+      this,
+      onChanged,
+      bottomLeftRadius: bottomLeftRadius,
+      bottomRightRadius: bottomRightRadius,
+      color: color,
+      gradient: gradient,
+      topLeftRadius: topLeftRadius,
+      topRightRadius: topRightRadius,
+      bottomPadding: bottomPadding,
+      leftPadding: leftPadding,
+      width: width,
+      height: height,
+    );
   }
 }
 
-class _CustomPainter extends BoxPainter {
+class CustomPainter extends BoxPainter {
   final RectIndicator decoration;
   final double topRightRadius;
   final double topLeftRadius;
@@ -68,7 +71,7 @@ class _CustomPainter extends BoxPainter {
   final double leftPadding;
   final double width;
   final double height;
-  _CustomPainter(
+  CustomPainter(
     this.decoration,
     VoidCallback? onChanged, {
     required this.topRightRadius,
@@ -103,13 +106,14 @@ class _CustomPainter extends BoxPainter {
     }
     paint.strokeWidth = 3;
     canvas.drawRRect(
-        RRect.fromRectAndCorners(
-          rect,
-          bottomRight: Radius.circular(bottomRightRadius),
-          bottomLeft: Radius.circular(bottomLeftRadius),
-          topLeft: Radius.circular(topLeftRadius),
-          topRight: Radius.circular(topRightRadius),
-        ),
-        paint);
+      RRect.fromRectAndCorners(
+        rect,
+        bottomRight: Radius.circular(bottomRightRadius),
+        bottomLeft: Radius.circular(bottomLeftRadius),
+        topLeft: Radius.circular(topLeftRadius),
+        topRight: Radius.circular(topRightRadius),
+      ),
+      paint,
+    );
   }
 }

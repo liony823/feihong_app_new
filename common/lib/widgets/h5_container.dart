@@ -162,7 +162,7 @@ Page resource error:
                 color: Styles.brandColor,
                 minHeight: 2,
               )
-              : const SizedBox(),
+              : WebViewWidget(controller: _controller),
         ],
       ),
     );
