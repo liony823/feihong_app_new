@@ -30,8 +30,9 @@ class ViewUtils {
     }
 
     final context = Global.context!;
-    showBottomSheet(
+    showModalBottomSheet(
       context: context,
+      backgroundColor: Colors.transparent,
       builder:
           (context) => BottomSheetView(
             items: [

@@ -68,6 +68,7 @@ class LocalizedCZh {
 	late final LocalizedCRegisterZh register = LocalizedCRegisterZh.internal(_root);
 	late final LocalizedCVerifyZh verify = LocalizedCVerifyZh.internal(_root);
 	late final LocalizedCProfileZh profile = LocalizedCProfileZh.internal(_root);
+	late final LocalizedCSetSelfSecurityZh setSelfSecurity = LocalizedCSetSelfSecurityZh.internal(_root);
 }
 
 // Path: errors
@@ -127,8 +128,9 @@ class LocalizedErrorsZh {
 		'errJwtSecretNotConfigured': '没有配置jwt.secret',
 		'errUsernameRegisterOff': '用户名已注册功能已关闭',
 		'errRequestDataError': '请求数据格式有误',
-		'errUsernameLengthInvalid': '用户名长度无效',
-		'errUsernameLoginLengthInvalid': '用户名必须在6-18位',
+		'errNicknameEmpty': '用户昵称不能为空',
+		'errUsernameEmpty': '用户名不能为空',
+		'errUsernameNotInvalid': '用户名须以字母开头，仅支持使用6～18个字母、数字、下划线自由组合',
 		'errInviteCodeEmpty': '邀请码不能为空',
 		'errInviteCodeNotExist': '邀请码不存在',
 		'errPasswordEmpty': '密码不能为空',
@@ -457,6 +459,23 @@ class LocalizedCProfileZh {
 	String get submitFailed => '提交失败';
 }
 
+// Path: c.setSelfSecurity
+class LocalizedCSetSelfSecurityZh {
+	LocalizedCSetSelfSecurityZh.internal(this._root);
+
+	final Localized _root; // ignore: unused_field
+
+	// Translations
+	String get title => '设置密保问题';
+	String get question => '密保问题';
+	String get answer => '密保答案';
+	String get plsEnterQuestion => '我的真实姓名';
+	String get plsEnterAnswer => '请输入';
+	String get questionOrAnswerEmpty => '密保问题或答案不能为空';
+	String get submitSuccess => '设置成功';
+	String get submit => '完 成';
+}
+
 /// Flat map(s) containing all translations.
 /// Only for edge cases! For simple maps, use the map function of this library.
 extension on Localized {
@@ -551,6 +570,14 @@ extension on Localized {
 			case 'c.profile.submit': return '提交';
 			case 'c.profile.submitSuccess': return '提交成功';
 			case 'c.profile.submitFailed': return '提交失败';
+			case 'c.setSelfSecurity.title': return '设置密保问题';
+			case 'c.setSelfSecurity.question': return '密保问题';
+			case 'c.setSelfSecurity.answer': return '密保答案';
+			case 'c.setSelfSecurity.plsEnterQuestion': return '我的真实姓名';
+			case 'c.setSelfSecurity.plsEnterAnswer': return '请输入';
+			case 'c.setSelfSecurity.questionOrAnswerEmpty': return '密保问题或答案不能为空';
+			case 'c.setSelfSecurity.submitSuccess': return '设置成功';
+			case 'c.setSelfSecurity.submit': return '完 成';
 			case 'errors.somethingUnexpected': return '发生了一些意外，请稍后再试';
 			case 'errors.retry': return '重试';
 			case 'errors.httpError.title': return '发生错误';
@@ -598,8 +625,9 @@ extension on Localized {
 			case 'errors.error.errJwtSecretNotConfigured': return '没有配置jwt.secret';
 			case 'errors.error.errUsernameRegisterOff': return '用户名已注册功能已关闭';
 			case 'errors.error.errRequestDataError': return '请求数据格式有误';
-			case 'errors.error.errUsernameLengthInvalid': return '用户名长度无效';
-			case 'errors.error.errUsernameLoginLengthInvalid': return '用户名必须在6-18位';
+			case 'errors.error.errNicknameEmpty': return '用户昵称不能为空';
+			case 'errors.error.errUsernameEmpty': return '用户名不能为空';
+			case 'errors.error.errUsernameNotInvalid': return '用户名须以字母开头，仅支持使用6～18个字母、数字、下划线自由组合';
 			case 'errors.error.errInviteCodeEmpty': return '邀请码不能为空';
 			case 'errors.error.errInviteCodeNotExist': return '邀请码不存在';
 			case 'errors.error.errPasswordEmpty': return '密码不能为空';

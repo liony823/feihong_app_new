@@ -6,7 +6,7 @@ part of 'set_self_info_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$setSelfInfoHash() => r'f68564cb0701ac75766d938a5506adafe344e498';
+String _$setSelfInfoHash() => r'19699a41baf2ca75f71280f21836c842c6948b6a';
 
 /// Copied from Dart SDK
 class _SystemHash {

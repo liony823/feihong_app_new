@@ -3,15 +3,15 @@ import 'package:common/common.dart';
 class FakeData {
   static UserInfo get fakeUserInfo => UserInfo(
     uid: '1',
-    username: '张三',
-    name: '张三',
+    username: '张三李四',
+    name: '张三李四',
     zone: '1',
     phone: '1',
     mute: 0,
     top: 0,
     sex: 0,
     category: '1',
-    shortNo: '1',
+    shortNo: 'feihong_user',
     chatPwdOn: 0,
     screenshot: 0,
     revokeRemind: 0,

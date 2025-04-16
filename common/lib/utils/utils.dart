@@ -14,12 +14,12 @@ class Utils {
     showToast(
       text,
       position: position,
-      radius: 12.r,
+      radius: 8.r,
       backgroundColor: Styles.backgroundColorDark,
       margin: EdgeInsets.only(left: 46.w, right: 46.w, top: 24.h),
       textPadding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
       textStyle: TextStyle(
-        fontSize: 12.sp,
+        fontSize: 14.sp,
         fontWeight: FontWeight.w600,
         color: Styles.primaryLight,
       ),

@@ -28,64 +28,87 @@ class SetSelfInfoPage extends HookConsumerWidget {
     return Scaffold(
         appBar: AppBar(title: context.t.c.profile.plsCompleteInfo.appBarText),
         body: Center(
-          child: FormBuilder(
-            key: controller.formKey,
-            child: Column(
-              spacing: 24.w,
-              children: [
-                48.verticalSpace,
-                switch (currentUser) {
-                  AsyncData(:final value) => _buildBody(context, value),
-                  AsyncError(:final error) => ErrorRetryWidget(
-                      message: error.toString(),
-                      onRetry: () {
-                        ref.invalidate(getCurrentUserProvider(uid));
-                      },
-                    ),
-                  _ => Skeletonizer(
-                      enabled: true,
-                      child: _buildBody(context, FakeData.fakeUserInfo),
-                    ),
-                },
-                Container(
-                  width: double.infinity,
-                  padding: EdgeInsets.symmetric(horizontal: 24.w),
-                  child: FilledButton(
-                    onPressed: controller.submit,
-                    child: Text(context.t.c.profile.submit),
+          child: Column(
+            spacing: 24.w,
+            children: [
+              48.verticalSpace,
+              switch (currentUser) {
+                AsyncData(:final value) => (() {
+                    // 先更新表单值，再构建UI
+                    WidgetsBinding.instance.addPostFrameCallback((_) {
+                      controller.formKey.currentState?.patchValue({
+                        'username': value.username,
+                        'nickname': value.name,
+                      });
+                    });
+                    return _buildBody(context, controller.formKey, value,
+                        onAvatarTap: controller.openPhotoSheet);
+                  })(),
+                AsyncError(:final error) => ErrorRetryWidget(
+                    message: error.toString(),
+                    onRetry: () {
+                      ref.invalidate(getCurrentUserProvider(uid));
+                    },
                   ),
-                )
-              ],
-            ),
+                AsyncLoading() => Skeletonizer(
+                    enabled: true,
+                    child: _buildBody(
+                        context, controller.formKey, FakeData.fakeUserInfo),
+                  ),
+                _ => const SizedBox.shrink(),
+              },
+              Container(
+                width: double.infinity,
+                padding: EdgeInsets.symmetric(horizontal: 24.w),
+                child: FilledButton(
+                  onPressed: controller.submit,
+                  child: Text(context.t.c.profile.submit),
+                ),
+              )
+            ],
           ),
         ));
   }
 
-  Widget _buildBody(BuildContext context, UserInfo userInfo) {
-    return Column(
-      spacing: 24.w,
-      children: [
-        _buildAvatarView(context),
-        _buildItemView(context,
-            name: 'username',
-            title: context.t.c.profile.username,
-            initialValue: userInfo.shortNo,
-            helperText: context.t.c.profile.usernameHelperText,
-            placeholder: context.t.c.profile.plsEnterUsername),
-        _buildItemView(context,
-            name: 'nickname',
-            title: context.t.c.profile.nickname,
-            initialValue: userInfo.name,
-            placeholder: context.t.c.profile.plsEnterNickname),
-      ],
+  Widget _buildBody(BuildContext context, GlobalKey formKey, UserInfo userInfo,
+      {VoidCallback? onAvatarTap}) {
+    return FormBuilder(
+      key: formKey,
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 24.w),
+        child: Column(
+          children: [
+            _buildAvatarView(context, onAvatarTap: onAvatarTap),
+            24.verticalSpace,
+            Divider(
+              color: Styles.dividerColor,
+              indent: 0,
+              endIndent: 0,
+            ),
+            _buildItemView(context,
+                name: 'username',
+                isDisabled: true,
+                title: context.t.c.profile.username,
+                initialValue: userInfo.shortNo,
+                placeholder: context.t.c.profile.plsEnterUsername),
+            _buildItemView(context,
+                name: 'nickname',
+                title: context.t.c.profile.nickname,
+                initialValue: userInfo.name,
+                placeholder: context.t.c.profile.plsEnterNickname),
+          ],
+        ),
+      ),
     );
   }
 
-  Widget _buildAvatarView(BuildContext context) {
+  Widget _buildAvatarView(BuildContext context, {VoidCallback? onAvatarTap}) {
     return Column(
       children: [
         Skeleton.shade(
           child: UserProfileAvatar(
+            onAvatarTap: onAvatarTap,
+            radius: 26.r,
             avatarUrl: '',
             avatarBorderData: AvatarBorderData(
               borderColor: Styles.brandColor,
@@ -108,32 +131,43 @@ class SetSelfInfoPage extends HookConsumerWidget {
       required String title,
       String? initialValue,
       String? placeholder,
-      String? helperText,
+      bool isDisabled = false,
       bool autofocus = false}) {
-    return Container(
-      height: 52.h,
-      padding: EdgeInsets.symmetric(horizontal: 24.w),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(title).textColor(Styles.neutral700).fontSize(14.sp),
-          Expanded(
-            child: FormBuilderTextField(
-              name: name,
-              initialValue: initialValue,
-              textAlign: TextAlign.right,
-              autofocus: autofocus,
-              textInputAction:
-                  autofocus ? TextInputAction.done : TextInputAction.next,
-              decoration: InputDecoration(
-                border: InputBorder.none,
-                hintText: placeholder,
-                helperText: helperText,
-              ),
+    return Opacity(
+      opacity: isDisabled ? 0.75 : 1,
+      child: Container(
+        height: 46.h,
+        decoration: BoxDecoration(
+          border: Border(
+            bottom: BorderSide(
+              color: Styles.dividerColor,
             ),
-          )
-        ],
+          ),
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            SizedBox(
+                width: 108.w,
+                child: Text(title).fontSize(16.sp).fontWeight(FontWeight.w500)),
+            Expanded(
+              child: FormBuilderTextField(
+                name: name,
+                enabled: !isDisabled,
+                initialValue: initialValue,
+                textAlign: TextAlign.left,
+                autofocus: autofocus,
+                textInputAction:
+                    autofocus ? TextInputAction.done : TextInputAction.next,
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                  hintText: placeholder,
+                ),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

@@ -103,5 +103,16 @@
         "submit":"提交",
         "submitSuccess":"提交成功",
         "submitFailed":"提交失败"
+    },
+
+    "setSelfSecurity":{
+        "title":"设置密保问题",
+        "question":"密保问题",
+        "answer":"密保答案",
+        "plsEnterQuestion":"我的真实姓名",
+        "plsEnterAnswer":"请输入",
+        "questionOrAnswerEmpty":"密保问题或答案不能为空",
+        "submitSuccess":"设置成功",
+        "submit":"完 成"
     }
 }

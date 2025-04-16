@@ -39,7 +39,7 @@ class Apis {
   static Future<String> getIP(String uid) async {
     String ip = '';
     try {
-      final response = await HttpUtil.get('$apiURL/users/$uid/route');
+      final response = await HttpUtil.get('$apiURL/users/$uid/im');
       ip = response['tcp_addr'];
     } catch (e) {
       ip = '';
@@ -122,38 +122,59 @@ class Apis {
     }
   }
 
-  static Future<UserCertification> loginByUsername({
+  static Future<UserCertification?> loginByUsername({
     required String username,
     required String password,
     required String deviceId,
     required String deviceName,
     required String deviceModel,
   }) async {
-    final response = await HttpUtil.post(
-      '$apiURL/user/login',
-      data: {
-        'username': username,
-        'password': password,
-        'flag': DeviceFlag.mobile,
-        'device': {
+    try {
+      final response = await HttpUtil.post(
+        '$apiURL/user/usernamelogin',
+        data: {
+          'username': username,
+          'password': password,
+          'flag': DeviceFlag.mobile,
+          'device': {
+            'device_id': deviceId,
+            'device_name': deviceName,
+            'device_model': deviceModel,
+          },
+        },
+      );
+      return UserCertification.fromJson(response);
+    } catch (e) {
+      Logger.print("用户通过用户名登录失败$e", isError: true);
+      return null;
+    }
+  }
+
+  static Future<UserCertification?> loginByPhone({
+    required String zone,
+    required String phone,
+    required String password,
+    required String deviceId,
+    required String deviceName,
+    required String deviceModel,
+  }) async {
+    try {
+      final response = await HttpUtil.post(
+        '$apiURL/user/phonelogin',
+        data: {
+          'zone': zone,
+          'phone': phone,
+          'password': password,
           'device_id': deviceId,
           'device_name': deviceName,
           'device_model': deviceModel,
         },
-      },
-    );
-    return UserCertification.fromJson(response);
-  }
-
-  static Future<UserCertification> loginByPhone({
-    required String phone,
-    required String password,
-  }) async {
-    final response = await HttpUtil.post(
-      '$apiURL/user/login',
-      data: {'phone': phone, 'password': password},
-    );
-    return UserCertification.fromJson(response);
+      );
+      return UserCertification.fromJson(response);
+    } catch (e) {
+      Logger.print("用户通过手机号登录失败$e", isError: true);
+      return null;
+    }
   }
 
   static Future<bool> sendRegisterSmsCode({
@@ -172,13 +193,46 @@ class Apis {
     }
   }
 
-  static Future updateCurrentUser({
-    required String shortNo,
-    required String name,
-  }) => HttpUtil.put(
-    '$apiURL/user/current',
-    data: {'short_no': shortNo, 'name': name},
-  );
+  // 更新当前用户信息
+  static Future updateCurrentUser({String? name}) async {
+    Map<String, dynamic> data = {};
+    if (name != null) {
+      data['name'] = name;
+    }
+    await HttpUtil.put('$apiURL/user/current', data: data);
+  }
+
+  // 设置密保问题
+  static Future setSelfSecurity({
+    required String question,
+    required String answer,
+  }) async {
+    try {
+      await HttpUtil.put(
+        '$apiURL/user/security/question',
+        data: {'question': question, 'answer': answer},
+      );
+    } catch (e) {
+      Logger.print("设置密保问题失败$e", isError: true);
+    }
+  }
+
+  // 添加密保问题
+  static Future<bool> addSelfSecurity({
+    required String question,
+    required String answer,
+  }) async {
+    try {
+      await HttpUtil.post(
+        '$apiURL/user/security/question',
+        data: {'question': question, 'answer': answer},
+      );
+      return true;
+    } catch (e) {
+      Logger.print("添加密保问题失败$e", isError: true);
+      return false;
+    }
+  }
 
   static syncMsgExtra(String channelId, int channelType, int version) async {
     final uid = DataSp.uid;

@@ -73,7 +73,7 @@ class Input extends StatefulWidget {
       height: 1.2,
     ),
     this.placeholderStyle = const TextStyle(
-      color: Styles.neutral400,
+      color: Styles.neutral500,
       fontSize: 15,
       height: 1.2,
     ),
@@ -179,8 +179,8 @@ class _InputState extends State<Input> {
   }
 
   OutlineInputBorder get _border => OutlineInputBorder(
-    borderRadius: BorderRadius.circular(12.w),
-    borderSide: BorderSide(color: Styles.neutral200),
+    borderRadius: BorderRadius.circular(24.w),
+    borderSide: BorderSide(color: Styles.inputBgDefault),
   );
 
   @override
@@ -209,7 +209,7 @@ class _InputState extends State<Input> {
         suffixIcon: widget.suffixIcon,
         prefixIcon: widget.prefixIcon,
         filled: true,
-        fillColor: Styles.neutral50,
+        fillColor: Styles.inputBgDefault,
         enabledBorder: _border,
         focusedBorder: _border,
         focusedErrorBorder: _border,

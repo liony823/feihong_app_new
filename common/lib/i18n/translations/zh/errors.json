@@ -54,8 +54,9 @@
         
         "errUsernameRegisterOff": "用户名已注册功能已关闭",
         "errRequestDataError": "请求数据格式有误",
-        "errUsernameLengthInvalid": "用户名长度无效",
-        "errUsernameLoginLengthInvalid": "用户名必须在6-18位",
+        "errNicknameEmpty": "用户昵称不能为空",
+        "errUsernameEmpty": "用户名不能为空",
+        "errUsernameNotInvalid": "用户名须以字母开头，仅支持使用6～18个字母、数字、下划线自由组合",
         "errInviteCodeEmpty": "邀请码不能为空",
         "errInviteCodeNotExist": "邀请码不存在",
         "errPasswordEmpty": "密码不能为空",

@@ -1,26 +1,27 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'signin_provier.dart';
+part of 'set_self_security_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$signinControllerHash() => r'efd12fe55b76e76e8755bc621bb2aa1d1b1bb535';
+String _$setSelfSecurityControllerHash() =>
+    r'd3d6608477d32bb9230393eff063cafe5941ee58';
 
-/// See also [SigninController].
-@ProviderFor(SigninController)
-final signinControllerProvider =
-    AutoDisposeNotifierProvider<SigninController, SigninState>.internal(
-  SigninController.new,
-  name: r'signinControllerProvider',
+/// See also [SetSelfSecurityController].
+@ProviderFor(SetSelfSecurityController)
+final setSelfSecurityControllerProvider = AutoDisposeNotifierProvider<
+    SetSelfSecurityController, SetSelfSecurityState>.internal(
+  SetSelfSecurityController.new,
+  name: r'setSelfSecurityControllerProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$signinControllerHash,
+      : _$setSelfSecurityControllerHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$SigninController = AutoDisposeNotifier<SigninState>;
+typedef _$SetSelfSecurityController = AutoDisposeNotifier<SetSelfSecurityState>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

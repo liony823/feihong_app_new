@@ -12,6 +12,7 @@ class DataSp {
 
   static String get uid => getUserCertification()?.uid ?? '';
   static String get token => getUserCertification()?.token ?? '';
+  static String get appLang => getAppLang() ?? 'zh';
 
   static init() async {
     await SpUtil().init();
@@ -39,12 +40,15 @@ class DataSp {
   }
 
   static Future<bool>? setUserCertification(
-      UserCertification userCertification) {
+    UserCertification userCertification,
+  ) {
     return SpUtil().putObject(_userCertification, userCertification);
   }
 
   static UserCertification? getUserCertification() {
-    return SpUtil().getObj<UserCertification>(_userCertification,
-        (v) => UserCertification.fromJson(v as Map<String, dynamic>));
+    return SpUtil().getObj<UserCertification>(
+      _userCertification,
+      (v) => UserCertification.fromJson(v as Map<String, dynamic>),
+    );
   }
 }

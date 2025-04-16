@@ -25,6 +25,7 @@ class HttpUtil {
     dio.interceptors.add(
       InterceptorsWrapper(
         onRequest: (options, handler) {
+          options.headers['app-language'] = DataSp.appLang;
           options.headers['token'] = DataSp.token;
           return handler.next(options); //continue
         },
@@ -36,13 +37,17 @@ class HttpUtil {
             final context = Global.context!;
             if (context.mounted) {
               final errRes = error.response?.data;
-              if (errRes != null) {
+              if (errRes != null && errRes is Map<String, dynamic>) {
                 if (errRes['status'] != null &&
                     !Utils.isEmptyOrNull(errRes['msg'])) {
                   final msgCode = errRes['msg'];
                   final errorText = context.t.errors.error[msgCode];
                   if (errorText != null) {
                     Utils.toast(description: errorText);
+                  } else {
+                    Utils.toast(
+                      description: context.t.errors.somethingUnexpected,
+                    );
                   }
                   return handler.reject(error);
                 }
@@ -133,7 +138,7 @@ class HttpUtil {
       options ??= Options();
       options.headers ??= {};
 
-      var result = await dio.post(
+      var result = await dio.put(
         path,
         data: data,
         queryParameters: queryParameters,

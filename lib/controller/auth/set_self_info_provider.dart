@@ -1,5 +1,7 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:common/common.dart';
 import 'package:feihong/controller/api/api.dart';
+import 'package:feihong/route/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -55,19 +57,30 @@ class SetSelfInfo extends _$SetSelfInfo {
     if (form == null || !form.saveAndValidate()) {
       return;
     }
-
+    // final username = form.getRawValue('username') as String;
+    final nickname = form.getRawValue('nickname') as String;
+    // if (username.isEmpty) {
+    //   Utils.simpleToast(Global.context!.t.c.profile.plsEnterUsername);
+    //   return;
+    // }
+    if (nickname.isEmpty) {
+      Utils.simpleToast(Global.context!.t.c.profile.plsEnterNickname);
+      return;
+    }
     try {
       final currentUser = await ref.watch(getCurrentUserProvider(uid).future);
-      final username = form.getRawValue('username') as String;
-      final nickname = form.getRawValue('nickname') as String;
 
-      if (currentUser.username != username || currentUser.name != nickname) {
-        await Apis.updateCurrentUser(
-          shortNo: username,
-          name: nickname,
-        );
+      if (currentUser.name != nickname) {
+        LoadingView.singleton.wrap(
+            asyncFunction: () => Apis.updateCurrentUser(
+                  name: nickname,
+                ));
       }
-      //TODO 跳转到首页
+      if (registerType == 'username') {
+        Global.context!.router.popAndPush(const SetSelfSecurityRoute());
+      } else {
+        Global.context!.router.popAndPush(const HomeRoute());
+      }
     } catch (e) {
       Logger.print('设置用户信息失败$e');
     }

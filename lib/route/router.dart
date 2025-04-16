@@ -47,6 +47,9 @@ class AppRouter extends RootStackRouter {
         ),
         AutoRoute(
           page: SetSelfInfoRoute.page,
+        ),
+        AutoRoute(
+          page: SetSelfSecurityRoute.page,
         )
       ];
 }

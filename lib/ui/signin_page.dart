@@ -140,6 +140,7 @@ class _State extends ConsumerState<SigninPage> with TickerProviderStateMixin {
                   onPressed: () => obscure.value = !obscure.value,
                   icon: Icon(
                     obscure!.value ? Icons.visibility_off : Icons.visibility,
+                    size: 18.w,
                   ),
                 ),
                 password: obscure.value,
@@ -213,6 +214,7 @@ class _State extends ConsumerState<SigninPage> with TickerProviderStateMixin {
                   onPressed: () => obscure.value = !obscure.value,
                   icon: Icon(
                     obscure!.value ? Icons.visibility_off : Icons.visibility,
+                    size: 18.w,
                   ),
                 ),
                 password: obscure.value,

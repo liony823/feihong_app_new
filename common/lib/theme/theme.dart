@@ -56,7 +56,7 @@ class AppTheme {
             return Styles.primaryLight;
           }),
           shape: WidgetStateProperty.all<RoundedRectangleBorder>(
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.r)),
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(24.r)),
           ),
           padding: WidgetStateProperty.all<EdgeInsetsGeometry>(
             EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
@@ -76,7 +76,7 @@ class AppTheme {
           padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 4.h),
           side: BorderSide(color: Styles.brandColorLight, width: 2),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8.r),
+            borderRadius: BorderRadius.circular(24.r),
           ),
           backgroundColor: Styles.outlinedButtonDefaultBg,
           overlayColor: Styles.outlinedButtonPressedBg,

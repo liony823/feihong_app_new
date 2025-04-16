@@ -83,7 +83,7 @@ class SigninController extends _$SigninController {
     final username = formKey.currentState?.getRawValue('username');
     final password = formKey.currentState?.getRawValue('password');
     try {
-      await LoadingView.singleton.wrap(
+      final result = await LoadingView.singleton.wrap(
         asyncFunction: () => Apis.loginByUsername(
           username: username,
           password: password,
@@ -92,25 +92,33 @@ class SigninController extends _$SigninController {
           deviceModel: Config.deviceModel,
         ),
       );
+      if (result != null) {
+        DataSp.setUserCertification(result);
+        Global.context!.router.replace(const HomeRoute());
+      }
     } catch (e) {
       Logger.print(e);
     }
   }
 
   void _signinWithPhone() async {
-    final phone = formKey.currentState?.getRawValue('phone');
-    final password = formKey.currentState?.getRawValue('password');
-    final username = "${state.zone}$phone".replaceAll('+', '');
+    final phone = formKey.currentState?.getRawValue('phone') as String;
+    final password = formKey.currentState?.getRawValue('password') as String;
     try {
-      await LoadingView.singleton.wrap(
-        asyncFunction: () => Apis.loginByUsername(
-          username: username,
+      final result = await LoadingView.singleton.wrap(
+        asyncFunction: () => Apis.loginByPhone(
+          zone: state.zone,
+          phone: phone,
           password: password,
           deviceId: Config.deviceID,
           deviceName: Config.deviceName,
           deviceModel: Config.deviceModel,
         ),
       );
+      if (result != null) {
+        DataSp.setUserCertification(result);
+        Global.context!.router.replace(const HomeRoute());
+      }
     } catch (e) {
       Logger.print(e);
     }
