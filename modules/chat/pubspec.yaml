@@ -1,0 +1,40 @@
+name: chat
+description: 飞宏IM聊天模块，包含聊天界面、消息处理等功能
+version: 0.0.1
+homepage: https://github.com/liony823/WuKongIMFlutterSDK
+publish_to: none
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+  flutter: ">=3.10.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  
+  # 状态管理
+  riverpod: ^2.6.1
+  flutter_riverpod: ^2.6.1
+  hooks_riverpod: ^2.6.1
+  riverpod_annotation: ^2.6.1
+  
+  # 路由
+  auto_route: ^10.0.1
+  
+  # UI组件
+  extended_image: ^9.1.0
+  scroll_to_index: ^3.0.1
+  
+  # IM SDK - 正常情况下应该在core中访问，这里是为了直接访问一些SDK特性
+  wukongimfluttersdk: 
+    git:
+      url: https://github.com/liony823/WuKongIMFlutterSDK.git
+      ref: master
+  common:
+    path: ../common
+
+dev_dependencies:
+  flutter_lints: ^5.0.0
+  build_runner: ^2.4.6
+  riverpod_generator: ^2.6.5
+  riverpod_lint: ^2.6.5

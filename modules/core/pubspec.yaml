@@ -1,0 +1,65 @@
+name: core
+description: 飞宏IM核心模块，包含网络、数据处理、缓存和核心业务逻辑
+version: 0.0.1
+homepage: https://github.com/liony823/feihong_app_new
+publish_to: none
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+  flutter: ">=3.10.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+    
+  # 网络请求
+  dio: ^5.8.0+1
+  connectivity_plus: ^6.1.0
+  
+  # 数据持久化
+  sqflite: ^2.3.2
+  path_provider: ^2.1.1
+  path: ^1.9.1 
+  
+  # 状态管理
+  riverpod: ^2.6.1
+  flutter_riverpod: ^2.6.1
+  hooks_riverpod: ^2.6.1
+  riverpod_annotation: ^2.6.1
+      
+  # 数据处理  
+  json_annotation: ^4.8.1
+  freezed_annotation: ^3.0.0
+  
+  # 工具
+  rxdart: ^0.28.0
+  device_region: ^1.3.0
+
+  # 国际化
+  intl: ^0.20.2
+  world_countries: ^2.0.2
+  country_flags: ^3.2.0
+
+  # IM SDK
+  wukongimfluttersdk: 
+    git:
+      url: https://github.com/liony823/WuKongIMFlutterSDK.git
+      ref: master
+
+  common:
+    path: ../common
+
+dev_dependencies:
+  flutter_lints: ^5.0.0
+  build_runner: ^2.4.6
+  json_serializable: ^6.9.0
+  freezed: ^3.0.3
+  riverpod_generator: ^2.6.5
+  riverpod_lint: ^2.6.5
+
+flutter:
+  # To add assets to your package, add an assets section, like this:
+  assets:
+    - sql.txt
+    - sql/
+  #   - images/a_dot_ham.jpeg 

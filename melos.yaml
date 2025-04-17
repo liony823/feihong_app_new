@@ -1,0 +1,57 @@
+name: feihong_melos
+
+packages:
+  - modules/**
+  - "*"
+
+scripts:
+  analyze:
+    description: 对所有包进行代码分析
+    run: melos exec -- "flutter analyze ."
+    
+  format:
+    description: 格式化所有Dart代码
+    run: melos exec -- "dart format ."
+
+  test:
+    description: 运行所有包的测试
+    run: melos exec --dir-exists="test" -- "flutter test"
+    
+  clean:
+    description: 清理所有包的build目录
+    run: melos exec -- "flutter clean"
+    
+  build_runner:
+    description: 为所有包运行build_runner
+    run: melos exec --depends-on="build_runner" -- "flutter pub run build_runner build --delete-conflicting-outputs"
+    
+  pub_get:
+    description: 为所有包获取依赖
+    run: melos exec -- "flutter pub get"
+    
+  # 路由生成命令
+  build_routes:
+    description: 为所有包生成路由代码
+    run: ./build_routes.sh
+    
+  # 主应用启动脚本
+  run:app:
+    description: 运行主应用
+    run: cd . && flutter run
+    
+  # 各模块独立启动脚本
+  run:auth:
+    description: 运行认证模块
+    run: cd modules/auth && flutter run
+    
+  run:base:
+    description: 运行基础模块
+    run: cd modules/base && flutter run
+    
+  run:chat:
+    description: 运行聊天模块
+    run: cd modules/chat && flutter run
+    
+  run:contact:
+    description: 运行联系人模块
+    run: cd modules/contact && flutter run

@@ -1,0 +1,55 @@
+name: auth
+description: 飞宏IM认证模块，包含登录、注册、验证码等功能
+version: 0.0.1
+homepage: https://github.com/liony823/feihong_app_new
+publish_to: none
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+  flutter: ">=3.10.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+      
+  # 状态管理
+  riverpod: ^2.6.1
+  flutter_riverpod: ^2.6.1
+  hooks_riverpod: ^2.6.1
+  flutter_hooks: ^0.20.5
+  
+  # 路由
+  auto_route: ^10.0.1
+  
+  # 国际化
+  intl: ^0.20.2
+  world_countries: ^2.0.2
+  country_flags: ^3.2.0
+  
+  # UI组件
+  pin_code_fields: ^8.0.1
+  flutter_form_builder: ^10.0.0
+  form_builder_validators: ^11.1.2
+  icons_plus: ^5.0.0
+
+  # 注解
+  freezed_annotation: ^3.0.0
+  riverpod_annotation: ^2.6.1
+  json_annotation: ^4.8.1
+
+  common:
+    path: ../common
+
+  core:
+    path: ../core
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+  freezed: ^3.0.3
+  build_runner: ^2.4.6
+  auto_route_generator: ^10.0.1
+  riverpod_generator: ^2.6.5
+  riverpod_lint: ^2.6.5
+  json_serializable: ^6.9.0

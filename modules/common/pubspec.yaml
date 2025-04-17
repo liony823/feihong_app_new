@@ -1,0 +1,61 @@
+name: common
+description: 飞宏IM共享公共组件库，包含通用工具、扩展、主题和国际化资源
+version: 0.0.1
+homepage: https://github.com/liony823/feihong_app_new
+publish_to: none
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+  flutter: ">=3.10.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+    
+  # 工具库
+  path: ^1.8.3
+  intl: ^0.20.2
+  device_info_plus: ^11.3.0
+  package_info_plus: ^8.3.0
+  shared_preferences: ^2.5.2
+  uuid: ^4.3.1
+  logger: ^2.5.0
+  
+  # UI相关
+  flutter_svg: ^2.0.7
+  icons_plus: ^5.0.0
+  flutter_spinkit: ^5.2.1
+  flutter_form_builder: ^10.0.0
+  oktoast: ^3.4.0
+  toastification: ^3.0.1
+
+  # webview
+  webview_flutter: ^4.10.0
+  webview_flutter_android: ^4.3.4
+  webview_flutter_wkwebview: ^3.18.5
+  
+  
+  # 国际化
+  slang: ^4.4.1
+  slang_flutter: ^4.4.0
+  
+  # JSON处理
+  json_annotation: ^4.8.1
+  freezed_annotation: ^3.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+  build_runner: ^2.4.6
+  json_serializable: ^6.9.0
+  freezed: ^3.0.3
+
+# For information on the generic Dart part of this file, see the
+# following page: https://dart.dev/tools/pub/pubspec
+
+flutter:
+  assets:
+    - assets/images/

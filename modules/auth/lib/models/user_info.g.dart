@@ -1,0 +1,83 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+part of 'user_info.dart';
+
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+_UserInfo _$UserInfoFromJson(Map<String, dynamic> json) => _UserInfo(
+      uid: json['uid'] as String,
+      username: json['username'] as String,
+      name: json['name'] as String,
+      email: json['email'] as String?,
+      zone: json['zone'] as String?,
+      phone: json['phone'] as String?,
+      mute: (json['mute'] as num).toInt(),
+      top: (json['top'] as num).toInt(),
+      sex: (json['sex'] as num).toInt(),
+      category: json['category'] as String,
+      shortNo: json['short_no'] as String,
+      chatPwdOn: (json['chat_pwd_on'] as num).toInt(),
+      screenshot: (json['screenshot'] as num).toInt(),
+      revokeRemind: (json['revoke_remind'] as num).toInt(),
+      receipt: (json['receipt'] as num).toInt(),
+      online: (json['online'] as num).toInt(),
+      lastOffline: (json['last_offline'] as num).toInt(),
+      deviceFlag: (json['device_flag'] as num).toInt(),
+      follow: (json['follow'] as num).toInt(),
+      beDeleted: (json['be_deleted'] as num).toInt(),
+      beBlacklist: (json['be_blacklist'] as num).toInt(),
+      code: json['code'] as String,
+      vercode: json['vercode'] as String,
+      sourceDesc: json['source_desc'] as String,
+      remark: json['remark'] as String,
+      isUploadAvatar: (json['is_upload_avatar'] as num).toInt(),
+      status: (json['status'] as num).toInt(),
+      robot: (json['robot'] as num).toInt(),
+      isDestroy: (json['is_destroy'] as num).toInt(),
+      flame: (json['flame'] as num).toInt(),
+      flameSecond: (json['flame_second'] as num).toInt(),
+      joinGroupInviteUid: json['join_group_invite_uid'] as String,
+      joinGroupInviteName: json['join_group_invite_name'] as String,
+      groupMember: json['group_member'] == null
+          ? null
+          : GroupMember.fromJson(json['group_member'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$UserInfoToJson(_UserInfo instance) => <String, dynamic>{
+      'uid': instance.uid,
+      'username': instance.username,
+      'name': instance.name,
+      'email': instance.email,
+      'zone': instance.zone,
+      'phone': instance.phone,
+      'mute': instance.mute,
+      'top': instance.top,
+      'sex': instance.sex,
+      'category': instance.category,
+      'short_no': instance.shortNo,
+      'chat_pwd_on': instance.chatPwdOn,
+      'screenshot': instance.screenshot,
+      'revoke_remind': instance.revokeRemind,
+      'receipt': instance.receipt,
+      'online': instance.online,
+      'last_offline': instance.lastOffline,
+      'device_flag': instance.deviceFlag,
+      'follow': instance.follow,
+      'be_deleted': instance.beDeleted,
+      'be_blacklist': instance.beBlacklist,
+      'code': instance.code,
+      'vercode': instance.vercode,
+      'source_desc': instance.sourceDesc,
+      'remark': instance.remark,
+      'is_upload_avatar': instance.isUploadAvatar,
+      'status': instance.status,
+      'robot': instance.robot,
+      'is_destroy': instance.isDestroy,
+      'flame': instance.flame,
+      'flame_second': instance.flameSecond,
+      'join_group_invite_uid': instance.joinGroupInviteUid,
+      'join_group_invite_name': instance.joinGroupInviteName,
+      'group_member': instance.groupMember?.toJson(),
+    };

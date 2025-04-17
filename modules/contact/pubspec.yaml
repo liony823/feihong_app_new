@@ -1,0 +1,36 @@
+name: contact
+description: 飞宏IM通讯录模块，包含联系人列表、用户资料等功能
+version: 0.0.1
+homepage: https://github.com/liony823/feihong_app_new
+publish_to: none
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+  flutter: ">=3.10.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+    
+  # 状态管理
+  riverpod: ^2.6.1
+  flutter_riverpod: ^2.6.1
+  hooks_riverpod: ^2.6.1
+  riverpod_annotation: ^2.6.1
+  
+  # 路由
+  auto_route: ^10.0.1
+  
+  # UI组件
+  azlistview: ^2.0.0
+  user_profile_avatar: ^0.1.3
+
+  common:
+    path: ../common
+
+
+dev_dependencies:
+  flutter_lints: ^5.0.0
+  build_runner: ^2.4.6
+  riverpod_generator: ^2.6.5
+  riverpod_lint: ^2.6.5

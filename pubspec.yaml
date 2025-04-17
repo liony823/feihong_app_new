@@ -58,18 +58,15 @@ dependencies:
   #路由
   auto_route: ^10.0.1
 
-
   # 国际化
-  intl: ^0.19.0
+  intl: ^0.20.2
   slang: ^4.4.1
   slang_flutter: ^4.4.0
   world_countries: ^2.0.2
   country_flags: ^3.2.0
 
-
   # 响应式编程
   rxdart: ^0.28.0
-
 
   # 扩展
   ducafe_ui_core: ^1.0.1
@@ -88,7 +85,6 @@ dependencies:
   scroll_to_index: ^3.0.1
   flutter_native_splash: ^2.4.6
 
-
   # 网络请求
   dio: ^5.8.0+1
 
@@ -97,13 +93,22 @@ dependencies:
     git:
       url: https://github.com/liony823/WuKongIMFlutterSDK.git
       ref: master
-
+      
+  # 导入模块依赖
+  auth:
+    path: modules/auth
+  base:
+    path: modules/base
+  chat:
+    path: modules/chat
+  contact:
+    path: modules/contact
+  core:
+    path: modules/core
   common:
-    path: ./common
+    path: modules/common
 
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -117,6 +122,7 @@ dev_dependencies:
   flutter_launcher_icons: ^0.13.1
   riverpod_generator: ^2.6.5
   auto_route_generator: ^10.0.1
+  melos: ^6.3.2
 
 dependency_overrides:
   intl: ^0.20.2
@@ -134,8 +140,6 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/images/
-    - assets/svgs/
     - assets/fonts/
 
   # An image asset can refer to one or more resolution-specific "variants", see
