@@ -39,6 +39,7 @@ class LocalizedEn extends Localized {
 
 	// Translations
 	@override late final _LocalizedCEn c = _LocalizedCEn._(_root);
+	@override late final _LocalizedContactEn contact = _LocalizedContactEn._(_root);
 	@override late final _LocalizedErrorsEn errors = _LocalizedErrorsEn._(_root);
 	@override late final _LocalizedHomeEn home = _LocalizedHomeEn._(_root);
 }
@@ -58,6 +59,20 @@ class _LocalizedCEn extends LocalizedCZh {
 	@override late final _LocalizedCVerifyEn verify = _LocalizedCVerifyEn._(_root);
 	@override String get welcome => 'Welcome to Feihong';
 	@override late final _LocalizedCZoneEn zone = _LocalizedCZoneEn._(_root);
+}
+
+// Path: contact
+class _LocalizedContactEn extends LocalizedContactZh {
+	_LocalizedContactEn._(LocalizedEn root) : this._root = root, super.internal(root);
+
+	final LocalizedEn _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => '通讯录';
+	@override String get empty => '暂无联系人';
+	@override String get newFriend => '新的朋友';
+	@override String get group => '群聊';
+	@override String get invite => '入群邀请';
 }
 
 // Path: errors
@@ -502,6 +517,11 @@ extension on LocalizedEn {
 			case 'c.zone.search': return 'Search for countries/regions';
 			case 'c.zone.select': return 'choose';
 			case 'c.zone.title': return 'Select a country/region';
+			case 'contact.title': return '通讯录';
+			case 'contact.empty': return '暂无联系人';
+			case 'contact.newFriend': return '新的朋友';
+			case 'contact.group': return '群聊';
+			case 'contact.invite': return '入群邀请';
 			case 'errors.error.errAddAppFailed': return 'Added application error';
 			case 'errors.error.errAddBannerFailed': return 'New banner information error';
 			case 'errors.error.errAddCategoryAppFailed': return 'Add a classification error';

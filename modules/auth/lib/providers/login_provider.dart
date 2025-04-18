@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:common/common.dart';
+import 'package:contact/contact.dart';
 import 'package:core/core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -116,13 +117,24 @@ class LoginController extends _$LoginController {
     final username = formKey.currentState?.getRawValue('username');
     final password = formKey.currentState?.getRawValue('password');
     final result = await LoadingView.singleton.wrap(
-      asyncFunction: () => authService.loginByUsername(
-        username: username,
-        password: password,
-        deviceId: CommonModule.deviceID,
-        deviceName: CommonModule.deviceName,
-        deviceModel: CommonModule.deviceModel,
-      ),
+      asyncFunction: () async {
+        final userCert = await authService.loginByUsername(
+          username: username,
+          password: password,
+          deviceId: CommonModule.deviceID,
+          deviceName: CommonModule.deviceName,
+          deviceModel: CommonModule.deviceModel,
+        );
+
+        if (userCert != null) {
+          final imService = ref.read(iMServiceProvider.notifier);
+          final contactService = ref.read(contactControllerProvider.notifier);
+          await imService.initialize(uid: userCert.uid, token: userCert.token);
+          await contactService.initialize();
+        }
+
+        return userCert;
+      },
     );
     if (result != null) {
       Global.context!.router.replacePath(Routes.home);
@@ -134,14 +146,25 @@ class LoginController extends _$LoginController {
     final phone = formKey.currentState?.getRawValue('phone') as String;
     final password = formKey.currentState?.getRawValue('password') as String;
     final result = await LoadingView.singleton.wrap(
-      asyncFunction: () => authService.loginByPhone(
-        zone: state.zone,
-        phone: phone,
-        password: password,
-        deviceId: CommonModule.deviceID,
-        deviceName: CommonModule.deviceName,
-        deviceModel: CommonModule.deviceModel,
-      ),
+      asyncFunction: () async {
+        final userCert = await authService.loginByPhone(
+          zone: state.zone,
+          phone: phone,
+          password: password,
+          deviceId: CommonModule.deviceID,
+          deviceName: CommonModule.deviceName,
+          deviceModel: CommonModule.deviceModel,
+        );
+
+        if (userCert != null) {
+          final imService = ref.read(iMServiceProvider.notifier);
+          final contactService = ref.read(contactControllerProvider.notifier);
+          await imService.initialize(uid: userCert.uid, token: userCert.token);
+          await contactService.initialize();
+        }
+
+        return userCert;
+      },
     );
     if (result != null) {
       Global.context!.router.replacePath(Routes.home);

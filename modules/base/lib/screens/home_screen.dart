@@ -1,15 +1,15 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:base/models/applet.dart';
 import 'package:base/pages/applet_page.dart';
-import 'package:base/pages/contact_page.dart';
 import 'package:base/pages/conversation_page.dart';
 import 'package:base/pages/feed_page.dart';
 import 'package:base/pages/mine_page.dart';
 import 'package:base/providers/applet_provider.dart';
-import 'package:base/providers/contact_provider.dart';
 import 'package:base/providers/home_provider.dart';
 import 'package:common/common.dart';
+import 'package:contact/contact.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
@@ -23,7 +23,7 @@ class HomeScreen extends HookConsumerWidget {
   }) {
     return [
       ConversationPage(),
-      ContactPage(),
+      ContactScreen(),
       if (enabledApplet) AppletPage(),
       FeedPage(),
       MinePage(),
@@ -90,8 +90,8 @@ class HomeScreen extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final controller = ref.watch(homeControllerProvider.notifier);
-    final homeState = ref.watch(homeControllerProvider);
     final contactState = ref.watch(contactControllerProvider);
+    final homeState = ref.watch(homeControllerProvider);
     final appletState = ref.watch(appletControllerProvider);
 
     // 创建默认的导航栏
@@ -120,7 +120,7 @@ class HomeScreen extends HookConsumerWidget {
           ),
           screenTransitionAnimation: ScreenTransitionAnimationSettings(
             // Screen transition animation on change of selected tab.
-            animateTabTransition: true,
+            animateTabTransition: false,
             duration: Duration(milliseconds: 200),
             screenTransitionAnimationType: ScreenTransitionAnimationType.fadeIn,
           ),
@@ -130,18 +130,12 @@ class HomeScreen extends HookConsumerWidget {
 
     return homeState.when(
       data: (homeData) {
-        return contactState.when(
-          data: (contactData) {
-            return appletState.when(
-              data: (appletData) {
-                return buildTabView(
-                  enabledApplet: homeData.enabledApplet,
-                  unreadCount: contactData.unreadCount,
-                  defaultApplet: appletData.defaultApplet,
-                );
-              },
-              loading: () => buildTabView(),
-              error: (_, __) => buildTabView(),
+        return appletState.when(
+          data: (appletData) {
+            return buildTabView(
+              enabledApplet: homeData.enabledApplet,
+              unreadCount: contactState.unreadFriendApplyCount,
+              defaultApplet: appletData.defaultApplet,
             );
           },
           loading: () => buildTabView(),

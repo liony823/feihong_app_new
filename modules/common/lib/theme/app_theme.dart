@@ -20,7 +20,7 @@ class AppTheme {
   static const Color secondaryDarkColor = Color(0xFF6A44EF);
 
   // 背景色
-  static const Color lightBackgroundColor = Color(0xFFF8F9FA);
+  static const Color lightBackgroundColor = Color(0xFFF6F6F6);
   static const Color darkBackgroundColor = Color(0xFF121212);
 
   // 文本颜色
@@ -50,7 +50,7 @@ class AppTheme {
   static const Color unreadMessageColor = Color(0xFFFF381F);
 
   // 分隔线颜色
-  static const Color dividerColor = Color(0xFFE0E0E0);
+  static const Color dividerColor = Color(0xFFF5F5F5);
   static const Color darkDividerColor = Color(0xFF424242);
 
   // 按钮前景色

@@ -72,7 +72,7 @@ class AuthRepository {
       return response.data;
     } catch (e) {
       AppLogger.e('注册失败', e);
-      rethrow;
+      return null;
     }
   }
 

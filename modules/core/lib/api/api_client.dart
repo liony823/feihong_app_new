@@ -28,15 +28,6 @@ class ApiClient {
       responseType: ResponseType.json,
     );
 
-    // 添加拦截器
-    _dio.interceptors.add(LogInterceptor(
-      request: true,
-      requestHeader: true,
-      requestBody: true,
-      responseBody: true,
-      error: true,
-    ));
-
     // 添加认证拦截器
     _dio.interceptors.add(InterceptorsWrapper(
       onRequest: (options, handler) {

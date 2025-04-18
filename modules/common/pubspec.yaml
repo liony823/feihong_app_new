@@ -25,6 +25,7 @@ dependencies:
   shared_preferences: ^2.5.2
   uuid: ^4.3.1
   logger: ^2.5.0
+  pinyin: ^3.3.0
   
   # UI相关
   flutter_svg: ^2.0.7
@@ -37,6 +38,7 @@ dependencies:
   wechat_camera_picker: ^4.3.7
   image_cropper: ^9.1.0
   extended_image: ^9.1.0
+  azlistview: ^2.0.0
 
   # webview
   webview_flutter: ^4.10.0

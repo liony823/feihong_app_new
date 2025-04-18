@@ -26,7 +26,7 @@ export 'extensions/extensions.dart';
 export 'theme/app_theme.dart';
 
 // 导出模型
-export 'models/models.dart';
+export 'models/i_supension_bean.dart';
 
 // 导出组件
 export 'widgets/widgets.dart';

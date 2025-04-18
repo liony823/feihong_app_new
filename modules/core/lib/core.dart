@@ -5,6 +5,7 @@ library;
 // 导出API
 export 'api/api_client.dart';
 export 'api/api_config.dart';
+export 'api/apis.dart';
 
 // 导出服务
 export 'services/core_service.dart';

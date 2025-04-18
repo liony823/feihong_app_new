@@ -4,6 +4,8 @@ import 'package:auth/route/route.gr.dart';
 import 'package:auth/services/auth_service.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:common/common.dart';
+import 'package:contact/contact.dart';
+import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -104,15 +106,28 @@ class VerifyPhoneController extends _$VerifyPhoneController {
   Future _register(String code) async {
     try {
       final authService = ref.watch(authServiceProvider);
-      final result = await authService.registerByPhone(
-        phone: state.phone,
-        zone: state.zone,
-        code: code,
-        inviteCode: state.inviteCode,
-        password: state.password,
-        deviceId: CommonModule.deviceID,
-        deviceName: CommonModule.deviceName,
-        deviceModel: CommonModule.deviceModel,
+      final result = await LoadingView.singleton.wrap(
+        asyncFunction: () async {
+          final result = await authService.registerByPhone(
+            phone: state.phone,
+            zone: state.zone,
+            code: code,
+            inviteCode: state.inviteCode,
+            password: state.password,
+            deviceId: CommonModule.deviceID,
+            deviceName: CommonModule.deviceName,
+            deviceModel: CommonModule.deviceModel,
+          );
+
+          if (result != null) {
+            final imService = ref.read(iMServiceProvider.notifier);
+            final contactService = ref.read(contactControllerProvider.notifier);
+            await imService.initialize(uid: result.uid, token: result.token);
+            await contactService.initialize();
+          }
+
+          return result;
+        },
       );
       if (result == null) {
         return;

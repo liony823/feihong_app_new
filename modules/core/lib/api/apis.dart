@@ -5,6 +5,9 @@ import 'api_client.dart';
 import 'api_config.dart';
 
 class Apis {
+
+  
+
   static String getAvatarUrl(String uid) {
     return "${ApiConfig.baseUrl}/users/$uid/avatar";
   }

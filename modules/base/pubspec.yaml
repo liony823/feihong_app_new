@@ -34,7 +34,10 @@ dependencies:
   form_builder_validators: ^11.1.2
   icons_plus: ^5.0.0
   skeletonizer: ^1.4.3
-  user_profile_avatar: ^0.1.3
+  acter_avatar: 
+    git:
+      url: https://github.com/liony823/acter-avatar.git
+      ref: main
   persistent_bottom_nav_bar: ^6.2.1
 
   # 注解
@@ -48,6 +51,9 @@ dependencies:
   core:
     path: ../core
 
+  contact:
+    path: ../contact
+
 dev_dependencies:
   flutter_lints: ^5.0.0
   freezed: ^3.0.3
@@ -57,3 +63,4 @@ dev_dependencies:
   json_serializable: ^6.9.0
   custom_lint:
   riverpod_lint:
+

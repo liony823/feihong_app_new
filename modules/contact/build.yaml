@@ -1,0 +1,17 @@
+targets:
+  $default:
+    builders:
+      slang_build_runner:
+        options:
+          base_locale: zh-CN
+          fallback_strategy: base_locale
+          input_directory: lib/i18n/translations
+          output_directory: lib/i18n
+          output_file_name: localized.g.dart
+          output_format: multiple_files
+          class_name: Localized
+          namespaces: true
+      json_serializable:
+        options:
+          field_rename: snake
+          explicit_to_json: true

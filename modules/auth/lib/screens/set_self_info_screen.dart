@@ -4,11 +4,12 @@ import 'package:auth/providers/set_self_info_provider.dart';
 import 'package:auth/resource/fake.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:common/common.dart';
+import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:acter_avatar/acter_avatar.dart';
 import 'package:skeletonizer/skeletonizer.dart';
-import 'package:user_profile_avatar/user_profile_avatar.dart';
 
 @RoutePage()
 class SetSelfInfoScreen extends HookConsumerWidget {
@@ -80,7 +81,8 @@ class SetSelfInfoScreen extends HookConsumerWidget {
         padding: EdgeInsets.symmetric(horizontal: 24.w),
         child: Column(
           children: [
-            _buildAvatarView(context, onAvatarTap: onAvatarTap),
+            _buildAvatarView(context,
+                onAvatarTap: onAvatarTap, userInfo: userInfo),
             24.verticalSpace,
             Divider(
               color: AppTheme.dividerColor,
@@ -104,18 +106,23 @@ class SetSelfInfoScreen extends HookConsumerWidget {
     );
   }
 
-  Widget _buildAvatarView(BuildContext context, {VoidCallback? onAvatarTap}) {
+  Widget _buildAvatarView(BuildContext context,
+      {UserInfo? userInfo, VoidCallback? onAvatarTap}) {
+    final avatarOptions = AvatarOptions(
+        AvatarInfo(
+          uniqueId: userInfo?.uid ?? 'u_10000',
+          onAvatarTap: onAvatarTap,
+          avatar: NetworkImage(Apis.getAvatarUrl(userInfo?.uid ?? 'avatar')),
+          displayName: userInfo?.name ??
+              'u_10000', // can be any image provider .i.e. AssetImage, MemoryImage and NetworkImage etc.
+        ),
+        size: 24.w);
+
     return Column(
       children: [
         Skeleton.shade(
-          child: UserProfileAvatar(
-            onAvatarTap: onAvatarTap,
-            radius: 26.r,
-            avatarUrl: '',
-            avatarBorderData: AvatarBorderData(
-              borderColor: AppTheme.brandColor,
-              borderWidth: 1.r,
-            ),
+          child: ActerAvatar(
+            options: avatarOptions,
           ),
         ),
         Text(

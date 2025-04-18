@@ -3,6 +3,7 @@ import 'package:auth/route/route.gr.dart';
 import 'package:auth/services/auth_service.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:common/common.dart';
+import 'package:contact/contact.dart';
 import 'package:core/core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -108,14 +109,25 @@ class RegisterController extends _$RegisterController {
     try {
       final authService = ref.watch(authServiceProvider);
       final result = await LoadingView.singleton.wrap(
-        asyncFunction: () => authService.registerByUsername(
-          username: username,
-          password: password,
-          inviteCode: inviteCode,
-          deviceId: CommonModule.deviceID,
-          deviceName: CommonModule.deviceName,
-          deviceModel: CommonModule.deviceModel,
-        ),
+        asyncFunction: () async {
+          final userCert = await authService.registerByUsername(
+            username: username,
+            password: password,
+            inviteCode: inviteCode,
+            deviceId: CommonModule.deviceID,
+            deviceName: CommonModule.deviceName,
+            deviceModel: CommonModule.deviceModel,
+          );
+          if (userCert != null) {
+            final imService = ref.read(iMServiceProvider.notifier);
+            final contactService = ref.read(contactControllerProvider.notifier);
+            await imService.initialize(
+                uid: userCert.uid, token: userCert.token);
+            await contactService.initialize();
+          }
+
+          return userCert;
+        },
       );
       if (result == null) {
         return;

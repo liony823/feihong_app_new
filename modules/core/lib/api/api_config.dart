@@ -11,7 +11,7 @@ class ApiConfig {
 
   /// 用户模块
   static const String loginByPhone = '/user/phonelogin';
-  static const String loginByUsername = '/user/usernameLogin';
+  static const String loginByUsername = '/user/usernamelogin';
   static const String registerByPhone = '/user/register';
   static const String registerByUsername = '/user/usernameregister';
   static const String sendRegisterVerificationCode = '/user/sms/registercode';
@@ -28,6 +28,7 @@ class ApiConfig {
       '/user/reddot/friendApply'; // 获取好友申请未读数量
   static const String clearFriendApplyUnread =
       '/user/reddot/friendApply'; // 清除好友申请未读
+  static const String syncContacts = '/friend/sync'; // 同步联系人
 
   // 小程序模块
   static const String getAppletList = '/applet'; // 获取小程序列表

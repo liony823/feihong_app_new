@@ -13,9 +13,10 @@ class HomeState {
       element.sid == AppModuleType.applet.name && element.status > 0);
 }
 
-@riverpod
+@Riverpod(keepAlive: true)
 class HomeController extends _$HomeController {
   final tabController = PersistentTabController();
+
   @override
   FutureOr<HomeState> build() async {
     final modules = await ref.watch(getAppModulesProvider.future);

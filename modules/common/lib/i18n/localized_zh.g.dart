@@ -40,6 +40,7 @@ class Localized implements BaseTranslations<AppLocale, Localized> {
 
 	// Translations
 	late final LocalizedCZh c = LocalizedCZh.internal(_root);
+	late final LocalizedContactZh contact = LocalizedContactZh.internal(_root);
 	late final LocalizedErrorsZh errors = LocalizedErrorsZh.internal(_root);
 	late final LocalizedHomeZh home = LocalizedHomeZh.internal(_root);
 }
@@ -70,6 +71,20 @@ class LocalizedCZh {
 	late final LocalizedCVerifyZh verify = LocalizedCVerifyZh.internal(_root);
 	late final LocalizedCProfileZh profile = LocalizedCProfileZh.internal(_root);
 	late final LocalizedCSetSelfSecurityZh setSelfSecurity = LocalizedCSetSelfSecurityZh.internal(_root);
+}
+
+// Path: contact
+class LocalizedContactZh {
+	LocalizedContactZh.internal(this._root);
+
+	final Localized _root; // ignore: unused_field
+
+	// Translations
+	String get title => '通讯录';
+	String get empty => '暂无联系人';
+	String get newFriend => '新的朋友';
+	String get group => '群聊';
+	String get invite => '入群邀请';
 }
 
 // Path: errors
@@ -495,7 +510,7 @@ class LocalizedHomeTabZh {
 
 	// Translations
 	String get conversation => '会话';
-	String get contacts => '联系人';
+	String get contacts => '通讯录';
 	String get applet => '小程序';
 	String get feed => '动态';
 	String get mine => '我的';
@@ -603,6 +618,11 @@ extension on Localized {
 			case 'c.setSelfSecurity.questionOrAnswerEmpty': return '密保问题或答案不能为空';
 			case 'c.setSelfSecurity.submitSuccess': return '设置成功';
 			case 'c.setSelfSecurity.submit': return '完 成';
+			case 'contact.title': return '通讯录';
+			case 'contact.empty': return '暂无联系人';
+			case 'contact.newFriend': return '新的朋友';
+			case 'contact.group': return '群聊';
+			case 'contact.invite': return '入群邀请';
 			case 'errors.somethingUnexpected': return '发生了一些意外，请稍后再试';
 			case 'errors.retry': return '重试';
 			case 'errors.httpError.title': return '发生错误';
@@ -838,7 +858,7 @@ extension on Localized {
 			case 'errors.error.errSlotLeaderNodeInfoNotExist': return '槽领导对应的节点信息不存在';
 			case 'errors.error.errStressMachineNotExist': return '压测机器不存在';
 			case 'home.tab.conversation': return '会话';
-			case 'home.tab.contacts': return '联系人';
+			case 'home.tab.contacts': return '通讯录';
 			case 'home.tab.applet': return '小程序';
 			case 'home.tab.feed': return '动态';
 			case 'home.tab.mine': return '我的';
