@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:common/common.dart';
 import 'package:core/core.dart';
-import 'package:feihong/routes/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -10,6 +9,7 @@ class SplashScreen extends HookConsumerWidget {
   const SplashScreen({super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    ref.watch(getCountriesProvider);
     final AsyncValue<AppConfig?> appConfig = ref.watch(getAppConfigProvider);
 
     // 根据appConfig状态执行不同操作
@@ -23,15 +23,17 @@ class SplashScreen extends HookConsumerWidget {
           final token = SpHelper.token;
           if (uid.isNullOrEmpty || token.isNullOrEmpty) {
             if (appConfig.value?.loginType == 4) {
-              context.router.replace(const LoginRoute());
+              context.router.replacePath(Routes.loginWithAuto);
             } else {
-              context.router.replace(const LoginRoute());
+              context.router.replacePath(Routes.login);
             }
           } else {
-            ref.read(
-              iMServiceProvider(uid: uid, token: token).notifier,
-            );
-            context.router.replace(const HomeRoute());
+            ref
+                .read(
+                  iMServiceProvider.notifier,
+                )
+                .initialize(uid: uid, token: token);
+            context.router.replacePath(Routes.home);
           }
         });
       }

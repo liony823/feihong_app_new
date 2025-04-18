@@ -33,66 +33,17 @@ dependencies:
   flutter_localizations:
     sdk: flutter
 
-  #状态管理
-  riverpod: ^2.6.1
-  flutter_riverpod: ^2.6.1
-  hooks_riverpod: ^2.6.1
-  flutter_hooks: ^0.20.5
-  riverpod_annotation: ^2.6.1
-
   # UI组件
   toastification: ^3.0.1
-  cupertino_icons: ^1.0.8
-  introduction_screen: ^3.1.17
-  icons_plus: ^5.0.0
-  flutter_svg: ^2.0.7
-  pin_code_fields: ^8.0.1
-  persistent_bottom_nav_bar_v2: ^5.3.1
-  azlistview: ^2.0.0
-  extended_image: ^9.1.0
-  glossy: ^0.0.5
   oktoast: ^3.4.0
-  user_profile_avatar: ^0.1.3
-  skeletonizer: ^1.4.3
 
   #路由
   auto_route: ^10.0.1
 
-  # 国际化
-  intl: ^0.20.2
-  slang: ^4.4.1
-  slang_flutter: ^4.4.0
-  world_countries: ^2.0.2
-  country_flags: ^3.2.0
-
-  # 响应式编程
-  rxdart: ^0.28.0
-
-  # 扩展
-  ducafe_ui_core: ^1.0.1
-  get_it: ^8.0.3
-  json_annotation: ^4.8.1
-  freezed_annotation: ^3.0.0
-  flutter_form_builder: ^10.0.0
-  form_builder_validators: ^11.1.2
-
   # 工具
-  device_info_plus: ^11.3.0
-  package_info_plus: ^8.3.0
-  vibration: ^1.7.6
-  shared_preferences: ^2.5.2
   stack_trace: ^1.12.1
   scroll_to_index: ^3.0.1
   flutter_native_splash: ^2.4.6
-
-  # 网络请求
-  dio: ^5.8.0+1
-
-  # IM SDK
-  wukongimfluttersdk: 
-    git:
-      url: https://github.com/liony823/WuKongIMFlutterSDK.git
-      ref: master
       
   # 导入模块依赖
   auth:
@@ -115,13 +66,8 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  riverpod_lint: ^2.6.5
-  build_runner: ^2.4.6
-  json_serializable: ^6.9.0
-  flutter_lints: ^5.0.0
-  flutter_launcher_icons: ^0.13.1
-  riverpod_generator: ^2.6.5
-  auto_route_generator: ^10.0.1
+  custom_lint:
+  riverpod_lint:
   melos: ^6.3.2
 
 dependency_overrides:

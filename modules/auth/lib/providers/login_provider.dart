@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:auto_route/auto_route.dart';
 import 'package:common/common.dart';
 import 'package:core/core.dart';
 import 'package:flutter/cupertino.dart';
@@ -124,7 +125,7 @@ class LoginController extends _$LoginController {
       ),
     );
     if (result != null) {
-      // Global.context!.router.replace(const HomeRoute());
+      Global.context!.router.replacePath(Routes.home);
     }
   }
 
@@ -143,7 +144,7 @@ class LoginController extends _$LoginController {
       ),
     );
     if (result != null) {
-      // Global.context!.router.replace(const HomeRoute());
+      Global.context!.router.replacePath(Routes.home);
     }
   }
 
@@ -171,10 +172,10 @@ class LoginController extends _$LoginController {
   }
 
   void toSignup() {
-    // Global.context!.router.push(const SignupRoute());
+    Global.context!.router.pushPath(Routes.register);
   }
 
   void toForgotPassword() {
-    // Global.context!.router.push(const ForgotPasswordRoute());
+    Global.context!.router.pushPath(Routes.forgotPassword);
   }
 }

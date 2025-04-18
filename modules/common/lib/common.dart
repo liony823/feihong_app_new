@@ -3,12 +3,16 @@
 library;
 
 // 导出utils
+export 'utils/utils.dart';
 export 'utils/logger.dart';
 export 'utils/constants.dart';
 export 'utils/global.dart';
 export 'utils/toast.dart';
 export 'utils/sp.dart';
+export 'utils/regex.dart';
 export 'utils/images.dart';
+export 'utils/routes.dart';
+export 'utils/image_util.dart';
 export 'utils/screen/screen_util.dart';
 export 'utils/screen/screenutil_init.dart';
 

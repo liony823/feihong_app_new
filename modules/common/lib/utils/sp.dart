@@ -116,8 +116,8 @@ class SpUtil {
   }
 
   List<Map>? getObjectList(String key) {
-    List<String>? dataLis = prefs?.getStringList(key);
-    return dataLis?.map((value) {
+    List<String>? dataList = prefs?.getStringList(key);
+    return dataList?.map((value) {
       Map dataMap = json.decode(value);
       return dataMap;
     }).toList();

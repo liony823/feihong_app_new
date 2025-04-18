@@ -40,6 +40,7 @@ class LocalizedEn extends Localized {
 	// Translations
 	@override late final _LocalizedCEn c = _LocalizedCEn._(_root);
 	@override late final _LocalizedErrorsEn errors = _LocalizedErrorsEn._(_root);
+	@override late final _LocalizedHomeEn home = _LocalizedHomeEn._(_root);
 }
 
 // Path: c
@@ -301,6 +302,15 @@ class _LocalizedErrorsEn extends LocalizedErrorsZh {
 		'title': 'An error occurred',
 		'unknown': 'Server error, please contact the administrator',
 	};
+}
+
+// Path: home
+class _LocalizedHomeEn extends LocalizedHomeZh {
+	_LocalizedHomeEn._(LocalizedEn root) : this._root = root, super.internal(root);
+
+	final LocalizedEn _root; // ignore: unused_field
+
+	// Translations
 }
 
 // Path: c.agreement

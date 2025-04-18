@@ -30,6 +30,11 @@ dependencies:
   # 数据处理  
   json_annotation: ^4.8.1
   freezed_annotation: ^3.0.0
+
+  # UI相关
+  wechat_assets_picker: ^9.5.0
+  wechat_camera_picker: ^4.3.7
+  image_cropper: ^9.1.0
   
   # 工具
   rxdart: ^0.28.0
@@ -55,7 +60,8 @@ dev_dependencies:
   json_serializable: ^6.9.0
   freezed: ^3.0.3
   riverpod_generator: ^2.6.5
-  riverpod_lint: ^2.6.5
+  custom_lint:
+  riverpod_lint:
 
 flutter:
   # To add assets to your package, add an assets section, like this:

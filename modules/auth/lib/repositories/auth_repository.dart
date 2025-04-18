@@ -189,7 +189,7 @@ class AuthRepository {
       final response = await _apiClient.get(
         '/users/$uid',
       );
-      return UserInfo.fromJson(response.data['data']);
+      return UserInfo.fromJson(response.data);
     } catch (e) {
       AppLogger.e('获取用户信息失败', e);
       return null;

@@ -55,7 +55,11 @@ class DB {
         for (String sql in sqlList) {
           String exeSql = sql.replaceAll('\n', '');
           if (exeSql != '') {
-            db.execute(exeSql);
+            try {
+              db.execute(exeSql);
+            } catch (e) {
+              AppLogger.e('sql文件执行失败', e);
+            }
           }
         }
         if (version > saveVersion) {

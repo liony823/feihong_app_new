@@ -12,7 +12,6 @@ class _AnimatedTextContainer extends Text {
     super.style,
     super.textAlign,
     super.textDirection,
-    super.textScaler,
     super.textWidthBasis,
   });
 

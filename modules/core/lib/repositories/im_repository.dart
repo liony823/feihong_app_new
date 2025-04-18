@@ -15,7 +15,7 @@ class IMRepository {
     String ip = '';
     try {
       final response = await _apiClient.get("/users/$uid/im");
-      ip = response.data['data']['tcpAddress'];
+      ip = response.data['tcp_addr'];
     } catch (e) {
       AppLogger.e('获取IM通信地址失败', e);
       ip = '';

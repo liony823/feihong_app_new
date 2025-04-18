@@ -4,12 +4,9 @@ import 'package:base/base.dart';
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 
-import 'app_router.gr.dart';
-
 export 'package:base/route/route.gr.dart';
 export 'package:auth/route/route.gr.dart';
 
-@AutoRouterConfig()
 class AppRouter extends RootStackRouter {
   final List<AutoRoute> _routes = [];
 
@@ -26,13 +23,5 @@ class AppRouter extends RootStackRouter {
   }
 
   @override
-  List<AutoRoute> get routes => [
-        CustomRoute(
-          initial: true,
-          page: SplashRoute.page,
-          transitionsBuilder: TransitionsBuilders.noTransition,
-          keepHistory: false,
-        ),
-        ..._routes,
-      ];
+  List<AutoRoute> get routes => _routes;
 }

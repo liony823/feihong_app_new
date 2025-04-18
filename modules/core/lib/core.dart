@@ -10,6 +10,9 @@ export 'api/api_config.dart';
 export 'services/core_service.dart';
 export 'services/im_service.dart';
 
+// 导出helper
+export 'helper/view.dart';
+
 // 导出数据库
 export 'database/database.dart';
 

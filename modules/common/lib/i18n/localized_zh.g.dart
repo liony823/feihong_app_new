@@ -41,6 +41,7 @@ class Localized implements BaseTranslations<AppLocale, Localized> {
 	// Translations
 	late final LocalizedCZh c = LocalizedCZh.internal(_root);
 	late final LocalizedErrorsZh errors = LocalizedErrorsZh.internal(_root);
+	late final LocalizedHomeZh home = LocalizedHomeZh.internal(_root);
 }
 
 // Path: c
@@ -318,6 +319,16 @@ class LocalizedErrorsZh {
 	};
 }
 
+// Path: home
+class LocalizedHomeZh {
+	LocalizedHomeZh.internal(this._root);
+
+	final Localized _root; // ignore: unused_field
+
+	// Translations
+	late final LocalizedHomeTabZh tab = LocalizedHomeTabZh.internal(_root);
+}
+
 // Path: c.agreement
 class LocalizedCAgreementZh {
 	LocalizedCAgreementZh.internal(this._root);
@@ -474,6 +485,20 @@ class LocalizedCSetSelfSecurityZh {
 	String get questionOrAnswerEmpty => '密保问题或答案不能为空';
 	String get submitSuccess => '设置成功';
 	String get submit => '完 成';
+}
+
+// Path: home.tab
+class LocalizedHomeTabZh {
+	LocalizedHomeTabZh.internal(this._root);
+
+	final Localized _root; // ignore: unused_field
+
+	// Translations
+	String get conversation => '会话';
+	String get contacts => '联系人';
+	String get applet => '小程序';
+	String get feed => '动态';
+	String get mine => '我的';
 }
 
 /// Flat map(s) containing all translations.
@@ -812,6 +837,11 @@ extension on Localized {
 			case 'errors.error.errStressTestNotEnabled': return '没有开启压测配置，不支持压测';
 			case 'errors.error.errSlotLeaderNodeInfoNotExist': return '槽领导对应的节点信息不存在';
 			case 'errors.error.errStressMachineNotExist': return '压测机器不存在';
+			case 'home.tab.conversation': return '会话';
+			case 'home.tab.contacts': return '联系人';
+			case 'home.tab.applet': return '小程序';
+			case 'home.tab.feed': return '动态';
+			case 'home.tab.mine': return '我的';
 			default: return null;
 		}
 	}

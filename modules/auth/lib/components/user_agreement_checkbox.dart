@@ -19,17 +19,13 @@ class UserAgreementCheckbox extends StatelessWidget {
   final String privacyPolicyContent;
 
   void _onTapUserAgreement() {
-    // Global.context!.router.push(WebViewRoute(
-    //   htmlContent: userAgreementContent,
-    //   title: context.t.c.agreement.userAgreement,
-    // ));
+    Global.context!.router.pushPath(
+        "${Routes.webview}?htmlContent=${Uri.encodeComponent(userAgreementContent)}&title=${Uri.encodeComponent(context.t.c.agreement.userAgreement)}");
   }
 
   void _onTapPrivacyPolicy() {
-    // Global.context!.router.push(WebViewRoute(
-    //   htmlContent: privacyPolicyContent,
-    //   title: context.t.c.agreement.privacyPolicy,
-    // ));
+    Global.context!.router.pushPath(
+        "${Routes.webview}?htmlContent=${Uri.encodeComponent(privacyPolicyContent)}&title=${Uri.encodeComponent(context.t.c.agreement.privacyPolicy)}");
   }
 
   @override

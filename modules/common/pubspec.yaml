@@ -14,6 +14,9 @@ dependencies:
   flutter_localizations:
     sdk: flutter
     
+  # 网络请求
+  dio: ^5.8.0+1
+
   # 工具库
   path: ^1.8.3
   intl: ^0.20.2
@@ -30,6 +33,10 @@ dependencies:
   flutter_form_builder: ^10.0.0
   oktoast: ^3.4.0
   toastification: ^3.0.1
+  wechat_assets_picker: ^9.5.0
+  wechat_camera_picker: ^4.3.7
+  image_cropper: ^9.1.0
+  extended_image: ^9.1.0
 
   # webview
   webview_flutter: ^4.10.0
@@ -48,6 +55,8 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  custom_lint:
+  riverpod_lint:
   flutter_lints: ^5.0.0
   build_runner: ^2.4.6
   json_serializable: ^6.9.0

@@ -22,7 +22,6 @@ dependencies:
   auto_route: ^10.0.1
   
   # UI组件
-  extended_image: ^9.1.0
   scroll_to_index: ^3.0.1
   
   # IM SDK - 正常情况下应该在core中访问，这里是为了直接访问一些SDK特性
@@ -37,4 +36,5 @@ dev_dependencies:
   flutter_lints: ^5.0.0
   build_runner: ^2.4.6
   riverpod_generator: ^2.6.5
-  riverpod_lint: ^2.6.5
+  custom_lint:
+  riverpod_lint:

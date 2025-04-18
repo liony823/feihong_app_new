@@ -18,7 +18,7 @@ Future<String> getSIMCountryCode(Ref ref) async {
 FutureOr<List<Country>> getCountries(Ref ref) async {
   try {
     final response = await ApiClient.instance.get(ApiConfig.getCountries);
-    return response.data.map((e) => Country.fromJson(e)).toList();
+    return (response.data as List).map((e) => Country.fromJson(e)).toList();
   } catch (e) {
     AppLogger.e('获取国家区号列表失败', e);
     return [];
@@ -40,7 +40,7 @@ FutureOr<AppConfig?> getAppConfig(Ref ref) async {
 FutureOr<List<AppModule>> getAppModules(Ref ref) async {
   try {
     final response = await ApiClient.instance.get(ApiConfig.getAppModule);
-    return response.data.map((e) => AppModule.fromJson(e)).toList();
+    return (response.data as List).map((e) => AppModule.fromJson(e)).toList();
   } catch (e) {
     AppLogger.e('获取应用模块失败', e);
     return [];

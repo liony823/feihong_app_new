@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:common/common.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -7,7 +8,7 @@ class SwapLangButton extends HookConsumerWidget {
   const SwapLangButton({super.key});
 
   void _onPressed() {
-    // Global.context!.router.push(const LangRoute());
+    Global.context!.router.pushPath(Routes.language);
   }
 
   @override
@@ -22,11 +23,11 @@ class SwapLangButton extends HookConsumerWidget {
                   '')
               .textColor(AppTheme.lightSecondaryTextColor)
               .fontWeight(FontWeight.w500)
-              .fontSize(14.sp),
+              .fontSize(12.sp),
           Icon(
             Icons.swap_vert_outlined,
             color: AppTheme.lightSecondaryTextColor,
-            size: 14.sp,
+            size: 12.sp,
           ),
         ],
       ),

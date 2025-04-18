@@ -23,7 +23,7 @@ final getSIMCountryCodeProvider = AutoDisposeFutureProvider<String>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef GetSIMCountryCodeRef = AutoDisposeFutureProviderRef<String>;
-String _$getCountriesHash() => r'6c41e08f022f71be3abeba1fd1d28635a77e2696';
+String _$getCountriesHash() => r'a1f796dffddd58ea7f1db0da8c49b0c74dbb0d41';
 
 /// See also [getCountries].
 @ProviderFor(getCountries)
@@ -55,7 +55,7 @@ final getAppConfigProvider = AutoDisposeFutureProvider<AppConfig?>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef GetAppConfigRef = AutoDisposeFutureProviderRef<AppConfig?>;
-String _$getAppModulesHash() => r'50a2d3a32d50ae26f8afbd77ad68a22ee9ef2ad8';
+String _$getAppModulesHash() => r'4b97974136619f79e1c88169b4d6942492a5db0d';
 
 /// See also [getAppModules].
 @ProviderFor(getAppModules)

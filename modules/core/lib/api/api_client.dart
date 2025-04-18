@@ -44,7 +44,7 @@ class ApiClient {
         final token = SpHelper.getToken();
         final uid = SpHelper.getUID();
         if (token != null) {
-          options.headers['Authorization'] = 'Bearer $token';
+          options.headers['token'] = token;
         }
         if (uid != null) {
           options.headers['uid'] = uid;

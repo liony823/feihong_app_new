@@ -23,6 +23,15 @@ class ApiConfig {
   static const String resetPwdBySecurityQuestion = '/user/pwdforgetByquestion';
   static const String logout = '/user/quit';
 
+  // 联系人模块
+  static const String getFriendApplyUnreadCount =
+      '/user/reddot/friendApply'; // 获取好友申请未读数量
+  static const String clearFriendApplyUnread =
+      '/user/reddot/friendApply'; // 清除好友申请未读
+
+  // 小程序模块
+  static const String getAppletList = '/applet'; // 获取小程序列表
+
   /// 环境配置
   static const bool isDevelopment = true;
 

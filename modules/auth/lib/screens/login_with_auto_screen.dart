@@ -11,8 +11,8 @@ import '../components/touch_close_keyboard.dart';
 import '../components/user_agreement_checkbox.dart';
 
 @RoutePage()
-class LoginWithDevicePage extends HookConsumerWidget {
-  const LoginWithDevicePage({super.key});
+class LoginWithDeviceScreen extends HookConsumerWidget {
+  const LoginWithDeviceScreen({super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final controller = ref.read(loginControllerProvider.notifier);

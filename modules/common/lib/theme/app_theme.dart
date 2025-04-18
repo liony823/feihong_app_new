@@ -32,9 +32,11 @@ class AppTheme {
   static const Color lightSecondaryTextColor = Color(0xFF6C757D);
   static const Color lightSecondaryTextColor2 = Color(0xFF9E9E9E);
   static const Color lightSecondaryTextColor3 = Color(0xFFC4C4C4);
+  static const Color lightSecondaryTextColor4 = Color(0xFFE0E0E0);
   static const Color darkSecondaryTextColor = Color(0xFFBDBDBD);
   static const Color darkSecondaryTextColor2 = Color(0xFF6C757D);
   static const Color darkSecondaryTextColor3 = Color(0xFF4F4F4F);
+  static const Color darkSecondaryTextColor4 = Color(0xFFC4C4C4);
   static const Color lightPlaceholderTextColor = Color(0xFFC4C4C4);
   static const Color darkPlaceholderTextColor = Color(0xFF4F4F4F);
 
@@ -43,6 +45,9 @@ class AppTheme {
   static const Color warningColor = Color(0xFFFFA000);
   static const Color successColor = Color(0xFF388E3C);
   static const Color infoColor = Color(0xFF0288D1);
+
+  // 未读消息颜色
+  static const Color unreadMessageColor = Color(0xFFFF381F);
 
   // 分隔线颜色
   static const Color dividerColor = Color(0xFFE0E0E0);
@@ -70,6 +75,7 @@ class AppTheme {
         backgroundColor: lightBackgroundColor,
         elevation: 0,
         iconTheme: IconThemeData(color: lightTextColor),
+        surfaceTintColor: brandColor.withValues(alpha: 0.2),
         titleTextStyle: TextStyle(
           color: lightTextColor,
           fontSize: 18.sp,

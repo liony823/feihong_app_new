@@ -10,20 +10,14 @@ import 'package:wukongimfluttersdk/wkim.dart';
 
 part 'im_service.g.dart';
 
-class IMState {
-  final String uid;
-  final String token;
-
-  IMState({required this.uid, required this.token});
-}
+class IMState {}
 
 /// IM服务类，处理与IM SDK的交互
 @riverpod
 class IMService extends _$IMService {
   @override
-  IMState build({required String uid, required String token}) {
-    initialize(uid: uid, token: token);
-    return IMState(uid: uid, token: token);
+  IMState build() {
+    return IMState();
   }
 
   /// 初始化IM SDK
