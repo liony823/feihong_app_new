@@ -6,7 +6,7 @@ part of 'im_service.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$iMServiceHash() => r'83470d0d3235c63d101509547457076ee7d46a26';
+String _$iMServiceHash() => r'37720f2bd49c8b88ca3a4034f5ebde684dcb379c';
 
 /// IM服务类，处理与IM SDK的交互
 ///

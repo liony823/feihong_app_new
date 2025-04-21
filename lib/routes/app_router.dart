@@ -1,6 +1,7 @@
 import 'package:auth/auth.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:base/base.dart';
+import 'package:contact/contact.dart';
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 
@@ -16,6 +17,7 @@ class AppRouter extends RootStackRouter {
   }) : super(navigatorKey: navigatorKey) {
     _routes.addAll(BaseRouter().routes);
     _routes.addAll(AuthRouter().routes);
+    _routes.addAll(ContactRouter().routes);
     // for (var module in modules) {
     //   if (module.sid == 'base') {
     //   } else if (module.sid == 'auth') {}

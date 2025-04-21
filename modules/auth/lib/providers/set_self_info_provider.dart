@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import 'auth_provider.dart';
 
 part 'set_self_info_provider.g.dart';
 

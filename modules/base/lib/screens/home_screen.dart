@@ -3,13 +3,12 @@ import 'package:base/models/applet.dart';
 import 'package:base/pages/applet_page.dart';
 import 'package:base/pages/conversation_page.dart';
 import 'package:base/pages/feed_page.dart';
-import 'package:base/pages/mine_page.dart';
 import 'package:base/providers/applet_provider.dart';
 import 'package:base/providers/home_provider.dart';
+import 'package:base/screens/mine_screen.dart';
 import 'package:common/common.dart';
 import 'package:contact/contact.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
@@ -26,7 +25,7 @@ class HomeScreen extends HookConsumerWidget {
       ContactScreen(),
       if (enabledApplet) AppletPage(),
       FeedPage(),
-      MinePage(),
+      MineScreen(),
     ];
   }
 
@@ -63,10 +62,11 @@ class HomeScreen extends HookConsumerWidget {
         PersistentBottomNavBarItem(
           icon: defaultApplet != null
               ? _buildAppletIcon(defaultApplet.icon)
-              : _buildIcon(EvaIcons.compass, AppTheme.brandColor),
+              : _buildIcon(EvaIcons.globe, AppTheme.brandColor),
           inactiveIcon: defaultApplet != null
               ? _buildAppletIcon(defaultApplet.icon)
-              : _buildIcon(EvaIcons.compass, AppTheme.lightSecondaryTextColor),
+              : _buildIcon(
+                  EvaIcons.globe_2_outline, AppTheme.lightSecondaryTextColor),
           title: defaultApplet?.displayName ?? context.t.home.tab.applet,
           activeColorPrimary: AppTheme.brandColor,
         ),

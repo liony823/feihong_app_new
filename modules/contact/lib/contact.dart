@@ -10,3 +10,6 @@ export 'providers/contact_provider.dart';
 
 // 导出服务
 export 'services/contact_service.dart';
+
+// 导出路由
+export 'route/route.dart';

@@ -29,6 +29,13 @@ class ApiConfig {
   static const String clearFriendApplyUnread =
       '/user/reddot/friendApply'; // 清除好友申请未读
   static const String syncContacts = '/friend/sync'; // 同步联系人
+  static const String getFriendApplyList = '/friend/apply'; // 获取好友申请列表
+  static const String addFriendApply = '/friend/apply'; // 添加好友申请
+  static const String sureFriendApply = '/friend/sure'; // 确认好友申请
+  static const String refuseFriendApply = '/friend/:to_uid'; // 拒绝好友申请
+
+  // 搜索模块
+  static const String searchUser = '/user/search'; // 搜索用户
 
   // 小程序模块
   static const String getAppletList = '/applet'; // 获取小程序列表

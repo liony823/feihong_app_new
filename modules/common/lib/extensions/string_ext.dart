@@ -180,6 +180,10 @@ extension StringExtensions on String {
           .fontWeight(FontWeight.w500)
           .fontFamily(AppTheme.fontFamily);
 
+  DateTime get toDateTime {
+    return DateTime.parse(this);
+  }
+
   SvgView get toSvg {
     return SvgView(icon: this);
   }

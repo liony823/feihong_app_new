@@ -25,5 +25,6 @@ class BaseRouter extends RootStackRouter {
           transitionsBuilder: TransitionsBuilders.noTransition,
         ),
         AutoRoute(page: LanguageRoute.page, path: Routes.language),
+        AutoRoute(page: SettingRoute.page, path: Routes.setting),
       ];
 }

@@ -46,3 +46,14 @@ FutureOr<List<AppModule>> getAppModules(Ref ref) async {
     return [];
   }
 }
+
+@riverpod
+Future<UserInfo?> getCurrentUser(Ref ref, String uid) async {
+  try {
+    final response = await ApiClient.instance.get('/users/$uid');
+    return UserInfo.fromJson(response.data);
+  } catch (e) {
+    AppLogger.e('获取当前用户失败', e);
+    return null;
+  }
+}

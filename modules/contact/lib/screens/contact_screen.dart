@@ -24,9 +24,8 @@ class ContactScreen extends HookConsumerWidget {
               onPressed: () {},
               icon: const Icon(EvaIcons.search_outline),
             ),
-            IconButton(
-              onPressed: () {},
-              icon: const Icon(EvaIcons.plus_circle_outline),
+            ContactDropdownMenu(
+              onItemPressed: contactController.onDropdownMenuPressed,
             ),
           ],
         ),

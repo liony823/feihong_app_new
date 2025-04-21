@@ -30,6 +30,7 @@ dependencies:
   icons_plus: ^5.0.0
   skeletonizer: ^1.4.3
 
+
     # 注解
   freezed_annotation: ^3.0.0
   json_annotation: ^4.8.1

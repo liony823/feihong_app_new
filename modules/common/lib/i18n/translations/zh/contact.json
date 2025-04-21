@@ -4,6 +4,20 @@
 
     "newFriend": "新的朋友",
     "group": "群聊",
-    "invite": "入群邀请"
-    
+    "invite": "入群邀请",
+    "friendApply": {
+        "title": "新的朋友",
+        "recentApply": "近三天申请",
+        "oldApply": "三天前申请",
+        "accepted":"已添加",
+        "apply":"待验证",
+        "refused":"已拒绝",
+        "accept": "接受",
+        "refuse": "拒绝",
+        "delete": "删除"
+    },
+    "searchUser": {
+        "placeholder": "搜索用户名/手机号",
+        "userNotFound": "未找到用户"
+    }
 }

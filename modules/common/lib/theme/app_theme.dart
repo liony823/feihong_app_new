@@ -24,7 +24,7 @@ class AppTheme {
   static const Color darkBackgroundColor = Color(0xFF121212);
 
   // 文本颜色
-  static const Color lightTextColor = Color(0xFF121212);
+  static const Color lightTextColor = Color(0xFF333333);
   static const Color darkTextColor = Color(0xFFFFFFFF);
   static const Color disabledTextColor = Color(0xFF9E9E9E);
 
@@ -51,6 +51,7 @@ class AppTheme {
 
   // 分隔线颜色
   static const Color dividerColor = Color(0xFFF5F5F5);
+  static const Color dividerColor2 = Color.fromARGB(255, 232, 231, 231);
   static const Color darkDividerColor = Color(0xFF424242);
 
   // 按钮前景色

@@ -1,5 +1,6 @@
 import 'package:common/common.dart';
 import 'package:core/repositories/im_repository.dart';
+import 'package:core/services/core_service.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:wukongimfluttersdk/common/options.dart';
 import 'package:wukongimfluttersdk/model/wk_image_content.dart';
@@ -23,6 +24,7 @@ class IMService extends _$IMService {
   /// 初始化IM SDK
   Future<void> initialize({required String uid, required String token}) async {
     try {
+      ref.watch(getCurrentUserProvider(uid).future);
       bool result = await WKIM.shared.setup(Options.newDefault(uid, token));
       // 配置连接信息
       final imRepository = ref.read(imRepositoryProvider);

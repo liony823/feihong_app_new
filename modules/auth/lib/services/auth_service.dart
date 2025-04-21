@@ -4,7 +4,6 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../models/db/db_account.dart';
 import '../models/user_cert.dart';
-import '../models/user_info.dart';
 import '../repositories/account_repository.dart';
 import '../repositories/auth_repository.dart';
 
@@ -135,11 +134,6 @@ class AuthService {
       zone: zone,
       phone: phone,
     );
-  }
-
-  /// 获取用户信息
-  Future<UserInfo?> getUserInfo(String uid) async {
-    return await _authRepository.getUserInfo(uid);
   }
 
   /// I更新用户信息

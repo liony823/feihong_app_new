@@ -39,6 +39,10 @@ dependencies:
   image_cropper: ^9.1.0
   extended_image: ^9.1.0
   azlistview: ^2.0.0
+  easy_refresh: ^3.4.0
+
+  # 动画
+  animate_do: ^3.3.4
 
   # webview
   webview_flutter: ^4.10.0
@@ -68,5 +72,9 @@ dev_dependencies:
 # following page: https://dart.dev/tools/pub/pubspec
 
 flutter:
+  uses-material-design: true
+  
+
   assets:
     - assets/images/
+    - assets/svgs/

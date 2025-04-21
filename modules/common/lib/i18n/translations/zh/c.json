@@ -114,5 +114,50 @@
         "questionOrAnswerEmpty":"密保问题或答案不能为空",
         "submitSuccess":"设置成功",
         "submit":"完 成"
+    },
+
+    "refresh":{
+        "noMoreData": "没有更多数据",
+        "pullToRefresh": "下拉刷新",
+        "refreshLoading": "刷新中",
+        "refreshSuccess": "刷新成功",
+        "refreshFailed": "刷新失败",
+        "pullToLoad": "上拉加载",
+        "loadSuccess": "加载成功",
+        "loadFailed": "加载失败",
+        "loadMore": "加载更多",
+        "loading": "加载中",
+        "releaseReady": "松开加载",
+        "lastUpdateAt": "最后更新于 %T 前"
+    },
+    "dropdownMenu":{
+        "createGroup":"发起群聊",
+        "addFriend":"添加好友",
+        "scan":"扫一扫"
+    },
+    "mine": {
+        "username":"账户ID: $username",
+        "wallet":"我的钱包",
+        "circle":"我的朋友圈",
+        "emoji":"表情",
+        "collection":"我的收藏",
+        "question":"常见问题",
+        "setting":"用户设置"
+    },
+    "setting":{
+        "title":"设置",
+
+        "accountSecurity":"账号安全",
+        "general":"通用",
+        "contactCustomer":"联系客服",
+        "about":"关于我们",
+        "userAgreement":"用户协议",
+        "privacyPolicy":"隐私政策",
+        "feedback":"意见反馈",
+        "networkDetection":"网络检测",
+        "switchLanguage":"切换语言",
+        "logout":"退出登录",
+        "switchAccount":"切换账号",
+        "logoutConfirm":"退出登录后，您需要重新登录才能继续使用。"
     }
 }

@@ -1,5 +1,4 @@
-import '../models/group_member.dart';
-import '../models/user_info.dart';
+import 'package:common/common.dart';
 
 class FakeData {
   static UserInfo get fakeUserInfo => UserInfo(

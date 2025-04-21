@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:common/common.dart';
 import 'package:contact/helper/fake.dart';
 import 'package:contact/models/contact.dart';
@@ -72,11 +73,37 @@ class ContactController extends _$ContactController {
     }
   }
 
-  void toNewFriend() {}
+  void onDropdownMenuPressed(String type) {
+    switch (type) {
+      case 'addFriend':
+        toAddFriend();
+        break;
+      case 'createGroup':
+        toAddGroup();
+        break;
+      case 'scan':
+        toScan();
+        break;
+    }
+  }
+
+  void toNewFriend() {
+    Global.context?.router.pushPath(Routes.friendApply);
+  }
 
   void toInvite() {}
 
   void toGroup() {}
 
   void toProfile() {}
+
+  void toAddGroup() {}
+
+  void toAddFriend() {
+    Global.context?.router.pushPath(Routes.addFriend);
+  }
+
+  void toScan() {
+    // Global.context?.router.pushPath(Routes.scan);
+  }
 }

@@ -1,5 +1,3 @@
-import 'package:auth/models/user_info.dart';
-import 'package:auth/providers/auth_provider.dart';
 import 'package:auth/providers/set_self_info_provider.dart';
 import 'package:auth/resource/fake.dart';
 import 'package:auto_route/auto_route.dart';

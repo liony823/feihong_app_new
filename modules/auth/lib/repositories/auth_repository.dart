@@ -1,4 +1,4 @@
-import 'package:auth/models/user_info.dart';
+import 'package:common/models/user_info.dart';
 import 'package:common/common.dart';
 import 'package:core/core.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -180,19 +180,6 @@ class AuthRepository {
     } catch (e) {
       AppLogger.e("发送验证码错误", e);
       return false;
-    }
-  }
-
-  /// 获取用户信息
-  Future<UserInfo?> getUserInfo(String uid) async {
-    try {
-      final response = await _apiClient.get(
-        '/users/$uid',
-      );
-      return UserInfo.fromJson(response.data);
-    } catch (e) {
-      AppLogger.e('获取用户信息失败', e);
-      return null;
     }
   }
 

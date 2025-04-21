@@ -11,4 +11,15 @@ class Routes {
   static const String verifyCode = '/verifyCode';
   static const String setSelfInfo = '/setSelfInfo';
   static const String setSelfSecurity = '/setSelfSecurity';
+
+  static const String contact = '/contact';
+  static const String friendApply = '/friendApply';
+  static const String groupApply = '/groupApply';
+  static const String groupList = '/groupList';
+  static const String userProfile = '/userProfile';
+  static const String groupProfile = '/groupProfile';
+  static const String addFriend = '/addFriend';
+  static const String addGroup = '/addGroup';
+
+  static const String setting = '/setting';
 }

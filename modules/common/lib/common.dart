@@ -27,6 +27,9 @@ export 'theme/app_theme.dart';
 
 // 导出模型
 export 'models/i_supension_bean.dart';
+export 'models/pagination.dart';
+export 'models/user_info.dart';
+export 'models/group_member.dart';
 
 // 导出组件
 export 'widgets/widgets.dart';

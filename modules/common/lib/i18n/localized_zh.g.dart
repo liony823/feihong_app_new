@@ -71,6 +71,10 @@ class LocalizedCZh {
 	late final LocalizedCVerifyZh verify = LocalizedCVerifyZh.internal(_root);
 	late final LocalizedCProfileZh profile = LocalizedCProfileZh.internal(_root);
 	late final LocalizedCSetSelfSecurityZh setSelfSecurity = LocalizedCSetSelfSecurityZh.internal(_root);
+	late final LocalizedCRefreshZh refresh = LocalizedCRefreshZh.internal(_root);
+	late final LocalizedCDropdownMenuZh dropdownMenu = LocalizedCDropdownMenuZh.internal(_root);
+	late final LocalizedCMineZh mine = LocalizedCMineZh.internal(_root);
+	late final LocalizedCSettingZh setting = LocalizedCSettingZh.internal(_root);
 }
 
 // Path: contact
@@ -85,6 +89,8 @@ class LocalizedContactZh {
 	String get newFriend => '新的朋友';
 	String get group => '群聊';
 	String get invite => '入群邀请';
+	late final LocalizedContactFriendApplyZh friendApply = LocalizedContactFriendApplyZh.internal(_root);
+	late final LocalizedContactSearchUserZh searchUser = LocalizedContactSearchUserZh.internal(_root);
 }
 
 // Path: errors
@@ -502,6 +508,106 @@ class LocalizedCSetSelfSecurityZh {
 	String get submit => '完 成';
 }
 
+// Path: c.refresh
+class LocalizedCRefreshZh {
+	LocalizedCRefreshZh.internal(this._root);
+
+	final Localized _root; // ignore: unused_field
+
+	// Translations
+	String get noMoreData => '没有更多数据';
+	String get pullToRefresh => '下拉刷新';
+	String get refreshLoading => '刷新中';
+	String get refreshSuccess => '刷新成功';
+	String get refreshFailed => '刷新失败';
+	String get pullToLoad => '上拉加载';
+	String get loadSuccess => '加载成功';
+	String get loadFailed => '加载失败';
+	String get loadMore => '加载更多';
+	String get loading => '加载中';
+	String get releaseReady => '松开加载';
+	String get lastUpdateAt => '最后更新于 %T 前';
+}
+
+// Path: c.dropdownMenu
+class LocalizedCDropdownMenuZh {
+	LocalizedCDropdownMenuZh.internal(this._root);
+
+	final Localized _root; // ignore: unused_field
+
+	// Translations
+	String get createGroup => '发起群聊';
+	String get addFriend => '添加好友';
+	String get scan => '扫一扫';
+}
+
+// Path: c.mine
+class LocalizedCMineZh {
+	LocalizedCMineZh.internal(this._root);
+
+	final Localized _root; // ignore: unused_field
+
+	// Translations
+	String username({required Object username}) => '账户ID: ${username}';
+	String get wallet => '我的钱包';
+	String get circle => '我的朋友圈';
+	String get emoji => '表情';
+	String get collection => '我的收藏';
+	String get question => '常见问题';
+	String get setting => '用户设置';
+}
+
+// Path: c.setting
+class LocalizedCSettingZh {
+	LocalizedCSettingZh.internal(this._root);
+
+	final Localized _root; // ignore: unused_field
+
+	// Translations
+	String get title => '设置';
+	String get accountSecurity => '账号安全';
+	String get general => '通用';
+	String get contactCustomer => '联系客服';
+	String get about => '关于我们';
+	String get userAgreement => '用户协议';
+	String get privacyPolicy => '隐私政策';
+	String get feedback => '意见反馈';
+	String get networkDetection => '网络检测';
+	String get switchLanguage => '切换语言';
+	String get logout => '退出登录';
+	String get switchAccount => '切换账号';
+	String get logoutConfirm => '退出登录后，您需要重新登录才能继续使用。';
+}
+
+// Path: contact.friendApply
+class LocalizedContactFriendApplyZh {
+	LocalizedContactFriendApplyZh.internal(this._root);
+
+	final Localized _root; // ignore: unused_field
+
+	// Translations
+	String get title => '新的朋友';
+	String get recentApply => '近三天申请';
+	String get oldApply => '三天前申请';
+	String get accepted => '已添加';
+	String get apply => '待验证';
+	String get refused => '已拒绝';
+	String get accept => '接受';
+	String get refuse => '拒绝';
+	String get delete => '删除';
+}
+
+// Path: contact.searchUser
+class LocalizedContactSearchUserZh {
+	LocalizedContactSearchUserZh.internal(this._root);
+
+	final Localized _root; // ignore: unused_field
+
+	// Translations
+	String get placeholder => '搜索用户名/手机号';
+	String get userNotFound => '未找到用户';
+}
+
 // Path: home.tab
 class LocalizedHomeTabZh {
 	LocalizedHomeTabZh.internal(this._root);
@@ -618,11 +724,57 @@ extension on Localized {
 			case 'c.setSelfSecurity.questionOrAnswerEmpty': return '密保问题或答案不能为空';
 			case 'c.setSelfSecurity.submitSuccess': return '设置成功';
 			case 'c.setSelfSecurity.submit': return '完 成';
+			case 'c.refresh.noMoreData': return '没有更多数据';
+			case 'c.refresh.pullToRefresh': return '下拉刷新';
+			case 'c.refresh.refreshLoading': return '刷新中';
+			case 'c.refresh.refreshSuccess': return '刷新成功';
+			case 'c.refresh.refreshFailed': return '刷新失败';
+			case 'c.refresh.pullToLoad': return '上拉加载';
+			case 'c.refresh.loadSuccess': return '加载成功';
+			case 'c.refresh.loadFailed': return '加载失败';
+			case 'c.refresh.loadMore': return '加载更多';
+			case 'c.refresh.loading': return '加载中';
+			case 'c.refresh.releaseReady': return '松开加载';
+			case 'c.refresh.lastUpdateAt': return '最后更新于 %T 前';
+			case 'c.dropdownMenu.createGroup': return '发起群聊';
+			case 'c.dropdownMenu.addFriend': return '添加好友';
+			case 'c.dropdownMenu.scan': return '扫一扫';
+			case 'c.mine.username': return ({required Object username}) => '账户ID: ${username}';
+			case 'c.mine.wallet': return '我的钱包';
+			case 'c.mine.circle': return '我的朋友圈';
+			case 'c.mine.emoji': return '表情';
+			case 'c.mine.collection': return '我的收藏';
+			case 'c.mine.question': return '常见问题';
+			case 'c.mine.setting': return '用户设置';
+			case 'c.setting.title': return '设置';
+			case 'c.setting.accountSecurity': return '账号安全';
+			case 'c.setting.general': return '通用';
+			case 'c.setting.contactCustomer': return '联系客服';
+			case 'c.setting.about': return '关于我们';
+			case 'c.setting.userAgreement': return '用户协议';
+			case 'c.setting.privacyPolicy': return '隐私政策';
+			case 'c.setting.feedback': return '意见反馈';
+			case 'c.setting.networkDetection': return '网络检测';
+			case 'c.setting.switchLanguage': return '切换语言';
+			case 'c.setting.logout': return '退出登录';
+			case 'c.setting.switchAccount': return '切换账号';
+			case 'c.setting.logoutConfirm': return '退出登录后，您需要重新登录才能继续使用。';
 			case 'contact.title': return '通讯录';
 			case 'contact.empty': return '暂无联系人';
 			case 'contact.newFriend': return '新的朋友';
 			case 'contact.group': return '群聊';
 			case 'contact.invite': return '入群邀请';
+			case 'contact.friendApply.title': return '新的朋友';
+			case 'contact.friendApply.recentApply': return '近三天申请';
+			case 'contact.friendApply.oldApply': return '三天前申请';
+			case 'contact.friendApply.accepted': return '已添加';
+			case 'contact.friendApply.apply': return '待验证';
+			case 'contact.friendApply.refused': return '已拒绝';
+			case 'contact.friendApply.accept': return '接受';
+			case 'contact.friendApply.refuse': return '拒绝';
+			case 'contact.friendApply.delete': return '删除';
+			case 'contact.searchUser.placeholder': return '搜索用户名/手机号';
+			case 'contact.searchUser.userNotFound': return '未找到用户';
 			case 'errors.somethingUnexpected': return '发生了一些意外，请稍后再试';
 			case 'errors.retry': return '重试';
 			case 'errors.httpError.title': return '发生错误';
