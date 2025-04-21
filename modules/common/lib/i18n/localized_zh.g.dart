@@ -65,6 +65,12 @@ class LocalizedCZh {
 	String get permissionDeniedHint => '请在设置中允许使用%s权限。';
 	String get male => '男';
 	String get female => '女';
+	String get close => '关闭';
+	String get manager => '管理';
+	String get delete => '删除';
+	String get edit => '编辑';
+	String get add => '添加';
+	String get save => '保存';
 	late final LocalizedCAgreementZh agreement = LocalizedCAgreementZh.internal(_root);
 	late final LocalizedCLanguageZh language = LocalizedCLanguageZh.internal(_root);
 	late final LocalizedCZoneZh zone = LocalizedCZoneZh.internal(_root);
@@ -77,6 +83,7 @@ class LocalizedCZh {
 	late final LocalizedCDropdownMenuZh dropdownMenu = LocalizedCDropdownMenuZh.internal(_root);
 	late final LocalizedCMineZh mine = LocalizedCMineZh.internal(_root);
 	late final LocalizedCSettingZh setting = LocalizedCSettingZh.internal(_root);
+	late final LocalizedCAccountZh account = LocalizedCAccountZh.internal(_root);
 }
 
 // Path: contact
@@ -585,6 +592,20 @@ class LocalizedCSettingZh {
 	String get logoutConfirm => '退出登录后，您需要重新登录才能继续使用。';
 }
 
+// Path: c.account
+class LocalizedCAccountZh {
+	LocalizedCAccountZh.internal(this._root);
+
+	final Localized _root; // ignore: unused_field
+
+	// Translations
+	String get title => '轻触头像以切换账号';
+	String get currentUse => '当前使用';
+	String get addAccount => '添加账号';
+	String get loginOther => '登录其他账号';
+	String get registerOther => '注册新账号';
+}
+
 // Path: contact.friendApply
 class LocalizedContactFriendApplyZh {
 	LocalizedContactFriendApplyZh.internal(this._root);
@@ -646,6 +667,12 @@ extension on Localized {
 			case 'c.permissionDeniedHint': return '请在设置中允许使用%s权限。';
 			case 'c.male': return '男';
 			case 'c.female': return '女';
+			case 'c.close': return '关闭';
+			case 'c.manager': return '管理';
+			case 'c.delete': return '删除';
+			case 'c.edit': return '编辑';
+			case 'c.add': return '添加';
+			case 'c.save': return '保存';
 			case 'c.agreement.userAgreement': return '《用户协议》';
 			case 'c.agreement.privacyPolicy': return '《隐私政策》';
 			case 'c.agreement.checkbox': return ({required InlineSpan userAgreement, required InlineSpan privacyPolicy}) => TextSpan(children: [
@@ -771,6 +798,11 @@ extension on Localized {
 			case 'c.setting.logout': return '退出登录';
 			case 'c.setting.switchAccount': return '切换账号';
 			case 'c.setting.logoutConfirm': return '退出登录后，您需要重新登录才能继续使用。';
+			case 'c.account.title': return '轻触头像以切换账号';
+			case 'c.account.currentUse': return '当前使用';
+			case 'c.account.addAccount': return '添加账号';
+			case 'c.account.loginOther': return '登录其他账号';
+			case 'c.account.registerOther': return '注册新账号';
 			case 'contact.title': return '通讯录';
 			case 'contact.empty': return '暂无联系人';
 			case 'contact.newFriend': return '新的朋友';

@@ -15,6 +15,10 @@ class SettingController extends _$SettingController {
     return SettingState();
   }
 
+  void onSwitchAccount() {
+    Global.context!.router.pushPath(Routes.account);
+  }
+
   void onLogout() {
     final context = Global.context!;
     showModalBottomSheet(

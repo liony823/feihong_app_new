@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:common/common.dart';
+import 'package:flutter/material.dart';
 
 import 'route.gr.dart';
 
@@ -25,6 +26,10 @@ class BaseRouter extends RootStackRouter {
           transitionsBuilder: TransitionsBuilders.noTransition,
         ),
         AutoRoute(page: LanguageRoute.page, path: Routes.language),
-        AutoRoute(page: SettingRoute.page, path: Routes.setting),
+        CustomRoute(
+          page: SettingRoute.page,
+          path: Routes.setting,
+          transitionsBuilder: TransitionsBuilders.slideLeft,
+        ),
       ];
 }

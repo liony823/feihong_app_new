@@ -1,7 +1,6 @@
 import 'package:acter_avatar/acter_avatar.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:common/common.dart';
-import 'package:contact/helper/fake.dart';
 import 'package:core/core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

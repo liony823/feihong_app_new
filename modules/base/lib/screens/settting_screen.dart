@@ -57,7 +57,10 @@ class SettingScreen extends HookConsumerWidget {
               ],
             )),
             16.verticalSpace,
-            _buildSwitchAccountView(context),
+            _buildSwitchAccountView(
+              context,
+              onSwitchAccount: controller.onSwitchAccount,
+            ),
             _buildLogoutView(context, onLogout: controller.onLogout),
           ],
         ),
@@ -65,11 +68,14 @@ class SettingScreen extends HookConsumerWidget {
     );
   }
 
-  Widget _buildSwitchAccountView(BuildContext context) {
+  Widget _buildSwitchAccountView(
+    BuildContext context, {
+    required VoidCallback onSwitchAccount,
+  }) {
     return _buildCardView(
         child: CupertinoButton(
       padding: EdgeInsets.symmetric(horizontal: 16.w),
-      onPressed: () {},
+      onPressed: onSwitchAccount,
       child: SizedBox(
         height: 52.h,
         child: Center(

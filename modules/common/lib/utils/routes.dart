@@ -11,6 +11,7 @@ class Routes {
   static const String verifyCode = '/verifyCode';
   static const String setSelfInfo = '/setSelfInfo';
   static const String setSelfSecurity = '/setSelfSecurity';
+  static const String account = '/account';
 
   static const String contact = '/contact';
   static const String friendApply = '/friendApply';

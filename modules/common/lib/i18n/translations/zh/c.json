@@ -12,6 +12,13 @@
     "permissionDeniedHint": "请在设置中允许使用%s权限。",
     "male":"男",
     "female":"女",
+    "close":"关闭",
+    "manager":"管理",
+    "delete":"删除",
+    "edit":"编辑",
+    "add":"添加",
+    "save":"保存",
+    
 
     "agreement":{
         "userAgreement":"《用户协议》",
@@ -165,5 +172,12 @@
         "logout":"退出登录",
         "switchAccount":"切换账号",
         "logoutConfirm":"退出登录后，您需要重新登录才能继续使用。"
+    },
+    "account":{
+        "title":"轻触头像以切换账号",
+        "currentUse":"当前使用",
+        "addAccount":"添加账号",
+        "loginOther":"登录其他账号",
+        "registerOther":"注册新账号"
     }
 }

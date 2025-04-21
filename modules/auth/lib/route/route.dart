@@ -15,6 +15,11 @@ class AuthRouter extends RootStackRouter {
             page: LoginWithDeviceRoute.page,
             path: Routes.loginWithAuto,
             transitionsBuilder: TransitionsBuilders.noTransition),
+        CustomRoute(
+            page: AccountRoute.page,
+            path: Routes.account,
+            transitionsBuilder: TransitionsBuilders.slideBottom,
+            predictiveBackPageTransitionsBuilder: TransitionsBuilders.slideTop),
         AutoRoute(
           page: RegisterRoute.page,
           path: Routes.register,
