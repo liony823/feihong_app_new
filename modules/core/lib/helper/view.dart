@@ -1,6 +1,8 @@
 import 'package:common/common.dart';
 import 'package:core/api/apis.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_pickers/pickers.dart';
+import 'package:flutter_pickers/style/picker_style.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:wechat_assets_picker/wechat_assets_picker.dart';
 import 'package:wechat_camera_picker/wechat_camera_picker.dart';
@@ -104,6 +106,42 @@ class ViewHelper {
             ),
         ],
       ),
+    );
+  }
+
+  static void openSexPicker({
+    required Function(int sex) onConfirm,
+    Function(bool)? onCancel,
+    int? initialValue,
+  }) {
+    final context = Global.context!;
+    Pickers.showSinglePicker(
+      context,
+      data: [context.t.c.male, context.t.c.female],
+      overlapTabBar: true,
+      pickerStyle: PickerStyle(
+        title: Text(context.t.c.profile.sex,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 18.sp,
+              fontWeight: FontWeight.w500,
+            )),
+        textSize: 18.sp,
+        pickerHeight: 168.w,
+        showTitleBar: true,
+        headDecoration: BoxDecoration(
+          color: AppTheme.primaryLightColor,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(12.w),
+            topRight: Radius.circular(12.w),
+          ),
+        ),
+      ),
+      selectData: initialValue == 1 ? context.t.c.male : context.t.c.female,
+      onConfirm: (value, index) {
+        onConfirm(index + 1);
+      },
+      onCancel: onCancel,
     );
   }
 

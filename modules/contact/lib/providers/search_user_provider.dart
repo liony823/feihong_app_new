@@ -5,7 +5,7 @@ import 'package:common/common.dart';
 part 'search_user_provider.g.dart';
 
 class SearchUserState {
-  final UserInfo? userInfo;
+  final SearchUserInfo? userInfo;
   final bool isSearched;
 
   const SearchUserState({
@@ -14,7 +14,7 @@ class SearchUserState {
   });
 
   SearchUserState copyWith({
-    UserInfo? userInfo,
+    SearchUserInfo? userInfo,
     bool? isSearched,
   }) {
     return SearchUserState(
@@ -36,6 +36,6 @@ class SearchUserController extends _$SearchUserController {
   Future<void> searchUser(String keyword) async {
     state = state.copyWith(userInfo: null, isSearched: false);
     final result = await _contactService.searchUser(keyword);
-    state = state.copyWith(userInfo: result,isSearched: true);
+    state = state.copyWith(userInfo: result, isSearched: true);
   }
 }

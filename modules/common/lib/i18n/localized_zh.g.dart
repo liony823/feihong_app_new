@@ -63,6 +63,8 @@ class LocalizedCZh {
 	String get talkTooShort => '说话时间太短';
 	String get permissionDeniedTitle => '权限被拒绝';
 	String get permissionDeniedHint => '请在设置中允许使用%s权限。';
+	String get male => '男';
+	String get female => '女';
 	late final LocalizedCAgreementZh agreement = LocalizedCAgreementZh.internal(_root);
 	late final LocalizedCLanguageZh language = LocalizedCLanguageZh.internal(_root);
 	late final LocalizedCZoneZh zone = LocalizedCZoneZh.internal(_root);
@@ -483,6 +485,10 @@ class LocalizedCProfileZh {
 	String get username => '用户名';
 	String get nickname => '昵称';
 	String get avatar => '头像';
+	String get sex => '性别';
+	String get introduction => '个性签名';
+	String get plsEnterIntroduction => '请输入您的个性签名';
+	String get plsSelectGender => '请选择您的性别';
 	String get usernameValidateError => '用户名格式错误（6-18位字符，不能包含非法字符）';
 	String get nicknameValidateError => '昵称格式错误（2-12位字符，不能包含非法字符）';
 	String get usernameHelperText => '用户名仅可修改一次。';
@@ -638,6 +644,8 @@ extension on Localized {
 			case 'c.talkTooShort': return '说话时间太短';
 			case 'c.permissionDeniedTitle': return '权限被拒绝';
 			case 'c.permissionDeniedHint': return '请在设置中允许使用%s权限。';
+			case 'c.male': return '男';
+			case 'c.female': return '女';
 			case 'c.agreement.userAgreement': return '《用户协议》';
 			case 'c.agreement.privacyPolicy': return '《隐私政策》';
 			case 'c.agreement.checkbox': return ({required InlineSpan userAgreement, required InlineSpan privacyPolicy}) => TextSpan(children: [
@@ -710,6 +718,10 @@ extension on Localized {
 			case 'c.profile.username': return '用户名';
 			case 'c.profile.nickname': return '昵称';
 			case 'c.profile.avatar': return '头像';
+			case 'c.profile.sex': return '性别';
+			case 'c.profile.introduction': return '个性签名';
+			case 'c.profile.plsEnterIntroduction': return '请输入您的个性签名';
+			case 'c.profile.plsSelectGender': return '请选择您的性别';
 			case 'c.profile.usernameValidateError': return '用户名格式错误（6-18位字符，不能包含非法字符）';
 			case 'c.profile.nicknameValidateError': return '昵称格式错误（2-12位字符，不能包含非法字符）';
 			case 'c.profile.usernameHelperText': return '用户名仅可修改一次。';

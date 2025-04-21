@@ -20,6 +20,9 @@ dependencies:
   
   # 路由
   auto_route: ^10.0.1
+
+  # 工具
+  uuid:
   
   # 国际化
   intl: ^0.20.2

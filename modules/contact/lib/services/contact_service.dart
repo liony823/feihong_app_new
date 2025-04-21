@@ -41,7 +41,7 @@ class ContactService {
     return await _contactRepository.refuseFriendApply(toUid);
   }
 
-  Future<UserInfo?> searchUser(String keyword) async {
+  Future<SearchUserInfo?> searchUser(String keyword) async {
     return await _contactRepository.searchUser(keyword);
   }
 }

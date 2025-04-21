@@ -83,6 +83,18 @@ class AppTheme {
           fontWeight: FontWeight.w600,
         ),
       ),
+      dialogTheme: DialogTheme(
+        backgroundColor: AppTheme.primaryLightColor,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12.r),
+        ),
+      ),
+      bottomSheetTheme: BottomSheetThemeData(
+        backgroundColor: AppTheme.lightBackgroundColor,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12.r),
+        ),
+      ),
       dividerTheme: DividerThemeData(
         color: dividerColor,
         thickness: 1.h,

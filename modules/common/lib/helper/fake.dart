@@ -1,12 +1,14 @@
 import 'package:common/common.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
-class FakeData {
+class FakeUserHelper {
   static UserInfo get fakeUserInfo => UserInfo(
-        uid: '1',
-        username: '张三李四',
-        name: '张三李四',
-        zone: '1',
-        phone: '1',
+        uid: BoneMock.fullName,
+        username: BoneMock.name,
+        name: BoneMock.name,
+        zone: BoneMock.country,
+        phone: BoneMock.phone,
+        introduction: BoneMock.longParagraph,
         mute: 0,
         top: 0,
         sex: 0,
@@ -35,15 +37,15 @@ class FakeData {
         joinGroupInviteUid: '1',
         joinGroupInviteName: '1',
         groupMember: GroupMember(
-          uid: '1',
-          name: '张三',
-          groupNo: '1',
-          remark: '1',
+          uid: BoneMock.fullName,
+          name: BoneMock.name,
+          groupNo: BoneMock.fullName,
+          remark: BoneMock.fullName,
           role: 0,
           isDeleted: 0,
           status: 0,
-          vercode: '1',
-          inviteUid: '1',
+          vercode: BoneMock.fullName,
+          inviteUid: BoneMock.fullName,
           robot: 0,
           forbiddenExpirTime: 1713235200,
           createdAt: '1713235200',

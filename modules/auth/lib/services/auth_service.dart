@@ -1,6 +1,7 @@
 import 'package:common/common.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:uuid/uuid.dart';
 
 import '../models/db/db_account.dart';
 import '../models/user_cert.dart';
@@ -193,7 +194,15 @@ class AuthService {
 
   /// 退出登录
   Future<bool> logout() async {
-    return await _authRepository.logout();
+    try {
+      await _authRepository.logout();
+      SpHelper.setToken("");
+      SpHelper.setUID("");
+      return true;
+    } catch (e) {
+      AppLogger.e("退出登录失败", e);
+      return false;
+    }
   }
 
   Future _loginWithPhoneSuccess(
@@ -208,6 +217,9 @@ class AuthService {
         phone: phone,
         password: password,
         loginType: 1,
+        createdAt: DateTime.now().millisecondsSinceEpoch,
+        id: Uuid().v4(),
+        uid: userCert.uid,
       ));
     } else {
       await _accountRepository.updateAccount(DBAccount(
@@ -217,6 +229,8 @@ class AuthService {
         zone: zone,
         phone: phone,
         password: password,
+        updatedAt: DateTime.now().millisecondsSinceEpoch,
+        uid: userCert.uid,
       ));
     }
   }
@@ -233,15 +247,20 @@ class AuthService {
         phone: "",
         password: password,
         loginType: 2,
+        uid: userCert.uid,
+        id: Uuid().v4(),
+        createdAt: DateTime.now().millisecondsSinceEpoch,
       ));
     } else {
       await _accountRepository.updateAccount(DBAccount(
+        uid: userCert.uid,
         id: account.id,
         loginType: 2,
         username: username,
         zone: "",
         phone: "",
         password: password,
+        updatedAt: DateTime.now().millisecondsSinceEpoch,
       ));
     }
   }

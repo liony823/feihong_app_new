@@ -6,11 +6,11 @@ part of 'core_service.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$getSIMCountryCodeHash() => r'9b41e9f1f8d812e934fb6cf2dfbc219a6ddd8a3c';
+String _$getSIMCountryCodeHash() => r'ffb312d2fa2bed6c6eee6d66a4e1e778dbeff25e';
 
 /// See also [getSIMCountryCode].
 @ProviderFor(getSIMCountryCode)
-final getSIMCountryCodeProvider = AutoDisposeFutureProvider<String>.internal(
+final getSIMCountryCodeProvider = FutureProvider<String>.internal(
   getSIMCountryCode,
   name: r'getSIMCountryCodeProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -22,12 +22,12 @@ final getSIMCountryCodeProvider = AutoDisposeFutureProvider<String>.internal(
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef GetSIMCountryCodeRef = AutoDisposeFutureProviderRef<String>;
-String _$getCountriesHash() => r'a1f796dffddd58ea7f1db0da8c49b0c74dbb0d41';
+typedef GetSIMCountryCodeRef = FutureProviderRef<String>;
+String _$getCountriesHash() => r'386dbfa9231ef9c15da3e8b6ab671e96d80c3412';
 
 /// See also [getCountries].
 @ProviderFor(getCountries)
-final getCountriesProvider = AutoDisposeFutureProvider<List<Country>>.internal(
+final getCountriesProvider = FutureProvider<List<Country>>.internal(
   getCountries,
   name: r'getCountriesProvider',
   debugGetCreateSourceHash:
@@ -38,12 +38,12 @@ final getCountriesProvider = AutoDisposeFutureProvider<List<Country>>.internal(
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef GetCountriesRef = AutoDisposeFutureProviderRef<List<Country>>;
-String _$getAppConfigHash() => r'41cc53202d48dcd2ed7841b987662955d8a59724';
+typedef GetCountriesRef = FutureProviderRef<List<Country>>;
+String _$getAppConfigHash() => r'18fc89b9551e4540ec99c947113aa96d53f59d99';
 
 /// See also [getAppConfig].
 @ProviderFor(getAppConfig)
-final getAppConfigProvider = AutoDisposeFutureProvider<AppConfig?>.internal(
+final getAppConfigProvider = FutureProvider<AppConfig?>.internal(
   getAppConfig,
   name: r'getAppConfigProvider',
   debugGetCreateSourceHash:
@@ -54,13 +54,12 @@ final getAppConfigProvider = AutoDisposeFutureProvider<AppConfig?>.internal(
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef GetAppConfigRef = AutoDisposeFutureProviderRef<AppConfig?>;
-String _$getAppModulesHash() => r'4b97974136619f79e1c88169b4d6942492a5db0d';
+typedef GetAppConfigRef = FutureProviderRef<AppConfig?>;
+String _$getAppModulesHash() => r'a7ac5df8c5f2b74ccd53b7bbc9624ef9d9f28444';
 
 /// See also [getAppModules].
 @ProviderFor(getAppModules)
-final getAppModulesProvider =
-    AutoDisposeFutureProvider<List<AppModule>>.internal(
+final getAppModulesProvider = FutureProvider<List<AppModule>>.internal(
   getAppModules,
   name: r'getAppModulesProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -72,8 +71,8 @@ final getAppModulesProvider =
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef GetAppModulesRef = AutoDisposeFutureProviderRef<List<AppModule>>;
-String _$getCurrentUserHash() => r'f8084aa2b2fdb0a42af60201b0d497b47c2bfd77';
+typedef GetAppModulesRef = FutureProviderRef<List<AppModule>>;
+String _$getCurrentUserHash() => r'89085b678528512428e2ff5c3368e9358d8ccfd8';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -139,7 +138,7 @@ class GetCurrentUserFamily extends Family<AsyncValue<UserInfo?>> {
 }
 
 /// See also [getCurrentUser].
-class GetCurrentUserProvider extends AutoDisposeFutureProvider<UserInfo?> {
+class GetCurrentUserProvider extends FutureProvider<UserInfo?> {
   /// See also [getCurrentUser].
   GetCurrentUserProvider(
     String uid,
@@ -191,7 +190,7 @@ class GetCurrentUserProvider extends AutoDisposeFutureProvider<UserInfo?> {
   }
 
   @override
-  AutoDisposeFutureProviderElement<UserInfo?> createElement() {
+  FutureProviderElement<UserInfo?> createElement() {
     return _GetCurrentUserProviderElement(this);
   }
 
@@ -211,13 +210,13 @@ class GetCurrentUserProvider extends AutoDisposeFutureProvider<UserInfo?> {
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-mixin GetCurrentUserRef on AutoDisposeFutureProviderRef<UserInfo?> {
+mixin GetCurrentUserRef on FutureProviderRef<UserInfo?> {
   /// The parameter `uid` of this provider.
   String get uid;
 }
 
-class _GetCurrentUserProviderElement
-    extends AutoDisposeFutureProviderElement<UserInfo?> with GetCurrentUserRef {
+class _GetCurrentUserProviderElement extends FutureProviderElement<UserInfo?>
+    with GetCurrentUserRef {
   _GetCurrentUserProviderElement(super.provider);
 
   @override

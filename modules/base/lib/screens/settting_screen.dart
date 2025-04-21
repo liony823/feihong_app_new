@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:base/providers/setting_provider.dart';
 import 'package:common/common.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +10,7 @@ class SettingScreen extends HookConsumerWidget {
   const SettingScreen({super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final controller = ref.read(settingControllerProvider.notifier);
     return Scaffold(
       appBar: AppBar(
         title: Text(context.t.c.setting.title),
@@ -56,7 +58,7 @@ class SettingScreen extends HookConsumerWidget {
             )),
             16.verticalSpace,
             _buildSwitchAccountView(context),
-            _buildLogoutView(context),
+            _buildLogoutView(context, onLogout: controller.onLogout),
           ],
         ),
       ),
@@ -78,11 +80,14 @@ class SettingScreen extends HookConsumerWidget {
     ));
   }
 
-  Widget _buildLogoutView(BuildContext context) {
+  Widget _buildLogoutView(
+    BuildContext context, {
+    required VoidCallback onLogout,
+  }) {
     return _buildCardView(
         child: CupertinoButton(
       padding: EdgeInsets.symmetric(horizontal: 16.w),
-      onPressed: () {},
+      onPressed: onLogout,
       child: SizedBox(
         height: 52.h,
         child: Center(

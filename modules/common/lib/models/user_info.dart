@@ -17,6 +17,7 @@ abstract class UserInfo with _$UserInfo {
     required int mute,
     required int top,
     required int sex,
+    required String introduction,
     required String category,
     required String shortNo,
     required int chatPwdOn,

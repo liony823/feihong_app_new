@@ -20,92 +20,91 @@ class BottomSheetView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 10.w),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.end,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Column(
           mainAxisSize: MainAxisSize.min,
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(6.r),
-              ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: items.map((e) => _parseItem(context, e)).toList(),
-              ),
-            ),
-            10.verticalSpace,
-            _itemBgView(
-              label: context.t.c.cancel,
-              onTap: isOverlaySheet ? onCancel : () => context.pop(),
-              borderRadius: BorderRadius.circular(6.r),
-              alignment: MainAxisAlignment.center,
-            ),
-            10.verticalSpace,
-          ],
+          children: items.map((e) => _parseItem(context, e)).toList(),
         ),
-      ),
+        8.verticalSpace,
+        _itemBgView(
+          context,
+          label: context.t.c.cancel,
+          onTap: isOverlaySheet ? onCancel : () => context.pop(),
+          alignment: MainAxisAlignment.center,
+          isCancel: true,
+        ),
+      ],
     );
   }
 
   Widget _parseItem(BuildContext context, SheetItem item) {
-    BorderRadius? borderRadius;
-    int length = items.length;
     bool isLast = items.indexOf(item) == items.length - 1;
     bool isFirst = items.indexOf(item) == 0;
-    if (length == 1) {
-      borderRadius = item.borderRadius ?? BorderRadius.circular(6.r);
-    } else {
-      borderRadius = item.borderRadius ??
-          BorderRadius.only(
-            topLeft: isFirst ? Radius.circular(6.r) : Radius.zero,
-            topRight: isFirst ? Radius.circular(6.r) : Radius.zero,
-            bottomLeft: isLast ? Radius.circular(6.r) : Radius.zero,
-            bottomRight: isLast ? Radius.circular(6.r) : Radius.zero,
-          );
-    }
     return _itemBgView(
+      context,
       label: item.label,
       textStyle: item.textStyle,
       icon: item.icon,
       alignment: item.alignment,
       line: !isLast,
-      borderRadius: borderRadius,
-      onTap: () {
-        if (!isOverlaySheet) context.pop(item.result);
-        item.onTap?.call();
-      },
+      isFirst: isFirst,
+      onTap: item.onTap != null
+          ? () {
+              if (!isOverlaySheet) context.pop(item.result);
+              item.onTap?.call();
+            }
+          : null,
     );
   }
 
-  Widget _itemBgView({
+  Widget _itemBgView(
+    BuildContext context, {
     required String label,
     String? icon,
     Function()? onTap,
-    BorderRadius? borderRadius,
     TextStyle? textStyle,
     MainAxisAlignment? alignment,
+    bool isFirst = false,
     bool line = false,
+    bool isCancel = false,
   }) =>
       Ink(
         decoration: BoxDecoration(
           color: AppTheme.primaryLightColor,
-          borderRadius: borderRadius,
+          borderRadius: isFirst
+              ? BorderRadius.only(
+                  topLeft: Radius.circular(12.r),
+                  topRight: Radius.circular(12.r),
+                )
+              : null,
         ),
         child: InkWell(
           onTap: onTap,
+          borderRadius: isFirst
+              ? BorderRadius.only(
+                  topLeft: Radius.circular(12.r),
+                  topRight: Radius.circular(12.r),
+                )
+              : null,
           child: Container(
             decoration: line
                 ? BoxDecoration(
                     border: BorderDirectional(
                       bottom:
-                          BorderSide(color: AppTheme.dividerColor, width: 0.5),
+                          BorderSide(color: AppTheme.dividerColor, width: 1.w),
                     ),
                   )
                 : null,
-            height: itemHeight ?? 56.h,
+            height: itemHeight ??
+                (isCancel
+                    ? 36.h + MediaQuery.of(context).padding.bottom
+                    : 56.h),
+            padding: isCancel
+                ? EdgeInsets.only(bottom: MediaQuery.of(context).padding.bottom)
+                : null,
             child: Row(
               mainAxisAlignment:
                   alignment ?? mainAxisAlignment ?? MainAxisAlignment.center,
@@ -120,10 +119,14 @@ class BottomSheetView extends StatelessWidget {
         ),
       );
 
-  _text(String label, TextStyle? style) => Text(label)
-      .textColor(AppTheme.lightSecondaryTextColor)
-      .fontSize(17.sp)
-      .textAlignment(TextAlign.center);
+  _text(String label, TextStyle? style) => Text(
+        label,
+        style: style ??
+            TextStyle(
+              color: AppTheme.lightTextColor,
+              fontSize: 17.sp,
+            ),
+      );
 
   _image(String icon) => icon.toImage
     ..width = 24.w

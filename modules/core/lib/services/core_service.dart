@@ -7,14 +7,14 @@ import 'package:world_countries/world_countries.dart' as wc;
 
 part 'core_service.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 Future<String> getSIMCountryCode(Ref ref) async {
   final countryCode = await DeviceRegion.getSIMCountryCode();
   final country = wc.WorldCountry.fromCodeShort(countryCode ?? '');
   return country.idd.phoneCode();
 }
 
-@riverpod
+@Riverpod(keepAlive: true)
 FutureOr<List<Country>> getCountries(Ref ref) async {
   try {
     final response = await ApiClient.instance.get(ApiConfig.getCountries);
@@ -25,7 +25,7 @@ FutureOr<List<Country>> getCountries(Ref ref) async {
   }
 }
 
-@riverpod
+@Riverpod(keepAlive: true)
 FutureOr<AppConfig?> getAppConfig(Ref ref) async {
   try {
     final response = await ApiClient.instance.get(ApiConfig.getAppConfig);
@@ -36,7 +36,7 @@ FutureOr<AppConfig?> getAppConfig(Ref ref) async {
   }
 }
 
-@riverpod
+@Riverpod(keepAlive: true)
 FutureOr<List<AppModule>> getAppModules(Ref ref) async {
   try {
     final response = await ApiClient.instance.get(ApiConfig.getAppModule);
@@ -47,9 +47,12 @@ FutureOr<List<AppModule>> getAppModules(Ref ref) async {
   }
 }
 
-@riverpod
+@Riverpod(keepAlive: true)
 Future<UserInfo?> getCurrentUser(Ref ref, String uid) async {
   try {
+    if (uid.isEmpty) {
+      return null;
+    }
     final response = await ApiClient.instance.get('/users/$uid');
     return UserInfo.fromJson(response.data);
   } catch (e) {

@@ -24,6 +24,7 @@ mixin _$UserInfo {
   int get mute;
   int get top;
   int get sex;
+  String get introduction;
   String get category;
   String get shortNo;
   int get chatPwdOn;
@@ -75,6 +76,8 @@ mixin _$UserInfo {
             (identical(other.mute, mute) || other.mute == mute) &&
             (identical(other.top, top) || other.top == top) &&
             (identical(other.sex, sex) || other.sex == sex) &&
+            (identical(other.introduction, introduction) ||
+                other.introduction == introduction) &&
             (identical(other.category, category) ||
                 other.category == category) &&
             (identical(other.shortNo, shortNo) || other.shortNo == shortNo) &&
@@ -130,6 +133,7 @@ mixin _$UserInfo {
         mute,
         top,
         sex,
+        introduction,
         category,
         shortNo,
         chatPwdOn,
@@ -159,7 +163,7 @@ mixin _$UserInfo {
 
   @override
   String toString() {
-    return 'UserInfo(uid: $uid, username: $username, name: $name, email: $email, zone: $zone, phone: $phone, mute: $mute, top: $top, sex: $sex, category: $category, shortNo: $shortNo, chatPwdOn: $chatPwdOn, screenshot: $screenshot, revokeRemind: $revokeRemind, receipt: $receipt, online: $online, lastOffline: $lastOffline, deviceFlag: $deviceFlag, follow: $follow, beDeleted: $beDeleted, beBlacklist: $beBlacklist, code: $code, vercode: $vercode, sourceDesc: $sourceDesc, remark: $remark, isUploadAvatar: $isUploadAvatar, status: $status, robot: $robot, isDestroy: $isDestroy, flame: $flame, flameSecond: $flameSecond, joinGroupInviteUid: $joinGroupInviteUid, joinGroupInviteName: $joinGroupInviteName, groupMember: $groupMember)';
+    return 'UserInfo(uid: $uid, username: $username, name: $name, email: $email, zone: $zone, phone: $phone, mute: $mute, top: $top, sex: $sex, introduction: $introduction, category: $category, shortNo: $shortNo, chatPwdOn: $chatPwdOn, screenshot: $screenshot, revokeRemind: $revokeRemind, receipt: $receipt, online: $online, lastOffline: $lastOffline, deviceFlag: $deviceFlag, follow: $follow, beDeleted: $beDeleted, beBlacklist: $beBlacklist, code: $code, vercode: $vercode, sourceDesc: $sourceDesc, remark: $remark, isUploadAvatar: $isUploadAvatar, status: $status, robot: $robot, isDestroy: $isDestroy, flame: $flame, flameSecond: $flameSecond, joinGroupInviteUid: $joinGroupInviteUid, joinGroupInviteName: $joinGroupInviteName, groupMember: $groupMember)';
   }
 }
 
@@ -178,6 +182,7 @@ abstract mixin class $UserInfoCopyWith<$Res> {
       int mute,
       int top,
       int sex,
+      String introduction,
       String category,
       String shortNo,
       int chatPwdOn,
@@ -228,6 +233,7 @@ class _$UserInfoCopyWithImpl<$Res> implements $UserInfoCopyWith<$Res> {
     Object? mute = null,
     Object? top = null,
     Object? sex = null,
+    Object? introduction = null,
     Object? category = null,
     Object? shortNo = null,
     Object? chatPwdOn = null,
@@ -291,6 +297,10 @@ class _$UserInfoCopyWithImpl<$Res> implements $UserInfoCopyWith<$Res> {
           ? _self.sex
           : sex // ignore: cast_nullable_to_non_nullable
               as int,
+      introduction: null == introduction
+          ? _self.introduction
+          : introduction // ignore: cast_nullable_to_non_nullable
+              as String,
       category: null == category
           ? _self.category
           : category // ignore: cast_nullable_to_non_nullable
@@ -422,6 +432,7 @@ class _UserInfo implements UserInfo {
       required this.mute,
       required this.top,
       required this.sex,
+      required this.introduction,
       required this.category,
       required this.shortNo,
       required this.chatPwdOn,
@@ -468,6 +479,8 @@ class _UserInfo implements UserInfo {
   final int top;
   @override
   final int sex;
+  @override
+  final String introduction;
   @override
   final String category;
   @override
@@ -549,6 +562,8 @@ class _UserInfo implements UserInfo {
             (identical(other.mute, mute) || other.mute == mute) &&
             (identical(other.top, top) || other.top == top) &&
             (identical(other.sex, sex) || other.sex == sex) &&
+            (identical(other.introduction, introduction) ||
+                other.introduction == introduction) &&
             (identical(other.category, category) ||
                 other.category == category) &&
             (identical(other.shortNo, shortNo) || other.shortNo == shortNo) &&
@@ -604,6 +619,7 @@ class _UserInfo implements UserInfo {
         mute,
         top,
         sex,
+        introduction,
         category,
         shortNo,
         chatPwdOn,
@@ -633,7 +649,7 @@ class _UserInfo implements UserInfo {
 
   @override
   String toString() {
-    return 'UserInfo(uid: $uid, username: $username, name: $name, email: $email, zone: $zone, phone: $phone, mute: $mute, top: $top, sex: $sex, category: $category, shortNo: $shortNo, chatPwdOn: $chatPwdOn, screenshot: $screenshot, revokeRemind: $revokeRemind, receipt: $receipt, online: $online, lastOffline: $lastOffline, deviceFlag: $deviceFlag, follow: $follow, beDeleted: $beDeleted, beBlacklist: $beBlacklist, code: $code, vercode: $vercode, sourceDesc: $sourceDesc, remark: $remark, isUploadAvatar: $isUploadAvatar, status: $status, robot: $robot, isDestroy: $isDestroy, flame: $flame, flameSecond: $flameSecond, joinGroupInviteUid: $joinGroupInviteUid, joinGroupInviteName: $joinGroupInviteName, groupMember: $groupMember)';
+    return 'UserInfo(uid: $uid, username: $username, name: $name, email: $email, zone: $zone, phone: $phone, mute: $mute, top: $top, sex: $sex, introduction: $introduction, category: $category, shortNo: $shortNo, chatPwdOn: $chatPwdOn, screenshot: $screenshot, revokeRemind: $revokeRemind, receipt: $receipt, online: $online, lastOffline: $lastOffline, deviceFlag: $deviceFlag, follow: $follow, beDeleted: $beDeleted, beBlacklist: $beBlacklist, code: $code, vercode: $vercode, sourceDesc: $sourceDesc, remark: $remark, isUploadAvatar: $isUploadAvatar, status: $status, robot: $robot, isDestroy: $isDestroy, flame: $flame, flameSecond: $flameSecond, joinGroupInviteUid: $joinGroupInviteUid, joinGroupInviteName: $joinGroupInviteName, groupMember: $groupMember)';
   }
 }
 
@@ -654,6 +670,7 @@ abstract mixin class _$UserInfoCopyWith<$Res>
       int mute,
       int top,
       int sex,
+      String introduction,
       String category,
       String shortNo,
       int chatPwdOn,
@@ -705,6 +722,7 @@ class __$UserInfoCopyWithImpl<$Res> implements _$UserInfoCopyWith<$Res> {
     Object? mute = null,
     Object? top = null,
     Object? sex = null,
+    Object? introduction = null,
     Object? category = null,
     Object? shortNo = null,
     Object? chatPwdOn = null,
@@ -768,6 +786,10 @@ class __$UserInfoCopyWithImpl<$Res> implements _$UserInfoCopyWith<$Res> {
           ? _self.sex
           : sex // ignore: cast_nullable_to_non_nullable
               as int,
+      introduction: null == introduction
+          ? _self.introduction
+          : introduction // ignore: cast_nullable_to_non_nullable
+              as String,
       category: null == category
           ? _self.category
           : category // ignore: cast_nullable_to_non_nullable

@@ -35,6 +35,7 @@ dependencies:
   wechat_assets_picker: ^9.5.0
   wechat_camera_picker: ^4.3.7
   image_cropper: ^9.1.0
+  flutter_pickers: ^2.1.9
   
   # 工具
   rxdart: ^0.28.0

@@ -1,23 +1,35 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:json_annotation/json_annotation.dart';
 
-part 'db_account.freezed.dart';
 part 'db_account.g.dart';
 
-@freezed
-abstract class DBAccount with _$DBAccount {
-  const factory DBAccount({
-    @Default(0) int id,
-    required String username,
-    required String zone,
-    required String phone,
-    required String password,
-    required int loginType,
-    @Default(0) int createdAt,
-    @Default(0) int updatedAt,
-  }) = _DBAccount;
+@JsonSerializable()
+class DBAccount {
+  final String id;
+  final String uid;
+  final String username;
+  final String zone;
+  final String phone;
+  final String password;
+  final int loginType;
+  final int? createdAt;
+  final int? updatedAt;
+
+  DBAccount({
+    required this.id,
+    required this.uid,
+    required this.username,
+    required this.zone,
+    required this.phone,
+    required this.password,
+    required this.loginType,
+    this.createdAt,
+    this.updatedAt,
+  });
 
   factory DBAccount.fromJson(Map<String, dynamic> json) =>
       _$DBAccountFromJson(json);
+
+  Map<String, dynamic> toJson() => _$DBAccountToJson(this);
 
   static const String table = 'account';
 }

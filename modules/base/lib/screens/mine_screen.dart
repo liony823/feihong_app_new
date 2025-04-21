@@ -1,6 +1,7 @@
 import 'package:acter_avatar/acter_avatar.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:common/common.dart';
+import 'package:contact/helper/fake.dart';
 import 'package:core/core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +35,7 @@ class MineScreen extends HookConsumerWidget {
                   onRetry: () {
                     ref.invalidate(getCurrentUserProvider(uid));
                   }),
-              _ => const SizedBox.shrink(),
+              _ => _buildUserInfoView(context, FakeUserHelper.fakeUserInfo),
             },
             12.verticalSpace,
             _buildCard(
@@ -123,11 +124,12 @@ class MineScreen extends HookConsumerWidget {
   }
 
   Widget _buildUserInfoView(BuildContext context, UserInfo? userInfo) {
+    final avatar = Apis.getAvatarUrl(userInfo!.uid);
     final avatarOptions = AvatarOptions(
       AvatarInfo(
-        uniqueId: userInfo?.uid ?? '',
-        displayName: userInfo?.name ?? '',
-        avatar: NetworkImage(Apis.getAvatarUrl(userInfo?.uid ?? 'avatar')),
+        uniqueId: userInfo.uid,
+        displayName: userInfo.name,
+        avatar: Utils.isEmptyOrNull(avatar) ? null : NetworkImage(avatar),
       ),
       size: 64.w,
     );

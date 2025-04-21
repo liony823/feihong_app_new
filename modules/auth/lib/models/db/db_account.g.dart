@@ -6,20 +6,21 @@ part of 'db_account.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_DBAccount _$DBAccountFromJson(Map<String, dynamic> json) => _DBAccount(
-      id: (json['id'] as num?)?.toInt() ?? 0,
+DBAccount _$DBAccountFromJson(Map<String, dynamic> json) => DBAccount(
+      id: json['id'] as String,
+      uid: json['uid'] as String,
       username: json['username'] as String,
       zone: json['zone'] as String,
       phone: json['phone'] as String,
       password: json['password'] as String,
       loginType: (json['login_type'] as num).toInt(),
-      createdAt: (json['created_at'] as num?)?.toInt() ?? 0,
-      updatedAt: (json['updated_at'] as num?)?.toInt() ?? 0,
+      createdAt: (json['created_at'] as num?)?.toInt(),
+      updatedAt: (json['updated_at'] as num?)?.toInt(),
     );
 
-Map<String, dynamic> _$DBAccountToJson(_DBAccount instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$DBAccountToJson(DBAccount instance) => <String, dynamic>{
       'id': instance.id,
+      'uid': instance.uid,
       'username': instance.username,
       'zone': instance.zone,
       'phone': instance.phone,

@@ -15,7 +15,7 @@ class SpHelper {
   static const String _token = 'token';
   static const String _appLang = 'appLang';
   static const String _appTheme = 'appTheme';
-  static const String _maxSqlVersion = 'maxSqlVersion';
+  static const String _maxSqlVersion = 'maxSqlV2';
 
   static String get uid => getUID() ?? '';
   static String get token => getToken() ?? '';

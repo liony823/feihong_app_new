@@ -1,5 +1,5 @@
 import 'package:auth/providers/set_self_info_provider.dart';
-import 'package:auth/resource/fake.dart';
+import 'package:common/helper/fake.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:common/common.dart';
 import 'package:core/core.dart';
@@ -20,15 +20,20 @@ class SetSelfInfoScreen extends HookConsumerWidget {
   });
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final controller = ref.watch(setSelfInfoProvider(
+    final controller = ref.read(setSelfInfoProvider(
       uid: uid,
       registerType: registerType,
     ).notifier);
+    final state = ref.watch(setSelfInfoProvider(
+      uid: uid,
+      registerType: registerType,
+    ));
+
     final AsyncValue<UserInfo?> currentUser =
         ref.watch(getCurrentUserProvider(uid));
     return Scaffold(
         appBar: AppBar(title: context.t.c.profile.plsCompleteInfo.appBarText),
-        body: Center(
+        body: SingleChildScrollView(
           child: Column(
             spacing: 24.w,
             children: [
@@ -37,13 +42,23 @@ class SetSelfInfoScreen extends HookConsumerWidget {
                 AsyncData(:final value) => (() {
                     // 先更新表单值，再构建UI
                     WidgetsBinding.instance.addPostFrameCallback((_) {
-                      controller.formKey.currentState?.patchValue({
+                      state.formKey.currentState?.patchValue({
                         'username': value?.username,
                         'nickname': value?.name,
+                        'sex': state.sex == 1
+                            ? context.t.c.male
+                            : context.t.c.female,
+                        'introduction': value?.introduction,
                       });
                     });
-                    return _buildBody(context, controller.formKey, value,
-                        onAvatarTap: controller.openPhotoSheet);
+                    return _buildBody(
+                      context,
+                      state.formKey,
+                      value,
+                      onAvatarTap: controller.openPhotoSheet,
+                      avatar: state.avatar,
+                      onTapSex: controller.openGenderSheet,
+                    );
                   })(),
                 AsyncError(:final error) => ErrorRetryWidget(
                     message: error.toString(),
@@ -54,7 +69,7 @@ class SetSelfInfoScreen extends HookConsumerWidget {
                 AsyncLoading() => Skeletonizer(
                     enabled: true,
                     child: _buildBody(
-                        context, controller.formKey, FakeData.fakeUserInfo),
+                        context, state.formKey, FakeUserHelper.fakeUserInfo),
                   ),
                 _ => const SizedBox.shrink(),
               },
@@ -72,7 +87,7 @@ class SetSelfInfoScreen extends HookConsumerWidget {
   }
 
   Widget _buildBody(BuildContext context, GlobalKey formKey, UserInfo? userInfo,
-      {VoidCallback? onAvatarTap}) {
+      {VoidCallback? onAvatarTap, String? avatar, VoidCallback? onTapSex}) {
     return FormBuilder(
       key: formKey,
       child: Padding(
@@ -80,7 +95,7 @@ class SetSelfInfoScreen extends HookConsumerWidget {
         child: Column(
           children: [
             _buildAvatarView(context,
-                onAvatarTap: onAvatarTap, userInfo: userInfo),
+                onAvatarTap: onAvatarTap, userInfo: userInfo, avatar: avatar),
             24.verticalSpace,
             Divider(
               color: AppTheme.dividerColor,
@@ -98,6 +113,22 @@ class SetSelfInfoScreen extends HookConsumerWidget {
                 title: context.t.c.profile.nickname,
                 initialValue: userInfo?.name,
                 placeholder: context.t.c.profile.plsEnterNickname),
+            _buildItemView(context,
+                name: 'sex',
+                onTap: onTapSex,
+                title: context.t.c.profile.sex,
+                initialValue:
+                    userInfo?.sex == 1 ? context.t.c.male : context.t.c.female,
+                isReadOnly: true,
+                placeholder: context.t.c.profile.plsSelectGender),
+            16.verticalSpace,
+            _buildItemView(context,
+                name: 'introduction',
+                maxLength: 200,
+                maxLines: 2,
+                title: context.t.c.profile.introduction,
+                initialValue: userInfo?.introduction,
+                placeholder: context.t.c.profile.plsEnterIntroduction),
           ],
         ),
       ),
@@ -105,22 +136,36 @@ class SetSelfInfoScreen extends HookConsumerWidget {
   }
 
   Widget _buildAvatarView(BuildContext context,
-      {UserInfo? userInfo, VoidCallback? onAvatarTap}) {
-    final avatarOptions = AvatarOptions(
+      {String? avatar, UserInfo? userInfo, VoidCallback? onAvatarTap}) {
+    final avatarOptions = AvatarOptions.DM(
         AvatarInfo(
           uniqueId: userInfo?.uid ?? 'u_10000',
           onAvatarTap: onAvatarTap,
-          avatar: NetworkImage(Apis.getAvatarUrl(userInfo?.uid ?? 'avatar')),
+          avatar: Utils.isEmptyOrNull(avatar)
+              ? NetworkImage(Apis.getAvatarUrl(userInfo?.uid ?? ''))
+              : NetworkImage(avatar!),
           displayName: userInfo?.name ??
               'u_10000', // can be any image provider .i.e. AssetImage, MemoryImage and NetworkImage etc.
         ),
-        size: 24.w);
+        size: 48.w);
 
     return Column(
+      spacing: 4.w,
       children: [
         Skeleton.shade(
-          child: ActerAvatar(
-            options: avatarOptions,
+          child: Container(
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(
+                color: AppTheme.brandColor,
+                width: 2,
+              ),
+            ),
+            child: ClipOval(
+              child: ActerAvatar(
+                options: avatarOptions,
+              ),
+            ),
           ),
         ),
         Text(
@@ -136,18 +181,21 @@ class SetSelfInfoScreen extends HookConsumerWidget {
   Widget _buildItemView(BuildContext context,
       {required String name,
       required String title,
+      VoidCallback? onTap,
       String? initialValue,
       String? placeholder,
+      int maxLines = 1,
+      int? maxLength,
+      bool isReadOnly = false,
       bool isDisabled = false,
       bool autofocus = false}) {
     return Opacity(
       opacity: isDisabled ? 0.75 : 1,
       child: Container(
-        height: 46.h,
         decoration: BoxDecoration(
           border: Border(
             bottom: BorderSide(
-              color: AppTheme.dividerColor,
+              color: AppTheme.dividerColor2,
             ),
           ),
         ),
@@ -161,10 +209,14 @@ class SetSelfInfoScreen extends HookConsumerWidget {
             Expanded(
               child: FormBuilderTextField(
                 name: name,
+                onTap: onTap,
+                readOnly: isReadOnly,
                 enabled: !isDisabled,
                 initialValue: initialValue,
                 textAlign: TextAlign.left,
                 autofocus: autofocus,
+                maxLength: maxLength,
+                maxLines: maxLines,
                 textInputAction:
                     autofocus ? TextInputAction.done : TextInputAction.next,
                 decoration: InputDecoration(

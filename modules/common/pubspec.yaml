@@ -40,6 +40,7 @@ dependencies:
   extended_image: ^9.1.0
   azlistview: ^2.0.0
   easy_refresh: ^3.4.0
+  skeletonizer: ^1.4.3
 
   # 动画
   animate_do: ^3.3.4

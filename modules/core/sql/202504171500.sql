@@ -1,10 +1,11 @@
-create table if not exists account (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
+create table account (
+    id VARCHAR(255) PRIMARY KEY,
+    uid VARCHAR(40) NOT NULL,
     username TEXT NOT NULL,
     zone TEXT NOT NULL,
     phone TEXT NOT NULL,
     password TEXT NOT NULL,
     login_type SMALLINT NOT NULL,
-    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+    created_at INTEGER NOT NULL,
+    updated_at INTEGER NULL DEFAULT 0
 );

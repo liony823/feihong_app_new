@@ -62,8 +62,7 @@ class ContactRepository {
 
   Future<bool> acceptFriendApply(String token) async {
     try {
-      await _apiClient.post(ApiConfig.sureFriendApply,
-          data: {'token': token});
+      await _apiClient.post(ApiConfig.sureFriendApply, data: {'token': token});
       return true;
     } catch (e) {
       AppLogger.e('接受好友申请失败', e);
@@ -83,11 +82,15 @@ class ContactRepository {
     }
   }
 
-  Future<UserInfo?> searchUser(String keyword) async {
+  Future<SearchUserInfo?> searchUser(String keyword) async {
     try {
-      final response = await _apiClient.get(ApiConfig.searchUser,
-          queryParameters: {'keyword': keyword});
-      return UserInfo.fromJson(response.data);
+      final response = await _apiClient
+          .get(ApiConfig.searchUser, queryParameters: {'keyword': keyword});
+      final exist = response.data['exist'];
+      if (exist == 1) {
+        return SearchUserInfo.fromJson(response.data['data']);
+      }
+      return null;
     } catch (e) {
       AppLogger.e('搜索用户失败', e);
       return null;

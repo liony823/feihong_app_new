@@ -1,4 +1,3 @@
-import 'package:auth/route/route.gr.dart';
 import 'package:auth/services/auth_service.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:common/common.dart';
@@ -7,41 +6,51 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-
 part 'set_self_info_provider.g.dart';
 
 class SetSelfInfoState {
   final String avatar;
+  final int sex;
   final String registerType;
+  final GlobalKey<FormBuilderState> formKey;
 
   SetSelfInfoState({
     required this.avatar,
+    required this.sex,
     required this.registerType,
+    required this.formKey,
   });
 
   SetSelfInfoState copyWith({
     String? avatar,
+    int? sex,
     String? registerType,
+    FocusNode? focusNode,
+    GlobalKey<FormBuilderState>? formKey,
   }) {
     return SetSelfInfoState(
       avatar: avatar ?? this.avatar,
+      sex: sex ?? this.sex,
       registerType: registerType ?? this.registerType,
+      formKey: formKey ?? this.formKey,
     );
   }
 }
 
 @riverpod
 class SetSelfInfo extends _$SetSelfInfo {
-  final formKey = GlobalKey<FormBuilderState>();
-
   @override
   SetSelfInfoState build({
     required String uid,
     required String registerType,
   }) {
+    final formKey = GlobalKey<FormBuilderState>();
+
     return SetSelfInfoState(
       avatar: '',
+      sex: 1,
       registerType: registerType,
+      formKey: formKey,
     );
   }
 
@@ -50,12 +59,22 @@ class SetSelfInfo extends _$SetSelfInfo {
       onData: (path, url) {
         state = state.copyWith(avatar: url);
       },
-      fileType: FileType.avatar,
+    );
+  }
+
+  void openGenderSheet() {
+    ViewHelper.openSexPicker(
+      initialValue: state.sex,
+      onConfirm: (sex) {
+        state.formKey.currentState?.fields['sex']!.didChange(
+            sex == 1 ? Global.context!.t.c.male : Global.context!.t.c.female);
+        state = state.copyWith(sex: sex);
+      },
     );
   }
 
   void submit() async {
-    final form = formKey.currentState;
+    final form = state.formKey.currentState;
     if (form == null || !form.saveAndValidate()) {
       return;
     }
@@ -74,13 +93,16 @@ class SetSelfInfo extends _$SetSelfInfo {
       final authService = ref.watch(authServiceProvider);
 
       if (currentUser?.name != nickname) {
-        LoadingView.singleton.wrap(
-            asyncFunction: () => authService.updateUserProfile(
-                  name: nickname,
-                ));
+        LoadingView.singleton.wrap(asyncFunction: () async {
+          await authService.updateUserProfile(
+            name: nickname,
+          );
+
+          ref.invalidate(getCurrentUserProvider(uid));
+        });
       }
       if (registerType == 'username') {
-        Global.context!.router.popAndPush(const SetSelfSecurityRoute());
+        Global.context!.router.pushPath(Routes.setSelfSecurity);
       } else {
         Global.context!.router.replaceAll([], updateExistingRoutes: false);
         Global.context!.router.pushPath(Routes.home);

@@ -7,7 +7,7 @@ part of 'verify_phone_provider.dart';
 // **************************************************************************
 
 String _$verifyPhoneControllerHash() =>
-    r'39fde6c885a0918ad9aada66b8dd7878b9bcdd83';
+    r'5f016ff61841a6c3d0d7d1d66730459844219c7a';
 
 /// Copied from Dart SDK
 class _SystemHash {

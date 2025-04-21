@@ -10,6 +10,8 @@
     "talkTooShort": "说话时间太短",
     "permissionDeniedTitle": "权限被拒绝",
     "permissionDeniedHint": "请在设置中允许使用%s权限。",
+    "male":"男",
+    "female":"女",
 
     "agreement":{
         "userAgreement":"《用户协议》",
@@ -97,6 +99,10 @@
         "username":"用户名",
         "nickname":"昵称",
         "avatar":"头像",
+        "sex":"性别",
+        "introduction":"个性签名",
+        "plsEnterIntroduction":"请输入您的个性签名",
+        "plsSelectGender":"请选择您的性别",
         "usernameValidateError":"用户名格式错误（6-18位字符，不能包含非法字符）",
         "nicknameValidateError":"昵称格式错误（2-12位字符，不能包含非法字符）",
         "usernameHelperText":"用户名仅可修改一次。",
