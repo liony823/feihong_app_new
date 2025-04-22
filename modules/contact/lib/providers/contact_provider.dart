@@ -26,6 +26,8 @@ class ContactState {
 
 @Riverpod(keepAlive: true)
 class ContactController extends _$ContactController {
+  ContactService get _contactService => ref.read(contactServiceProvider);
+
   @override
   ContactState build() {
     FakeHelper.fakeHeader.tagIndex = "↑";
@@ -41,15 +43,13 @@ class ContactController extends _$ContactController {
   }
 
   Future<void> getUnreadFriendApplyCount() async {
-    final contactService = ref.read(contactServiceProvider);
-    final unreadFriendApplyCount = await contactService.getUnreadCount();
+    final unreadFriendApplyCount = await _contactService.getUnreadCount();
     state = state.copyWith(unreadFriendApplyCount: unreadFriendApplyCount);
   }
 
   Future<void> syncContacts() async {
-    final contactService = ref.read(contactServiceProvider);
     final results =
-        await contactService.syncContacts(version: state.maxVersion);
+        await _contactService.syncContacts(version: state.maxVersion);
 
     if (results.isNotEmpty) {
       List<ISContact> newContacts = [];

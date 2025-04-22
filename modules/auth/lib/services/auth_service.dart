@@ -1,4 +1,6 @@
 import 'package:common/common.dart';
+import 'package:contact/contact.dart';
+import 'package:core/core.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:uuid/uuid.dart';
@@ -12,10 +14,17 @@ part 'auth_service.g.dart';
 
 /// 认证服务类，处理登录、注册和验证等功能
 class AuthService {
-  final AuthRepository _authRepository;
-  final AccountRepository _accountRepository;
+  final AuthRepository authRepository;
+  final AccountRepository accountRepository;
+  final IMService imService;
+  final ContactController contactService;
 
-  AuthService(this._authRepository, this._accountRepository);
+  AuthService({
+    required this.authRepository,
+    required this.accountRepository,
+    required this.imService,
+    required this.contactService,
+  });
 
   /// 手机号登录
   Future<UserCert?> loginByPhone({
@@ -26,7 +35,7 @@ class AuthService {
     required String deviceName,
     required String deviceModel,
   }) async {
-    final userCert = await _authRepository.loginByPhone(
+    final userCert = await authRepository.loginByPhone(
       zone: zone,
       phone: phone,
       password: password,
@@ -48,7 +57,7 @@ class AuthService {
     required String deviceName,
     required String deviceModel,
   }) async {
-    final userCert = await _authRepository.loginByUsername(
+    final userCert = await authRepository.loginByUsername(
       username: username,
       password: password,
       deviceId: deviceId,
@@ -73,7 +82,7 @@ class AuthService {
     String? name,
     String? inviteCode,
   }) async {
-    final userCert = await _authRepository.registerByPhone(
+    final userCert = await authRepository.registerByPhone(
       zone: zone,
       phone: phone,
       code: code,
@@ -100,7 +109,7 @@ class AuthService {
     String? name,
     String? inviteCode,
   }) async {
-    final userCert = await _authRepository.registerByUsername(
+    final userCert = await authRepository.registerByUsername(
       username: username,
       password: password,
       deviceId: deviceId,
@@ -120,7 +129,7 @@ class AuthService {
     required String phone,
     required String zone,
   }) async {
-    return await _authRepository.sendRegisterVerificationCode(
+    return await authRepository.sendRegisterVerificationCode(
       phone: phone,
       zone: zone,
     );
@@ -131,7 +140,7 @@ class AuthService {
     required String zone,
     required String phone,
   }) async {
-    return await _authRepository.sendForgetPwdVerificationCode(
+    return await authRepository.sendForgetPwdVerificationCode(
       zone: zone,
       phone: phone,
     );
@@ -142,7 +151,7 @@ class AuthService {
     String? name,
     String? shortNo,
   }) async {
-    return await _authRepository.updateUserProfile(
+    return await authRepository.updateUserProfile(
       name: name,
       shortNo: shortNo,
     );
@@ -153,7 +162,7 @@ class AuthService {
     required String question,
     required String answer,
   }) async {
-    return await _authRepository.setSecurityQuestion(
+    return await authRepository.setSecurityQuestion(
       question: question,
       answer: answer,
     );
@@ -161,7 +170,7 @@ class AuthService {
 
   /// 获取安全问题
   Future<String?> getSecurityQuestion() async {
-    return await _authRepository.getSecurityQuestion();
+    return await authRepository.getSecurityQuestion();
   }
 
   /// 通过验证码重置密码
@@ -171,7 +180,7 @@ class AuthService {
     required String code,
     required String pwd,
   }) async {
-    return await _authRepository.resetPassword(
+    return await authRepository.resetPassword(
       zone: zone,
       phone: phone,
       code: code,
@@ -185,7 +194,7 @@ class AuthService {
     required String answer,
     required String password,
   }) async {
-    return await _authRepository.resetPasswordBySecret(
+    return await authRepository.resetPasswordBySecret(
       question: question,
       answer: answer,
       password: password,
@@ -195,7 +204,7 @@ class AuthService {
   /// 退出登录
   Future<bool> logout() async {
     try {
-      await _authRepository.logout();
+      await authRepository.logout();
       SpHelper.setToken("");
       SpHelper.setUID("");
       return true;
@@ -209,10 +218,13 @@ class AuthService {
       UserCert userCert, String phone, String zone, String password) async {
     SpHelper.setToken(userCert.token);
     SpHelper.setUID(userCert.uid);
-    final account = await _accountRepository.getAccountByPhone(phone, zone);
+    await imService.initialize(uid: userCert.uid, token: userCert.token);
+    await contactService.initialize();
+    final account = await accountRepository.getAccountByPhone(phone, zone);
     if (account == null) {
-      await _accountRepository.saveAccount(DBAccount(
-        username: "",
+      await accountRepository.saveAccount(DBAccount(
+        username: userCert.username,
+        name: userCert.name,
         zone: zone,
         phone: phone,
         password: password,
@@ -222,10 +234,11 @@ class AuthService {
         uid: userCert.uid,
       ));
     } else {
-      await _accountRepository.updateAccount(DBAccount(
+      await accountRepository.updateAccount(DBAccount(
         id: account.id,
         loginType: 1,
-        username: "",
+        username: userCert.username,
+        name: userCert.name,
         zone: zone,
         phone: phone,
         password: password,
@@ -239,12 +252,15 @@ class AuthService {
       UserCert userCert, String username, String password) async {
     SpHelper.setToken(userCert.token);
     SpHelper.setUID(userCert.uid);
-    final account = await _accountRepository.getAccountByUsername(username);
+    await imService.initialize(uid: userCert.uid, token: userCert.token);
+    await contactService.initialize();
+    final account = await accountRepository.getAccountByUsername(username);
     if (account == null) {
-      await _accountRepository.saveAccount(DBAccount(
+      await accountRepository.saveAccount(DBAccount(
         username: username,
-        zone: "",
-        phone: "",
+        name: userCert.name,
+        zone: userCert.zone,
+        phone: userCert.phone,
         password: password,
         loginType: 2,
         uid: userCert.uid,
@@ -252,13 +268,14 @@ class AuthService {
         createdAt: DateTime.now().millisecondsSinceEpoch,
       ));
     } else {
-      await _accountRepository.updateAccount(DBAccount(
+      await accountRepository.updateAccount(DBAccount(
         uid: userCert.uid,
+        name: userCert.name,
         id: account.id,
         loginType: 2,
         username: username,
-        zone: "",
-        phone: "",
+        zone: userCert.zone,
+        phone: userCert.phone,
         password: password,
         updatedAt: DateTime.now().millisecondsSinceEpoch,
       ));
@@ -269,8 +286,14 @@ class AuthService {
 /// AuthService提供者
 @riverpod
 AuthService authService(Ref ref) {
+  final imService = ref.read(iMServiceProvider.notifier);
+  final contactService = ref.read(contactControllerProvider.notifier);
+  final authRepository = ref.read(authRepositoryProvider);
+  final accountRepository = ref.read(accountRepositoryProvider);
   return AuthService(
-    ref.read(authRepositoryProvider),
-    ref.read(accountRepositoryProvider),
+    authRepository: authRepository,
+    accountRepository: accountRepository,
+    imService: imService,
+    contactService: contactService,
   );
 }

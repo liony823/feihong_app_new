@@ -178,6 +178,10 @@
         "currentUse":"当前使用",
         "addAccount":"添加账号",
         "loginOther":"登录其他账号",
-        "registerOther":"注册新账号"
+        "registerOther":"注册新账号",
+        "clearAccountTitle":"清除登录痕迹",
+        "clearAccountHint":"仅清楚本地登录记录，不清除聊天记录",
+        "deleteAccountLabel":"删除$name的登录记录",
+        "deleteAccountHint":"删除登录记录不会删除任何历史记录"
     }
 }

@@ -136,7 +136,7 @@ class SetSelfInfoScreen extends HookConsumerWidget {
 
   Widget _buildAvatarView(BuildContext context,
       {String? avatar, UserInfo? userInfo, VoidCallback? onAvatarTap}) {
-    final avatarOptions = AvatarOptions.DM(
+    final avatarOptions = AvatarOptions(
         AvatarInfo(
           uniqueId: userInfo?.uid ?? 'u_10000',
           onAvatarTap: onAvatarTap,

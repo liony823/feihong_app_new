@@ -9,6 +9,7 @@ part of 'db_account.dart';
 DBAccount _$DBAccountFromJson(Map<String, dynamic> json) => DBAccount(
       id: json['id'] as String,
       uid: json['uid'] as String,
+      name: json['name'] as String,
       username: json['username'] as String,
       zone: json['zone'] as String,
       phone: json['phone'] as String,
@@ -21,6 +22,7 @@ DBAccount _$DBAccountFromJson(Map<String, dynamic> json) => DBAccount(
 Map<String, dynamic> _$DBAccountToJson(DBAccount instance) => <String, dynamic>{
       'id': instance.id,
       'uid': instance.uid,
+      'name': instance.name,
       'username': instance.username,
       'zone': instance.zone,
       'phone': instance.phone,

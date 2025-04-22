@@ -35,6 +35,8 @@ class LoginState {
 @riverpod
 class LoginController extends _$LoginController {
   final formKey = GlobalKey<FormBuilderState>();
+  AuthService get _authService => ref.read(authServiceProvider);
+
   @override
   LoginState build() {
     final code = ref.watch(getSIMCountryCodeProvider);
@@ -43,6 +45,10 @@ class LoginController extends _$LoginController {
       isChecked: true,
       zone: code.value ?? '',
     );
+  }
+
+  void back(){
+    Global.context?.router.pop();
   }
 
   void signin(String type) {
@@ -58,7 +64,7 @@ class LoginController extends _$LoginController {
   }
 
   void signinWithDevice() async {
-    final authService = ref.watch(authServiceProvider);
+    
     // 自动生成6位随机字符作为用户名和密码
     final random = Random();
     final chars =
@@ -71,7 +77,7 @@ class LoginController extends _$LoginController {
     }
 
     final result = await LoadingView.singleton.wrap(
-      asyncFunction: () => authService.loginByUsername(
+      asyncFunction: () => _authService.loginByUsername(
         username: username,
         password: password,
         deviceId: CommonModule.deviceID,
@@ -81,7 +87,7 @@ class LoginController extends _$LoginController {
     );
 
     if (result != null) {
-      // 登录成功后的处理
+      Global.context!.router.replacePath(Routes.home);
     }
   }
 
@@ -113,28 +119,16 @@ class LoginController extends _$LoginController {
   }
 
   void _signinWithUsername() async {
-    final authService = ref.watch(authServiceProvider);
     final username = formKey.currentState?.getRawValue('username');
     final password = formKey.currentState?.getRawValue('password');
     final result = await LoadingView.singleton.wrap(
-      asyncFunction: () async {
-        final userCert = await authService.loginByUsername(
+      asyncFunction: () => _authService.loginByUsername(
           username: username,
           password: password,
           deviceId: CommonModule.deviceID,
           deviceName: CommonModule.deviceName,
           deviceModel: CommonModule.deviceModel,
-        );
-
-        if (userCert != null) {
-          final imService = ref.read(iMServiceProvider.notifier);
-          final contactService = ref.read(contactControllerProvider.notifier);
-          await imService.initialize(uid: userCert.uid, token: userCert.token);
-          await contactService.initialize();
-        }
-
-        return userCert;
-      },
+        ),
     );
     if (result != null) {
       Global.context!.router.replacePath(Routes.home);
@@ -142,29 +136,18 @@ class LoginController extends _$LoginController {
   }
 
   void _signinWithPhone() async {
-    final authService = ref.watch(authServiceProvider);
+    
     final phone = formKey.currentState?.getRawValue('phone') as String;
     final password = formKey.currentState?.getRawValue('password') as String;
     final result = await LoadingView.singleton.wrap(
-      asyncFunction: () async {
-        final userCert = await authService.loginByPhone(
+      asyncFunction: () => _authService.loginByPhone(
           zone: state.zone,
           phone: phone,
           password: password,
           deviceId: CommonModule.deviceID,
           deviceName: CommonModule.deviceName,
           deviceModel: CommonModule.deviceModel,
-        );
-
-        if (userCert != null) {
-          final imService = ref.read(iMServiceProvider.notifier);
-          final contactService = ref.read(contactControllerProvider.notifier);
-          await imService.initialize(uid: userCert.uid, token: userCert.token);
-          await contactService.initialize();
-        }
-
-        return userCert;
-      },
+        ),
     );
     if (result != null) {
       Global.context!.router.replacePath(Routes.home);

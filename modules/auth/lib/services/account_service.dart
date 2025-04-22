@@ -20,7 +20,7 @@ class AccountService {
     }
   }
 
-  Future<int> deleteAccount(int id) async {
+  Future<int> deleteAccount(String id) async {
     try {
       return await _accountRepository.deleteAccount(id);
     } catch (e) {

@@ -6,6 +6,7 @@ part 'db_account.g.dart';
 class DBAccount {
   final String id;
   final String uid;
+  final String name;
   final String username;
   final String zone;
   final String phone;
@@ -17,6 +18,7 @@ class DBAccount {
   DBAccount({
     required this.id,
     required this.uid,
+    required this.name,
     required this.username,
     required this.zone,
     required this.phone,

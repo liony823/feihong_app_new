@@ -16,3 +16,4 @@ export 'azlist_view.dart';
 export 'refresh.dart';
 export 'pop_button.dart';
 export 'dropdown_menu.dart';
+export 'avatar.dart';

@@ -38,7 +38,7 @@ class AccountRepository {
         where: 'id = ?', whereArgs: [account.id]);
   }
 
-  Future<int> deleteAccount(int id) async {
+  Future<int> deleteAccount(String id) async {
     return await _db.database
         .delete(DBAccount.table, where: 'id = ?', whereArgs: [id]);
   }

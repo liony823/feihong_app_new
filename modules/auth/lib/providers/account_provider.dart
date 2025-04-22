@@ -1,5 +1,10 @@
 import 'package:auth/models/db/db_account.dart';
+import 'package:auth/models/user_cert.dart';
 import 'package:auth/services/account_service.dart';
+import 'package:auth/services/auth_service.dart';
+import 'package:auto_route/auto_route.dart';
+import 'package:common/common.dart';
+import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'account_provider.g.dart';
@@ -7,13 +12,15 @@ part 'account_provider.g.dart';
 class AccountState {
   final List<DBAccount> accounts;
   final bool isManager;
+  final String currentAccountUid;
 
-  AccountState({required this.accounts, required this.isManager});
+  AccountState({required this.accounts, required this.isManager,required this.currentAccountUid});
 
-  AccountState copyWith({List<DBAccount>? accounts, bool? isManager}) {
+  AccountState copyWith({List<DBAccount>? accounts, bool? isManager, String? currentAccountUid}) {
     return AccountState(
       accounts: accounts ?? this.accounts,
       isManager: isManager ?? this.isManager,
+      currentAccountUid: currentAccountUid ?? this.currentAccountUid,
     );
   }
 }
@@ -21,10 +28,111 @@ class AccountState {
 @riverpod
 class AccountController extends _$AccountController {
   AccountService get _accountService => ref.read(accountServiceProvider);
+  AuthService get _authService => ref.read(authServiceProvider);
 
   @override
   FutureOr<AccountState> build() async {
     final accounts = await _accountService.getAccountList();
-    return AccountState(accounts: accounts, isManager: false);
+    final currentAccountUid = SpHelper.uid;
+    return AccountState(accounts: accounts, isManager: false,currentAccountUid: currentAccountUid);
+  }
+
+  void addAccount() {
+    showModalBottomSheet(
+      context: Global.context!,
+      builder: (context) {
+        return BottomSheetView(
+          items: [
+            SheetItem(
+                label: context.t.c.account.loginOther, onTap: _onLoginOther),
+            SheetItem(
+              label: context.t.c.account.registerOther,
+              onTap: _onRegisterOther,
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void onSwitchManager() {
+    state = AsyncData(
+      state.requireValue.copyWith(isManager: !state.requireValue.isManager),
+    );
+  }
+
+  void onDeleteAccount(DBAccount account){
+        showModalBottomSheet(
+      context: Global.context!,
+      builder: (context) {
+        return BottomSheetView(
+          items: [
+            SheetItem(
+                label: context.t.c.account.deleteAccountHint, textStyle: TextStyle(
+                  color: AppTheme.lightSecondaryTextColor,
+                  fontSize: 13.sp,    
+                ),
+               ),
+            SheetItem(
+              label: context.t.c.account.deleteAccountLabel(name: account.name),
+              textStyle: TextStyle(
+                color: AppTheme.dangerColor,
+                fontSize: 16.sp,
+              ),
+              onTap:() =>  _onDeleteAccount(account),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void onSwitchAccount(DBAccount account) async {
+    if (account.uid == state.requireValue.currentAccountUid) {
+      Global.context?.router.replacePath(Routes.home);
+      return;
+    }
+    UserCert? userCert;
+    if (account.loginType == 1) {
+      userCert = await LoadingView.singleton.wrap(
+        asyncFunction: () => _authService.loginByPhone(
+          zone: account.zone,
+          phone: account.phone,
+          password: account.password,
+          deviceId: CommonModule.deviceID,
+          deviceName: CommonModule.deviceName,
+          deviceModel: CommonModule.deviceModel,
+        ),
+      );
+    }else if (account.loginType == 2) {
+      userCert = await LoadingView.singleton.wrap(
+        asyncFunction: () => _authService.loginByUsername(
+          username: account.username,
+          password: account.password,
+          deviceId: CommonModule.deviceID,
+          deviceName: CommonModule.deviceName,
+          deviceModel: CommonModule.deviceModel,
+        ),
+      );
+    }
+    if (userCert != null) {
+      Global.context?.router.replacePath(Routes.home);
+    }
+  }
+
+  void _onLoginOther() {
+    Global.context!.router.pushPath("${Routes.login}?pre=${Routes.account}");
+  }
+
+  void _onRegisterOther() {
+    Global.context!.router.pushPath("${Routes.register}?pre=${Routes.account}");
+  }
+
+  void _onDeleteAccount(DBAccount account) async {
+    _accountService.deleteAccount(account.id);
+    final accounts = await _accountService.getAccountList();
+    state = AsyncData(
+      state.requireValue.copyWith(accounts: accounts),
+    );
   }
 }

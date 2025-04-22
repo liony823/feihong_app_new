@@ -26,6 +26,8 @@ class LoginScreen extends HookConsumerWidget {
     final tabController = useTabController(
       initialLength: appConfig.value?.loginType == 3 ? 2 : 1,
     );
+    final routeStackLength = context.router.stack.length;
+    AppLogger.d('routeStackLength: $routeStackLength');
     return Material(
       color: Colors.transparent,
       child: TouchCloseSoftKeyboard(
@@ -34,6 +36,18 @@ class LoginScreen extends HookConsumerWidget {
             child: SingleChildScrollView(
                 child: Column(
               children: [
+                Row(
+                  children: [
+                    if (routeStackLength > 1)
+                      IconButton(
+                        onPressed: controller.back,
+                        icon: const Icon(
+                          EvaIcons.close_outline,
+                          color: Colors.white,
+                        ),
+                      ),
+                  ]
+                ),
                 Align(
                   alignment: Alignment.centerRight,
                   child: SwapLangButton(),

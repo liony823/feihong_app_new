@@ -41,6 +41,7 @@ class AppTheme {
   static const Color darkPlaceholderTextColor = Color(0xFF4F4F4F);
 
   // 警告颜色
+  static const Color dangerColor = Color(0xFFB00020);
   static const Color errorColor = Color(0xFFD32F2F);
   static const Color warningColor = Color(0xFFFFA000);
   static const Color successColor = Color(0xFF388E3C);
@@ -61,6 +62,12 @@ class AppTheme {
   // 输入框背景色
   static const Color inputBgDefault = Color(0xFFF7F8FA);
   static const Color darkInputBgDefault = Color(0xFF2C2C2C);
+
+  // 阴影颜色
+  static const Color shadowColor = Color(0xFFE0E0E0);
+  static const Color darkShadowColor = Color(0xFF424242);
+  static const Color shadowColor2 = Color(0xFFF5F5F5);
+  static const Color darkShadowColor2 = Color(0xFF2C2C2C);
 
   static ThemeData get lightTheme {
     return ThemeData(

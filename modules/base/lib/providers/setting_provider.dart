@@ -35,7 +35,7 @@ class SettingController extends _$SettingController {
           SheetItem(
             label: context.t.c.setting.logout,
             textStyle: TextStyle(
-              color: AppTheme.unreadMessageColor,
+              color: AppTheme.dangerColor,
               fontSize: 17.sp,
             ),
             onTap: _onLogout,

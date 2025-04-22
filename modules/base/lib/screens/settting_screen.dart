@@ -99,7 +99,7 @@ class SettingScreen extends HookConsumerWidget {
         child: Center(
           child: Text(context.t.c.setting.logout)
               .fontSize(16.sp)
-              .textColor(AppTheme.unreadMessageColor),
+              .textColor(AppTheme.dangerColor),
         ),
       ),
     ));

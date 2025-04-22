@@ -604,6 +604,10 @@ class LocalizedCAccountZh {
 	String get addAccount => '添加账号';
 	String get loginOther => '登录其他账号';
 	String get registerOther => '注册新账号';
+	String get clearAccountTitle => '清除登录痕迹';
+	String get clearAccountHint => '仅清楚本地登录记录，不清除聊天记录';
+	String deleteAccountLabel({required Object name}) => '删除${name}的登录记录';
+	String get deleteAccountHint => '删除登录记录不会删除任何历史记录';
 }
 
 // Path: contact.friendApply
@@ -803,6 +807,10 @@ extension on Localized {
 			case 'c.account.addAccount': return '添加账号';
 			case 'c.account.loginOther': return '登录其他账号';
 			case 'c.account.registerOther': return '注册新账号';
+			case 'c.account.clearAccountTitle': return '清除登录痕迹';
+			case 'c.account.clearAccountHint': return '仅清楚本地登录记录，不清除聊天记录';
+			case 'c.account.deleteAccountLabel': return ({required Object name}) => '删除${name}的登录记录';
+			case 'c.account.deleteAccountHint': return '删除登录记录不会删除任何历史记录';
 			case 'contact.title': return '通讯录';
 			case 'contact.empty': return '暂无联系人';
 			case 'contact.newFriend': return '新的朋友';
