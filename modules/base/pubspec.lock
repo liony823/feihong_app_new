@@ -9,15 +9,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "80.0.0"
-  acter_avatar:
-    dependency: "direct main"
-    description:
-      path: "."
-      ref: main
-      resolved-ref: b593cd1656d6e2778c2eb60d3e806b370674ba21
-      url: "https://github.com/liony823/acter-avatar.git"
-    source: git
-    version: "2.0.1+1"
   adaptive_number:
     dependency: transitive
     description:
@@ -523,6 +514,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_advanced_avatar:
+    dependency: transitive
+    description:
+      name: flutter_advanced_avatar
+      sha256: c97fa65a2499d85f367421b8386d45ce090046dcf24f6f71042e5e4e5c6a8c59
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.5.2"
   flutter_form_builder:
     dependency: "direct main"
     description:
@@ -552,6 +551,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_pickers:
+    dependency: transitive
+    description:
+      name: flutter_pickers
+      sha256: f38a9d9229afed75f76bae64e628b78b9c20194873e3c141783523cf21ac8a95
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "2.1.9"
   flutter_plugin_android_lifecycle:
     dependency: transitive
     description:
@@ -853,14 +860,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.0.0"
-  multiavatar:
-    dependency: transitive
-    description:
-      name: multiavatar
-      sha256: "8fc089ea8421aef04361663af4319b487e2ffa47035cc617bd94cd10e36d5db6"
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "0.1.5"
   nested:
     dependency: transitive
     description:
@@ -1069,6 +1068,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.5.1"
+  pretty_qr_code:
+    dependency: transitive
+    description:
+      name: pretty_qr_code
+      sha256: b078bd5d51956dea4342378af1b092ad962b81bdbb55b10fffce03461da8db74
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "3.4.0"
   provider:
     dependency: transitive
     description:
@@ -1093,6 +1100,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.5.0"
+  qr:
+    dependency: transitive
+    description:
+      name: qr
+      sha256: "5a1d2586170e172b8a8c8470bbbffd5eb0cd38a66c0d77155ea138d3af3a4445"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "3.0.2"
   riverpod:
     dependency: "direct main"
     description:
@@ -1141,6 +1156,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.28.0"
+  screenshot:
+    dependency: transitive
+    description:
+      name: screenshot
+      sha256: "63817697a7835e6ce82add4228e15d233b74d42975c143ad8cfe07009fab866b"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "3.0.0"
   scrollable_positioned_list:
     dependency: transitive
     description:

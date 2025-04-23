@@ -16,7 +16,7 @@ class SettingController extends _$SettingController {
   }
 
   void onSwitchAccount() {
-    Global.context!.router.pushPath(Routes.account);
+    Global.context!.router.pushPath(Routes.accountManager);
   }
 
   void onLogout() {

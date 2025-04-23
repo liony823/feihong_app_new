@@ -17,7 +17,7 @@ class LoginTab extends StatelessWidget {
             child: buildLine(),
           ),
           Text(title)
-              .fontSize(18.sp)
+              .fontSize(20.sp)
               .textColor(AppTheme.lightTextColor)
               .fontWeight(FontWeight.w500),
         ],

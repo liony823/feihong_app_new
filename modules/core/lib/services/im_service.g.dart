@@ -6,14 +6,13 @@ part of 'im_service.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$iMServiceHash() => r'37720f2bd49c8b88ca3a4034f5ebde684dcb379c';
+String _$iMServiceHash() => r'869bc3ed274021a604eebf61ac5d833aacd8e38e';
 
 /// IM服务类，处理与IM SDK的交互
 ///
 /// Copied from [IMService].
 @ProviderFor(IMService)
-final iMServiceProvider =
-    AutoDisposeNotifierProvider<IMService, IMState>.internal(
+final iMServiceProvider = NotifierProvider<IMService, IMState>.internal(
   IMService.new,
   name: r'iMServiceProvider',
   debugGetCreateSourceHash:
@@ -22,6 +21,6 @@ final iMServiceProvider =
   allTransitiveDependencies: null,
 );
 
-typedef _$IMService = AutoDisposeNotifier<IMState>;
+typedef _$IMService = Notifier<IMState>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

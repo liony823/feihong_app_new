@@ -26,6 +26,7 @@ dependencies:
   uuid: ^4.3.1
   logger: ^2.5.0
   pinyin: ^3.3.0
+  image_gallery_saver_plus: ^4.0.1
   
   # UI相关
   flutter_svg: ^2.0.7
@@ -41,10 +42,9 @@ dependencies:
   azlistview: ^2.0.0
   easy_refresh: ^3.4.0
   skeletonizer: ^1.4.3
-  acter_avatar: 
-    git:
-      url: https://github.com/liony823/acter-avatar.git
-      ref: main
+  flutter_advanced_avatar: ^1.5.2
+  pretty_qr_code: ^3.3.0
+  screenshot: ^3.0.0
 
   # 动画
   animate_do: ^3.3.4

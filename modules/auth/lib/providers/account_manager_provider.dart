@@ -7,17 +7,21 @@ import 'package:common/common.dart';
 import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'account_provider.g.dart';
+part 'account_manager_provider.g.dart';
 
-class AccountState {
+class AccountManagerState {
   final List<DBAccount> accounts;
   final bool isManager;
   final String currentAccountUid;
 
-  AccountState({required this.accounts, required this.isManager,required this.currentAccountUid});
+  AccountManagerState(
+      {required this.accounts,
+      required this.isManager,
+      required this.currentAccountUid});
 
-  AccountState copyWith({List<DBAccount>? accounts, bool? isManager, String? currentAccountUid}) {
-    return AccountState(
+  AccountManagerState copyWith(
+      {List<DBAccount>? accounts, bool? isManager, String? currentAccountUid}) {
+    return AccountManagerState(
       accounts: accounts ?? this.accounts,
       isManager: isManager ?? this.isManager,
       currentAccountUid: currentAccountUid ?? this.currentAccountUid,
@@ -26,15 +30,18 @@ class AccountState {
 }
 
 @riverpod
-class AccountController extends _$AccountController {
+class AccountManagerController extends _$AccountManagerController {
   AccountService get _accountService => ref.read(accountServiceProvider);
   AuthService get _authService => ref.read(authServiceProvider);
 
   @override
-  FutureOr<AccountState> build() async {
+  FutureOr<AccountManagerState> build() async {
     final accounts = await _accountService.getAccountList();
     final currentAccountUid = SpHelper.uid;
-    return AccountState(accounts: accounts, isManager: false,currentAccountUid: currentAccountUid);
+    return AccountManagerState(
+        accounts: accounts,
+        isManager: false,
+        currentAccountUid: currentAccountUid);
   }
 
   void addAccount() {
@@ -61,25 +68,26 @@ class AccountController extends _$AccountController {
     );
   }
 
-  void onDeleteAccount(DBAccount account){
-        showModalBottomSheet(
+  void onDeleteAccount(DBAccount account) {
+    showModalBottomSheet(
       context: Global.context!,
       builder: (context) {
         return BottomSheetView(
           items: [
             SheetItem(
-                label: context.t.c.account.deleteAccountHint, textStyle: TextStyle(
-                  color: AppTheme.lightSecondaryTextColor,
-                  fontSize: 13.sp,    
-                ),
-               ),
+              label: context.t.c.account.deleteAccountHint,
+              textStyle: TextStyle(
+                color: AppTheme.lightSecondaryTextColor,
+                fontSize: 13.sp,
+              ),
+            ),
             SheetItem(
               label: context.t.c.account.deleteAccountLabel(name: account.name),
               textStyle: TextStyle(
                 color: AppTheme.dangerColor,
                 fontSize: 16.sp,
               ),
-              onTap:() =>  _onDeleteAccount(account),
+              onTap: () => _onDeleteAccount(account),
             ),
           ],
         );
@@ -104,7 +112,7 @@ class AccountController extends _$AccountController {
           deviceModel: CommonModule.deviceModel,
         ),
       );
-    }else if (account.loginType == 2) {
+    } else if (account.loginType == 2) {
       userCert = await LoadingView.singleton.wrap(
         asyncFunction: () => _authService.loginByUsername(
           username: account.username,
@@ -121,11 +129,11 @@ class AccountController extends _$AccountController {
   }
 
   void _onLoginOther() {
-    Global.context!.router.pushPath("${Routes.login}?pre=${Routes.account}");
+    Global.context!.router.pushPath(Routes.login);
   }
 
   void _onRegisterOther() {
-    Global.context!.router.pushPath("${Routes.register}?pre=${Routes.account}");
+    Global.context!.router.pushPath(Routes.register);
   }
 
   void _onDeleteAccount(DBAccount account) async {

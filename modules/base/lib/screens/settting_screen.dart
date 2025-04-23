@@ -146,7 +146,7 @@ class SettingScreen extends HookConsumerWidget {
       child: Row(
         children: [
           Expanded(child: Text(title).fontSize(16.sp)),
-          Icon(Icons.chevron_right_outlined,
+          Icon(Icons.chevron_right_rounded,
               color: AppTheme.lightSecondaryTextColor),
         ],
       ),

@@ -1,5 +1,5 @@
-import 'package:acter_avatar/acter_avatar.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:base/route/route.gr.dart';
 import 'package:common/common.dart';
 import 'package:core/core.dart';
 import 'package:flutter/cupertino.dart';
@@ -112,7 +112,7 @@ class MineScreen extends HookConsumerWidget {
             if (unReadCount > 0) UnreadCountView(count: unReadCount),
             10.horizontalSpace,
             Icon(
-              Icons.chevron_right_outlined,
+              Icons.chevron_right_rounded,
               size: 22.w,
               color: AppTheme.lightSecondaryTextColor,
             )
@@ -123,64 +123,68 @@ class MineScreen extends HookConsumerWidget {
   }
 
   Widget _buildUserInfoView(BuildContext context, UserInfo? userInfo) {
-    final avatar = Apis.getAvatarUrl(userInfo!.uid);
-    final avatarOptions = AvatarOptions(
-      AvatarInfo(
-        uniqueId: userInfo.uid,
-        displayName: userInfo.name,
-        avatar: Utils.isEmptyOrNull(avatar) ? null : NetworkImage(avatar),
-      ),
-      size: 64.w,
-    );
-    return Container(
-      padding: EdgeInsets.only(
-        left: 12.w,
-        right: 16.w,
-        top: 24.h + MediaQuery.of(context).padding.top,
-        bottom: 24.h,
-      ),
-      decoration: BoxDecoration(
-        color: Colors.white,
-      ),
-      child: Row(
-        children: [
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 12.w),
-            child: ActerAvatar(options: avatarOptions),
-          ),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(userInfo?.name ?? '',
-                    style: TextStyle(
-                        fontSize: 20.sp,
-                        fontWeight: FontWeight.w600,
-                        overflow: TextOverflow.ellipsis,
-                        color: AppTheme.lightTextColor)),
-                Text(
-                    context.t.c.mine
-                        .username(username: userInfo?.username ?? ''),
-                    style: TextStyle(
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.w500,
-                        overflow: TextOverflow.ellipsis,
-                        color: AppTheme.lightSecondaryTextColor)),
-              ],
+    return GestureDetector(
+      onTap: () {
+        context.router.pushPath(Routes.profile);
+      },
+      child: Container(
+        padding: EdgeInsets.only(
+          left: 12.w,
+          right: 16.w,
+          top: 24.h + MediaQuery.of(context).padding.top,
+          bottom: 24.h,
+        ),
+        decoration: BoxDecoration(
+          color: Colors.white,
+        ),
+        child: Row(
+          children: [
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 12.w),
+              child: Avatar(
+                size: 64.w,
+                uid: userInfo?.uid ?? '',
+                name: userInfo?.name ?? '',
+                url: Apis.getAvatarUrl(userInfo!.uid),
+              ),
             ),
-          ),
-          Column(
-            spacing: 4.w,
-            children: [
-              ImageRes.icoQR.toSvg
-                ..width = 18.w
-                ..height = 18.w
-                ..color = Color.fromARGB(255, 158, 193, 226),
-              Icon(Icons.chevron_right_outlined,
-                  color: AppTheme.lightSecondaryTextColor),
-            ],
-          )
-        ],
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(userInfo.name,
+                      style: TextStyle(
+                          fontSize: 20.sp,
+                          fontWeight: FontWeight.w600,
+                          overflow: TextOverflow.ellipsis,
+                          color: AppTheme.lightTextColor)),
+                  Text(context.t.c.mine.username(username: userInfo.username),
+                      style: TextStyle(
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.w500,
+                          overflow: TextOverflow.ellipsis,
+                          color: AppTheme.lightSecondaryTextColor)),
+                ],
+              ),
+            ),
+            Column(
+              spacing: 4.w,
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    context.router.push(PersonalQrcodeRoute(uid: userInfo.uid));
+                  },
+                  child: ImageRes.icoQR.toSvg
+                    ..width = 18.w
+                    ..height = 18.w
+                    ..color = AppTheme.lightSecondaryTextColor,
+                ),
+                Icon(Icons.chevron_right_rounded,
+                    color: AppTheme.lightSecondaryTextColor),
+              ],
+            )
+          ],
+        ),
       ),
     );
   }

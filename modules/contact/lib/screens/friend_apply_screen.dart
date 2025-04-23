@@ -1,4 +1,3 @@
-import 'package:acter_avatar/acter_avatar.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:common/common.dart';
 import 'package:contact/helper/fake.dart';
@@ -92,15 +91,6 @@ class FriendApplyScreen extends HookConsumerWidget {
     VoidCallback? onAccept,
     VoidCallback? onRefuse,
   }) {
-    final avatarOptions = AvatarOptions(
-      AvatarInfo(
-        uniqueId: apply.uid,
-        displayName: apply.toName,
-        avatar: NetworkImage(apply
-            .showToAvatar), // can be any image provider .i.e. AssetImage, MemoryImage and NetworkImage etc.
-      ),
-      size: 36.w,
-    );
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
       color: AppTheme.primaryLightColor,
@@ -110,8 +100,11 @@ class FriendApplyScreen extends HookConsumerWidget {
             children: [
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.w),
-                child: ActerAvatar(
-                  options: avatarOptions,
+                child: Avatar(
+                  uid: apply.uid,
+                  name: apply.toName,
+                  url: apply.showToAvatar,
+                  size: 36.w,
                 ),
               ),
               Expanded(

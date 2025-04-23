@@ -10,14 +10,23 @@
     "talkTooShort": "说话时间太短",
     "permissionDeniedTitle": "权限被拒绝",
     "permissionDeniedHint": "请在设置中允许使用%s权限。",
-    "male":"男",
-    "female":"女",
     "close":"关闭",
     "manager":"管理",
     "delete":"删除",
     "edit":"编辑",
     "add":"添加",
     "save":"保存",
+
+    "saveSuccessfully":"保存成功",
+    "saveToGallery":"保存到相册",
+    "saveFailed":"保存失败",
+    "permanentlyDenied":"权限不允许",
+
+    "gender": [
+        "其他",
+        "男",
+        "女"
+    ],
     
 
     "agreement":{
@@ -98,7 +107,7 @@
         "sendSuccess": "发送成功"
     },
 
-    "profile": {
+    "setSelfInfo": {
         "plsCompleteInfo":"请完善个人信息",
         "plsSetAvatar":"点击设置头像",
         "plsEnterNickname":"请输入您的昵称",
@@ -183,5 +192,36 @@
         "clearAccountHint":"仅清楚本地登录记录，不清除聊天记录",
         "deleteAccountLabel":"删除$name的登录记录",
         "deleteAccountHint":"删除登录记录不会删除任何历史记录"
+    },
+    "profile": {
+        "title":"个人信息",
+        "avatar":"头像",
+        "nickname":"昵称",
+        "sex":"性别",
+        "username":"账户ID",
+        "introduction":"个性签名",
+        "qrCode":"二维码名片",
+        "setNickname":"设置昵称",
+        "setUsername":"设置用户名",
+        "setIntroduction":"设置个性签名",
+        "plsSelectGender":"请选择您的性别",
+        "plsSetAvatar":"点击设置头像",
+        "plsEnterNickname":"请输入您的昵称",
+        "plsEnterUsername":"请输入您的用户名",
+        "plsEnterIntroduction":"请输入您的个性签名",
+        "usernameValidateError":"用户名格式错误（6-18位字符，不能包含非法字符）",
+        "nicknameValidateError":"昵称格式错误（2-12位字符，不能包含非法字符）",
+        "setAvatarSuccess":"修改头像成功",
+        "setAvatarFailed":"修改头像失败",
+        "setNicknameSuccess":"修改昵称成功",
+        "setNicknameFailed":"修改昵称失败",
+        "setUsernameSuccess":"修改用户名成功",
+        "setUsernameFailed":"修改用户名失败",
+        "setIntroductionSuccess":"修改个性签名成功",
+        "setIntroductionFailed":"修改个性签名失败",
+        "setGenderSuccess":"修改性别成功",
+        "setGenderFailed":"修改性别失败",
+        "introductionDefault":"暂无个性签名",
+        "saveImage":"点击保存图片"
     }
 }

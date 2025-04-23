@@ -25,6 +25,7 @@ class RegisterScreen extends HookConsumerWidget {
     final tabController = useTabController(
       initialLength: appConfig.value?.loginType == 3 ? 2 : 1,
     );
+    final routeStackLength = context.router.stack.length;
     return TouchCloseSoftKeyboard(
       isGradientBg: true,
       child: Scaffold(
@@ -33,6 +34,24 @@ class RegisterScreen extends HookConsumerWidget {
             backgroundColor: Colors.transparent,
             title: (context.t.c.register.title).appBarText,
             centerTitle: false,
+            leadingWidth: 72.w,
+            leading: Visibility(
+              visible: routeStackLength > 1,
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16.w),
+                child: IconButton(
+                  onPressed: controller.back,
+                  style: IconButton.styleFrom(
+                    backgroundColor: Colors.black26,
+                    shape: const CircleBorder(),
+                  ),
+                  icon: const Icon(
+                    EvaIcons.close_outline,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ),
             actions: [SwapLangButton()],
           ),
           body: SingleChildScrollView(
@@ -79,7 +98,7 @@ class RegisterScreen extends HookConsumerWidget {
     return FormBuilder(
       key: controller.formKey,
       child: SizedBox(
-        height: registerInviteOn == 1 ? 524.h : 420.h,
+        height: registerInviteOn == 1 ? 536.h : 432.h,
         child: Column(spacing: 24.w, children: [
           LoginTabBar(
             controller: tabController,
@@ -148,6 +167,7 @@ class RegisterScreen extends HookConsumerWidget {
                 name: 'password',
                 placeholder: context.t.c.login.passwordPlaceholder,
                 keyboardType: TextInputType.visiblePassword,
+                textInputAction: TextInputAction.next,
                 suffixIcon: IconButton(
                   onPressed: () => obscure.value = !obscure.value,
                   icon: Icon(
@@ -321,7 +341,7 @@ class RegisterScreen extends HookConsumerWidget {
     return Row(
       spacing: 6.w,
       children: [
-        Text(label).fontSize(14.sp),
+        Text(label).fontSize(16.sp),
         Icon(
           icon,
           size: 16.w,

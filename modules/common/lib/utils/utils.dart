@@ -9,10 +9,17 @@ class Utils {
     return str == null || str.isEmpty;
   }
 
-  static Future<CroppedFile?> uCrop(String path, {int compressQuality = 90}) {
+  static Future<CroppedFile?> uCrop(String path,
+      {int compressQuality = 90, double? aspectRatioX, double? aspectRatioY}) {
     return ImageCropper().cropImage(
       sourcePath: path,
       compressQuality: compressQuality,
+      aspectRatio: aspectRatioX != null && aspectRatioY != null
+          ? CropAspectRatio(
+              ratioX: aspectRatioX,
+              ratioY: aspectRatioY,
+            )
+          : null,
       uiSettings: [
         AndroidUiSettings(
           toolbarTitle: '',

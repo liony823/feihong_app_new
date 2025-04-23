@@ -34,10 +34,7 @@ dependencies:
   form_builder_validators: ^11.1.2
   icons_plus: ^5.0.0
   skeletonizer: ^1.4.3
-  acter_avatar: 
-    git:
-      url: https://github.com/liony823/acter-avatar.git
-      ref: main
+
   persistent_bottom_nav_bar: ^6.2.1
 
   # 注解

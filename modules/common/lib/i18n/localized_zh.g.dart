@@ -63,27 +63,35 @@ class LocalizedCZh {
 	String get talkTooShort => '说话时间太短';
 	String get permissionDeniedTitle => '权限被拒绝';
 	String get permissionDeniedHint => '请在设置中允许使用%s权限。';
-	String get male => '男';
-	String get female => '女';
 	String get close => '关闭';
 	String get manager => '管理';
 	String get delete => '删除';
 	String get edit => '编辑';
 	String get add => '添加';
 	String get save => '保存';
+	String get saveSuccessfully => '保存成功';
+	String get saveToGallery => '保存到相册';
+	String get saveFailed => '保存失败';
+	String get permanentlyDenied => '权限不允许';
+	List<String> get gender => [
+		'其他',
+		'男',
+		'女',
+	];
 	late final LocalizedCAgreementZh agreement = LocalizedCAgreementZh.internal(_root);
 	late final LocalizedCLanguageZh language = LocalizedCLanguageZh.internal(_root);
 	late final LocalizedCZoneZh zone = LocalizedCZoneZh.internal(_root);
 	late final LocalizedCLoginZh login = LocalizedCLoginZh.internal(_root);
 	late final LocalizedCRegisterZh register = LocalizedCRegisterZh.internal(_root);
 	late final LocalizedCVerifyZh verify = LocalizedCVerifyZh.internal(_root);
-	late final LocalizedCProfileZh profile = LocalizedCProfileZh.internal(_root);
+	late final LocalizedCSetSelfInfoZh setSelfInfo = LocalizedCSetSelfInfoZh.internal(_root);
 	late final LocalizedCSetSelfSecurityZh setSelfSecurity = LocalizedCSetSelfSecurityZh.internal(_root);
 	late final LocalizedCRefreshZh refresh = LocalizedCRefreshZh.internal(_root);
 	late final LocalizedCDropdownMenuZh dropdownMenu = LocalizedCDropdownMenuZh.internal(_root);
 	late final LocalizedCMineZh mine = LocalizedCMineZh.internal(_root);
 	late final LocalizedCSettingZh setting = LocalizedCSettingZh.internal(_root);
 	late final LocalizedCAccountZh account = LocalizedCAccountZh.internal(_root);
+	late final LocalizedCProfileZh profile = LocalizedCProfileZh.internal(_root);
 }
 
 // Path: contact
@@ -478,9 +486,9 @@ class LocalizedCVerifyZh {
 	String get sendSuccess => '发送成功';
 }
 
-// Path: c.profile
-class LocalizedCProfileZh {
-	LocalizedCProfileZh.internal(this._root);
+// Path: c.setSelfInfo
+class LocalizedCSetSelfInfoZh {
+	LocalizedCSetSelfInfoZh.internal(this._root);
 
 	final Localized _root; // ignore: unused_field
 
@@ -610,6 +618,44 @@ class LocalizedCAccountZh {
 	String get deleteAccountHint => '删除登录记录不会删除任何历史记录';
 }
 
+// Path: c.profile
+class LocalizedCProfileZh {
+	LocalizedCProfileZh.internal(this._root);
+
+	final Localized _root; // ignore: unused_field
+
+	// Translations
+	String get title => '个人信息';
+	String get avatar => '头像';
+	String get nickname => '昵称';
+	String get sex => '性别';
+	String get username => '账户ID';
+	String get introduction => '个性签名';
+	String get qrCode => '二维码名片';
+	String get setNickname => '设置昵称';
+	String get setUsername => '设置用户名';
+	String get setIntroduction => '设置个性签名';
+	String get plsSelectGender => '请选择您的性别';
+	String get plsSetAvatar => '点击设置头像';
+	String get plsEnterNickname => '请输入您的昵称';
+	String get plsEnterUsername => '请输入您的用户名';
+	String get plsEnterIntroduction => '请输入您的个性签名';
+	String get usernameValidateError => '用户名格式错误（6-18位字符，不能包含非法字符）';
+	String get nicknameValidateError => '昵称格式错误（2-12位字符，不能包含非法字符）';
+	String get setAvatarSuccess => '修改头像成功';
+	String get setAvatarFailed => '修改头像失败';
+	String get setNicknameSuccess => '修改昵称成功';
+	String get setNicknameFailed => '修改昵称失败';
+	String get setUsernameSuccess => '修改用户名成功';
+	String get setUsernameFailed => '修改用户名失败';
+	String get setIntroductionSuccess => '修改个性签名成功';
+	String get setIntroductionFailed => '修改个性签名失败';
+	String get setGenderSuccess => '修改性别成功';
+	String get setGenderFailed => '修改性别失败';
+	String get introductionDefault => '暂无个性签名';
+	String get saveImage => '点击保存图片';
+}
+
 // Path: contact.friendApply
 class LocalizedContactFriendApplyZh {
 	LocalizedContactFriendApplyZh.internal(this._root);
@@ -669,14 +715,19 @@ extension on Localized {
 			case 'c.talkTooShort': return '说话时间太短';
 			case 'c.permissionDeniedTitle': return '权限被拒绝';
 			case 'c.permissionDeniedHint': return '请在设置中允许使用%s权限。';
-			case 'c.male': return '男';
-			case 'c.female': return '女';
 			case 'c.close': return '关闭';
 			case 'c.manager': return '管理';
 			case 'c.delete': return '删除';
 			case 'c.edit': return '编辑';
 			case 'c.add': return '添加';
 			case 'c.save': return '保存';
+			case 'c.saveSuccessfully': return '保存成功';
+			case 'c.saveToGallery': return '保存到相册';
+			case 'c.saveFailed': return '保存失败';
+			case 'c.permanentlyDenied': return '权限不允许';
+			case 'c.gender.0': return '其他';
+			case 'c.gender.1': return '男';
+			case 'c.gender.2': return '女';
 			case 'c.agreement.userAgreement': return '《用户协议》';
 			case 'c.agreement.privacyPolicy': return '《隐私政策》';
 			case 'c.agreement.checkbox': return ({required InlineSpan userAgreement, required InlineSpan privacyPolicy}) => TextSpan(children: [
@@ -742,23 +793,23 @@ extension on Localized {
 			case 'c.verify.plsEnterVerificationCode': return '请输入您的验证码';
 			case 'c.verify.confirm': return '确 认';
 			case 'c.verify.sendSuccess': return '发送成功';
-			case 'c.profile.plsCompleteInfo': return '请完善个人信息';
-			case 'c.profile.plsSetAvatar': return '点击设置头像';
-			case 'c.profile.plsEnterNickname': return '请输入您的昵称';
-			case 'c.profile.plsEnterUsername': return '请输入您的用户名';
-			case 'c.profile.username': return '用户名';
-			case 'c.profile.nickname': return '昵称';
-			case 'c.profile.avatar': return '头像';
-			case 'c.profile.sex': return '性别';
-			case 'c.profile.introduction': return '个性签名';
-			case 'c.profile.plsEnterIntroduction': return '请输入您的个性签名';
-			case 'c.profile.plsSelectGender': return '请选择您的性别';
-			case 'c.profile.usernameValidateError': return '用户名格式错误（6-18位字符，不能包含非法字符）';
-			case 'c.profile.nicknameValidateError': return '昵称格式错误（2-12位字符，不能包含非法字符）';
-			case 'c.profile.usernameHelperText': return '用户名仅可修改一次。';
-			case 'c.profile.submit': return '提交';
-			case 'c.profile.submitSuccess': return '提交成功';
-			case 'c.profile.submitFailed': return '提交失败';
+			case 'c.setSelfInfo.plsCompleteInfo': return '请完善个人信息';
+			case 'c.setSelfInfo.plsSetAvatar': return '点击设置头像';
+			case 'c.setSelfInfo.plsEnterNickname': return '请输入您的昵称';
+			case 'c.setSelfInfo.plsEnterUsername': return '请输入您的用户名';
+			case 'c.setSelfInfo.username': return '用户名';
+			case 'c.setSelfInfo.nickname': return '昵称';
+			case 'c.setSelfInfo.avatar': return '头像';
+			case 'c.setSelfInfo.sex': return '性别';
+			case 'c.setSelfInfo.introduction': return '个性签名';
+			case 'c.setSelfInfo.plsEnterIntroduction': return '请输入您的个性签名';
+			case 'c.setSelfInfo.plsSelectGender': return '请选择您的性别';
+			case 'c.setSelfInfo.usernameValidateError': return '用户名格式错误（6-18位字符，不能包含非法字符）';
+			case 'c.setSelfInfo.nicknameValidateError': return '昵称格式错误（2-12位字符，不能包含非法字符）';
+			case 'c.setSelfInfo.usernameHelperText': return '用户名仅可修改一次。';
+			case 'c.setSelfInfo.submit': return '提交';
+			case 'c.setSelfInfo.submitSuccess': return '提交成功';
+			case 'c.setSelfInfo.submitFailed': return '提交失败';
 			case 'c.setSelfSecurity.title': return '设置密保问题';
 			case 'c.setSelfSecurity.question': return '密保问题';
 			case 'c.setSelfSecurity.answer': return '密保答案';
@@ -811,6 +862,35 @@ extension on Localized {
 			case 'c.account.clearAccountHint': return '仅清楚本地登录记录，不清除聊天记录';
 			case 'c.account.deleteAccountLabel': return ({required Object name}) => '删除${name}的登录记录';
 			case 'c.account.deleteAccountHint': return '删除登录记录不会删除任何历史记录';
+			case 'c.profile.title': return '个人信息';
+			case 'c.profile.avatar': return '头像';
+			case 'c.profile.nickname': return '昵称';
+			case 'c.profile.sex': return '性别';
+			case 'c.profile.username': return '账户ID';
+			case 'c.profile.introduction': return '个性签名';
+			case 'c.profile.qrCode': return '二维码名片';
+			case 'c.profile.setNickname': return '设置昵称';
+			case 'c.profile.setUsername': return '设置用户名';
+			case 'c.profile.setIntroduction': return '设置个性签名';
+			case 'c.profile.plsSelectGender': return '请选择您的性别';
+			case 'c.profile.plsSetAvatar': return '点击设置头像';
+			case 'c.profile.plsEnterNickname': return '请输入您的昵称';
+			case 'c.profile.plsEnterUsername': return '请输入您的用户名';
+			case 'c.profile.plsEnterIntroduction': return '请输入您的个性签名';
+			case 'c.profile.usernameValidateError': return '用户名格式错误（6-18位字符，不能包含非法字符）';
+			case 'c.profile.nicknameValidateError': return '昵称格式错误（2-12位字符，不能包含非法字符）';
+			case 'c.profile.setAvatarSuccess': return '修改头像成功';
+			case 'c.profile.setAvatarFailed': return '修改头像失败';
+			case 'c.profile.setNicknameSuccess': return '修改昵称成功';
+			case 'c.profile.setNicknameFailed': return '修改昵称失败';
+			case 'c.profile.setUsernameSuccess': return '修改用户名成功';
+			case 'c.profile.setUsernameFailed': return '修改用户名失败';
+			case 'c.profile.setIntroductionSuccess': return '修改个性签名成功';
+			case 'c.profile.setIntroductionFailed': return '修改个性签名失败';
+			case 'c.profile.setGenderSuccess': return '修改性别成功';
+			case 'c.profile.setGenderFailed': return '修改性别失败';
+			case 'c.profile.introductionDefault': return '暂无个性签名';
+			case 'c.profile.saveImage': return '点击保存图片';
 			case 'contact.title': return '通讯录';
 			case 'contact.empty': return '暂无联系人';
 			case 'contact.newFriend': return '新的朋友';

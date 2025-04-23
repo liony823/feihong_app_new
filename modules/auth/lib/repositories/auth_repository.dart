@@ -1,4 +1,3 @@
-import 'package:common/models/user_info.dart';
 import 'package:common/common.dart';
 import 'package:core/core.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -187,12 +186,16 @@ class AuthRepository {
   Future<bool> updateUserProfile({
     String? name,
     String? shortNo,
+    String? intro,
+    int? sex,
   }) async {
     try {
       final data = <String, dynamic>{};
 
       if (name != null) data['name'] = name;
       if (shortNo != null) data['short_no'] = shortNo;
+      if (intro != null) data['introduction'] = intro;
+      if (sex != null) data['sex'] = sex;
 
       final response = await _apiClient.put(
         ApiConfig.updateUserInfo,

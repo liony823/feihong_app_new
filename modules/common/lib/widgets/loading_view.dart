@@ -41,25 +41,24 @@ class LoadingView {
     if (_isVisible) return;
     _overlayState = Overlay.of(Global.context!);
     _overlayEntry = OverlayEntry(
-      builder:
-          (BuildContext context) => Container(
-            width: MediaQuery.of(context).size.width,
-            color: Colors.transparent,
-            child: Stack(
-              children: [
-                BackdropFilter(
-                  filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
-                  child: Container(color: Colors.black.withValues(alpha: .1)),
-                ),
-                Center(
-                  child: SpinKitWave(
-                    color: AppTheme.primaryLightColor,
-                    size: 32.w,
-                  ),
-                ),
-              ],
+      builder: (BuildContext context) => Container(
+        width: MediaQuery.of(context).size.width,
+        color: Colors.transparent,
+        child: Stack(
+          children: [
+            BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
+              child: Container(color: Colors.black.withValues(alpha: .1)),
             ),
-          ),
+            Center(
+              child: SpinKitWave(
+                color: AppTheme.primaryLightColor,
+                size: 24.w,
+              ),
+            ),
+          ],
+        ),
+      ),
     );
     _isVisible = true;
     _overlayState?.insert(_overlayEntry!);
@@ -76,48 +75,47 @@ class LoadingView {
   void progress(Stream<double> stream) async {
     _progressOverlayState = Overlay.of(Global.context!);
     _progressOverlayEntry = OverlayEntry(
-      builder:
-          (BuildContext context) => GestureDetector(
-            onTap: dismiss,
+      builder: (BuildContext context) => GestureDetector(
+        onTap: dismiss,
+        child: Container(
+          width: MediaQuery.of(context).size.width,
+          color: const Color.fromARGB(0, 37, 33, 33),
+          child: Center(
             child: Container(
-              width: MediaQuery.of(context).size.width,
-              color: const Color.fromARGB(0, 37, 33, 33),
-              child: Center(
-                child: Container(
-                  alignment: Alignment.center,
-                  width: 80,
-                  height: 80,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    color: const Color(0xFF0C1C33),
+              alignment: Alignment.center,
+              width: 80,
+              height: 80,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+                color: const Color(0xFF0C1C33),
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const CupertinoActivityIndicator(
+                    color: Colors.white,
+                    radius: 20,
                   ),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const CupertinoActivityIndicator(
-                        color: Colors.white,
-                        radius: 20,
-                      ),
-                      StreamBuilder(
-                        stream: stream,
-                        builder: (
-                          BuildContext context,
-                          AsyncSnapshot<double> snapshot,
-                        ) {
-                          if (!snapshot.hasData) return Container();
-                          final progress = snapshot.data ?? 0.0;
-                          return Text(
-                            '${(progress * 100).toStringAsFixed(1)}%',
-                            style: const TextStyle(color: Colors.white),
-                          );
-                        },
-                      ),
-                    ],
+                  StreamBuilder(
+                    stream: stream,
+                    builder: (
+                      BuildContext context,
+                      AsyncSnapshot<double> snapshot,
+                    ) {
+                      if (!snapshot.hasData) return Container();
+                      final progress = snapshot.data ?? 0.0;
+                      return Text(
+                        '${(progress * 100).toStringAsFixed(1)}%',
+                        style: const TextStyle(color: Colors.white),
+                      );
+                    },
                   ),
-                ),
+                ],
               ),
             ),
           ),
+        ),
+      ),
     );
     isProgressVisible = true;
     _progressOverlayState?.insert(_progressOverlayEntry!);

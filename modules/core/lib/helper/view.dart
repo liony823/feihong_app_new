@@ -17,6 +17,8 @@ class ViewHelper {
     List<SheetItem> items = const [],
     int quality = 80,
     FileType fileType = FileType.common,
+    double? aspectRatioX,
+    double? aspectRatioY,
   }) {
     bool allowSendImageTypeHelper(String? mimeType) {
       final result = mimeType?.contains('png') == true ||
@@ -34,7 +36,6 @@ class ViewHelper {
     final context = Global.context!;
     showModalBottomSheet(
       context: context,
-      backgroundColor: Colors.transparent,
       builder: (context) => BottomSheetView(
         items: [
           ...items,
@@ -68,6 +69,8 @@ class ViewHelper {
                     toUrl: toUrl,
                     quality: quality,
                     fileType: fileType,
+                    aspectRatioX: aspectRatioX,
+                    aspectRatioY: aspectRatioY,
                   );
                   onData?.call(map['path'], map['url']);
                 }
@@ -99,6 +102,8 @@ class ViewHelper {
                     toUrl: toUrl,
                     quality: quality,
                     fileType: fileType,
+                    aspectRatioX: aspectRatioX,
+                    aspectRatioY: aspectRatioY,
                   );
                   onData?.call(map['path'], map['url']);
                 }
@@ -117,7 +122,7 @@ class ViewHelper {
     final context = Global.context!;
     Pickers.showSinglePicker(
       context,
-      data: [context.t.c.male, context.t.c.female],
+      data: context.t.c.gender,
       overlapTabBar: true,
       pickerStyle: PickerStyle(
         title: Text(context.t.c.profile.sex,
@@ -137,7 +142,7 @@ class ViewHelper {
           ),
         ),
       ),
-      selectData: initialValue == 1 ? context.t.c.male : context.t.c.female,
+      selectData: context.t.c.gender[initialValue ?? 1],
       onConfirm: (value, index) {
         onConfirm(index + 1);
       },
@@ -150,12 +155,17 @@ class ViewHelper {
     bool crop = true,
     bool toUrl = true,
     int quality = 80,
+    double? aspectRatioX,
+    double? aspectRatioY,
     FileType fileType = FileType.common,
   }) async {
     CroppedFile? cropFile;
     String? url;
     if (crop && !path.endsWith('.gif')) {
-      cropFile = await Utils.uCrop(path, compressQuality: quality);
+      cropFile = await Utils.uCrop(path,
+          compressQuality: quality,
+          aspectRatioX: aspectRatioX,
+          aspectRatioY: aspectRatioY);
       if (cropFile == null) {
         return {'path': null, 'url': null};
       }

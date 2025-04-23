@@ -135,7 +135,7 @@ class AppTheme {
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(24.r)),
           ),
           padding: WidgetStateProperty.all<EdgeInsetsGeometry>(
-            EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
+            EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
           ),
           textStyle: WidgetStateProperty.all<TextStyle>(
             TextStyle(fontSize: 15.sp, fontWeight: FontWeight.w600),

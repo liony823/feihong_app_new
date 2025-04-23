@@ -28,7 +28,7 @@ class DB {
   /// 初始化数据库
   Future<void> init() async {
     final databasesPath = await getDatabasesPath();
-    final path = join(databasesPath, 'im_v3.db');
+    final path = join(databasesPath, 'im_feihong_v1.db');
     _instance = await openDatabase(
       path,
       version: 1,

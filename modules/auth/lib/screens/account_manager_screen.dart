@@ -1,5 +1,5 @@
 import 'package:auth/models/db/db_account.dart';
-import 'package:auth/providers/account_provider.dart';
+import 'package:auth/providers/account_manager_provider.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:common/common.dart';
 import 'package:core/core.dart';
@@ -9,12 +9,12 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:icons_plus/icons_plus.dart';
 
 @RoutePage()
-class AccountScreen extends HookConsumerWidget {
-  const AccountScreen({super.key});
+class AccountManagerScreen extends HookConsumerWidget {
+  const AccountManagerScreen({super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(accountControllerProvider);
-    final controller = ref.watch(accountControllerProvider.notifier);
+    final state = ref.watch(accountManagerControllerProvider);
+    final controller = ref.watch(accountManagerControllerProvider.notifier);
     return Scaffold(
       appBar: AppBar(
         surfaceTintColor: Colors.transparent,
@@ -80,9 +80,10 @@ class AccountScreen extends HookConsumerWidget {
                     .fontSize(20.sp)
                     .fontWeight(FontWeight.w500),
               ),
-              if (value.isManager) Text(context.t.c.account.clearAccountHint)
-                  .fontSize(14.sp)
-                  .textColor(AppTheme.lightSecondaryTextColor),
+              if (value.isManager)
+                Text(context.t.c.account.clearAccountHint)
+                    .fontSize(14.sp)
+                    .textColor(AppTheme.lightSecondaryTextColor),
               Divider(
                 indent: 64.w,
                 endIndent: 64.w,
@@ -94,22 +95,22 @@ class AccountScreen extends HookConsumerWidget {
                     ...value.accounts.map((e) {
                       final isCurrent = e.uid == value.currentAccountUid;
                       return Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 24.w, vertical: 6.w),
-                          child: _buildAccountItemView(context, e,
-                          isCurrent:isCurrent,
-                          isManager: value.isManager,
-                          onDelete: () => controller.onDeleteAccount(e),
-                              onPressed: () => controller.onSwitchAccount(e)),
-                        );
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 24.w, vertical: 6.w),
+                        child: _buildAccountItemView(context, e,
+                            isCurrent: isCurrent,
+                            isManager: value.isManager,
+                            onDelete: () => controller.onDeleteAccount(e),
+                            onPressed: () => controller.onSwitchAccount(e)),
+                      );
                     }),
                     Visibility(
                       visible: !value.isManager,
                       child: Padding(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 24.w, vertical: 6.w),
-                        child:
-                            _buildAddAccountView(context, controller.addAccount),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 24.w, vertical: 6.w),
+                        child: _buildAddAccountView(
+                            context, controller.addAccount),
                       ),
                     ),
                   ],
@@ -120,7 +121,7 @@ class AccountScreen extends HookConsumerWidget {
         AsyncError(:final error) => ErrorRetryWidget(
             message: error.toString(),
             onRetry: () {
-              ref.invalidate(accountControllerProvider);
+              ref.invalidate(accountManagerControllerProvider);
             },
           ),
         _ => const Center(
@@ -152,7 +153,10 @@ class AccountScreen extends HookConsumerWidget {
   }
 
   Widget _buildAccountItemView(BuildContext context, DBAccount account,
-      {required VoidCallback onPressed, required VoidCallback onDelete, bool isManager = false,bool isCurrent = false}) {
+      {required VoidCallback onPressed,
+      required VoidCallback onDelete,
+      bool isManager = false,
+      bool isCurrent = false}) {
     return _buildCardView(context,
         isManager: isManager,
         isCurrent: isCurrent,
@@ -178,9 +182,10 @@ class AccountScreen extends HookConsumerWidget {
                       Text(account.name)
                           .fontSize(16.sp)
                           .fontWeight(FontWeight.w500),
-                      if (isCurrent) Text(context.t.c.account.currentUse)
-                          .textColor(AppTheme.brandDarkColor)
-                          .fontSize(14.sp),
+                      if (isCurrent)
+                        Text(context.t.c.account.currentUse)
+                            .textColor(AppTheme.brandDarkColor)
+                            .fontSize(14.sp),
                       if (isManager && !isCurrent)
                         Icon(
                           HeroIcons.trash,
@@ -201,7 +206,10 @@ class AccountScreen extends HookConsumerWidget {
   }
 
   Widget _buildCardView(BuildContext context,
-      {required Widget child, required VoidCallback onPressed, bool isManager = false,bool isCurrent = false}) {
+      {required Widget child,
+      required VoidCallback onPressed,
+      bool isManager = false,
+      bool isCurrent = false}) {
     return Opacity(
       opacity: (isManager && isCurrent) ? 0.5 : 1,
       child: CupertinoButton(

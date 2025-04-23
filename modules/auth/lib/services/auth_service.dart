@@ -150,10 +150,14 @@ class AuthService {
   Future<bool> updateUserProfile({
     String? name,
     String? shortNo,
+    String? intro,
+    int? sex,
   }) async {
     return await authRepository.updateUserProfile(
       name: name,
       shortNo: shortNo,
+      intro: intro,
+      sex: sex,
     );
   }
 

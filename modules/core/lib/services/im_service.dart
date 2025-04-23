@@ -14,7 +14,7 @@ part 'im_service.g.dart';
 class IMState {}
 
 /// IM服务类，处理与IM SDK的交互
-@riverpod
+@Riverpod(keepAlive: true)
 class IMService extends _$IMService {
   @override
   IMState build() {
@@ -25,6 +25,9 @@ class IMService extends _$IMService {
   Future<void> initialize({required String uid, required String token}) async {
     try {
       ref.watch(getCurrentUserProvider(uid).future);
+      if (WKIM.shared.options.uid != null) {
+        WKIM.shared.connectionManager.disconnect(true);
+      }
       bool result = await WKIM.shared.setup(Options.newDefault(uid, token));
       // 配置连接信息
       final imRepository = ref.read(imRepositoryProvider);

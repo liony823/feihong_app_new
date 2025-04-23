@@ -56,7 +56,13 @@ class SetSelfInfo extends _$SetSelfInfo {
 
   void openPhotoSheet() {
     ViewHelper.openPhotoSheet(
+      fileType: FileType.avatar,
+      aspectRatioX: 1,
+      aspectRatioY: 1,
       onData: (path, url) {
+        if (Utils.isEmptyOrNull(url)) {
+          return;
+        }
         state = state.copyWith(avatar: url);
       },
     );
@@ -66,8 +72,8 @@ class SetSelfInfo extends _$SetSelfInfo {
     ViewHelper.openSexPicker(
       initialValue: state.sex,
       onConfirm: (sex) {
-        state.formKey.currentState?.fields['sex']!.didChange(
-            sex == 1 ? Global.context!.t.c.male : Global.context!.t.c.female);
+        state.formKey.currentState?.fields['sex']!
+            .didChange(Global.context!.t.c.gender[sex]);
         state = state.copyWith(sex: sex);
       },
     );
@@ -85,7 +91,7 @@ class SetSelfInfo extends _$SetSelfInfo {
     //   return;
     // }
     if (nickname.isEmpty) {
-      ToastUtil.simpleToast(Global.context!.t.c.profile.plsEnterNickname);
+      ToastUtil.simpleToast(Global.context!.t.c.setSelfInfo.plsEnterNickname);
       return;
     }
     try {

@@ -17,3 +17,4 @@ export 'refresh.dart';
 export 'pop_button.dart';
 export 'dropdown_menu.dart';
 export 'avatar.dart';
+export 'qrcode.dart';

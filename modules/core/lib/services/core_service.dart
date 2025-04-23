@@ -60,3 +60,14 @@ Future<UserInfo?> getCurrentUser(Ref ref, String uid) async {
     return null;
   }
 }
+
+@riverpod
+FutureOr<String> getMyQrCode(Ref ref) async {
+  try {
+    final response = await ApiClient.instance.get('/user/qrcode');
+    return response.data['data'];
+  } catch (e) {
+    AppLogger.e('获取我的二维码失败', e);
+    return '';
+  }
+}

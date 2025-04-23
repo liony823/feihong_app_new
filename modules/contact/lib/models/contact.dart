@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:common/common.dart';
 import 'package:core/core.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:azlistview/azlistview.dart';
 
 part 'contact.freezed.dart';
 part 'contact.g.dart';

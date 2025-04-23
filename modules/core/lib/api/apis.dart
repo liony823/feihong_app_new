@@ -5,15 +5,12 @@ import 'api_client.dart';
 import 'api_config.dart';
 
 class Apis {
-
-  
-
   static String getAvatarUrl(String uid) {
-    return "${ApiConfig.baseUrl}/users/$uid/avatar";
+    return "${ApiConfig.baseUrl}/users/$uid/avatar?v=${DateTime.now().millisecondsSinceEpoch}";
   }
 
   static String getGroupAvatarUrl(String gid) {
-    return "${ApiConfig.baseUrl}/groups/$gid/avatar";
+    return "${ApiConfig.baseUrl}/groups/$gid/avatar?v=${DateTime.now().millisecondsSinceEpoch}";
   }
 
   /// 上传文件

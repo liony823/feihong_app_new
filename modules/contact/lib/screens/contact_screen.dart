@@ -1,4 +1,3 @@
-import 'package:acter_avatar/acter_avatar.dart';
 import 'package:common/common.dart';
 import 'package:contact/helper/fake.dart';
 import 'package:contact/models/contact.dart';
@@ -83,18 +82,13 @@ class ContactScreen extends HookConsumerWidget {
     VoidCallback? onPressed,
     bool showDivider = true,
   }) {
-    final avatarOptions = AvatarOptions(
-        AvatarInfo(
-          uniqueId: contact.uid,
-          displayName: contact.getName(),
-          avatar: NetworkImage(contact
-              .avatar), // can be any image provider .i.e. AssetImage, MemoryImage and NetworkImage etc.
-        ),
-        size: 36.w);
     return _buildItemView(
       context,
-      avatar: ActerAvatar(
-        options: avatarOptions,
+      avatar: Avatar(
+        uid: contact.uid,
+        name: contact.getName(),
+        url: contact.avatar,
+        size: 36.w,
       ),
       text: contact.getName(),
       onPressed: onPressed,

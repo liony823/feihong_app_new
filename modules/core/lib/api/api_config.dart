@@ -1,7 +1,7 @@
 /// API配置类
 class ApiConfig {
   /// API基础URL
-  static const String baseUrl = 'http://127.0.0.1:8090/v1';
+  static const String baseUrl = 'http://192.168.1.160:8090/v1';
 
   /// 公共模块
   static const String getCountries = '/common/countries'; // 获取国家区号列表

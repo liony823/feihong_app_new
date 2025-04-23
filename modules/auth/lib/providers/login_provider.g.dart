@@ -6,7 +6,7 @@ part of 'login_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$loginControllerHash() => r'e90536758250cfabe95948d5e8af02cfbffaa6fd';
+String _$loginControllerHash() => r'd3a2372b04cca6a40fc0f606a6ee90135e5d9136';
 
 /// See also [LoginController].
 @ProviderFor(LoginController)

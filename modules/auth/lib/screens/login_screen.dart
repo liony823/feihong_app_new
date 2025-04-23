@@ -27,7 +27,6 @@ class LoginScreen extends HookConsumerWidget {
       initialLength: appConfig.value?.loginType == 3 ? 2 : 1,
     );
     final routeStackLength = context.router.stack.length;
-    AppLogger.d('routeStackLength: $routeStackLength');
     return Material(
       color: Colors.transparent,
       child: TouchCloseSoftKeyboard(
@@ -37,21 +36,28 @@ class LoginScreen extends HookConsumerWidget {
                 child: Column(
               children: [
                 Row(
-                  children: [
-                    if (routeStackLength > 1)
-                      IconButton(
-                        onPressed: controller.back,
-                        icon: const Icon(
-                          EvaIcons.close_outline,
-                          color: Colors.white,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Visibility(
+                        visible: routeStackLength > 1,
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 16.w),
+                          child: IconButton(
+                            onPressed: controller.back,
+                            style: IconButton.styleFrom(
+                              backgroundColor: Colors.black26,
+                              shape: const CircleBorder(),
+                            ),
+                            icon: const Icon(
+                              EvaIcons.close_outline,
+                              color: Colors.white,
+                            ),
+                          ),
                         ),
                       ),
-                  ]
-                ),
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: SwapLangButton(),
-                ),
+                      SwapLangButton()
+                    ]),
                 ImageRes.logo.toImage
                   ..width = 64.w
                   ..height = 64.h,
@@ -280,7 +286,7 @@ class LoginScreen extends HookConsumerWidget {
     return Row(
       spacing: 6.w,
       children: [
-        Text(label).fontSize(14.sp),
+        Text(label).fontSize(16.sp),
         Icon(
           icon,
           size: 16.w,
@@ -299,13 +305,13 @@ class LoginScreen extends HookConsumerWidget {
         TextButton(
           onPressed: onForgotPassword,
           child: Text(context.t.c.login.forgotPassword)
-              .fontSize(12.sp)
+              .fontSize(14.sp)
               .textColor(AppTheme.lightSecondaryTextColor),
         ),
         TextButton(
           onPressed: onSignup,
           child: Text(context.t.c.login.noAccountYet)
-              .fontSize(12.sp)
+              .fontSize(14.sp)
               .textColor(AppTheme.brandDarkColor),
         ),
       ],

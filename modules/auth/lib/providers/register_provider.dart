@@ -34,11 +34,16 @@ class RegisterState {
 @riverpod
 class RegisterController extends _$RegisterController {
   final formKey = GlobalKey<FormBuilderState>();
+  AuthService get _authService => ref.read(authServiceProvider);
 
   @override
   RegisterState build() {
     final code = ref.watch(getSIMCountryCodeProvider);
     return RegisterState(zone: code.value ?? '', isChecked: true);
+  }
+
+  void back() {
+    Global.context?.router.pop();
   }
 
   void register(String type) {
@@ -107,28 +112,15 @@ class RegisterController extends _$RegisterController {
     final inviteCode =
         formKey.currentState?.getRawValue('inviteCode') as String?;
     try {
-      final authService = ref.watch(authServiceProvider);
       final result = await LoadingView.singleton.wrap(
-        asyncFunction: () async {
-          final userCert = await authService.registerByUsername(
-            username: username,
-            password: password,
-            inviteCode: inviteCode,
-            deviceId: CommonModule.deviceID,
-            deviceName: CommonModule.deviceName,
-            deviceModel: CommonModule.deviceModel,
-          );
-          if (userCert != null) {
-            final imService = ref.read(iMServiceProvider.notifier);
-            final contactService = ref.read(contactControllerProvider.notifier);
-            await imService.initialize(
-                uid: userCert.uid, token: userCert.token);
-            await contactService.initialize();
-          }
-
-          return userCert;
-        },
-      );
+          asyncFunction: () => _authService.registerByUsername(
+                username: username,
+                password: password,
+                inviteCode: inviteCode,
+                deviceId: CommonModule.deviceID,
+                deviceName: CommonModule.deviceName,
+                deviceModel: CommonModule.deviceModel,
+              ));
       if (result == null) {
         return;
       }

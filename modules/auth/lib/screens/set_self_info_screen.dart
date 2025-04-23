@@ -5,7 +5,6 @@ import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:acter_avatar/acter_avatar.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 @RoutePage()
@@ -31,7 +30,8 @@ class SetSelfInfoScreen extends HookConsumerWidget {
     final AsyncValue<UserInfo?> currentUser =
         ref.watch(getCurrentUserProvider(uid));
     return Scaffold(
-        appBar: AppBar(title: context.t.c.profile.plsCompleteInfo.appBarText),
+        appBar:
+            AppBar(title: context.t.c.setSelfInfo.plsCompleteInfo.appBarText),
         body: SingleChildScrollView(
           child: Column(
             spacing: 24.w,
@@ -44,9 +44,7 @@ class SetSelfInfoScreen extends HookConsumerWidget {
                       state.formKey.currentState?.patchValue({
                         'username': value?.username,
                         'nickname': value?.name,
-                        'sex': state.sex == 1
-                            ? context.t.c.male
-                            : context.t.c.female,
+                        'sex': context.t.c.gender[state.sex],
                         'introduction': value?.introduction,
                       });
                     });
@@ -77,7 +75,7 @@ class SetSelfInfoScreen extends HookConsumerWidget {
                 padding: EdgeInsets.symmetric(horizontal: 24.w),
                 child: FilledButton(
                   onPressed: controller.submit,
-                  child: Text(context.t.c.profile.submit),
+                  child: Text(context.t.c.setSelfInfo.submit),
                 ),
               )
             ],
@@ -104,30 +102,29 @@ class SetSelfInfoScreen extends HookConsumerWidget {
             _buildItemView(context,
                 name: 'username',
                 isDisabled: true,
-                title: context.t.c.profile.username,
+                title: context.t.c.setSelfInfo.username,
                 initialValue: userInfo?.username,
-                placeholder: context.t.c.profile.plsEnterUsername),
+                placeholder: context.t.c.setSelfInfo.plsEnterUsername),
             _buildItemView(context,
                 name: 'nickname',
-                title: context.t.c.profile.nickname,
+                title: context.t.c.setSelfInfo.nickname,
                 initialValue: userInfo?.name,
-                placeholder: context.t.c.profile.plsEnterNickname),
+                placeholder: context.t.c.setSelfInfo.plsEnterNickname),
             _buildItemView(context,
                 name: 'sex',
                 onTap: onTapSex,
-                title: context.t.c.profile.sex,
-                initialValue:
-                    userInfo?.sex == 1 ? context.t.c.male : context.t.c.female,
+                title: context.t.c.setSelfInfo.sex,
+                initialValue: context.t.c.gender[userInfo?.sex ?? 1],
                 isReadOnly: true,
-                placeholder: context.t.c.profile.plsSelectGender),
+                placeholder: context.t.c.setSelfInfo.plsSelectGender),
             16.verticalSpace,
             _buildItemView(context,
                 name: 'introduction',
                 maxLength: 200,
                 maxLines: 2,
-                title: context.t.c.profile.introduction,
+                title: context.t.c.setSelfInfo.introduction,
                 initialValue: userInfo?.introduction,
-                placeholder: context.t.c.profile.plsEnterIntroduction),
+                placeholder: context.t.c.setSelfInfo.plsEnterIntroduction),
           ],
         ),
       ),
@@ -136,20 +133,8 @@ class SetSelfInfoScreen extends HookConsumerWidget {
 
   Widget _buildAvatarView(BuildContext context,
       {String? avatar, UserInfo? userInfo, VoidCallback? onAvatarTap}) {
-    final avatarOptions = AvatarOptions(
-        AvatarInfo(
-          uniqueId: userInfo?.uid ?? 'u_10000',
-          onAvatarTap: onAvatarTap,
-          avatar: Utils.isEmptyOrNull(avatar)
-              ? NetworkImage(Apis.getAvatarUrl(userInfo?.uid ?? ''))
-              : NetworkImage(avatar!),
-          displayName: userInfo?.name ??
-              'u_10000', // can be any image provider .i.e. AssetImage, MemoryImage and NetworkImage etc.
-        ),
-        size: 48.w);
-
     return Column(
-      spacing: 4.w,
+      spacing: 8.w,
       children: [
         Skeleton.shade(
           child: Container(
@@ -161,14 +146,18 @@ class SetSelfInfoScreen extends HookConsumerWidget {
               ),
             ),
             child: ClipOval(
-              child: ActerAvatar(
-                options: avatarOptions,
+              child: Avatar(
+                uid: userInfo?.uid ?? '',
+                name: userInfo?.name ?? '',
+                url: avatar ?? '',
+                size: 48.w,
+                onTap: onAvatarTap,
               ),
             ),
           ),
         ),
         Text(
-          context.t.c.profile.plsSetAvatar,
+          context.t.c.setSelfInfo.plsSetAvatar,
         )
             .textColor(AppTheme.lightSecondaryTextColor)
             .fontSize(14.sp)
