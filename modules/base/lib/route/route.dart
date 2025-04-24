@@ -9,12 +9,6 @@ import 'route.gr.dart';
 class BaseRouter extends RootStackRouter {
   @override
   List<AutoRoute> get routes => [
-        CustomRoute(
-            page: SplashRoute.page,
-            path: Routes.splash,
-            transitionsBuilder: TransitionsBuilders.noTransition,
-            keepHistory: false,
-            initial: true),
         AutoRoute(
           page: WebViewRoute.page,
           path: Routes.webview,
@@ -23,6 +17,7 @@ class BaseRouter extends RootStackRouter {
           page: HomeRoute.page,
           path: Routes.home,
           transitionsBuilder: TransitionsBuilders.noTransition,
+          initial: true,
         ),
         AutoRoute(page: LanguageRoute.page, path: Routes.language),
         CustomRoute(

@@ -11,7 +11,7 @@ class AppTheme {
   static const Color primaryDarkColor = Color(0xFF121212);
 
   // 品牌色
-  static const Color brandColor = Color(0xFF007AFF);
+  static const Color brandColor = Color(0xFF005FFF);
   static const Color brandDarkColor = Color(0xFF0062CC);
 
   // 次要色调

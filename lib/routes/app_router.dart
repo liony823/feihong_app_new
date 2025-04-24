@@ -1,6 +1,7 @@
 import 'package:auth/auth.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:base/base.dart';
+import 'package:common/common.dart';
 import 'package:contact/contact.dart';
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
@@ -26,4 +27,19 @@ class AppRouter extends RootStackRouter {
 
   @override
   List<AutoRoute> get routes => _routes;
+
+  @override
+  List<AutoRouteGuard> get guards => [AuthGuard()];
+}
+
+class AuthGuard extends AutoRouteGuard {
+  @override
+  void onNavigation(NavigationResolver resolver, StackRouter router) {
+    final uid = SpHelper.uid;
+    if (uid.isNotEmpty || whiteRoutes.contains(resolver.route.path)) {
+      resolver.next(true);
+    } else {
+      resolver.redirectUntil(LoginRoute());
+    }
+  }
 }

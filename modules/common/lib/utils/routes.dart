@@ -29,5 +29,19 @@ class Routes {
   static const String addFriend = '/addFriend';
   static const String addGroup = '/addGroup';
 
+  static const String conversation = '/conversation';
+
   static const String setting = '/setting';
 }
+
+const List<String> whiteRoutes = [
+  Routes.splash,
+  Routes.login,
+  Routes.loginWithAuto,
+  Routes.register,
+  Routes.forgotPassword,
+  Routes.resetPassword,
+  Routes.verifyCode,
+  Routes.language,
+  Routes.webview,
+];

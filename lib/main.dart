@@ -19,10 +19,9 @@ void main() async {
   runApp(
     ProviderScope(
       observers: [
-        // 日志观察器，用于调试
         _ProviderLogger(),
       ],
-      child: const App(),
+      child: const FeiApp(),
     ),
   );
 

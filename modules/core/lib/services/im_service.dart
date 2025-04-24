@@ -52,6 +52,7 @@ class IMService extends _$IMService {
 
   /// 注册消息监听器
   void _registerMessageListeners() {
+    
     WKIM.shared.cmdManager.addOnCmdListener('sys_im', (wkcmd) async {
       if (wkcmd.cmd == 'messageRevoke') {
         var channelID = wkcmd.param['channel_id'];

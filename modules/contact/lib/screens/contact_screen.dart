@@ -88,7 +88,7 @@ class ContactScreen extends HookConsumerWidget {
         uid: contact.uid,
         name: contact.getName(),
         url: contact.avatar,
-        size: 36.w,
+        size: 40.w,
       ),
       text: contact.getName(),
       onPressed: onPressed,
@@ -123,7 +123,7 @@ class ContactScreen extends HookConsumerWidget {
                     text,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                  ).fontSize(15.sp),
+                  ).fontSize(16.sp),
                 )
               ],
             ),
@@ -141,8 +141,8 @@ class ContactScreen extends HookConsumerWidget {
   Widget _buildContactHeaderIcon(BuildContext context,
       {required IconData icon, required Color color}) {
     return Container(
-      height: 36.w,
-      width: 36.w,
+      height: 40.w,
+      width: 40.w,
       decoration: BoxDecoration(
         color: color,
         borderRadius: BorderRadius.circular(6.r),

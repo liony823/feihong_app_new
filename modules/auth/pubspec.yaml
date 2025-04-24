@@ -45,6 +45,9 @@ dependencies:
   common:
     path: ../common
 
+  chat:
+    path: ../chat
+
   core:
     path: ../core
 

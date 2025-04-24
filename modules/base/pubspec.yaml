@@ -51,6 +51,9 @@ dependencies:
   contact:
     path: ../contact
 
+  chat:
+    path: ../chat
+
   auth:
     path: ../auth
 

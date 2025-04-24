@@ -1,3 +1,4 @@
+import 'package:chat/providers/conversation_provider.dart';
 import 'package:common/common.dart';
 import 'package:contact/contact.dart';
 import 'package:core/core.dart';
@@ -18,12 +19,14 @@ class AuthService {
   final AccountRepository accountRepository;
   final IMService imService;
   final ContactController contactService;
+  final ConversationController conversationService;
 
   AuthService({
     required this.authRepository,
     required this.accountRepository,
     required this.imService,
     required this.contactService,
+    required this.conversationService,
   });
 
   /// 手机号登录
@@ -223,7 +226,10 @@ class AuthService {
     SpHelper.setToken(userCert.token);
     SpHelper.setUID(userCert.uid);
     await imService.initialize(uid: userCert.uid, token: userCert.token);
-    await contactService.initialize();
+    await Future.wait([
+      contactService.initialize(),
+      conversationService.initialize(),
+    ]);
     final account = await accountRepository.getAccountByPhone(phone, zone);
     if (account == null) {
       await accountRepository.saveAccount(DBAccount(
@@ -292,6 +298,7 @@ class AuthService {
 AuthService authService(Ref ref) {
   final imService = ref.read(iMServiceProvider.notifier);
   final contactService = ref.read(contactControllerProvider.notifier);
+  final conversationService = ref.read(conversationControllerProvider.notifier);
   final authRepository = ref.read(authRepositoryProvider);
   final accountRepository = ref.read(accountRepositoryProvider);
   return AuthService(
@@ -299,5 +306,6 @@ AuthService authService(Ref ref) {
     accountRepository: accountRepository,
     imService: imService,
     contactService: contactService,
+    conversationService: conversationService,
   );
 }

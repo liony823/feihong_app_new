@@ -1,11 +1,11 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:base/models/applet.dart';
 import 'package:base/pages/applet_page.dart';
-import 'package:base/pages/conversation_page.dart';
 import 'package:base/pages/feed_page.dart';
 import 'package:base/providers/applet_provider.dart';
 import 'package:base/providers/home_provider.dart';
 import 'package:base/screens/mine_screen.dart';
+import 'package:chat/chat.dart';
 import 'package:common/common.dart';
 import 'package:contact/contact.dart';
 import 'package:flutter/material.dart';
@@ -21,8 +21,8 @@ class HomeScreen extends HookConsumerWidget {
     bool enabledApplet = false,
   }) {
     return [
-      ConversationPage(),
-      ContactScreen(),
+      const ConversationScreen(),
+      const ContactScreen(),
       if (enabledApplet) AppletPage(),
       FeedPage(),
       MineScreen(),
@@ -82,7 +82,6 @@ class HomeScreen extends HookConsumerWidget {
         inactiveIcon: _buildIcon(
             EvaIcons.person_outline, AppTheme.lightSecondaryTextColor),
         title: context.t.home.tab.mine,
-        activeColorPrimary: AppTheme.brandColor,
       ),
     ];
   }
@@ -104,13 +103,22 @@ class HomeScreen extends HookConsumerWidget {
         context,
         controller: controller.tabController,
         screens: _buildScreens(enabledApplet: enabledApplet),
-        navBarStyle: NavBarStyle.style12,
+        navBarStyle: NavBarStyle.style2,
         items: _navBarsItems(
           context,
           unreadFriendApplyCount: unreadCount,
           unreadMessageCount: unreadCount,
           enabledApplet: enabledApplet,
           defaultApplet: defaultApplet,
+        ),
+        padding: EdgeInsets.only(top: 8.h),
+        decoration: NavBarDecoration(
+          border: Border(
+            top: BorderSide(
+              color: AppTheme.dividerColor2,
+              width: 0.5,
+            ),
+          ),
         ),
         animationSettings: const NavBarAnimationSettings(
           navBarItemAnimation: ItemAnimationSettings(
@@ -171,7 +179,7 @@ class HomeScreen extends HookConsumerWidget {
   Icon _buildIcon(IconData icon, Color color) {
     return Icon(
       icon,
-      size: 24.w,
+      size: 26.w,
       color: color,
     );
   }
