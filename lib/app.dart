@@ -78,7 +78,7 @@ class AppInitNotifier extends StateNotifier<AppInitState> {
           // 并行初始化联系人和会话服务
           await Future.wait([
             _ref.read(contactControllerProvider.notifier).initialize(),
-            _ref.read(conversationControllerProvider.notifier).initialize(),
+            _ref.read(channelControllerProvider.notifier).initialize(),
           ]);
         }
       }
@@ -183,7 +183,6 @@ class _AppState extends ConsumerState<FeiApp>
                     ),
                   ),
                   if (!animationCompleted) buildAnimation(),
-                  // 如果初始化失败，显示重试按钮
                   if (initState.error != null && !animationCompleted)
                     Positioned(
                       bottom: 20,

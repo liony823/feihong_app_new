@@ -38,7 +38,7 @@ class AuthRepository {
         },
       );
 
-      return UserCert.fromJson(response.data);
+      return UserCert.fromJson(response.data['data']);
     } catch (e) {
       AppLogger.e('登录失败', e);
       return null;
@@ -68,7 +68,7 @@ class AuthRepository {
         },
       );
 
-      return response.data;
+      return UserCert.fromJson(response.data['data']);
     } catch (e) {
       AppLogger.e('注册失败', e);
       return null;

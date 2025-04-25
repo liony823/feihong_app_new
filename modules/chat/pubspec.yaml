@@ -23,6 +23,7 @@ dependencies:
   
   # UI组件
   scroll_to_index: ^3.0.1
+  flutter_slidable: ^4.0.0
   
   # IM SDK - 正常情况下应该在core中访问，这里是为了直接访问一些SDK特性
   wukongimfluttersdk: 

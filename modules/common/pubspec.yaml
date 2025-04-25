@@ -45,6 +45,7 @@ dependencies:
   flutter_advanced_avatar: ^1.5.2
   pretty_qr_code: ^3.3.0
   screenshot: ^3.0.0
+  cached_network_image: ^3.4.1
 
   # 动画
   animate_do: ^3.3.4

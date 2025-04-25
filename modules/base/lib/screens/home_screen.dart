@@ -21,7 +21,7 @@ class HomeScreen extends HookConsumerWidget {
     bool enabledApplet = false,
   }) {
     return [
-      const ConversationScreen(),
+      const ChannelScreen(),
       const ContactScreen(),
       if (enabledApplet) AppletPage(),
       FeedPage(),
@@ -161,16 +161,13 @@ class HomeScreen extends HookConsumerWidget {
 
   Widget _setupIcon(Widget icon, int unReadCount) {
     return Stack(
-      alignment: Alignment.center,
+      clipBehavior: Clip.none,
       children: [
         icon,
-        Positioned(
-          top: 0,
-          right: 0,
-          child: Transform.translate(
-            offset: const Offset(2, -2),
-            child: UnreadCountView(count: unReadCount),
-          ),
+        PositionedDirectional(
+              top: -4,
+              start: 12,
+          child: UnreadIndicator(unreadCount: unReadCount),
         ),
       ],
     );

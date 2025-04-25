@@ -41,5 +41,8 @@ class ContactRouter extends RootStackRouter {
             child: FadeTransition(opacity: animation, child: child),
           ),
         ),
+        AutoRoute(
+          page: FriendHomeRoute.page, 
+        )
       ];
 }

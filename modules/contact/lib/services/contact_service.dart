@@ -44,6 +44,14 @@ class ContactService {
   Future<SearchUserInfo?> searchUser(String keyword) async {
     return await _contactRepository.searchUser(keyword);
   }
+
+  Future<bool> applyFriend({
+    required String toUid,
+    required String remark,
+    required String vercode
+  }) async {
+    return await _contactRepository.applyFriend(toUid: toUid, remark: remark, vercode: vercode);
+  }
 }
 
 @riverpod

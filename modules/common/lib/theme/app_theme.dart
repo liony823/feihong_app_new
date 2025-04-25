@@ -47,6 +47,8 @@ class AppTheme {
   static const Color successColor = Color(0xFF388E3C);
   static const Color infoColor = Color(0xFF0288D1);
 
+  static const Color accentColor = Color(0xFF20E070);
+
   // 未读消息颜色
   static const Color unreadMessageColor = Color(0xFFFF381F);
 

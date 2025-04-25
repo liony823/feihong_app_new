@@ -1,4 +1,4 @@
-import 'package:chat/providers/conversation_provider.dart';
+import 'package:chat/chat.dart';
 import 'package:common/common.dart';
 import 'package:contact/contact.dart';
 import 'package:core/core.dart';
@@ -19,7 +19,7 @@ class AuthService {
   final AccountRepository accountRepository;
   final IMService imService;
   final ContactController contactService;
-  final ConversationController conversationService;
+  final ChannelController conversationService;
 
   AuthService({
     required this.authRepository,
@@ -298,7 +298,7 @@ class AuthService {
 AuthService authService(Ref ref) {
   final imService = ref.read(iMServiceProvider.notifier);
   final contactService = ref.read(contactControllerProvider.notifier);
-  final conversationService = ref.read(conversationControllerProvider.notifier);
+  final conversationService = ref.read(channelControllerProvider.notifier);
   final authRepository = ref.read(authRepositoryProvider);
   final accountRepository = ref.read(accountRepositoryProvider);
   return AuthService(

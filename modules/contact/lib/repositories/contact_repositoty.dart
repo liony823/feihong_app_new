@@ -96,6 +96,24 @@ class ContactRepository {
       return null;
     }
   }
+
+  Future<bool> applyFriend({
+    required String toUid,
+    required String remark,
+    required String vercode,
+  }) async {
+    try {
+      await _apiClient.post(ApiConfig.applyFriend, data: {
+        'to_uid': toUid,
+        'remark': remark,
+        'vercode': vercode,
+      });
+      return true;
+    } catch (e) {
+      AppLogger.e('申请添加好友失败', e);
+      return false;
+    }
+  }
 }
 
 @riverpod

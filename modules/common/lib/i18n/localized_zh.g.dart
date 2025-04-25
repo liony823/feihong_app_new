@@ -108,6 +108,7 @@ class LocalizedContactZh {
 	String get invite => '入群邀请';
 	late final LocalizedContactFriendApplyZh friendApply = LocalizedContactFriendApplyZh.internal(_root);
 	late final LocalizedContactSearchUserZh searchUser = LocalizedContactSearchUserZh.internal(_root);
+	late final LocalizedContactFriendHomeZh friendHome = LocalizedContactFriendHomeZh.internal(_root);
 }
 
 // Path: errors
@@ -685,6 +686,23 @@ class LocalizedContactSearchUserZh {
 	String get userNotFound => '未找到用户';
 }
 
+// Path: contact.friendHome
+class LocalizedContactFriendHomeZh {
+	LocalizedContactFriendHomeZh.internal(this._root);
+
+	final Localized _root; // ignore: unused_field
+
+	// Translations
+	String get title => '好友主页';
+	String get introduction => '个性签名';
+	String get addToContact => '添加到通讯录';
+	String get applyFriend => '申请添加好友';
+	String get sendApply => '发送好友申请';
+	String get send => '发送';
+	String get sendSuccess => '发送成功';
+	String get sendFail => '发送失败';
+}
+
 // Path: home.tab
 class LocalizedHomeTabZh {
 	LocalizedHomeTabZh.internal(this._root);
@@ -907,6 +925,14 @@ extension on Localized {
 			case 'contact.friendApply.delete': return '删除';
 			case 'contact.searchUser.placeholder': return '搜索用户名/手机号';
 			case 'contact.searchUser.userNotFound': return '未找到用户';
+			case 'contact.friendHome.title': return '好友主页';
+			case 'contact.friendHome.introduction': return '个性签名';
+			case 'contact.friendHome.addToContact': return '添加到通讯录';
+			case 'contact.friendHome.applyFriend': return '申请添加好友';
+			case 'contact.friendHome.sendApply': return '发送好友申请';
+			case 'contact.friendHome.send': return '发送';
+			case 'contact.friendHome.sendSuccess': return '发送成功';
+			case 'contact.friendHome.sendFail': return '发送失败';
 			case 'errors.somethingUnexpected': return '发生了一些意外，请稍后再试';
 			case 'errors.retry': return '重试';
 			case 'errors.httpError.title': return '发生错误';

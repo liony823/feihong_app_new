@@ -1,3 +1,5 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:contact/route/route.gr.dart';
 import 'package:contact/services/contact_service.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:common/common.dart';
@@ -36,6 +38,8 @@ class SearchUserController extends _$SearchUserController {
   Future<void> searchUser(String keyword) async {
     state = state.copyWith(userInfo: null, isSearched: false);
     final result = await _contactService.searchUser(keyword);
-    state = state.copyWith(userInfo: result, isSearched: true);
+    if (result != null){
+      Global.context!.router.push(FriendHomeRoute(userInfo: result));
+    }
   }
 }

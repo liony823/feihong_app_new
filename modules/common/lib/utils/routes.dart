@@ -1,5 +1,4 @@
 class Routes {
-  static const String splash = '/splash';
   static const String webview = '/webview';
   static const String home = '/home';
   static const String language = '/language';
@@ -35,7 +34,6 @@ class Routes {
 }
 
 const List<String> whiteRoutes = [
-  Routes.splash,
   Routes.login,
   Routes.loginWithAuto,
   Routes.register,

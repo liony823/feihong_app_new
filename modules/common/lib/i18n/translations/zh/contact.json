@@ -19,5 +19,15 @@
     "searchUser": {
         "placeholder": "搜索用户名/手机号",
         "userNotFound": "未找到用户"
+    },
+    "friendHome": {
+        "title":"好友主页",
+        "introduction":"个性签名",
+        "addToContact":"添加到通讯录",
+        "applyFriend":"申请添加好友",
+        "sendApply":"发送好友申请",
+        "send": "发送",
+        "sendSuccess": "发送成功",
+        "sendFail": "发送失败"
     }
 }
