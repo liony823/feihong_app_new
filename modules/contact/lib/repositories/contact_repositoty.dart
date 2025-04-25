@@ -27,7 +27,7 @@ class ContactRepository {
     }
   }
 
-  Future<int> getUnreadCount() async {
+  Future<int> getUnreadFriendApplyCount() async {
     try {
       final response =
           await _apiClient.get(ApiConfig.getFriendApplyUnreadCount);
@@ -35,6 +35,16 @@ class ContactRepository {
     } catch (e) {
       AppLogger.e('获取未读消息数量失败', e);
       return 0;
+    }
+  }
+
+  Future<bool> markFriendApplyRead() async {
+    try {
+      await _apiClient.post(ApiConfig.clearFriendApplyUnread);
+      return true;
+    } catch (e) {
+      AppLogger.e('标记好友申请已读失败', e);
+      return false;
     }
   }
 
@@ -47,9 +57,9 @@ class ContactRepository {
           queryParameters: {'page_index': pageIndex, 'page_size': pageSize});
       if (response.data['list'] != null) {
         return Pagination(
-          total: response.data['total'],
+          total: response.data['count'],
           list: (response.data['list'] as List)
-              .map((e) => FriendApply.fromJson(e as Map<String, dynamic>))
+              .map((e) => FriendApply.fromJson(e))
               .toList(),
         );
       }

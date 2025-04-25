@@ -667,12 +667,15 @@ class LocalizedContactFriendApplyZh {
 	String get title => '新的朋友';
 	String get recentApply => '近三天申请';
 	String get oldApply => '三天前申请';
+	String remark({required Object remark}) => '备注: ${remark}';
 	String get accepted => '已添加';
 	String get apply => '待验证';
 	String get refused => '已拒绝';
 	String get accept => '接受';
 	String get refuse => '拒绝';
 	String get delete => '删除';
+	String get acceptSuccess => '已添加为好友';
+	String get refuseSuccess => '已拒绝此好友申请';
 }
 
 // Path: contact.searchUser
@@ -917,12 +920,15 @@ extension on Localized {
 			case 'contact.friendApply.title': return '新的朋友';
 			case 'contact.friendApply.recentApply': return '近三天申请';
 			case 'contact.friendApply.oldApply': return '三天前申请';
+			case 'contact.friendApply.remark': return ({required Object remark}) => '备注: ${remark}';
 			case 'contact.friendApply.accepted': return '已添加';
 			case 'contact.friendApply.apply': return '待验证';
 			case 'contact.friendApply.refused': return '已拒绝';
 			case 'contact.friendApply.accept': return '接受';
 			case 'contact.friendApply.refuse': return '拒绝';
 			case 'contact.friendApply.delete': return '删除';
+			case 'contact.friendApply.acceptSuccess': return '已添加为好友';
+			case 'contact.friendApply.refuseSuccess': return '已拒绝此好友申请';
 			case 'contact.searchUser.placeholder': return '搜索用户名/手机号';
 			case 'contact.searchUser.userNotFound': return '未找到用户';
 			case 'contact.friendHome.title': return '好友主页';

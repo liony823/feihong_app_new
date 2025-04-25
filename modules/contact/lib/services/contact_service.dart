@@ -21,8 +21,14 @@ class ContactService {
     return contacts.map((e) => ISContact(contact: e)).toList();
   }
 
-  Future<int> getUnreadCount() async {
-    return await _contactRepository.getUnreadCount();
+  /// 获取未读好友申请数量
+  Future<int> getUnreadFriendApplyCount() async {
+    return await _contactRepository.getUnreadFriendApplyCount();
+  }
+
+  /// 标记好友申请为已读
+  Future<bool> markFriendApplyRead() async {
+    return await _contactRepository.markFriendApplyRead();
   }
 
   Future<Pagination<FriendApply>> getFriendApplyList({

@@ -34,7 +34,7 @@ class ContactScreen extends HookConsumerWidget {
           itemBuilder: (context, contact, index) {
             final isHeader = contact.uid == FakeHelper.fakeHeader.uid;
             return isHeader
-                ? _buildContactHeaderView(context, contactController)
+                ? _buildContactHeaderView(context, contactController,unreadFriendApplyCount: contactState.unreadFriendApplyCount)
                 : _buildContactItemView(
                     context,
                     contact,
@@ -46,13 +46,16 @@ class ContactScreen extends HookConsumerWidget {
   }
 
   Widget _buildContactHeaderView(
-      BuildContext context, ContactController controller) {
+      BuildContext context, ContactController controller, {
+    int unreadFriendApplyCount = 0,
+      }) {
     return Container(
       color: AppTheme.primaryLightColor,
       margin: EdgeInsets.only(bottom: 12.h),
       child: Column(
         children: [
           _buildItemView(context,
+          extra: unreadFriendApplyCount > 0 ? UnreadIndicator(unreadCount: unreadFriendApplyCount) : null,
               avatar: _buildContactHeaderIcon(context,
                   icon: EvaIcons.person_add, color: Color(0xFFFA9C3E)),
               text: context.t.contact.newFriend, onPressed: () {
@@ -100,6 +103,7 @@ class ContactScreen extends HookConsumerWidget {
     BuildContext context, {
     required Widget avatar,
     required String text,
+    Widget? extra,
     VoidCallback? onPressed,
     bool showDivider = true,
   }) {
@@ -124,7 +128,11 @@ class ContactScreen extends HookConsumerWidget {
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ).fontSize(16.sp),
-                )
+                ),
+                Padding(
+                  padding:  EdgeInsets.symmetric(horizontal: 12.w),
+                  child: extra ?? const SizedBox(),
+                ),
               ],
             ),
             if (showDivider)

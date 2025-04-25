@@ -267,22 +267,22 @@ class AuthService {
     final account = await accountRepository.getAccountByUsername(username);
     if (account == null) {
       await accountRepository.saveAccount(DBAccount(
+        uid: userCert.uid,
+        id: Uuid().v4(),
+        loginType: 2,
         username: username,
         name: userCert.name,
         zone: userCert.zone,
         phone: userCert.phone,
         password: password,
-        loginType: 2,
-        uid: userCert.uid,
-        id: Uuid().v4(),
         createdAt: DateTime.now().millisecondsSinceEpoch,
       ));
     } else {
       await accountRepository.updateAccount(DBAccount(
         uid: userCert.uid,
-        name: userCert.name,
         id: account.id,
         loginType: 2,
+        name: userCert.name,
         username: username,
         zone: userCert.zone,
         phone: userCert.phone,

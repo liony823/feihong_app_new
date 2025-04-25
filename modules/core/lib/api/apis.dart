@@ -6,11 +6,11 @@ import 'api_config.dart';
 
 class Apis {
   static String getAvatarUrl(String uid) {
-    return "${ApiConfig.baseUrl}/users/$uid/avatar?v=${DateTime.now().millisecondsSinceEpoch}";
+    return "${ApiConfig.baseUrl}/users/$uid/avatar";
   }
 
   static String getGroupAvatarUrl(String gid) {
-    return "${ApiConfig.baseUrl}/groups/$gid/avatar?v=${DateTime.now().millisecondsSinceEpoch}";
+    return "${ApiConfig.baseUrl}/groups/$gid/avatar";
   }
 
   /// 上传文件

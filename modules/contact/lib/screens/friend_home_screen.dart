@@ -4,7 +4,6 @@ import 'package:contact/providers/add_friend_provider.dart';
 import 'package:core/core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 @RoutePage()
@@ -13,7 +12,7 @@ class FriendHomeScreen extends HookConsumerWidget {
   const FriendHomeScreen({super.key,required this.userInfo});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final addFriendProvider = ref.watch(addFriendProviderProvider(userInfo: userInfo));
+    final controller = ref.read(addFriendProviderProvider(userInfo: userInfo).notifier);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppTheme.primaryLightColor,
@@ -67,13 +66,13 @@ class FriendHomeScreen extends HookConsumerWidget {
           ),
           12.verticalSpace,
           CupertinoButton(
-            onPressed: (){},
+            onPressed: controller.openApplyDialog,
             color: AppTheme.primaryLightColor,
             padding: EdgeInsets.symmetric(horizontal: 24.w,vertical: 20.w),
             child: Material(
               color: Colors.transparent,
               child: Center(
-                child: Text(context.t.contact.friendHome.addToContact).textColor(AppTheme.secondaryColor).fontSize(20.sp).fontWeight(FontWeight.w500),
+                child: Text(context.t.contact.friendHome.addToContact).textColor(AppTheme.brandColor).fontSize(20.sp).fontWeight(FontWeight.w500),
               ),
             ),
           )
@@ -83,21 +82,3 @@ class FriendHomeScreen extends HookConsumerWidget {
   }
 }
 
-
-class ApplyFriendDialog extends StatelessWidget {
-  final Function(String) onSubmit;
-  const ApplyFriendDialog({super.key,required this.onSubmit});
-  @override
-  Widget build(BuildContext context) {
-    return SimpleDialog(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16.w),
-      ),
-      backgroundColor: AppTheme.primaryLightColor,
-      title: Text(context.t.contact.friendHome.applyFriend),
-      children: [
-        
-      ],
-    );
-  }
-}

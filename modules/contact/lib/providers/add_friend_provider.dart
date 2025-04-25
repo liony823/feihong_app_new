@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:common/common.dart';
 import 'package:contact/contact.dart';
+import 'package:contact/dialogs/add_friend_dialog.dart';
 import 'package:contact/screens/friend_home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -41,7 +42,7 @@ class AddFriendProvider extends _$AddFriendProvider {
     showDialog(context: Global.context!, builder:(context) =>  ApplyFriendDialog(onSubmit: submitApply,));
   }
 
-  void submitApply(String remark) async {
+  Future<bool> submitApply(String remark) async {
    final result = await LoadingView.singleton.wrap(asyncFunction: () async {
       final toUid = state.userInfo.uid; 
       final vercode = state.userInfo.vercode;
@@ -50,9 +51,10 @@ class AddFriendProvider extends _$AddFriendProvider {
 
     if (result){
       final context = Global.context;
-      if (context == null || !context.mounted) return;
+      if (context == null || !context.mounted) return false;
       ToastUtil.simpleToast(context.t.contact.friendHome.sendSuccess);
-      context.router.popUntilRoot();
     }
+
+    return result;
   }
 }

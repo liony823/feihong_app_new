@@ -108,6 +108,8 @@ class FriendApplyController extends _$FriendApplyController {
       },
     );
     if (result) {
+      ToastUtil.simpleToast(
+          Global.context!.t.contact.friendApply.acceptSuccess);
       _updateApplyStatus(apply, FriendApplyStatus.accepted);
     }
   }
@@ -119,6 +121,8 @@ class FriendApplyController extends _$FriendApplyController {
       },
     );
     if (result) {
+      ToastUtil.simpleToast(
+          Global.context!.t.contact.friendApply.refuseSuccess);
       _updateApplyStatus(apply, FriendApplyStatus.refused);
     }
   }

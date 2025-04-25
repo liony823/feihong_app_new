@@ -9,12 +9,15 @@
         "title": "新的朋友",
         "recentApply": "近三天申请",
         "oldApply": "三天前申请",
+        "remark": "备注: $remark",
         "accepted":"已添加",
         "apply":"待验证",
         "refused":"已拒绝",
         "accept": "接受",
         "refuse": "拒绝",
-        "delete": "删除"
+        "delete": "删除",
+        "acceptSuccess": "已添加为好友",
+        "refuseSuccess": "已拒绝此好友申请"
     },
     "searchUser": {
         "placeholder": "搜索用户名/手机号",

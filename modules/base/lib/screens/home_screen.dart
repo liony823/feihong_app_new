@@ -166,7 +166,7 @@ class HomeScreen extends HookConsumerWidget {
         icon,
         PositionedDirectional(
               top: -4,
-              start: 12,
+              start: 16,
           child: UnreadIndicator(unreadCount: unReadCount),
         ),
       ],

@@ -26,7 +26,6 @@ class UserAvatar extends StatelessWidget {
     this.onlineIndicatorConstraints,
     this.onTap,
     this.onLongPress,
-    this.showOnlineStatus = true,
     this.borderRadius,
     this.onlineIndicatorAlignment = Alignment.topRight,
     this.selected = false,
@@ -60,11 +59,6 @@ class UserAvatar extends StatelessWidget {
 
   /// {@macro onUserAvatarTap}
   final Function? onLongPress;
-
-  /// Flag for showing online status
-  ///
-  /// Defaults to `true`
-  final bool showOnlineStatus;
 
   /// Flag for if avatar is selected
   ///
@@ -147,7 +141,7 @@ class UserAvatar extends StatelessWidget {
       child: Stack(
         children: <Widget>[
           avatar,
-          if (showOnlineStatus && online)
+          if (online)
             Positioned.fill(
               child: Align(
                 alignment: onlineIndicatorAlignment,

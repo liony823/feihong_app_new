@@ -35,12 +35,14 @@ class FriendApplyScreen extends HookConsumerWidget {
                     child: Text(
                       context.t.contact.friendApply.recentApply,
                     )
-                        .fontSize(12.sp)
+                        .fontSize(14.sp)
                         .textColor(AppTheme.lightSecondaryTextColor2),
                   ),
                   ...value.recentApplyList.map((e) => _buildItemView(
                         context,
                         apply: e,
+                        showDivider: value.recentApplyList.indexOf(e) !=
+                            value.recentApplyList.length - 1,
                         onAccept: () => controller.onAccept(e),
                         onRefuse: () => controller.onRefuse(e),
                       )),
@@ -52,13 +54,15 @@ class FriendApplyScreen extends HookConsumerWidget {
                     child: Text(
                       context.t.contact.friendApply.oldApply,
                     )
-                        .fontSize(12.sp)
+                        .fontSize(14.sp)
                         .textColor(AppTheme.lightSecondaryTextColor2),
                   ),
                   ...value.oldApplyList.map(
                     (e) => _buildItemView(
                       context,
                       apply: e,
+                      showDivider: value.oldApplyList.indexOf(e) !=
+                          value.oldApplyList.length - 1,
                       onAccept: () => controller.onAccept(e),
                       onRefuse: () => controller.onRefuse(e),
                     ),
@@ -100,34 +104,37 @@ class FriendApplyScreen extends HookConsumerWidget {
             children: [
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.w),
-                child: Avatar(
-                  uid: apply.uid,
-                  name: apply.toName,
+                child: UserAvatar(
+                  displayName: apply.toName,
                   url: apply.showToAvatar,
-                  size: 36.w,
                 ),
               ),
               Expanded(
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Text(
                       apply.toName,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                    ).fontSize(15.sp),
+                    ).fontSize(16.sp),
                     Text(
-                      apply.remark,
+                      context.t.contact.friendApply
+                          .remark(remark: apply.remark),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                    ).fontSize(12.sp),
+                    )
+                        .textColor(AppTheme.lightSecondaryTextColor)
+                        .fontSize(14.sp),
                   ],
                 ),
               ),
               _buildApplyStatusView(
                 context,
                 apply,
-                onAccept: () {},
-                onRefuse: () {},
+                onAccept: onAccept,
+                onRefuse: onRefuse,
               ),
             ],
           ),
@@ -147,28 +154,35 @@ class FriendApplyScreen extends HookConsumerWidget {
     VoidCallback? onAccept,
     VoidCallback? onRefuse,
   }) {
+    /// toUID 为申请人的id
+
     switch (apply.status) {
       case FriendApplyStatus.apply:
-        if (apply.uid == SpHelper.uid) {
+        if (apply.toUid == SpHelper.uid) {
           return Text(context.t.contact.friendApply.apply);
         } else {
           return Row(
+            spacing: 8.w,
             children: [
-              OutlinedButton(
+              FilledButton(
                 onPressed: onAccept,
-                style: OutlinedButton.styleFrom(
-                  backgroundColor: AppTheme.brandColor.withValues(alpha: 0.05),
-                  foregroundColor: AppTheme.brandColor,
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 12.w, vertical: 4.h),
+                style: FilledButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8.r),
+                  ),
+                  padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 2.h),
                 ),
                 child: Text(context.t.contact.friendApply.accept),
               ),
-              OutlinedButton(
+              FilledButton(
                 onPressed: onRefuse,
-                style: OutlinedButton.styleFrom(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 12.w, vertical: 4.h),
+                style: FilledButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8.r),
+                  ),
+                  backgroundColor: AppTheme.brandColor.withValues(alpha: 0.05),
+                  foregroundColor: AppTheme.dangerColor,
+                  padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 2.h),
                 ),
                 child: Text(context.t.contact.friendApply.refuse),
               ),
@@ -176,7 +190,7 @@ class FriendApplyScreen extends HookConsumerWidget {
           );
         }
       case FriendApplyStatus.accepted:
-        if (apply.uid == SpHelper.uid) {
+        if (apply.toUid == SpHelper.uid) {
           return Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

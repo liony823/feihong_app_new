@@ -43,8 +43,13 @@ class ContactController extends _$ContactController {
   }
 
   Future<void> getUnreadFriendApplyCount() async {
-    final unreadFriendApplyCount = await _contactService.getUnreadCount();
+    final unreadFriendApplyCount = await _contactService.getUnreadFriendApplyCount();
     state = state.copyWith(unreadFriendApplyCount: unreadFriendApplyCount);
+  }
+
+  Future<void> markFriendApplyRead() async {
+    await _contactService.markFriendApplyRead();
+    state = state.copyWith(unreadFriendApplyCount: 0);
   }
 
   Future<void> syncContacts() async {
@@ -88,6 +93,9 @@ class ContactController extends _$ContactController {
   }
 
   void toNewFriend() {
+    if (state.unreadFriendApplyCount > 0) {
+      markFriendApplyRead();
+    }
     Global.context?.router.pushPath(Routes.friendApply);
   }
 
