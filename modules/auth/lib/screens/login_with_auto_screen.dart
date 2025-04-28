@@ -1,4 +1,4 @@
-import 'package:auth/providers/login_provider.dart';
+import 'package:core/providers/auth/login_provider.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:common/common.dart';
 import 'package:core/core.dart';

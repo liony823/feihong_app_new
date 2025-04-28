@@ -5,11 +5,17 @@ import 'api_client.dart';
 import 'api_config.dart';
 
 class Apis {
-  static String getAvatarUrl(String uid) {
+  static String getAvatarUrl(String uid,{String cacheKey = ""}) {
+    if (cacheKey.isNotEmpty) {
+      return "${ApiConfig.baseUrl}/users/$uid/avatar?cacheKey=$cacheKey";
+    }
     return "${ApiConfig.baseUrl}/users/$uid/avatar";
   }
 
-  static String getGroupAvatarUrl(String gid) {
+  static String getGroupAvatarUrl(String gid, {String cacheKey = ""}) {
+    if (cacheKey.isNotEmpty) {
+      return "${ApiConfig.baseUrl}/groups/$gid/avatar?cacheKey=$cacheKey";
+    }
     return "${ApiConfig.baseUrl}/groups/$gid/avatar";
   }
 

@@ -1,7 +1,5 @@
-import 'package:chat/chat.dart';
 import 'package:common/common.dart';
 import 'package:common/widgets/splash_screen.dart';
-import 'package:contact/contact.dart';
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -58,6 +56,7 @@ class AppInitNotifier extends StateNotifier<AppInitState> {
     state = state.copyWith(isInitializing: true);
 
     try {
+      _ref.read(appCoreServiceProvider);
       // 先初始化国家数据
       await _ref.read(getCountriesProvider.future);
 
@@ -65,21 +64,13 @@ class AppInitNotifier extends StateNotifier<AppInitState> {
       final appConfig = await _ref.read(getAppConfigProvider.future);
 
       if (appConfig != null) {
-        final uid = SpHelper.uid;
-        final token = SpHelper.token;
+        final userCert = SpHelper.userCert;
 
-        if (!uid.isNullOrEmpty && !token.isNullOrEmpty) {
+        if (userCert != null) {
           // 初始化IM服务
           await _ref.read(iMServiceProvider.notifier).initialize(
-                uid: uid,
-                token: token,
+               userCert
               );
-
-          // 并行初始化联系人和会话服务
-          await Future.wait([
-            _ref.read(contactControllerProvider.notifier).initialize(),
-            _ref.read(channelControllerProvider.notifier).initialize(),
-          ]);
         }
       }
 

@@ -24,14 +24,19 @@ dependencies:
   # UI组件
   scroll_to_index: ^3.0.1
   flutter_slidable: ^4.0.0
+  icons_plus: ^5.0.0
   
   # IM SDK - 正常情况下应该在core中访问，这里是为了直接访问一些SDK特性
   wukongimfluttersdk: 
     git:
       url: https://github.com/liony823/WuKongIMFlutterSDK.git
       ref: master
+
   common:
     path: ../common
+  
+  core:
+    path: ../core
 
 dev_dependencies:
   flutter_lints: ^5.0.0
@@ -42,3 +47,6 @@ dev_dependencies:
   json_serializable: ^6.9.0
   custom_lint:
   riverpod_lint:
+
+dependency_overrides: 
+  intl: ^0.20.2

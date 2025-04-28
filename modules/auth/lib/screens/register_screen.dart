@@ -1,7 +1,7 @@
 import 'package:auth/components/swap_lang_button.dart';
 import 'package:auth/components/touch_close_keyboard.dart';
 import 'package:auth/components/user_agreement_checkbox.dart';
-import 'package:auth/providers/register_provider.dart';
+import 'package:core/providers/auth/register_provider.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:common/common.dart';
 import 'package:core/core.dart';

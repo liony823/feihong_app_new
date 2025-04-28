@@ -1,4 +1,10 @@
-# melos_managed_dependency_overrides: common
+# melos_managed_dependency_overrides: common,auth,contact,core
 dependency_overrides:
   common:
     path: ../common
+  auth:
+    path: ../auth
+  contact:
+    path: ../contact
+  core:
+    path: ../core

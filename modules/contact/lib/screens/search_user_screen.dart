@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:common/common.dart';
-import 'package:contact/providers/search_user_provider.dart';
+import 'package:core/providers/contact/search_user_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';

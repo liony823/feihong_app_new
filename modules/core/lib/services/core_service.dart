@@ -1,11 +1,88 @@
 import 'package:common/common.dart';
 import 'package:core/core.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:device_region/device_region.dart';
+import 'package:just_audio/just_audio.dart';
+import 'package:world_countries/helpers.dart';
 import 'package:world_countries/world_countries.dart' as wc;
 
 part 'core_service.g.dart';
+
+class AppCoreState {
+  bool isRunningBackground = false;
+  final AudioPlayer? audioPlayer;
+  final InternetStatus? internetStatus; 
+
+  AppCoreState({
+    this.isRunningBackground = false,
+    this.audioPlayer,
+    this.internetStatus
+  });
+  AppCoreState copyWith({
+    bool? isRunningBackground,
+    AudioPlayer? audioPlayer,
+    InternetStatus? internetStatus,
+  }) {
+    return AppCoreState(
+      audioPlayer: audioPlayer ?? this.audioPlayer,
+      internetStatus: internetStatus ?? this.internetStatus,
+      isRunningBackground: isRunningBackground ?? this.isRunningBackground,
+    );
+  }
+}
+
+@Riverpod(keepAlive: true)
+class AppCoreService extends _$AppCoreService {  
+  @override
+  AppCoreState build() {
+
+    SystemChannels.lifecycle.setMessageHandler((message) async {
+      if (message == AppLifecycleState.resumed.name) {
+        state = state.copyWith(isRunningBackground: false);
+      } else if (message == AppLifecycleState.paused.name) {
+        state = state.copyWith(isRunningBackground: true);
+      }
+      return message;
+    });
+
+    final internetListener = InternetConnection().onStatusChange.listen(_onInternetStatusChange);
+
+    ref.onDispose(() {
+      internetListener.cancel();
+      state.audioPlayer?.dispose();
+    });
+
+    final audioPlayer = AudioPlayer();
+    audioPlayer.setAsset(AudioRes.msgIncoming,package: 'common');
+
+    return AppCoreState(
+      isRunningBackground: false,
+      audioPlayer: audioPlayer
+    );
+  }
+
+
+  void _onInternetStatusChange(InternetStatus status) {
+    state = state.copyWith(internetStatus: status);
+    if (status == InternetStatus.disconnected) {
+      final context = Global.context;
+      if (context != null && context.mounted){
+        context.showSnackBar(SnackBar(
+          content: Text(context.t.c.networkError),
+          duration: const Duration(seconds: 2),
+        ));
+      }
+    }
+  }
+
+  void playIncomingMessageSound() {
+    state.audioPlayer?.play();
+  }
+}
 
 @Riverpod(keepAlive: true)
 Future<String> getSIMCountryCode(Ref ref) async {

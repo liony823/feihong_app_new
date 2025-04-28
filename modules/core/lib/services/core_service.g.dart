@@ -72,7 +72,7 @@ final getAppModulesProvider = FutureProvider<List<AppModule>>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef GetAppModulesRef = FutureProviderRef<List<AppModule>>;
-String _$getCurrentUserHash() => r'4dd5c1c45c0e82a1b4aead059f1343650ba935c0';
+String _$getCurrentUserHash() => r'3e6d9df5ac77354ada1d692e688234be4ba3e180';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -239,5 +239,21 @@ final getMyQrCodeProvider = AutoDisposeFutureProvider<String>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef GetMyQrCodeRef = AutoDisposeFutureProviderRef<String>;
+String _$appCoreServiceHash() => r'3cfd015354a52de08ff359ba58e13ef66ceffc3f';
+
+/// See also [AppCoreService].
+@ProviderFor(AppCoreService)
+final appCoreServiceProvider =
+    NotifierProvider<AppCoreService, AppCoreState>.internal(
+  AppCoreService.new,
+  name: r'appCoreServiceProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$appCoreServiceHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$AppCoreService = Notifier<AppCoreState>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

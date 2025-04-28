@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:common/common.dart';
-import 'package:contact/providers/add_friend_provider.dart';
+import 'package:core/providers/contact/add_friend_provider.dart';
 import 'package:core/core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

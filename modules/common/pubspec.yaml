@@ -59,6 +59,7 @@ dependencies:
   # 国际化
   slang: ^4.4.1
   slang_flutter: ^4.4.0
+  world_countries: ^2.0.2
   
   # JSON处理
   json_annotation: ^4.8.1
@@ -87,3 +88,4 @@ flutter:
   assets:
     - assets/images/
     - assets/svgs/
+    - assets/audio/

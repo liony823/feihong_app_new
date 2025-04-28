@@ -1,5 +1,5 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:base/providers/setting_provider.dart';
+import 'package:core/providers/base/setting_provider.dart';
 import 'package:common/common.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

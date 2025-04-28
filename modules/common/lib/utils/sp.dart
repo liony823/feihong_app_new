@@ -4,6 +4,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../models/user_cert.dart';
+
 class SpHelper {
   static final SpHelper _instance = SpHelper._();
 
@@ -11,16 +13,17 @@ class SpHelper {
 
   SpHelper._();
 
-  static const String _uid = 'uid';
-  static const String _token = 'token';
+  static const String _cert = 'cert';
   static const String _appLang = 'appLang';
   static const String _appTheme = 'appTheme';
   static const String _maxSqlVersion = 'maxSqlVersion';
 
-  static String get uid => getUID() ?? '';
-  static String get token => getToken() ?? '';
+  static String get uid => getUserCert()?.uid ?? '';
+  static String get token => getUserCert()?.token ?? '';
+  static UserCert? get userCert => getUserCert();
   static String get appLang => getAppLang() ?? 'zh';
   static int get maxSqlVersion => getMaxSqlVersion() ?? 0;
+  static int get friendApplyUnreadCount => getFriendApplyUnreadCount() ?? 0;
 
   static init() async {
     await SpUtil().init();
@@ -28,6 +31,14 @@ class SpHelper {
 
   static Future<bool>? clear() {
     return SpUtil().clear();
+  }
+
+  static Future<bool>? setFriendApplyUnreadCount(int count) {
+    return SpUtil().putInt("${SpHelper.uid}_friendApplyUnreadCount" , count);
+  }
+
+  static int? getFriendApplyUnreadCount() {
+    return SpUtil().getInt("${SpHelper.uid}_friendApplyUnreadCount");
   }
 
   static Future<bool>? setAppLang(String lang) {
@@ -47,20 +58,16 @@ class SpHelper {
     return theme != null ? ThemeMode.values.byName(theme) : null;
   }
 
-  static Future<bool>? setUID(String uid) {
-    return SpUtil().putString(_uid, uid);
+  static Future<bool>? setUserCert(UserCert cert) {
+    return SpUtil().putObject(_cert, cert);
+  } 
+
+  static Future<bool>? removeUserCert() {
+    return SpUtil().remove(_cert);
   }
 
-  static String? getUID() {
-    return SpUtil().getString(_uid);
-  }
-
-  static Future<bool>? setToken(String token) {
-    return SpUtil().putString(_token, token);
-  }
-
-  static String? getToken() {
-    return SpUtil().getString(_token);
+  static UserCert? getUserCert() {
+    return SpUtil().getObj<UserCert>(_cert, (v) => UserCert.fromJson(v.cast()));
   }
 
   static Future<bool>? setMaxSqlVersion(int version) {

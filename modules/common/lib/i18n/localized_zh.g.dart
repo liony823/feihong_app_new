@@ -69,6 +69,8 @@ class LocalizedCZh {
 	String get edit => '编辑';
 	String get add => '添加';
 	String get save => '保存';
+	String get noInternet => '没有网络连接';
+	String get networkError => '网络异常，请检查您的网络设置';
 	String get saveSuccessfully => '保存成功';
 	String get saveToGallery => '保存到相册';
 	String get saveFailed => '保存失败';
@@ -742,6 +744,8 @@ extension on Localized {
 			case 'c.edit': return '编辑';
 			case 'c.add': return '添加';
 			case 'c.save': return '保存';
+			case 'c.noInternet': return '没有网络连接';
+			case 'c.networkError': return '网络异常，请检查您的网络设置';
 			case 'c.saveSuccessfully': return '保存成功';
 			case 'c.saveToGallery': return '保存到相册';
 			case 'c.saveFailed': return '保存失败';

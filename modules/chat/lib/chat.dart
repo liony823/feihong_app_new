@@ -5,8 +5,5 @@ library;
 // 导出入口点
 export 'chat_module.dart';
 
-export 'providers/channel_provider.dart';
-
-
 // 导出入口页面
 export 'screens/conversation_screen.dart';

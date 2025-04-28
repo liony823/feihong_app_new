@@ -1,5 +1,5 @@
 {
-  "dart.flutterSdkPath": ".fvm/versions/stable",
+  "dart.flutterSdkPath": ".fvm/versions/3.30.0-0.1.pre",
   "i18n-ally.sourceLanguage": "zh",
   "i18n-ally.displayLanguage": "zh",
   "i18n-ally.localesPaths": [

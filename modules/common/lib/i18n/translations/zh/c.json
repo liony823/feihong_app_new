@@ -17,6 +17,9 @@
     "add":"添加",
     "save":"保存",
 
+    "noInternet":"没有网络连接",
+    "networkError":"网络异常，请检查您的网络设置",
+
     "saveSuccessfully":"保存成功",
     "saveToGallery":"保存到相册",
     "saveFailed":"保存失败",

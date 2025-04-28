@@ -1,5 +1,5 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:base/providers/profile/set_avatar_provider.dart';
+import 'package:core/providers/profile/set_avatar_provider.dart';
 import 'package:common/common.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

@@ -1,6 +1,5 @@
 import 'package:common/common.dart';
-import 'package:core/repositories/im_repository.dart';
-import 'package:core/services/core_service.dart';
+import 'package:core/core.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:wukongimfluttersdk/common/options.dart';
 import 'package:wukongimfluttersdk/model/wk_image_content.dart';
@@ -8,31 +7,58 @@ import 'package:wukongimfluttersdk/model/wk_video_content.dart';
 import 'package:wukongimfluttersdk/model/wk_voice_content.dart';
 import 'package:wukongimfluttersdk/type/const.dart';
 import 'package:wukongimfluttersdk/wkim.dart';
+import 'package:vibration/vibration.dart';
 
 part 'im_service.g.dart';
 
-class IMState {}
+class IMState {
+  UserCert? userCert;
+
+  IMState({
+    this.userCert,
+  });
+
+  IMState copyWith({
+    UserCert? userCert,
+  }) {
+    return IMState(
+      userCert: userCert ?? this.userCert,
+    );
+  }
+}
 
 /// IM服务类，处理与IM SDK的交互
 @Riverpod(keepAlive: true)
+
 class IMService extends _$IMService {
+  AppCoreService get _appCoreService =>
+      ref.watch(appCoreServiceProvider.notifier);
+  FriendApplyController get _friendApplyController =>
+      ref.read(friendApplyControllerProvider.notifier);
+  ContactController get _contactController => 
+      ref.read(contactControllerProvider.notifier);
+  
   @override
   IMState build() {
     return IMState();
   }
 
   /// 初始化IM SDK
-  Future<void> initialize({required String uid, required String token}) async {
+  Future<void> initialize(UserCert userCert) async {
+    state.userCert = userCert;
     try {
-      ref.watch(getCurrentUserProvider(uid).future);
       if (WKIM.shared.options.uid != null) {
         WKIM.shared.connectionManager.disconnect(true);
       }
-      bool result = await WKIM.shared.setup(Options.newDefault(uid, token));
+      final cert = state.userCert;
+      if (cert == null) {
+        throw Exception('UserCert is null');
+      }
+      bool result = await WKIM.shared.setup(Options.newDefault(cert.uid, cert.token));
       // 配置连接信息
       final imRepository = ref.read(imRepositoryProvider);
       WKIM.shared.options.getAddr = (Function(String address) complete) async {
-        final tcpAddress = await imRepository.getIMTCPAddress(uid);
+        final tcpAddress = await imRepository.getIMTCPAddress(cert.uid);
         complete(tcpAddress);
       };
 
@@ -42,6 +68,12 @@ class IMService extends _$IMService {
 
         // 设置消息监听器
         _registerMessageListeners();
+
+        // 并行初始化联系人和会话服务
+        await Future.wait([
+          ref.read(contactControllerProvider.notifier).initialize(),
+          ref.read(channelControllerProvider.notifier).initialize(),
+        ]);
       }
       AppLogger.i('IM SDK初始化成功');
     } catch (e) {
@@ -54,6 +86,52 @@ class IMService extends _$IMService {
   void _registerMessageListeners() {
     
     WKIM.shared.cmdManager.addOnCmdListener('sys_im', (wkcmd) async {
+      final param = wkcmd.param;
+      if (wkcmd.cmd == 'friendRequest'){
+        // 处理好友申请
+        
+        _friendApplyController.addFriendApply(
+          FriendApply(
+            uid: param['apply_uid'],
+            toUid: param['to_uid'],
+            toName: param['apply_name'],
+            status: FriendApplyStatus.apply,
+            remark: param['remark'],
+            token: param['token'],
+          ),
+        );
+        _contactController.getUnreadFriendApplyCount();
+        _playMessageSound();
+      }
+      if (wkcmd.cmd == 'friendAccept'){
+        // 接受好友申请
+        final toUID = param['to_uid'];
+        final fromUID = param['from_uid'];
+        if (!toUID || toUID == "") {
+          return;
+        }
+        if (!Utils.isEmptyOrNull(fromUID)){
+          WKIM.shared.channelManager.fetchChannelInfo(
+            fromUID,
+            WKChannelType.personal,
+          );
+        }
+        _contactController.syncContacts();
+        final friendApplyState = ref.watch(friendApplyControllerProvider);
+        final friendApplys = friendApplyState.value?.list ?? [];
+        for (var apply in friendApplys) {
+          if (apply.uid == toUID) {
+            _friendApplyController.updateApplyStatus(
+              apply,
+              FriendApplyStatus.accepted,
+            );
+            break;
+          }
+        }
+      }
+      if (wkcmd.cmd == 'friendDeleted'){
+        _contactController.syncContacts();
+      }
       if (wkcmd.cmd == 'messageRevoke') {
         var channelID = wkcmd.param['channel_id'];
         var channelType = wkcmd.param['channel_type'];
@@ -76,9 +154,9 @@ class IMService extends _$IMService {
           }
         }
       } else if (wkcmd.cmd == 'unreadClear') {
-        var channelID = wkcmd.param['channel_id'];
-        var channelType = wkcmd.param['channel_type'];
-        var unread = wkcmd.param['unread'];
+        var channelID = param['channel_id'];
+        var channelType = param['channel_type'];
+        var unread = param['unread'];
         if (channelID != '') {
           WKIM.shared.conversationManager.updateRedDot(
             channelID,
@@ -158,5 +236,25 @@ class IMService extends _$IMService {
         back(true, wkMsg);
       }
     });
+  }
+
+  void _playMessageSound() async {
+    bool isAllowVoice = true;
+    bool isAollowBeep = true;
+    bool isMuteOfApp = false;
+    final userInfo = state.userCert;
+    if (userInfo != null) {
+      isAllowVoice = userInfo.setting.voiceOn == 1;
+      isAollowBeep = userInfo.setting.shockOn == 1;
+      isMuteOfApp = userInfo.setting.muteOfApp == 1;
+    }
+    if (isAllowVoice && !isMuteOfApp) {
+      _appCoreService.playIncomingMessageSound();
+    }
+    if (isAollowBeep) {
+      if (await Vibration.hasVibrator() == true) {
+        Vibration.vibrate();
+      }
+    }
   }
 }

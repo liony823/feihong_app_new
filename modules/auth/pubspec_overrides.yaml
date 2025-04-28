@@ -1,6 +1,10 @@
-# melos_managed_dependency_overrides: common,core
+# melos_managed_dependency_overrides: common,core,chat,contact
 dependency_overrides:
+  chat:
+    path: ../chat
   common:
     path: ../common
+  contact:
+    path: ../contact
   core:
     path: ../core

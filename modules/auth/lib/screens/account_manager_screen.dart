@@ -1,5 +1,5 @@
-import 'package:auth/models/db/db_account.dart';
-import 'package:auth/providers/account_manager_provider.dart';
+import 'package:core/models/db/db_account.dart';
+import 'package:core/providers/auth/account_manager_provider.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:common/common.dart';
 import 'package:core/core.dart';

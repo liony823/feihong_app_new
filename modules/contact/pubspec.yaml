@@ -23,7 +23,6 @@ dependencies:
   
   # UI组件
   azlistview: ^2.0.0
-
   icons_plus: ^5.0.0
   skeletonizer: ^1.4.3
 
@@ -50,4 +49,8 @@ dev_dependencies:
   custom_lint:
   riverpod_lint:
 
+
+
+dependency_overrides: 
+  intl: ^0.20.2
 

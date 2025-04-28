@@ -1,7 +1,7 @@
 import 'package:common/common.dart';
-import 'package:contact/helper/fake.dart';
-import 'package:contact/models/contact.dart';
-import 'package:contact/providers/contact_provider.dart';
+import 'package:core/helper/fake.dart';
+import 'package:core/models/contact/contact.dart';
+import 'package:core/providers/contact/contact_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';

@@ -11,6 +11,7 @@ export 'utils/toast.dart';
 export 'utils/sp.dart';
 export 'utils/regex.dart';
 export 'utils/images.dart';
+export 'utils/audios.dart';
 export 'utils/routes.dart';
 export 'utils/image_util.dart';
 export 'utils/screen/screen_util.dart';
@@ -31,6 +32,7 @@ export 'models/pagination.dart';
 export 'models/user_info.dart';
 export 'models/group_member.dart';
 export 'models/search_user_info.dart';
+export 'models/user_cert.dart';
 
 // 导出helper
 export 'helper/fake.dart';

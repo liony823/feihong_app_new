@@ -71,7 +71,7 @@ dev_dependencies:
   riverpod_lint:
   melos: ^6.3.2
 
-dependency_overrides:
+dependency_overrides: 
   intl: ^0.20.2
 
 # For information on the generic Dart part of this file, see the

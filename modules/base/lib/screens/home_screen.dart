@@ -1,12 +1,10 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:base/models/applet.dart';
 import 'package:base/pages/applet_page.dart';
 import 'package:base/pages/feed_page.dart';
-import 'package:base/providers/applet_provider.dart';
-import 'package:base/providers/home_provider.dart';
 import 'package:base/screens/mine_screen.dart';
 import 'package:chat/chat.dart';
 import 'package:common/common.dart';
+import 'package:core/core.dart';
 import 'package:contact/contact.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';

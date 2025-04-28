@@ -32,12 +32,12 @@ class ApiClient {
     _dio.interceptors.add(InterceptorsWrapper(
       onRequest: (options, handler) {
         // 从本地存储获取token并添加到请求头
-        final token = SpHelper.getToken();
-        final uid = SpHelper.getUID();
-        if (token != null) {
+        final token = SpHelper.token;
+        final uid = SpHelper.uid;
+        if (token.isNotEmpty) {
           options.headers['token'] = token;
         }
-        if (uid != null) {
+        if (uid.isNotEmpty) {
           options.headers['uid'] = uid;
         }
         return handler.next(options);

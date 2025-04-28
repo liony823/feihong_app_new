@@ -66,3 +66,7 @@ dev_dependencies:
   custom_lint:
   riverpod_lint:
 
+
+dependency_overrides:
+  # 解决intl版本冲突
+  intl: ^0.20.2
