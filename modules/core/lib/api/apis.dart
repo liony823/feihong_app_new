@@ -1,11 +1,12 @@
 import 'package:common/common.dart';
 import 'package:dio/dio.dart';
 
+import '../models/channel/channel_info.dart';
 import 'api_client.dart';
 import 'api_config.dart';
 
 class Apis {
-  static String getAvatarUrl(String uid,{String cacheKey = ""}) {
+  static String getAvatarUrl(String uid, {String cacheKey = ""}) {
     if (cacheKey.isNotEmpty) {
       return "${ApiConfig.baseUrl}/users/$uid/avatar?cacheKey=$cacheKey";
     }
@@ -56,6 +57,113 @@ class Apis {
     } catch (e) {
       AppLogger.e("用户上传头像失败", e);
       return false;
+    }
+  }
+
+  /// 健康检查
+  static Future<bool> healthCheck() async {
+    try {
+      final response = await ApiClient.instance.get(ApiConfig.health);
+      return response.data['status'] == 'up';
+    } catch (e) {
+      AppLogger.e("健康检查失败", e);
+      return false;
+    }
+  }
+
+  /// 同步会话
+  static Future syncConversation({
+    required int version,
+    required String lastSsgSeqs,
+    required String deviceUUID,
+    required int msgCount,
+  }) async {
+    try {
+      final response =
+          await ApiClient.instance.post(ApiConfig.syncConversation, data: {
+        "version": version,
+        "last_msg_seqs": lastSsgSeqs,
+        "device_uuid": deviceUUID,
+        "msg_count": msgCount,
+      });
+      return response.data;
+    } catch (e) {
+      AppLogger.e("同步会话失败");
+      return null;
+    }
+  }
+
+  /// 同步消息
+  static Future syncMessage(
+      {required int limit, required int maxMessageSeq}) async {
+    try {
+      final response = await ApiClient.instance.post(ApiConfig.syncMessage,
+          data: {"limit": limit, "max_message_seq": maxMessageSeq});
+      return response.data;
+    } catch (e) {
+      AppLogger.e("同步消息失败");
+      return null;
+    }
+  }
+
+  ///
+  /// 同步某个频道的消息
+  /// @param channelID           频道ID
+  /// @param channelType         频道类型
+  /// @param startMessageSeq     最小messageSeq
+  /// @param endMessageSeq       最大messageSeq
+  /// @param limit               获取条数
+  /// @param pullMode            拉取模式 0:向下拉取 1:向上拉取
+  ///
+  static Future syncChannelMessage(
+      {required String channelId,
+      required int channelType,
+      required int startMessageSeq,
+      required int endMessageReq,
+      required int limit,
+      required int pullMode}) async {
+    try {
+      final response =
+          await ApiClient.instance.post(ApiConfig.syncChannelMessage, data: {
+        "channel_id": channelId,
+        "channel_type": channelType,
+        "start_message_seq": startMessageSeq,
+        "end_message_seq": endMessageReq,
+        "limit": limit,
+        "pull_mode": pullMode
+      });
+      return response.data;
+    } catch (e) {
+      AppLogger.e("同步频道消息失败");
+      return null;
+    }
+  }
+
+  // 获取频道
+  static Future<ChannelInfo?> getChannel(
+      {required String channelId, required int channelType}) async {
+    try {
+      final response =
+          await ApiClient.instance.get("/channels/$channelId/$channelType");
+      if (response.data != null) {
+        return ChannelInfo.fromJson(response.data);
+      }
+      return null;
+    } catch (e) {
+      AppLogger.e("获取频道失败");
+      return null;
+    }
+  }
+
+  /// 同步设备消息
+  static Future ackCoverMsg({required String deviceUUID}) async {
+    try {
+      await ApiClient.instance.post(ApiConfig.ackConverMsg, data: {
+        "device_uuid": deviceUUID,
+      });
+    } catch (e) {
+      AppLogger.e("同步设备消息失败");
+      return null;
     }
   }
 }

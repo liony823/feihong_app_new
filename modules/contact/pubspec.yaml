@@ -38,6 +38,9 @@ dependencies:
   core:
     path: ../core
 
+  stream_ui:
+    path: ../stream_ui
+
 
 dev_dependencies:
   flutter_lints: ^5.0.0

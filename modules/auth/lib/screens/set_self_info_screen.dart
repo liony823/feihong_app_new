@@ -1,4 +1,3 @@
-import 'package:core/providers/auth/set_self_info_provider.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:common/common.dart';
 import 'package:core/core.dart';
@@ -6,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:skeletonizer/skeletonizer.dart';
+import 'package:stream_ui/stream_ui.dart';
 
 @RoutePage()
 class SetSelfInfoScreen extends HookConsumerWidget {
@@ -137,23 +137,17 @@ class SetSelfInfoScreen extends HookConsumerWidget {
       spacing: 8.w,
       children: [
         Skeleton.shade(
-          child: Container(
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              border: Border.all(
-                color: AppTheme.brandColor,
-                width: 2,
-              ),
+          child: UserAvatar(
+            user: User(
+              uid: userInfo?.uid?? '',
+              name: userInfo?.name?? '',
+              image: avatar?? '',
             ),
-            child: ClipOval(
-              child: Avatar(
-                uid: userInfo?.uid ?? '',
-                name: userInfo?.name ?? '',
-                url: avatar ?? '',
-                size: 48.w,
-                onTap: onAvatarTap,
-              ),
+            constraints: BoxConstraints.tightFor(
+              width: 48.w,
+              height: 48.w,
             ),
+            onTap: onAvatarTap,
           ),
         ),
         Text(

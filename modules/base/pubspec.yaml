@@ -57,6 +57,9 @@ dependencies:
   auth:
     path: ../auth
 
+  stream_ui:
+    path: ../stream_ui
+
 dev_dependencies:
   flutter_lints: ^5.0.0
   freezed: ^3.0.3

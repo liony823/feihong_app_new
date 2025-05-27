@@ -6,4 +6,4 @@ library;
 export 'chat_module.dart';
 
 // 导出入口页面
-export 'screens/conversation_screen.dart';
+export 'screens/channel_screen.dart';

@@ -117,8 +117,8 @@ class PopButton extends StatelessWidget {
           // boxShadow: [
           //   BoxShadow(
           //     color: bgShadowColor ?? Color(0xFF4C4C4B),
-          //     offset: bgShadowOffset ?? Offset(0, 6.h),
-          //     blurRadius: bgShadowBlurRadius ?? 10.r,
+          //     offset: bgShadowOffset ?? Offset(0, 2.h),
+          //     blurRadius: bgShadowBlurRadius ?? 1.r,
           //     spreadRadius: bgShadowSpreadRadius ?? 1.r,
           //   )
           // ],

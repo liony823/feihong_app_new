@@ -239,7 +239,7 @@ final getMyQrCodeProvider = AutoDisposeFutureProvider<String>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef GetMyQrCodeRef = AutoDisposeFutureProviderRef<String>;
-String _$appCoreServiceHash() => r'3cfd015354a52de08ff359ba58e13ef66ceffc3f';
+String _$appCoreServiceHash() => r'8d7eb7cb970ea75a7c34ab0ce8fdab908466d4d0';
 
 /// See also [AppCoreService].
 @ProviderFor(AppCoreService)

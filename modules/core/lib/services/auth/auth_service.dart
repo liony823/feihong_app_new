@@ -235,6 +235,7 @@ class AuthService {
         zone: zone,
         phone: phone,
         password: password,
+        createdAt: account.createdAt,
         updatedAt: DateTime.now().millisecondsSinceEpoch,
         uid: userCert.uid,
       ));
@@ -268,6 +269,7 @@ class AuthService {
         zone: userCert.zone,
         phone: userCert.phone,
         password: password,
+        createdAt: account.createdAt,
         updatedAt: DateTime.now().millisecondsSinceEpoch,
       ));
     }

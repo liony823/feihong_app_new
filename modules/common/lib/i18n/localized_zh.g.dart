@@ -43,6 +43,7 @@ class Localized implements BaseTranslations<AppLocale, Localized> {
 	late final LocalizedContactZh contact = LocalizedContactZh.internal(_root);
 	late final LocalizedErrorsZh errors = LocalizedErrorsZh.internal(_root);
 	late final LocalizedHomeZh home = LocalizedHomeZh.internal(_root);
+	late final LocalizedMsgZh msg = LocalizedMsgZh.internal(_root);
 }
 
 // Path: c
@@ -69,17 +70,22 @@ class LocalizedCZh {
 	String get edit => '编辑';
 	String get add => '添加';
 	String get save => '保存';
+	String get retry => '重试';
+	String get you => '你';
 	String get noInternet => '没有网络连接';
 	String get networkError => '网络异常，请检查您的网络设置';
 	String get saveSuccessfully => '保存成功';
 	String get saveToGallery => '保存到相册';
 	String get saveFailed => '保存失败';
 	String get permanentlyDenied => '权限不允许';
+	String get letsStartChattingLabel => '让我们开始聊天吧';
+	String get loadingChannelsError => '加载频道失败';
 	List<String> get gender => [
 		'其他',
 		'男',
 		'女',
 	];
+	late final LocalizedCDateFormatZh dateFormat = LocalizedCDateFormatZh.internal(_root);
 	late final LocalizedCAgreementZh agreement = LocalizedCAgreementZh.internal(_root);
 	late final LocalizedCLanguageZh language = LocalizedCLanguageZh.internal(_root);
 	late final LocalizedCZoneZh zone = LocalizedCZoneZh.internal(_root);
@@ -368,6 +374,63 @@ class LocalizedHomeZh {
 
 	// Translations
 	late final LocalizedHomeTabZh tab = LocalizedHomeTabZh.internal(_root);
+	List<String> get connectionStatus => [
+		'同步失败',
+		'同步成功',
+		'已在其他设备登录',
+		'同步中',
+		'连接中',
+		'网络异常',
+		'同步成功',
+	];
+}
+
+// Path: msg
+class LocalizedMsgZh {
+	LocalizedMsgZh.internal(this._root);
+
+	final Localized _root; // ignore: unused_field
+
+	// Translations
+	String get channelMuted => '已静音';
+	String get applyJoinGroup => '[进群申请]';
+	String get lastMsgRemind => '[有人@你]';
+	String get lastMsgDraft => '[草稿]';
+	String get unkownMsg => '[未知消息，请先升级客户端查看]';
+	String get formarMsgError => '[消息格式错误，无法查看]';
+	String get signalDecryptError => '[消息解密失败，无法查看]';
+	String get youRecalledAMessage => '你撤回了一条消息';
+	String someoneRecalledAMessage({required Object name}) => '\'${name}\'撤回了一条消息';
+	String youRecalledMemberMessage({required Object member}) => '你撤回了一条成员 \'${member}\' 的消息';
+	String someoneRecalledMemberMessage({required Object name}) => '${name} 撤回了一条成员的消息';
+	String noRelationRequest({required Object name}) => '${name}开启了朋友验证，你还不是他（她）朋友。请先发送朋友验证请求，对方验证通过后，才能聊天。发送验证请求';
+	String get systemFileHelper => '文件传输助手';
+	String get systemTeam => '系统通知';
+	String get chat => '会话';
+	String get ohter_typing => '对方正在输入';
+	String user_is_typing({required Object name}) => '${name}正在输入';
+}
+
+// Path: c.dateFormat
+class LocalizedCDateFormatZh {
+	LocalizedCDateFormatZh.internal(this._root);
+
+	final Localized _root; // ignore: unused_field
+
+	// Translations
+	String get yesterday => '昨天';
+	String get am => '上午';
+	String get pm => '下午';
+	String get today => '今天';
+	List<String> get weeks => [
+		'周日',
+		'周一',
+		'周二',
+		'周三',
+		'周四',
+		'周五',
+		'周六',
+	];
 }
 
 // Path: c.agreement
@@ -744,15 +807,30 @@ extension on Localized {
 			case 'c.edit': return '编辑';
 			case 'c.add': return '添加';
 			case 'c.save': return '保存';
+			case 'c.retry': return '重试';
+			case 'c.you': return '你';
 			case 'c.noInternet': return '没有网络连接';
 			case 'c.networkError': return '网络异常，请检查您的网络设置';
 			case 'c.saveSuccessfully': return '保存成功';
 			case 'c.saveToGallery': return '保存到相册';
 			case 'c.saveFailed': return '保存失败';
 			case 'c.permanentlyDenied': return '权限不允许';
+			case 'c.letsStartChattingLabel': return '让我们开始聊天吧';
+			case 'c.loadingChannelsError': return '加载频道失败';
 			case 'c.gender.0': return '其他';
 			case 'c.gender.1': return '男';
 			case 'c.gender.2': return '女';
+			case 'c.dateFormat.yesterday': return '昨天';
+			case 'c.dateFormat.am': return '上午';
+			case 'c.dateFormat.pm': return '下午';
+			case 'c.dateFormat.today': return '今天';
+			case 'c.dateFormat.weeks.0': return '周日';
+			case 'c.dateFormat.weeks.1': return '周一';
+			case 'c.dateFormat.weeks.2': return '周二';
+			case 'c.dateFormat.weeks.3': return '周三';
+			case 'c.dateFormat.weeks.4': return '周四';
+			case 'c.dateFormat.weeks.5': return '周五';
+			case 'c.dateFormat.weeks.6': return '周六';
 			case 'c.agreement.userAgreement': return '《用户协议》';
 			case 'c.agreement.privacyPolicy': return '《隐私政策》';
 			case 'c.agreement.checkbox': return ({required InlineSpan userAgreement, required InlineSpan privacyPolicy}) => TextSpan(children: [
@@ -1182,6 +1260,30 @@ extension on Localized {
 			case 'home.tab.applet': return '小程序';
 			case 'home.tab.feed': return '动态';
 			case 'home.tab.mine': return '我的';
+			case 'home.connectionStatus.0': return '同步失败';
+			case 'home.connectionStatus.1': return '同步成功';
+			case 'home.connectionStatus.2': return '已在其他设备登录';
+			case 'home.connectionStatus.3': return '同步中';
+			case 'home.connectionStatus.4': return '连接中';
+			case 'home.connectionStatus.5': return '网络异常';
+			case 'home.connectionStatus.6': return '同步成功';
+			case 'msg.channelMuted': return '已静音';
+			case 'msg.applyJoinGroup': return '[进群申请]';
+			case 'msg.lastMsgRemind': return '[有人@你]';
+			case 'msg.lastMsgDraft': return '[草稿]';
+			case 'msg.unkownMsg': return '[未知消息，请先升级客户端查看]';
+			case 'msg.formarMsgError': return '[消息格式错误，无法查看]';
+			case 'msg.signalDecryptError': return '[消息解密失败，无法查看]';
+			case 'msg.youRecalledAMessage': return '你撤回了一条消息';
+			case 'msg.someoneRecalledAMessage': return ({required Object name}) => '\'${name}\'撤回了一条消息';
+			case 'msg.youRecalledMemberMessage': return ({required Object member}) => '你撤回了一条成员 \'${member}\' 的消息';
+			case 'msg.someoneRecalledMemberMessage': return ({required Object name}) => '${name} 撤回了一条成员的消息';
+			case 'msg.noRelationRequest': return ({required Object name}) => '${name}开启了朋友验证，你还不是他（她）朋友。请先发送朋友验证请求，对方验证通过后，才能聊天。发送验证请求';
+			case 'msg.systemFileHelper': return '文件传输助手';
+			case 'msg.systemTeam': return '系统通知';
+			case 'msg.chat': return '会话';
+			case 'msg.ohter_typing': return '对方正在输入';
+			case 'msg.user_is_typing': return ({required Object name}) => '${name}正在输入';
 			default: return null;
 		}
 	}

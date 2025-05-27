@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:icons_plus/icons_plus.dart';
+import 'package:stream_ui/stream_ui.dart';
 
 @RoutePage()
 class PersonalQrcodeScreen extends HookConsumerWidget {
@@ -61,13 +62,11 @@ class PersonalQrcodeScreen extends HookConsumerWidget {
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Avatar(
-                            size: 48.w,
-                            uid: uid,
-                            name: value?.name ?? '',
-                            url: Apis.getAvatarUrl(value?.uid ?? ''),
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
+                          UserAvatar(
+                            user: User(uid: uid, name: value?.name ?? '',image: Apis.getAvatarUrl(value?.uid?? '')),
+                            constraints: BoxConstraints.tightFor(
+                              width: 40.w,
+                              height: 40.w
                             ),
                           ),
                           12.horizontalSpace,

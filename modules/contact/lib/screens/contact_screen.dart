@@ -1,11 +1,10 @@
 import 'package:common/common.dart';
-import 'package:core/helper/fake.dart';
-import 'package:core/models/contact/contact.dart';
-import 'package:core/providers/contact/contact_provider.dart';
+import 'package:core/core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:icons_plus/icons_plus.dart';
+import 'package:stream_ui/stream_ui.dart';
 
 class ContactScreen extends HookConsumerWidget {
   const ContactScreen({super.key});
@@ -87,11 +86,8 @@ class ContactScreen extends HookConsumerWidget {
   }) {
     return _buildItemView(
       context,
-      avatar: Avatar(
-        uid: contact.uid,
-        name: contact.getName(),
-        url: contact.avatar,
-        size: 40.w,
+      avatar: UserAvatar(
+        user: User(uid: contact.uid, name: contact.getName(),image: Apis.getAvatarUrl(contact.uid)),
       ),
       text: contact.getName(),
       onPressed: onPressed,

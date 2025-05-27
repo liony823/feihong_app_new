@@ -33,6 +33,7 @@ class _ContactDropdownMenuState extends State<ContactDropdownMenu> {
       popCtrl: _popCtrl,
       menuItemPadding: EdgeInsets.all(8.w),
       verticalMargin: 4.h,
+      showArrow: false,
       menus: [
         PopMenuInfo(
           text: context.t.c.dropdownMenu.createGroup,

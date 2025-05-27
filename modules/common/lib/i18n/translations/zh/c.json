@@ -16,6 +16,8 @@
     "edit":"编辑",
     "add":"添加",
     "save":"保存",
+    "retry":"重试",
+    "you":"你",
 
     "noInternet":"没有网络连接",
     "networkError":"网络异常，请检查您的网络设置",
@@ -25,11 +27,30 @@
     "saveFailed":"保存失败",
     "permanentlyDenied":"权限不允许",
 
+    "letsStartChattingLabel": "让我们开始聊天吧",
+    "loadingChannelsError": "加载频道失败",
+
     "gender": [
         "其他",
         "男",
         "女"
     ],
+
+    "dateFormat": {
+        "yesterday": "昨天",
+        "am": "上午",
+        "pm": "下午",
+        "today": "今天",
+        "weeks": [
+            "周日",
+            "周一",
+            "周二",
+            "周三",
+            "周四",
+            "周五",
+            "周六"
+        ]
+    },
     
 
     "agreement":{

@@ -52,7 +52,7 @@ extension ContextExtensions on BuildContext {
 
   // Color get primaryColor => theme.primaryColor;
 
-  // Color get accentColor => theme.colorScheme.secondary;
+  // Color get accentInfoColor => theme.colorScheme.secondary;
 
   // Color get scaffoldBackgroundColor => theme.scaffoldBackgroundColor;
 
@@ -108,4 +108,6 @@ extension ContextExtensions on BuildContext {
 
   /// 检查键盘是否可见
   bool get isKeyboardShowing => MediaQuery.of(this).viewInsets.bottom > 0;
+
+  bool get isCN => Localizations.localeOf(this).languageCode == 'zh';
 }

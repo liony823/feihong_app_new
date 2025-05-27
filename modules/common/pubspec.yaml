@@ -27,6 +27,7 @@ dependencies:
   logger: ^2.5.0
   pinyin: ^3.3.0
   image_gallery_saver_plus: ^4.0.1
+  jiffy: ^6.2.1
   
   # UI相关
   flutter_svg: ^2.0.7

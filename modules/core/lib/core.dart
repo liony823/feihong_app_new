@@ -22,6 +22,7 @@ export 'models/contact/contact.dart';
 export 'models/contact/friend_apply.dart';
 export 'models/applet/applet.dart';
 export 'models/db/db_account.dart';
+export 'models/channel/channel_info.dart';
 
 // 导出状态管理
 export 'providers/base/home_provider.dart';

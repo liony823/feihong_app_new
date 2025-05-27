@@ -59,10 +59,7 @@ dependencies:
 
   # IM SDK
   wukongimfluttersdk: 
-    git:
-      url: https://github.com/liony823/WuKongIMFlutterSDK.git
-      ref: master
-
+  
   common:
     path: ../common
 
@@ -74,6 +71,8 @@ dependencies:
     path: ../chat
   contact:
     path: ../contact
+  stream_ui:
+    path: ../stream_ui
 
 dev_dependencies:
   flutter_lints: ^5.0.0

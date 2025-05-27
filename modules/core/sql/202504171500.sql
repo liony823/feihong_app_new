@@ -7,6 +7,6 @@ create table account (
     phone TEXT NOT NULL,
     password TEXT NOT NULL,
     login_type SMALLINT NOT NULL,
-    created_at INTEGER NOT NULL,
+    created_at INTEGER NULL DEFAULT 0,
     updated_at INTEGER NULL DEFAULT 0
 );

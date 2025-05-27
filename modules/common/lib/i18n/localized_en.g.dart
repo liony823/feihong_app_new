@@ -42,6 +42,7 @@ class LocalizedEn extends Localized {
 	@override late final _LocalizedContactEn contact = _LocalizedContactEn._(_root);
 	@override late final _LocalizedErrorsEn errors = _LocalizedErrorsEn._(_root);
 	@override late final _LocalizedHomeEn home = _LocalizedHomeEn._(_root);
+	@override late final _LocalizedMsgEn msg = _LocalizedMsgEn._(_root);
 }
 
 // Path: c
@@ -322,6 +323,15 @@ class _LocalizedErrorsEn extends LocalizedErrorsZh {
 // Path: home
 class _LocalizedHomeEn extends LocalizedHomeZh {
 	_LocalizedHomeEn._(LocalizedEn root) : this._root = root, super.internal(root);
+
+	final LocalizedEn _root; // ignore: unused_field
+
+	// Translations
+}
+
+// Path: msg
+class _LocalizedMsgEn extends LocalizedMsgZh {
+	_LocalizedMsgEn._(LocalizedEn root) : this._root = root, super.internal(root);
 
 	final LocalizedEn _root; // ignore: unused_field
 

@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
+import 'package:stream_ui/stream_ui.dart';
 
 @RoutePage()
 class HomeScreen extends HookConsumerWidget {
@@ -88,24 +89,26 @@ class HomeScreen extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final controller = ref.watch(homeControllerProvider.notifier);
     final contactState = ref.watch(contactControllerProvider);
+    final channelState = ref.watch(channelControllerProvider);
     final homeState = ref.watch(homeControllerProvider);
     final appletState = ref.watch(appletControllerProvider);
 
     // 创建默认的导航栏
     Widget buildTabView({
       bool enabledApplet = false,
-      int unreadCount = 0,
+      int unreadMessageCount = 0,
+      int unreadFriendApplyCount = 0,
       Applet? defaultApplet,
     }) {
       return PersistentTabView(
         context,
         controller: controller.tabController,
         screens: _buildScreens(enabledApplet: enabledApplet),
-        navBarStyle: NavBarStyle.style2,
+        navBarStyle: NavBarStyle.style8,
         items: _navBarsItems(
           context,
-          unreadFriendApplyCount: unreadCount,
-          unreadMessageCount: unreadCount,
+          unreadFriendApplyCount: unreadFriendApplyCount,
+          unreadMessageCount: unreadMessageCount,
           enabledApplet: enabledApplet,
           defaultApplet: defaultApplet,
         ),
@@ -140,7 +143,8 @@ class HomeScreen extends HookConsumerWidget {
           data: (appletData) {
             return buildTabView(
               enabledApplet: homeData.enabledApplet,
-              unreadCount: contactState.unreadFriendApplyCount,
+              unreadFriendApplyCount: contactState.unreadFriendApplyCount,
+              unreadMessageCount: channelState.unreadMessageCount,
               defaultApplet: appletData.defaultApplet,
             );
           },

@@ -5,6 +5,7 @@ import 'package:core/core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:stream_ui/stream_ui.dart';
 
 class MineScreen extends HookConsumerWidget {
   const MineScreen({super.key});
@@ -34,7 +35,9 @@ class MineScreen extends HookConsumerWidget {
                   onRetry: () {
                     ref.invalidate(getCurrentUserProvider(uid));
                   }),
-              _ => _buildUserInfoView(context, FakeUserHelper.fakeUserInfo),
+              _ =>  const Center(
+                  child: CircularProgressIndicator(),
+              ),
             },
             12.verticalSpace,
             _buildCard(
@@ -141,11 +144,13 @@ class MineScreen extends HookConsumerWidget {
           children: [
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 12.w),
-              child: Avatar(
-                size: 64.w,
-                uid: userInfo?.uid ?? '',
-                name: userInfo?.name ?? '',
-                url: Apis.getAvatarUrl(userInfo!.uid),
+              child: UserAvatar(
+                user: User(
+                    uid: userInfo?.uid ?? '',
+                    name: userInfo?.name ?? '',
+                    image: Apis.getAvatarUrl(userInfo!.uid)),
+                    borderRadius: BorderRadius.circular(8.r),
+                constraints: BoxConstraints.tightFor(width: 60.w, height: 60.w),
               ),
             ),
             Expanded(

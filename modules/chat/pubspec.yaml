@@ -28,15 +28,15 @@ dependencies:
   
   # IM SDK - 正常情况下应该在core中访问，这里是为了直接访问一些SDK特性
   wukongimfluttersdk: 
-    git:
-      url: https://github.com/liony823/WuKongIMFlutterSDK.git
-      ref: master
 
   common:
     path: ../common
   
   core:
     path: ../core
+
+  stream_ui:
+    path: ../stream_ui
 
 dev_dependencies:
   flutter_lints: ^5.0.0

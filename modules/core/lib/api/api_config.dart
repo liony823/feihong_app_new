@@ -1,7 +1,11 @@
 /// API配置类
 class ApiConfig {
   /// API基础URL
-  static const String baseUrl = 'http://192.168.1.160:8090/v1';
+  static const String baseUrl = 'http://192.168.2.52:8090/v1';
+
+  static const String baseIMUrl = 'http://192.168.2.52:5001';
+
+  static const String health = '/health'; // 健康检查
 
   /// 公共模块
   static const String getCountries = '/common/countries'; // 获取国家区号列表
@@ -22,6 +26,14 @@ class ApiConfig {
   static const String resetPwdByPhone = '/user/pwdforget';
   static const String resetPwdBySecurityQuestion = '/user/pwdforgetByquestion';
   static const String logout = '/user/quit';
+
+  // 会话模块
+  static const String syncConversation = '/conversation/sync';
+  static const String ackConverMsg = '/conversation/syncack';
+  
+  // 消息模块
+  static const String syncMessage = '/message/sync';
+  static const String syncChannelMessage = '/message/channel/sync';
 
   // 联系人模块
   static const String getFriendApplyUnreadCount =

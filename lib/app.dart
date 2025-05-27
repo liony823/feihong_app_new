@@ -1,4 +1,5 @@
 import 'package:common/common.dart';
+import 'package:stream_ui/stream_ui.dart';
 import 'package:common/widgets/splash_screen.dart';
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
@@ -137,68 +138,83 @@ class _AppState extends ConsumerState<FeiApp>
       modules: modules.value ?? [],
     );
 
-    return OKToast(
-      child: ToastificationWrapper(
-        child: TranslationProvider(
-          child: ScreenUtilInit(
-            designSize: const Size(375, 812),
-            minTextAdapt: true,
-            builder: (context, child) {
-              return Stack(
-                alignment: Alignment.center,
-                children: [
-                  MaterialApp.router(
-                    routerConfig: appRouter.config(),
-                    theme: AppTheme.lightTheme,
-                    darkTheme: AppTheme.darkTheme,
-                    locale: TranslationProvider.of(context).flutterLocale,
-                    supportedLocales: [
-                      ...AppLocaleUtils.supportedLocales,
-                    ],
-                    localizationsDelegates: [
-                      TypedLocaleDelegate(),
-                      GlobalMaterialLocalizations.delegate,
-                      GlobalCupertinoLocalizations.delegate,
-                    ],
-                    builder: (context, child) => Overlay(
-                      initialEntries: [
-                        OverlayEntry(
-                          builder: (context) => ToastificationConfigProvider(
-                            config: ToastificationConfig(
-                              alignment: Alignment.topCenter,
+    return StreamChatConfiguration(
+      data: StreamChatConfigurationData(),
+      child: StreamChatTheme(
+        data: _getTheme(context, null),
+        child: OKToast(
+          child: ToastificationWrapper(
+            child: TranslationProvider(
+              child: ScreenUtilInit(
+                designSize: const Size(375, 812),
+                minTextAdapt: true,
+                builder: (context, child) {
+                  return Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      MaterialApp.router(
+                        routerConfig: appRouter.config(),
+                        theme: AppTheme.lightTheme,
+                        darkTheme: AppTheme.darkTheme,
+                        locale: TranslationProvider.of(context).flutterLocale,
+                        supportedLocales: [
+                          ...AppLocaleUtils.supportedLocales,
+                        ],
+                        localizationsDelegates: [
+                          TypedLocaleDelegate(),
+                          GlobalMaterialLocalizations.delegate,
+                          GlobalCupertinoLocalizations.delegate,
+                        ],
+                        builder: (context, child) => Overlay(
+                          initialEntries: [
+                            OverlayEntry(
+                              builder: (context) => ToastificationConfigProvider(
+                                config: ToastificationConfig(
+                                  alignment: Alignment.topCenter,
+                                ),
+                                child: child!,
+                              ),
                             ),
-                            child: child!,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  if (!animationCompleted) buildAnimation(),
-                  if (initState.error != null && !animationCompleted)
-                    Positioned(
-                      bottom: 20,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          ref
-                              .read(appInitProvider.notifier)
-                              .retryInitialization();
-                        },
-                        child: ErrorRetryWidget(
-                          message: initState.error,
-                          onRetry: () {
-                            ref
-                                .read(appInitProvider.notifier)
-                                .retryInitialization();
-                          },
+                          ],
                         ),
                       ),
-                    ),
-                ],
-              );
-            },
+                      if (!animationCompleted) buildAnimation(),
+                      if (initState.error != null && !animationCompleted)
+                        Positioned(
+                          bottom: 20,
+                          child: ElevatedButton(
+                            onPressed: () {
+                              ref
+                                  .read(appInitProvider.notifier)
+                                  .retryInitialization();
+                            },
+                            child: ErrorRetryWidget(
+                              message: initState.error,
+                              onRetry: () {
+                                ref
+                                    .read(appInitProvider.notifier)
+                                    .retryInitialization();
+                              },
+                            ),
+                          ),
+                        ),
+                    ],
+                  );
+                },
+              ),
+            ),
           ),
         ),
       ),
     );
+  }
+
+  StreamChatThemeData _getTheme(
+    BuildContext context,
+    StreamChatThemeData? themeData,
+  ) {
+    final appBrightness = Theme.of(context).brightness;
+    final defaultTheme = StreamChatThemeData(brightness: appBrightness);
+    return defaultTheme.merge(themeData);
   }
 }

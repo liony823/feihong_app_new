@@ -7,23 +7,25 @@ import 'package:internet_connection_checker_plus/internet_connection_checker_plu
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:device_region/device_region.dart';
 import 'package:just_audio/just_audio.dart';
-import 'package:world_countries/helpers.dart';
 import 'package:world_countries/world_countries.dart' as wc;
 
 part 'core_service.g.dart';
 
 class AppCoreState {
   bool isRunningBackground = false;
+  bool isRefreshChatActivityMessage = false;
   final AudioPlayer? audioPlayer;
   final InternetStatus? internetStatus; 
 
   AppCoreState({
     this.isRunningBackground = false,
+    this.isRefreshChatActivityMessage = false,
     this.audioPlayer,
     this.internetStatus
   });
   AppCoreState copyWith({
     bool? isRunningBackground,
+    bool? isRefreshChatActivityMessage,
     AudioPlayer? audioPlayer,
     InternetStatus? internetStatus,
   }) {
@@ -31,6 +33,7 @@ class AppCoreState {
       audioPlayer: audioPlayer ?? this.audioPlayer,
       internetStatus: internetStatus ?? this.internetStatus,
       isRunningBackground: isRunningBackground ?? this.isRunningBackground,
+      isRefreshChatActivityMessage: isRefreshChatActivityMessage?? this.isRefreshChatActivityMessage,
     );
   }
 }
@@ -49,15 +52,13 @@ class AppCoreService extends _$AppCoreService {
       return message;
     });
 
-    final internetListener = InternetConnection().onStatusChange.listen(_onInternetStatusChange);
 
     ref.onDispose(() {
-      internetListener.cancel();
       state.audioPlayer?.dispose();
     });
 
     final audioPlayer = AudioPlayer();
-    audioPlayer.setAsset(AudioRes.msgIncoming,package: 'common');
+    audioPlayer.setAsset(AudioRes.msgIncoming);
 
     return AppCoreState(
       isRunningBackground: false,
@@ -65,22 +66,12 @@ class AppCoreService extends _$AppCoreService {
     );
   }
 
-
-  void _onInternetStatusChange(InternetStatus status) {
-    state = state.copyWith(internetStatus: status);
-    if (status == InternetStatus.disconnected) {
-      final context = Global.context;
-      if (context != null && context.mounted){
-        context.showSnackBar(SnackBar(
-          content: Text(context.t.c.networkError),
-          duration: const Duration(seconds: 2),
-        ));
-      }
-    }
-  }
-
   void playIncomingMessageSound() {
     state.audioPlayer?.play();
+  }
+
+  void setIsRefreshChatActivityMessage(bool isRefreshChatActivityMessage) {
+    state = state.copyWith(isRefreshChatActivityMessage: isRefreshChatActivityMessage);
   }
 }
 
@@ -126,7 +117,7 @@ FutureOr<List<AppModule>> getAppModules(Ref ref) async {
 
 @Riverpod(keepAlive: true)
 Future<UserInfo?> getCurrentUser(Ref ref, String uid) async {
-  try {
+  try {   
     if (uid.isEmpty) {
       return null;
     }

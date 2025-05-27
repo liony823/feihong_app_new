@@ -1,0 +1,20 @@
+{
+    "channelMuted":"已静音",
+    "applyJoinGroup":"[进群申请]",
+    "lastMsgRemind":"[有人@你]",
+    "lastMsgDraft": "[草稿]",
+    "unkownMsg":"[未知消息，请先升级客户端查看]",
+    "formarMsgError": "[消息格式错误，无法查看]",
+    "signalDecryptError": "[消息解密失败，无法查看]",
+    "youRecalledAMessage":"你撤回了一条消息",
+    "someoneRecalledAMessage":"'$name'撤回了一条消息",
+    "youRecalledMemberMessage":"你撤回了一条成员 '$member' 的消息",
+    "someoneRecalledMemberMessage":"$name 撤回了一条成员的消息",
+    "noRelationRequest":"$name开启了朋友验证，你还不是他（她）朋友。请先发送朋友验证请求，对方验证通过后，才能聊天。发送验证请求",
+
+    "systemFileHelper":"文件传输助手",
+    "systemTeam":"系统通知",
+    "chat":"会话",
+    "ohter_typing":"对方正在输入",
+    "user_is_typing":"$name正在输入"
+}

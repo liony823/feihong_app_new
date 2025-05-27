@@ -70,6 +70,14 @@ class SpHelper {
     return SpUtil().getObj<UserCert>(_cert, (v) => UserCert.fromJson(v.cast()));
   }
 
+  static Future<bool>? setPcOnline(int online) {
+    return SpUtil().putInt("${SpHelper.uid}_pc_online", online);
+  }
+
+  static int getPcOnline() {
+    return SpUtil().getInt("${SpHelper.uid}_pc_online") ?? 0;
+  }
+
   static Future<bool>? setMaxSqlVersion(int version) {
     return SpUtil().putInt(_maxSqlVersion, version);
   }

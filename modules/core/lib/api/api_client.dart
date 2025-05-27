@@ -43,7 +43,8 @@ class ApiClient {
         return handler.next(options);
       },
       onError: (DioException error, handler) {
-        if (error.type != DioExceptionType.cancel) {
+        if (error.type != DioExceptionType.cancel &&
+            error.requestOptions.extra['showError'] == true) {
           final context = Global.context!;
           if (context.mounted) {
             final errRes = error.response?.data;

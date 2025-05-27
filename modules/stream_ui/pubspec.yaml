@@ -1,0 +1,69 @@
+name: stream_ui
+description: 飞宏IM共享公共组件库，包含通用工具、扩展、主题和国际化资源
+version: 0.0.1
+homepage: https://github.com/liony823/feihong_app_new
+publish_to: none
+
+environment:
+  sdk: '>=3.3.0 <4.0.0'
+  flutter: ">=3.10.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  
+
+  # 工具库
+  collection: ^1.17.2
+  path: ^1.8.3
+  uuid: ^4.3.1
+  logger: ^2.5.0
+  lottie: ^3.1.2
+  equatable: ^2.0.5
+  
+  # UI相关
+  image_cropper: ^9.1.0
+  extended_image: ^9.1.0
+  cached_network_image: ^3.4.1
+  svg_icon_widget: ^0.0.1
+
+  # 动画
+  animate_do: ^3.3.4
+  
+  # JSON处理
+  json_annotation: ^4.8.1
+  freezed_annotation: ^3.0.0
+
+  intl: ^0.20.2
+
+  wukongimfluttersdk: 
+
+  common:
+    path: ../common
+  
+  core:
+    path: ../core
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  custom_lint:
+  riverpod_lint:
+  flutter_lints: ^5.0.0
+  build_runner: ^2.4.6
+  json_serializable: ^6.9.0
+  freezed: ^3.0.3
+
+
+# For information on the generic Dart part of this file, see the
+# following page: https://dart.dev/tools/pub/pubspec
+
+flutter:
+  assets:
+    - lib/assets/animations/
+    - lib/assets/icons/
+    - lib/assets/icons/colored/
+    - lib/assets/images/
+  uses-material-design: true

@@ -4,6 +4,7 @@ import 'package:common/common.dart';
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:stream_ui/stream_ui.dart';
 
 @RoutePage()
 class ProfileScreen extends HookConsumerWidget {
@@ -58,11 +59,15 @@ class ProfileScreen extends HookConsumerWidget {
                 _buildItemView(
                   context,
                   title: context.t.c.profile.avatar,
-                  child: Avatar(
-                    size: 40.w,
-                    name: value?.name ?? '',
-                    uid: value?.uid ?? '',
-                    url: Apis.getAvatarUrl(value?.uid ?? ''),
+                  child: UserAvatar(
+                    user: User(
+                        uid: value?.uid ?? '',
+                        name: value?.name ?? '',
+                        image: Apis.getAvatarUrl(value!.uid)),
+                    constraints: BoxConstraints.tightFor(
+                      width: 40.w,
+                      height: 40.w
+                    ),
                   ),
                   onTap: () => _onTapMenu(context, 'avatar', value!),
                 ),

@@ -1,5 +1,3 @@
-import 'package:core/models/db/db_account.dart';
-import 'package:core/providers/auth/account_manager_provider.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:common/common.dart';
 import 'package:core/core.dart';
@@ -7,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:icons_plus/icons_plus.dart';
+import 'package:stream_ui/stream_ui.dart';
 
 @RoutePage()
 class AccountManagerScreen extends HookConsumerWidget {
@@ -164,11 +163,17 @@ class AccountManagerScreen extends HookConsumerWidget {
           spacing: 12.w,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Avatar(
-              uid: account.uid,
-              name: account.name,
-              url: Apis.getAvatarUrl(account.uid),
-              size: 48.w,
+            UserAvatar(
+              user: User(
+                uid: account.uid,
+                name: account.name,
+                image: Apis.getAvatarUrl(account.uid),
+              ),
+              constraints: BoxConstraints.tightFor(
+                width: 48.w,
+                height: 48.w,
+              ),
+              borderRadius: BorderRadius.circular(8.r),
             ),
             Expanded(
               child: Column(

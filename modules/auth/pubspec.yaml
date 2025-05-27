@@ -54,6 +54,9 @@ dependencies:
   contact:
     path: ../contact
 
+  stream_ui:
+    path: ../stream_ui
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
