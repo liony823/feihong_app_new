@@ -28,7 +28,10 @@ export 'src/scroll_view/stream_scroll_view_loading_widget.dart';
 export 'src/channel/channel_name.dart';
 export 'src/channel/channel_avatar.dart';
 export 'src/icons/stream_svg_icon.dart';
+export 'src/dialogs/add_friend_dialog.dart';
+export'src/dialogs/delete_conversation_dialog.dart';
 
 export 'src/models/sort_order.dart';
 export 'src/models/comparable_field.dart';
 export 'src/models/channel_state.dart';
+export 'src/models/chat_msg.dart';

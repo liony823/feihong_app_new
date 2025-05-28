@@ -2,6 +2,7 @@
 import 'package:common/common.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:stream_ui/stream_ui.dart';
 
 class ApplyFriendDialog extends HookWidget {
   final Future<bool> Function(String) onSubmit;
@@ -19,12 +20,12 @@ class ApplyFriendDialog extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final remark = useState("");
+    final chatTheme = StreamChatTheme.of(context);
     return AlertDialog(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16.w),
       ),
-      backgroundColor: AppTheme.primaryLightColor,
-      // contentPadding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 24.w),
+      backgroundColor: chatTheme.colorTheme.appBg,
       title: Text(context.t.contact.friendHome.applyFriend),
       titlePadding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 24.w),
       insetPadding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 24.w),

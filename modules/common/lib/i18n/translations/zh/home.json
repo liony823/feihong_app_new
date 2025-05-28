@@ -14,5 +14,10 @@
         "连接中",
         "网络异常",
         "同步成功"
-    ]
+    ],
+    "conversation": {
+        "deleteTitle": "删除",
+        "deleteSubtitle": "删除后，将清空该聊天的聊天记录",
+        "deleteConfirm": "确定删除"
+    }
 }

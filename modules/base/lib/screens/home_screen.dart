@@ -142,6 +142,7 @@ class HomeScreen extends HookConsumerWidget {
         return appletState.when(
           data: (appletData) {
             return buildTabView(
+              
               enabledApplet: homeData.enabledApplet,
               unreadFriendApplyCount: contactState.unreadFriendApplyCount,
               unreadMessageCount: channelState.unreadMessageCount,
@@ -150,6 +151,7 @@ class HomeScreen extends HookConsumerWidget {
           },
           loading: () => buildTabView(),
           error: (_, __) => buildTabView(),
+          
         );
       },
       loading: () => buildTabView(),

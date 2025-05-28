@@ -1,6 +1,6 @@
 import 'package:common/common.dart';
 import 'package:core/core.dart';
-import 'package:core/dialogs/add_friend_dialog.dart';
+import 'package:stream_ui/src/dialogs/add_friend_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 

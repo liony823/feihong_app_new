@@ -28,7 +28,7 @@ class Routes {
   static const String addFriend = '/addFriend';
   static const String addGroup = '/addGroup';
 
-  static const String conversation = '/conversation';
+  static const String chat = '/chat';
 
   static const String setting = '/setting';
 }

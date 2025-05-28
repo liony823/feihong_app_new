@@ -62,7 +62,10 @@ class _ContactDropdownMenuState extends State<ContactDropdownMenu> {
       ],
       child: Padding(
         padding: EdgeInsets.only(right: 16.w, left: 8.w),
-        child: const Icon(EvaIcons.plus_circle_outline),
+        child: const Icon(
+          EvaIcons.plus_circle_outline,
+          color: AppTheme.darkSecondaryTextColor2,
+        ),
       ),
     );
   }

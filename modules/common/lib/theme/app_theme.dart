@@ -20,7 +20,7 @@ class AppTheme {
   static const Color secondaryDarkColor = Color(0xFF6A44EF);
 
   // 背景色
-  static const Color lightBackgroundColor = Color(0xFFF6F6F6);
+  static const Color lightBackgroundColor = Color(0xFFf7f7f8);
   static const Color darkBackgroundColor = Color(0xFF121212);
 
   // 文本颜色

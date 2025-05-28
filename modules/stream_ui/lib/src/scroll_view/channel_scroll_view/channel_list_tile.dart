@@ -144,75 +144,103 @@ class ChannelListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final channelPreviewTheme = StreamChannelPreviewTheme.of(context);
     final msg = channelState.conversationMsg;
-    final channel = channelState.channel;
+    final getChannel = msg.getWkChannel();
+    return FutureBuilder(
+        future: getChannel,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            final channel = snapshot.data;
+            if (channel != null) {
+              final leading = this.leading ??
+                  ChannelAvatar(
+                    channel: channel,
+                  );
 
-    if (channel != null) {
-      final leading = this.leading ??
-          ChannelAvatar(
-            channel: channel,
-          );
+              final title = this.title ??
+                  ChannelName(
+                    channelState: channelState,
+                    textStyle: channelPreviewTheme.titleStyle,
+                  );
 
-      final title = this.title ??
-          ChannelName(
-            channelState: channelState,
-            textStyle: channelPreviewTheme.titleStyle,
-          );
+              final subtitle = this.subtitle ??
+                  ChannelListTileSubtitle(
+                    channelState: channelState,
+                    textStyle: channelPreviewTheme.subtitleStyle,
+                  );
 
-      final subtitle = this.subtitle ??
-          ChannelListTileSubtitle(
-            channelState: channelState,
-            textStyle: channelPreviewTheme.subtitleStyle,
-          );
+              final trailing = this.trailing ??
+                  ChannelLastMessageDate(
+                    conversationMsg: msg,
+                    textStyle: channelPreviewTheme.lastMessageAtStyle,
+                  );
 
-      final trailing = this.trailing ??
-          ChannelLastMessageDate(
-            conversationMsg: msg,
-            textStyle: channelPreviewTheme.lastMessageAtStyle,
-          );
-
-      return AnimatedOpacity(
-        opacity: channel.mute == 1 ? 0.5 : 1,
-        duration: const Duration(milliseconds: 300),
-        child: ListTile(
-          onTap: onTap,
-          onLongPress: onLongPress,
-          visualDensity: visualDensity,
-          contentPadding: contentPadding,
-          leading: leading,
-          tileColor: tileColor,
-          selected: selected,
-          selectedTileColor: selectedTileColor ??
-              StreamChatTheme.of(context).colorTheme.borders,
-          title: Row(
-            children: [
-              Expanded(child: title),
-              Padding(
-                padding: const EdgeInsets.only(right: 4),
-                child: sendingIndicatorBuilder?.call(context, channelState) ??
-                    SendingIndicatorBuilder(
-                      message: msg,
-                      cid: SpHelper.uid,
-                    ),
-              ),
-              trailing
-            ],
-          ),
-          subtitle: Row(
-            children: [
-              Expanded(
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: subtitle,
+              return ListTile(
+                onTap: onTap,
+                onLongPress: onLongPress,
+                visualDensity: visualDensity,
+                contentPadding: contentPadding,
+                leading: leading,
+                tileColor: tileColor,
+                selected: selected,
+                selectedTileColor: selectedTileColor ??
+                    StreamChatTheme.of(context).colorTheme.borders,
+      
+                titleAlignment: ListTileTitleAlignment.bottom,
+              
+                title: Padding(
+                  padding:  EdgeInsets.only(bottom: 4.w),
+                  child: Row(
+                    children: [
+                      Expanded(
+                          child: Row(
+                        children: [
+                          title,
+                          if (channel.mute == 1)
+                            Padding(
+                              padding: EdgeInsets.only(left: 4.w,top: 2.w),
+                              child: StreamSvgIcon(
+                                icon: StreamSvgIcons.mute,
+                                size: 14.w,
+                              ),
+                            )
+                        ],
+                      )),
+                      Padding(
+                        padding: const EdgeInsets.only(right: 4),
+                        child: sendingIndicatorBuilder?.call(
+                                context, channelState) ??
+                            SendingIndicatorBuilder(
+                              message: msg,
+                              cid: SpHelper.uid,
+                            ),
+                      ),
+                      trailing
+                    ],
+                  ),
                 ),
-              ),
-              unreadIndicatorBuilder?.call(context) ??
-                  UnreadIndicator(unreadCount: msg.unreadCount)
-            ],
-          ),
-        ),
-      );
-    }
-    return Empty();
+                subtitle: Padding(
+                  padding:  EdgeInsets.only(bottom: 4.w),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: subtitle,
+                        ),
+                      ),
+                      unreadIndicatorBuilder?.call(context) ??
+                          UnreadIndicator(
+                              unreadCount: msg.unreadCount,
+                              isMuted: channel.mute == 1)
+                    ],
+                  ),
+                ),
+              );
+            }
+          }
+
+          return Empty();
+        });
   }
 }
 

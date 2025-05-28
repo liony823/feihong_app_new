@@ -55,8 +55,8 @@ class LocalizedCZh {
 	// Translations
 	String get appNmae => '飞宏';
 	String get welcome => '欢迎来到飞宏';
-	String get confirm => '确 认';
-	String get cancel => '取 消';
+	String get confirm => '确认';
+	String get cancel => '取消';
 	String get toolboxAlbum => '相册';
 	String get toolboxCamera => '相机';
 	String get supportsTypeHint => '仅支持png、jpg、jpeg、gif、bmp及webp格式。';
@@ -383,6 +383,7 @@ class LocalizedHomeZh {
 		'网络异常',
 		'同步成功',
 	];
+	late final LocalizedHomeConversationZh conversation = LocalizedHomeConversationZh.internal(_root);
 }
 
 // Path: msg
@@ -785,6 +786,18 @@ class LocalizedHomeTabZh {
 	String get mine => '我的';
 }
 
+// Path: home.conversation
+class LocalizedHomeConversationZh {
+	LocalizedHomeConversationZh.internal(this._root);
+
+	final Localized _root; // ignore: unused_field
+
+	// Translations
+	String get deleteTitle => '删除';
+	String get deleteSubtitle => '删除后，将清空该聊天的聊天记录';
+	String get deleteConfirm => '确定删除';
+}
+
 /// Flat map(s) containing all translations.
 /// Only for edge cases! For simple maps, use the map function of this library.
 extension on Localized {
@@ -792,8 +805,8 @@ extension on Localized {
 		switch (path) {
 			case 'c.appNmae': return '飞宏';
 			case 'c.welcome': return '欢迎来到飞宏';
-			case 'c.confirm': return '确 认';
-			case 'c.cancel': return '取 消';
+			case 'c.confirm': return '确认';
+			case 'c.cancel': return '取消';
 			case 'c.toolboxAlbum': return '相册';
 			case 'c.toolboxCamera': return '相机';
 			case 'c.supportsTypeHint': return '仅支持png、jpg、jpeg、gif、bmp及webp格式。';
@@ -1267,6 +1280,9 @@ extension on Localized {
 			case 'home.connectionStatus.4': return '连接中';
 			case 'home.connectionStatus.5': return '网络异常';
 			case 'home.connectionStatus.6': return '同步成功';
+			case 'home.conversation.deleteTitle': return '删除';
+			case 'home.conversation.deleteSubtitle': return '删除后，将清空该聊天的聊天记录';
+			case 'home.conversation.deleteConfirm': return '确定删除';
 			case 'msg.channelMuted': return '已静音';
 			case 'msg.applyJoinGroup': return '[进群申请]';
 			case 'msg.lastMsgRemind': return '[有人@你]';

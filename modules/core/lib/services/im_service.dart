@@ -42,6 +42,7 @@ class IMState {
 /// IM服务类，处理与IM SDK的交互
 @Riverpod(keepAlive: true)
 class IMService extends _$IMService {
+  IMRepository get _imRepository => ref.read(imRepositoryProvider);
   AppCoreService get _appCoreService =>
       ref.watch(appCoreServiceProvider.notifier);
   FriendApplyController get _friendApplyController =>
@@ -68,9 +69,8 @@ class IMService extends _$IMService {
       bool result =
           await WKIM.shared.setup(Options.newDefault(cert.uid, cert.token));
       // 配置连接信息
-      final imRepository = ref.read(imRepositoryProvider);
       WKIM.shared.options.getAddr = (Function(String address) complete) async {
-        final tcpAddress = await imRepository.getIMTCPAddress(cert.uid);
+        final tcpAddress = await _imRepository.getIMTCPAddress(cert.uid);
         complete(tcpAddress);
       };
 
@@ -94,6 +94,31 @@ class IMService extends _$IMService {
     }
   }
 
+  /// 更新会话未读数
+  Future<bool> updateConversationUnreadCount(
+    String channelID,
+    int channelType,
+    int unread,
+  ) {
+    if (unread < 0) {
+      unread = 0;
+    }
+    WKIM.shared.conversationManager
+        .updateRedDot(channelID, channelType, unread);
+    return _imRepository.updateConversationUnreadCount(
+        channelID, channelType, unread);
+  }
+
+
+  /// 清除某频道消息
+  Future<bool> offsetMessage(
+    String channelID,
+    int channelType,
+  ) async {
+    final maxMessageSeq = await WKIM.shared.messageManager.getMaxMessageSeq(channelID, channelType);
+    return _imRepository.offsetMessage(channelID, channelType, maxMessageSeq);
+  }
+
   /// 注册消息监听器
   void _registerMessageListeners() {
     AppLogger.d("注册消息监听器");
@@ -101,7 +126,7 @@ class IMService extends _$IMService {
     // 监听系统消息
     WKIM.shared.cmdManager.addOnCmdListener('sys_im', (wkcmd) async {
       final param = wkcmd.param;
-      if (wkcmd.cmd == 'friendRequest') {
+      if (wkcmd.cmd == WKCMDKeys.wk_friendRequest) {
         // 处理好友申请
 
         _friendApplyController.addFriendApply(
@@ -117,7 +142,7 @@ class IMService extends _$IMService {
         _contactController.getUnreadFriendApplyCount();
         _playMessageSound();
       }
-      if (wkcmd.cmd == 'friendAccept') {
+      if (wkcmd.cmd == WKCMDKeys.wk_friendAccept) {
         // 接受好友申请
         final toUID = param['to_uid'];
         final fromUID = param['from_uid'];
@@ -143,10 +168,10 @@ class IMService extends _$IMService {
           }
         }
       }
-      if (wkcmd.cmd == 'friendDeleted') {
+      if (wkcmd.cmd == WKCMDKeys.wk_friendDeleted) {
         _contactController.syncContacts();
       }
-      if (wkcmd.cmd == 'messageRevoke') {
+      if (wkcmd.cmd == WKCMDKeys.wk_messageRevoke) {
         var channelID = wkcmd.param['channel_id'];
         var channelType = wkcmd.param['channel_type'];
         if (channelID != '') {
@@ -155,19 +180,76 @@ class IMService extends _$IMService {
               .getMaxExtraVersionWithChannel(channelID, channelType);
           // Apis.syncMsgExtra(channelID, channelType, maxVersion);
         }
-      } else if (wkcmd.cmd == 'channelUpdate') {
-        var channelID = wkcmd.param['channel_id'];
-        var channelType = wkcmd.param['channel_type'];
-        if (channelID != '') {
+      }
+      if (wkcmd.cmd == WKCMDKeys.wk_channelUpdate) {
+        var channelID = wkcmd.param['channel_id'] as String;
+        var channelType = wkcmd.param['channel_type'] as int;
+        if (channelID.isNotEmpty) {
+          final localChannel = await WKIM.shared.channelManager
+              .getChannel(channelID, channelType);
+          bool needUpdate = false;
           if (channelType == WKChannelType.personal) {
             // 同步个人信息
-            // Apis.getUserInfo(channelID);
+            final userInfo = await Apis.getUserInfo(uid: channelID);
+            if (userInfo == null) {
+              return;
+            }
+            if (localChannel != null && localChannel.channelID.isNotEmpty) {
+              if (localChannel.channelName != userInfo.name) {
+                localChannel.channelName = userInfo.name;
+                needUpdate = true;
+              }
+              if (localChannel.channelRemark != userInfo.remark) {
+                localChannel.channelRemark = userInfo.remark;
+                needUpdate = true;
+              }
+              if (localChannel.mute != userInfo.mute) {
+                localChannel.mute = userInfo.mute;
+                needUpdate = true;
+              }
+              if (localChannel.top != userInfo.top) {
+                localChannel.top = userInfo.top;
+                needUpdate = true;
+              }
+              if (localChannel.follow != userInfo.follow) {
+                localChannel.follow = userInfo.follow;
+                needUpdate = true;
+              }
+            }
           } else if (channelType == WKChannelType.group) {
             // 同步群信息
-            // Apis.getGroupInfo(channelID);
+            final groupInfo = await Apis.getGroupInfo(groupNo: channelID);
+            if (groupInfo == null) {
+              return;
+            }
+
+            if (localChannel != null && localChannel.channelID.isNotEmpty) {
+              if (localChannel.channelName != groupInfo.name) {
+                localChannel.channelName = groupInfo.name;
+                needUpdate = true;
+              }
+              if (localChannel.channelRemark != groupInfo.remark) {
+                localChannel.channelRemark = groupInfo.remark;
+                needUpdate = true;
+              }
+
+              if (localChannel.mute != groupInfo.mute) {
+                localChannel.mute = groupInfo.mute;
+                needUpdate = true;
+              }
+              if (localChannel.top != groupInfo.top) {
+                localChannel.top = groupInfo.top;
+                needUpdate = true;
+              }
+            }
+          }
+
+          if (needUpdate && localChannel != null) {
+            WKIM.shared.channelManager.addOrUpdateChannel(localChannel);
           }
         }
-      } else if (wkcmd.cmd == 'unreadClear') {
+      }
+      if (wkcmd.cmd == WKCMDKeys.wk_unreadClear) {
         var channelID = param['channel_id'];
         var channelType = param['channel_type'];
         var unread = param['unread'];

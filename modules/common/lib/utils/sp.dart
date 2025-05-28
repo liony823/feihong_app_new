@@ -85,6 +85,14 @@ class SpHelper {
   static int? getMaxSqlVersion() {
     return SpUtil().getInt(_maxSqlVersion);
   }
+
+  static int? getHideChannelAllPinnedMessage(String key) {
+    return SpUtil().getInt("${SpHelper.uid}_hide_pin_msg_$key");
+  }
+
+  static Future<bool>? setHideChannelAllPinnedMessage(String key, int value) {
+    return SpUtil().putInt("${SpHelper.uid}_hide_pin_msg_$key", value);
+  }
 }
 
 class SpUtil {

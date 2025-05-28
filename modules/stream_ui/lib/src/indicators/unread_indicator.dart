@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 
 class UnreadIndicator extends StatelessWidget {
   final int unreadCount;
+  final bool isMuted;
   const UnreadIndicator({
     super.key,
     required this.unreadCount,
+    this.isMuted = false,
   });
 
   @override
@@ -15,7 +17,7 @@ class UnreadIndicator extends StatelessWidget {
     return Badge(
       textColor: Colors.white,
       textStyle: theme.textTheme.footnoteBold,
-      backgroundColor: theme.channelPreviewTheme.unreadCounterColor,
+      backgroundColor: isMuted ? theme.colorTheme.disabled : theme.channelPreviewTheme.unreadCounterColor,
       label: Text(
         switch (unreadCount) {
           > 99 => '99+',

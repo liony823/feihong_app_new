@@ -4,6 +4,7 @@ import 'dart:collection';
 import 'package:common/common.dart';
 import 'package:core/core.dart';
 import 'package:core/helper/dropdown_menu.dart';
+import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:stream_ui/stream_ui.dart';
 import 'package:wukongimfluttersdk/entity/channel.dart';
@@ -69,8 +70,15 @@ class ChannelProviderState {
 
 @Riverpod(keepAlive: true)
 class ChannelController extends _$ChannelController with DropdownMenuMixin {
+  IMService get _imService => ref.read(iMServiceProvider.notifier);
+
   @override
   ChannelProviderState build() {
+    ref.onDispose(() {
+      _stopHeartTimer();
+      _disposeListener();
+    });
+
     return ChannelProviderState(
         unreadMessageCount: 0,
         msgCount: 0,
@@ -80,6 +88,54 @@ class ChannelController extends _$ChannelController with DropdownMenuMixin {
         isEnd: false,
         memberMaps: {},
         channelList: []);
+  }
+
+  // 置顶/取消置顶
+  void onPinAction(WKUIConversationMsg item) async {
+    bool top = false;
+    final channel = await item.getWkChannel();
+    if (channel != null) {
+      top = channel.top == 1;
+    }
+    _updateTop(item.channelID, item.channelType, top ? 0 : 1);
+  }
+
+  // 删除会话
+  void onDeleteAction(WKUIConversationMsg item) async {
+    final result = await showDialog<bool>(
+        context: Global.context!,
+        builder: (context) => DeleteConversationDialog());
+    if (result == true) {
+      // _imService.updateConversationUnreadCount(
+      //     item.channelID, item.channelType, 0); // offsetMessage 接口逻辑中会清除计数
+      _imService.offsetMessage(item.channelID, item.channelType);
+      final res = await WKIM.shared.conversationManager
+          .deleteMsg(item.channelID, item.channelType);
+      if (res) {
+        final channel = await item.getWkChannel();
+        if (channel != null && channel.top == 1) {
+          _updateTop(item.channelID, item.channelType, 0);
+        }
+        WKIM.shared.messageManager
+            .clearWithChannel(item.channelID, item.channelType);
+      }
+    }
+  }
+
+  // 静音频道/取消静音
+  void onMuteAction(WKUIConversationMsg item) async {
+    bool mute = false;
+    final channel = await item.getWkChannel();
+    if (channel != null) {
+      mute = channel.mute == 1;
+    }
+    _updateMute(item.channelID, item.channelType, mute ? 0 : 1);
+  }
+
+  // 标记已读
+  void onMarkReadedAction(WKUIConversationMsg item) {
+    _imService.updateConversationUnreadCount(
+        item.channelID, item.channelType, 0);
   }
 
   Future<void> initialize() async {
@@ -118,20 +174,25 @@ class ChannelController extends _$ChannelController with DropdownMenuMixin {
 
   void _initListener() {
     /// 监听连接状态变化
-    WKIM.shared.connectionManager.addOnConnectionStatus('home',
+    WKIM.shared.connectionManager.addOnConnectionStatus('channel_conversation',
         (status, reason, connInfo) {
-          if (state.connectionStatus != status){
-            state = state.copyWith(connectionStatus: status);
-          }
+      if (state.connectionStatus != status) {
+        state = state.copyWith(connectionStatus: status);
+      }
     });
 
     /// 监听会话未读数量列表变化
     WKIM.shared.conversationManager
         .addOnClearAllRedDotListener('channel_conversation', () {
-      for (var i = 0; i < state.channelList.length; i++) {
-        state.channelList[i].conversationMsg.unreadCount = 0;
+      final newList = [...state.channelList];
+      for (var i = 0; i < newList.length; i++) {
+        newList[i].conversationMsg.unreadCount = 0;
+        newList[i].isResetCounter = true;
       }
+      state = state.copyWith(channelList: newList);
+      _setAllCount();
     });
+
     // 监听刷新channel资料事件
     WKIM.shared.channelManager.addOnRefreshListener("channel_conversation",
         (refreshChannel) async {
@@ -227,7 +288,6 @@ class ChannelController extends _$ChannelController with DropdownMenuMixin {
             }
           }
           break;
-        //TODO 处理更多指令
       }
     });
 
@@ -402,6 +462,25 @@ class ChannelController extends _$ChannelController with DropdownMenuMixin {
     });
   }
 
+  void _disposeListener() {
+    WKIM.shared.connectionManager
+        .removeOnConnectionStatus('channel_conversation');
+    WKIM.shared.conversationManager
+        .removeClearAllRedDotListener('channel_conversation');
+    WKIM.shared.channelManager.removeOnRefreshListener("channel_conversation");
+    WKIM.shared.conversationManager
+        .removeDeleteMsgListener("channel_conversation");
+    WKIM.shared.cmdManager.removeCmdListener("channel_conversation_cmd");
+    WKIM.shared.messageManager
+        .removeOnRefreshMsgListener("channel_conversation");
+    WKIM.shared.messageManager
+        .removeClearChannelMsgListener("channel_conversation");
+    WKIM.shared.reminderManager
+        .removeOnNewReminderListener("channel_conversation");
+    WKIM.shared.conversationManager
+        .removeOnRefreshMsgListListener('channel_conversation');
+  }
+
   Future<void> getUnreadMessageCount() async {
     final unreadMessageCount =
         await WKIM.shared.conversationManager.getAllUnreadCount();
@@ -445,7 +524,6 @@ class ChannelController extends _$ChannelController with DropdownMenuMixin {
     List<ChannelState> normalList = [];
     for (var i = 0; i < list.length; i++) {
       final channel = await list[i].conversationMsg.getWkChannel();
-      list[i].channel = channel;
       if (channel != null && channel.top == 1) {
         topList.add(list[i]);
       } else {
@@ -743,6 +821,32 @@ class ChannelController extends _$ChannelController with DropdownMenuMixin {
       state = state.copyWith(
         typingTimer: null,
       );
+    }
+  }
+
+  void _updateTop(String channelID, int channelType, int top) async {
+    bool success = false;
+    if (channelType == WKChannelType.personal) {
+      success =
+          await Apis.updateUserSetting(uid: channelID, data: {"top": top});
+    } else {
+      success =
+          await Apis.updateGroupSetting(groupNo: channelID, data: {"top": top});
+    }
+
+    if (success) {
+      // ToastUtil.simpleToast(Global.context!.t.c.saveSuccessfully);
+    }
+  }
+
+  void _updateMute(String channelID, int channelType, int mute) async {
+    bool success = false;
+    if (channelType == WKChannelType.personal) {
+      success =
+          await Apis.updateUserSetting(uid: channelID, data: {"mute": mute});
+    } else {
+      success = await Apis.updateGroupSetting(
+          groupNo: channelID, data: {"mute": mute});
     }
   }
 }

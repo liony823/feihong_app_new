@@ -1,6 +1,7 @@
 import 'package:auth/auth.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:base/base.dart';
+import 'package:chat/chat.dart';
 import 'package:common/common.dart';
 import 'package:contact/contact.dart';
 import 'package:core/core.dart';
@@ -19,6 +20,7 @@ class AppRouter extends RootStackRouter {
     _routes.addAll(BaseRouter().routes);
     _routes.addAll(AuthRouter().routes);
     _routes.addAll(ContactRouter().routes);
+    _routes.addAll(ChatRouter().routes);
     // for (var module in modules) {
     //   if (module.sid == 'base') {
     //   } else if (module.sid == 'auth') {}

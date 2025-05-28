@@ -81,7 +81,7 @@ Future<void> main() async {
               ..modifier = FieldModifier.constant
               ..type = refer('String')
               ..name = 'package'
-              ..assignment = const Code("'stream_chat_flutter'"),
+              ..assignment = const Code("'stream_ui'"),
           ),
           // Icon data for each SVG file
           ...svgIconFiles.map(

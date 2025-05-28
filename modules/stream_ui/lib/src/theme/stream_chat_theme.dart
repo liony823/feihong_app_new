@@ -188,7 +188,7 @@ class StreamChatThemeData {
           width: 50,
         ),
       ),
-      titleStyle: textTheme.body,
+      titleStyle: textTheme.bodyBold,
       subtitleStyle: textTheme.footnote.copyWith(
         color: const Color(0xff7A7A7A),
       ),

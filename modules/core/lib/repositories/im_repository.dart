@@ -23,6 +23,38 @@ class IMRepository {
     }
     return ip;
   }
+
+  /// 更新会话未读数
+  Future<bool> updateConversationUnreadCount(
+      String channelID, int channelType, int unread) async {
+    try {
+      await _apiClient.put(ApiConfig.clearUnread, data: {
+        "unread": unread,
+        "channel_id": channelID,
+        "channel_type": channelType
+      });
+      return true;
+    } catch (e) {
+      AppLogger.e("更新会话未读数失败");
+      return false;
+    }
+  }
+
+  /// 清除某频道消息
+  Future<bool> offsetMessage(
+      String channelID, int channelType, int messageSeq) async {
+    try {
+      await _apiClient.put(ApiConfig.offsetMessage, data: {
+        "message_seq": messageSeq,
+        "channel_id": channelID,
+        "channel_type": channelType
+      });
+      return true;
+    } catch (e) {
+      AppLogger.e("清除频道消息失败");
+      return false;
+    }
+  }
 }
 
 @riverpod

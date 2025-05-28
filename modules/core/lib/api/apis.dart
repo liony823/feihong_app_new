@@ -166,4 +166,56 @@ class Apis {
       return null;
     }
   }
+
+  /// 更新用户设置
+  static Future<bool> updateUserSetting(
+      {required String uid, required Map<String, dynamic> data}) async {
+    try {
+      await ApiClient.instance.put("/users/$uid/setting", data: data);
+      return true;
+    } catch (e) {
+      AppLogger.e("更新用户设置失败");
+      return false;
+    }
+  }
+
+  /// 更新群设置
+  static Future<bool> updateGroupSetting(
+      {required String groupNo, required Map<String, dynamic> data}) async {
+    try {
+      await ApiClient.instance.put("/groups/$groupNo/setting", data: data);
+      return true;
+    } catch (e) {
+      AppLogger.e("更新群组设置失败");
+      return false;
+    }
+  }
+
+  /// 获取用户信息
+  static Future<UserInfo?> getUserInfo({required String uid}) async {
+    try {
+      final response = await ApiClient.instance.get("/users/$uid");
+      if (response.data != null) {
+        return UserInfo.fromJson(response.data);
+      }
+      return null;
+    } catch (e) {
+      AppLogger.e("获取用户信息失败");
+      return null;
+    }
+  }
+
+  /// 获取群组信息
+  static Future<GroupInfo?> getGroupInfo({required String groupNo}) async {
+    try {
+      final response = await ApiClient.instance.get("/groups/$groupNo");
+      if (response.data != null) {
+        return GroupInfo.fromJson(response.data);
+      }
+      return null;
+    } catch (e) {
+      AppLogger.e("获取群组信息失败");
+      return null;
+    }
+  }
 }

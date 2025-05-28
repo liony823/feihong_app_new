@@ -1,4 +1,3 @@
-import 'package:wukongimfluttersdk/entity/channel.dart';
 import 'package:wukongimfluttersdk/entity/conversation.dart';
 import 'package:wukongimfluttersdk/entity/msg.dart';
 import 'package:wukongimfluttersdk/entity/reminder.dart';
@@ -10,14 +9,11 @@ class ChannelState {
     WKUIConversationMsg conversationMsg,
   ): conversationMsg = conversationMsg, childList = [] {
     this.conversationMsg.getWkChannel().then((value) {
-      this.channel = value;
       this.isTop = value?.top;
     });
   }
 
   WKUIConversationMsg conversationMsg;
-
-  WKChannel? channel;
 
   WKMsg? lastMsg;
 

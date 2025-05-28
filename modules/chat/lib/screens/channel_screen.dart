@@ -1,3 +1,5 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:chat/route/route.gr.dart';
 import 'package:common/common.dart';
 import 'package:flutter/material.dart';
 import 'package:core/core.dart';
@@ -23,46 +25,88 @@ class ChannelScreen extends HookConsumerWidget {
           IconButton(
             onPressed: () {},
             icon: const Icon(EvaIcons.search_outline),
+            color: AppTheme.darkSecondaryTextColor2,
           ),
           ContactDropdownMenu(
             onItemPressed: channelController.onDropdownMenuPressed,
           ),
         ],
       ),
-      body: SlidableAutoCloseBehavior(
-        child: StreamChannelListView(
-          channels: state.channelList,
-          itemBuilder: (context, items, index, defaultWidget) {
-            final chatTheme = StreamChatTheme.of(context);
-            final channel = state.channelList[index];
-            final backgroundColor = chatTheme.colorTheme.highlight;
-            return Slidable(
-              groupTag: "channels-actions",
-              endActionPane: ActionPane(
-                motion: const BehindMotion(),
-                extentRatio: 0.4,
-                children: [
-                  CustomSlidableAction(
-                      backgroundColor: backgroundColor,
-                      onPressed: (context) {},
-                      child: const Icon(Icons.more_horiz)),
-                  CustomSlidableAction(
-                      backgroundColor: backgroundColor,
-                      onPressed: (context) {},
-                      child: StreamSvgIcon(
-                        icon: StreamSvgIcons.delete,
-                        color: chatTheme.colorTheme.accentPrimary,
-                      )),
-                ],
-              ),
-              child: ColoredBox(
-                color: channel.isTop == 1
-                    ? Colors.white70
-                    : Colors.white,
-                child: defaultWidget,
-              ),
-            );
-          },
+      body: Container(
+        decoration: BoxDecoration(
+            border: Border(
+          top: BorderSide(
+            color: AppTheme.dividerColor2,
+            width: 0.5.w,
+          ),
+        )),
+        child: SlidableAutoCloseBehavior(
+          child: StreamChannelListView(
+            channels: state.channelList,
+            onChannelTap: (channelState) => context.pushRoute(ChatRoute(
+                channelID: channelState.conversationMsg.channelID,
+                channelType: channelState.conversationMsg.channelType)),
+            itemBuilder: (context, items, index, defaultWidget) {
+              final chatTheme = StreamChatTheme.of(context);
+              final channel = state.channelList[index];
+              return Slidable(
+                groupTag: "channels-actions",
+                endActionPane: ActionPane(
+                  motion: const DrawerMotion(),
+                  extentRatio: channel.getUnreadCount > 0 ? 0.6 : 0.4,
+                  children: [
+                    FutureBuilder(
+                        future: channel.conversationMsg.getWkChannel(),
+                        builder: (context, snapshot) {
+                          if (snapshot.hasData) {
+                            final wkChannel = snapshot.data;
+                            if (wkChannel != null) {
+                              return CustomSlidableAction(
+                                  backgroundColor: chatTheme.colorTheme.appBg,
+                                  onPressed: (context) => channelController
+                                      .onMuteAction(channel.conversationMsg),
+                                  child: StreamSvgIcon(
+                                      icon: wkChannel.mute == 1
+                                          ? StreamSvgIcons.volumeUp
+                                          : StreamSvgIcons.mute));
+                            }
+                          }
+                          return CustomSlidableAction(
+                              backgroundColor: chatTheme.colorTheme.appBg,
+                              onPressed: (context) => channelController
+                                  .onMuteAction(channel.conversationMsg),
+                              child: StreamSvgIcon(icon: StreamSvgIcons.mute));
+                        }),
+                    CustomSlidableAction(
+                        backgroundColor: chatTheme.colorTheme.inputBg,
+                        onPressed: (context) => channelController
+                            .onPinAction(channel.conversationMsg),
+                        child: StreamSvgIcon(
+                            icon: channel.isTop == 1
+                                ? StreamSvgIcons.unpin
+                                : StreamSvgIcons.pin)),
+                    if (channel.getUnreadCount > 0)
+                      CustomSlidableAction(
+                          backgroundColor: chatTheme.colorTheme.accentPrimary,
+                          onPressed: (context) => channelController
+                              .onMarkReadedAction(channel.conversationMsg),
+                          child: const StreamSvgIcon(
+                              icon: StreamSvgIcons.badgeCheck)),
+                    CustomSlidableAction(
+                        backgroundColor: chatTheme.colorTheme.accentError,
+                        onPressed: (context) => channelController
+                            .onDeleteAction(channel.conversationMsg),
+                        child:
+                            const StreamSvgIcon(icon: StreamSvgIcons.delete)),
+                  ],
+                ),
+                child: ColoredBox(
+                    color:
+                        channel.isTop == 1 ? Colors.transparent : Colors.white,
+                    child: defaultWidget),
+              );
+            },
+          ),
         ),
       ),
     );
@@ -99,7 +143,10 @@ class ChannelScreen extends HookConsumerWidget {
                 color: bgColor,
               ),
               child: Center(
-                child: (delayMs > -1 && (state.connectionStatus == WKConnectStatus.success || state.connectionStatus == WKConnectStatus.syncCompleted))
+                child: (delayMs > -1 &&
+                        (state.connectionStatus == WKConnectStatus.success ||
+                            state.connectionStatus ==
+                                WKConnectStatus.syncCompleted))
                     ? Text(
                         '${delayMs}ms',
                         style: TextStyle(

@@ -23,6 +23,11 @@ class WKSystemAccount {
   }
 }
 
+class WKGroupType {
+  static const normalGroup = 0;
+  static const superGroup = 31;
+}
+
 class WKContentType extends WkMessageContentType {
   //系统消息
   static const systemMsg = 0;

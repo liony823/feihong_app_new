@@ -16,11 +16,12 @@ class ContactScreen extends HookConsumerWidget {
     return Scaffold(
         appBar: AppBar(
           title: context.t.contact.title.appBarText,
-          centerTitle: true,
+          centerTitle: false,
           actions: [
             IconButton(
               onPressed: () {},
               icon: const Icon(EvaIcons.search_outline),
+              color: AppTheme.darkSecondaryTextColor2,
             ),
             ContactDropdownMenu(
               onItemPressed: contactController.onDropdownMenuPressed,
@@ -33,7 +34,8 @@ class ContactScreen extends HookConsumerWidget {
           itemBuilder: (context, contact, index) {
             final isHeader = contact.uid == FakeHelper.fakeHeader.uid;
             return isHeader
-                ? _buildContactHeaderView(context, contactController,unreadFriendApplyCount: contactState.unreadFriendApplyCount)
+                ? _buildContactHeaderView(context, contactController,
+                    unreadFriendApplyCount: contactState.unreadFriendApplyCount)
                 : _buildContactItemView(
                     context,
                     contact,
@@ -45,16 +47,19 @@ class ContactScreen extends HookConsumerWidget {
   }
 
   Widget _buildContactHeaderView(
-      BuildContext context, ContactController controller, {
+    BuildContext context,
+    ContactController controller, {
     int unreadFriendApplyCount = 0,
-      }) {
+  }) {
     return Container(
       color: AppTheme.primaryLightColor,
       margin: EdgeInsets.only(bottom: 12.h),
       child: Column(
         children: [
           _buildItemView(context,
-          extra: unreadFriendApplyCount > 0 ? UnreadIndicator(unreadCount: unreadFriendApplyCount) : null,
+              extra: unreadFriendApplyCount > 0
+                  ? UnreadIndicator(unreadCount: unreadFriendApplyCount)
+                  : null,
               avatar: _buildContactHeaderIcon(context,
                   icon: EvaIcons.person_add, color: Color(0xFFFA9C3E)),
               text: context.t.contact.newFriend, onPressed: () {
@@ -87,7 +92,10 @@ class ContactScreen extends HookConsumerWidget {
     return _buildItemView(
       context,
       avatar: UserAvatar(
-        user: User(uid: contact.uid, name: contact.getName(),image: Apis.getAvatarUrl(contact.uid)),
+        user: User(
+            uid: contact.uid,
+            name: contact.getName(),
+            image: Apis.getAvatarUrl(contact.uid)),
       ),
       text: contact.getName(),
       onPressed: onPressed,
@@ -126,7 +134,7 @@ class ContactScreen extends HookConsumerWidget {
                   ).fontSize(16.sp),
                 ),
                 Padding(
-                  padding:  EdgeInsets.symmetric(horizontal: 12.w),
+                  padding: EdgeInsets.symmetric(horizontal: 12.w),
                   child: extra ?? const SizedBox(),
                 ),
               ],

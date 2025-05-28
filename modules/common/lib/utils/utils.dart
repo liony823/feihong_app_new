@@ -5,8 +5,19 @@ import 'package:image_cropper/image_cropper.dart';
 import 'package:pinyin/pinyin.dart';
 
 class Utils {
-  static bool isEmptyOrNull(String? str) {
-    return str == null || str.isEmpty;
+  
+  /// 判断是否为空
+  static bool isEmptyOrNull(dynamic s) {
+    if (s == null){
+      return true;
+    }
+    if (s is List) {
+      return s.isEmpty;
+    }
+    if (s is String) {
+      return s.isEmpty;
+    }
+    return false;
   }
 
   static Future<CroppedFile?> uCrop(String path,
