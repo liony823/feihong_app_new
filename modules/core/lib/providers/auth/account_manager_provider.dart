@@ -104,9 +104,9 @@ class AccountManagerController extends _$AccountManagerController {
           zone: account.zone,
           phone: account.phone,
           password: account.password,
-          deviceId: CommonModule.deviceID,
-          deviceName: CommonModule.deviceName,
-          deviceModel: CommonModule.deviceModel,
+          deviceId: AppConstants.deviceID,
+          deviceName: AppConstants.deviceName,
+          deviceModel: AppConstants.deviceModel,
         ),
       );
     } else if (account.loginType == 2) {
@@ -114,9 +114,9 @@ class AccountManagerController extends _$AccountManagerController {
         asyncFunction: () => _authService.loginByUsername(
           username: account.username,
           password: account.password,
-          deviceId: CommonModule.deviceID,
-          deviceName: CommonModule.deviceName,
-          deviceModel: CommonModule.deviceModel,
+          deviceId: AppConstants.deviceID,
+          deviceName: AppConstants.deviceName,
+          deviceModel: AppConstants.deviceModel,
         ),
       );
     }

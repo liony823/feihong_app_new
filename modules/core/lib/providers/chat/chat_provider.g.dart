@@ -6,7 +6,7 @@ part of 'chat_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$chatProviderHash() => r'14a957fe812d6feba20c4da0ba7793f83e95d66a';
+String _$chatControllerHash() => r'25e23960be02e32606d56d869073d031ffe1c024';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -29,53 +29,53 @@ class _SystemHash {
   }
 }
 
-abstract class _$ChatProvider
+abstract class _$ChatController
     extends BuildlessAutoDisposeNotifier<ChatProviderState> {
   late final String channelID;
   late final int channelType;
-  late final List<WKMessageContent> msgContentList;
-  late final int lastPreviewMsgOrderSeq;
-  late final int keepOffsetY;
-  late final int redDot;
-  late final int tipsOrderSeq;
-  late final int unreadStartMsgOrderSeq;
-  late final int aroundMsgSeq;
+  late final List<WKMessageContent>? msgContentList;
+  late final int? lastPreviewMsgOrderSeq;
+  late final int? keepOffsetY;
+  late final int? redDot;
+  late final int? tipsOrderSeq;
+  late final int? unreadStartMsgOrderSeq;
+  late final int? aroundMsgSeq;
 
   ChatProviderState build({
     required String channelID,
     required int channelType,
-    List<WKMessageContent> msgContentList = const [],
-    int lastPreviewMsgOrderSeq = 0,
-    int keepOffsetY = 0,
-    int redDot = 0,
-    int tipsOrderSeq = 0,
-    int unreadStartMsgOrderSeq = 0,
-    int aroundMsgSeq = 0,
+    List<WKMessageContent>? msgContentList,
+    int? lastPreviewMsgOrderSeq,
+    int? keepOffsetY,
+    int? redDot,
+    int? tipsOrderSeq,
+    int? unreadStartMsgOrderSeq,
+    int? aroundMsgSeq,
   });
 }
 
-/// See also [ChatProvider].
-@ProviderFor(ChatProvider)
-const chatProviderProvider = ChatProviderFamily();
+/// See also [ChatController].
+@ProviderFor(ChatController)
+const chatControllerProvider = ChatControllerFamily();
 
-/// See also [ChatProvider].
-class ChatProviderFamily extends Family<ChatProviderState> {
-  /// See also [ChatProvider].
-  const ChatProviderFamily();
+/// See also [ChatController].
+class ChatControllerFamily extends Family<ChatProviderState> {
+  /// See also [ChatController].
+  const ChatControllerFamily();
 
-  /// See also [ChatProvider].
-  ChatProviderProvider call({
+  /// See also [ChatController].
+  ChatControllerProvider call({
     required String channelID,
     required int channelType,
-    List<WKMessageContent> msgContentList = const [],
-    int lastPreviewMsgOrderSeq = 0,
-    int keepOffsetY = 0,
-    int redDot = 0,
-    int tipsOrderSeq = 0,
-    int unreadStartMsgOrderSeq = 0,
-    int aroundMsgSeq = 0,
+    List<WKMessageContent>? msgContentList,
+    int? lastPreviewMsgOrderSeq,
+    int? keepOffsetY,
+    int? redDot,
+    int? tipsOrderSeq,
+    int? unreadStartMsgOrderSeq,
+    int? aroundMsgSeq,
   }) {
-    return ChatProviderProvider(
+    return ChatControllerProvider(
       channelID: channelID,
       channelType: channelType,
       msgContentList: msgContentList,
@@ -89,8 +89,8 @@ class ChatProviderFamily extends Family<ChatProviderState> {
   }
 
   @override
-  ChatProviderProvider getProviderOverride(
-    covariant ChatProviderProvider provider,
+  ChatControllerProvider getProviderOverride(
+    covariant ChatControllerProvider provider,
   ) {
     return call(
       channelID: provider.channelID,
@@ -117,25 +117,25 @@ class ChatProviderFamily extends Family<ChatProviderState> {
       _allTransitiveDependencies;
 
   @override
-  String? get name => r'chatProviderProvider';
+  String? get name => r'chatControllerProvider';
 }
 
-/// See also [ChatProvider].
-class ChatProviderProvider
-    extends AutoDisposeNotifierProviderImpl<ChatProvider, ChatProviderState> {
-  /// See also [ChatProvider].
-  ChatProviderProvider({
+/// See also [ChatController].
+class ChatControllerProvider
+    extends AutoDisposeNotifierProviderImpl<ChatController, ChatProviderState> {
+  /// See also [ChatController].
+  ChatControllerProvider({
     required String channelID,
     required int channelType,
-    List<WKMessageContent> msgContentList = const [],
-    int lastPreviewMsgOrderSeq = 0,
-    int keepOffsetY = 0,
-    int redDot = 0,
-    int tipsOrderSeq = 0,
-    int unreadStartMsgOrderSeq = 0,
-    int aroundMsgSeq = 0,
+    List<WKMessageContent>? msgContentList,
+    int? lastPreviewMsgOrderSeq,
+    int? keepOffsetY,
+    int? redDot,
+    int? tipsOrderSeq,
+    int? unreadStartMsgOrderSeq,
+    int? aroundMsgSeq,
   }) : this._internal(
-          () => ChatProvider()
+          () => ChatController()
             ..channelID = channelID
             ..channelType = channelType
             ..msgContentList = msgContentList
@@ -145,15 +145,15 @@ class ChatProviderProvider
             ..tipsOrderSeq = tipsOrderSeq
             ..unreadStartMsgOrderSeq = unreadStartMsgOrderSeq
             ..aroundMsgSeq = aroundMsgSeq,
-          from: chatProviderProvider,
-          name: r'chatProviderProvider',
+          from: chatControllerProvider,
+          name: r'chatControllerProvider',
           debugGetCreateSourceHash:
               const bool.fromEnvironment('dart.vm.product')
                   ? null
-                  : _$chatProviderHash,
-          dependencies: ChatProviderFamily._dependencies,
+                  : _$chatControllerHash,
+          dependencies: ChatControllerFamily._dependencies,
           allTransitiveDependencies:
-              ChatProviderFamily._allTransitiveDependencies,
+              ChatControllerFamily._allTransitiveDependencies,
           channelID: channelID,
           channelType: channelType,
           msgContentList: msgContentList,
@@ -165,7 +165,7 @@ class ChatProviderProvider
           aroundMsgSeq: aroundMsgSeq,
         );
 
-  ChatProviderProvider._internal(
+  ChatControllerProvider._internal(
     super._createNotifier, {
     required super.name,
     required super.dependencies,
@@ -185,17 +185,17 @@ class ChatProviderProvider
 
   final String channelID;
   final int channelType;
-  final List<WKMessageContent> msgContentList;
-  final int lastPreviewMsgOrderSeq;
-  final int keepOffsetY;
-  final int redDot;
-  final int tipsOrderSeq;
-  final int unreadStartMsgOrderSeq;
-  final int aroundMsgSeq;
+  final List<WKMessageContent>? msgContentList;
+  final int? lastPreviewMsgOrderSeq;
+  final int? keepOffsetY;
+  final int? redDot;
+  final int? tipsOrderSeq;
+  final int? unreadStartMsgOrderSeq;
+  final int? aroundMsgSeq;
 
   @override
   ChatProviderState runNotifierBuild(
-    covariant ChatProvider notifier,
+    covariant ChatController notifier,
   ) {
     return notifier.build(
       channelID: channelID,
@@ -211,10 +211,10 @@ class ChatProviderProvider
   }
 
   @override
-  Override overrideWith(ChatProvider Function() create) {
+  Override overrideWith(ChatController Function() create) {
     return ProviderOverride(
       origin: this,
-      override: ChatProviderProvider._internal(
+      override: ChatControllerProvider._internal(
         () => create()
           ..channelID = channelID
           ..channelType = channelType
@@ -244,14 +244,14 @@ class ChatProviderProvider
   }
 
   @override
-  AutoDisposeNotifierProviderElement<ChatProvider, ChatProviderState>
+  AutoDisposeNotifierProviderElement<ChatController, ChatProviderState>
       createElement() {
-    return _ChatProviderProviderElement(this);
+    return _ChatControllerProviderElement(this);
   }
 
   @override
   bool operator ==(Object other) {
-    return other is ChatProviderProvider &&
+    return other is ChatControllerProvider &&
         other.channelID == channelID &&
         other.channelType == channelType &&
         other.msgContentList == msgContentList &&
@@ -282,7 +282,7 @@ class ChatProviderProvider
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-mixin ChatProviderRef on AutoDisposeNotifierProviderRef<ChatProviderState> {
+mixin ChatControllerRef on AutoDisposeNotifierProviderRef<ChatProviderState> {
   /// The parameter `channelID` of this provider.
   String get channelID;
 
@@ -290,53 +290,52 @@ mixin ChatProviderRef on AutoDisposeNotifierProviderRef<ChatProviderState> {
   int get channelType;
 
   /// The parameter `msgContentList` of this provider.
-  List<WKMessageContent> get msgContentList;
+  List<WKMessageContent>? get msgContentList;
 
   /// The parameter `lastPreviewMsgOrderSeq` of this provider.
-  int get lastPreviewMsgOrderSeq;
+  int? get lastPreviewMsgOrderSeq;
 
   /// The parameter `keepOffsetY` of this provider.
-  int get keepOffsetY;
+  int? get keepOffsetY;
 
   /// The parameter `redDot` of this provider.
-  int get redDot;
+  int? get redDot;
 
   /// The parameter `tipsOrderSeq` of this provider.
-  int get tipsOrderSeq;
+  int? get tipsOrderSeq;
 
   /// The parameter `unreadStartMsgOrderSeq` of this provider.
-  int get unreadStartMsgOrderSeq;
+  int? get unreadStartMsgOrderSeq;
 
   /// The parameter `aroundMsgSeq` of this provider.
-  int get aroundMsgSeq;
+  int? get aroundMsgSeq;
 }
 
-class _ChatProviderProviderElement
-    extends AutoDisposeNotifierProviderElement<ChatProvider, ChatProviderState>
-    with ChatProviderRef {
-  _ChatProviderProviderElement(super.provider);
+class _ChatControllerProviderElement extends AutoDisposeNotifierProviderElement<
+    ChatController, ChatProviderState> with ChatControllerRef {
+  _ChatControllerProviderElement(super.provider);
 
   @override
-  String get channelID => (origin as ChatProviderProvider).channelID;
+  String get channelID => (origin as ChatControllerProvider).channelID;
   @override
-  int get channelType => (origin as ChatProviderProvider).channelType;
+  int get channelType => (origin as ChatControllerProvider).channelType;
   @override
-  List<WKMessageContent> get msgContentList =>
-      (origin as ChatProviderProvider).msgContentList;
+  List<WKMessageContent>? get msgContentList =>
+      (origin as ChatControllerProvider).msgContentList;
   @override
-  int get lastPreviewMsgOrderSeq =>
-      (origin as ChatProviderProvider).lastPreviewMsgOrderSeq;
+  int? get lastPreviewMsgOrderSeq =>
+      (origin as ChatControllerProvider).lastPreviewMsgOrderSeq;
   @override
-  int get keepOffsetY => (origin as ChatProviderProvider).keepOffsetY;
+  int? get keepOffsetY => (origin as ChatControllerProvider).keepOffsetY;
   @override
-  int get redDot => (origin as ChatProviderProvider).redDot;
+  int? get redDot => (origin as ChatControllerProvider).redDot;
   @override
-  int get tipsOrderSeq => (origin as ChatProviderProvider).tipsOrderSeq;
+  int? get tipsOrderSeq => (origin as ChatControllerProvider).tipsOrderSeq;
   @override
-  int get unreadStartMsgOrderSeq =>
-      (origin as ChatProviderProvider).unreadStartMsgOrderSeq;
+  int? get unreadStartMsgOrderSeq =>
+      (origin as ChatControllerProvider).unreadStartMsgOrderSeq;
   @override
-  int get aroundMsgSeq => (origin as ChatProviderProvider).aroundMsgSeq;
+  int? get aroundMsgSeq => (origin as ChatControllerProvider).aroundMsgSeq;
 }
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

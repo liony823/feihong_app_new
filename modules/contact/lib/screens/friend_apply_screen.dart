@@ -1,9 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:common/common.dart';
 import 'package:core/core.dart';
-import 'package:core/helper/fake.dart';
-import 'package:core/models/contact/friend_apply.dart';
-import 'package:core/providers/contact/friend_apply_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:icons_plus/icons_plus.dart';

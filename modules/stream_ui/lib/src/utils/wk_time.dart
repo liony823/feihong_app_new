@@ -58,10 +58,10 @@ class WKTimeUtils {
             result = DateFormat(timeFormat).format(otherCalendar);
             break;
         }
-      }else {
+      } else {
         result = DateFormat(timeFormat).format(otherCalendar);
       }
-    }else {
+    } else {
       result = DateFormat(yearTimeFormat).format(otherCalendar);
     }
 
@@ -103,5 +103,69 @@ class WKTimeUtils {
     final adjustedDay = day + (firstWeekday - 1);
     // 计算第几周（ceil 向上取整）
     return (adjustedDay / 7).ceil();
+  }
+
+  static String getOnlineTime(int time) {
+    final context = Global.context;
+    if (context == null) {
+      return "";
+    }
+    int diff = (DateTime.now().millisecondsSinceEpoch ~/ 1000) - time;
+    double r;
+    if (diff > 60) {
+      r = diff / 60;
+      if (r > 60) {
+        return "";
+      } else {
+        return context.t.c.dateFormat.minute(minute: r.toInt());
+      }
+    }
+
+    return context.t.c.dateFormat.just;
+  }
+
+  static String getNowDate() {
+    String temp_str;
+    final dt = DateTime.now();
+    //最后的aa表示“上午”或“下午”    HH表示24小时制    如果换成hh表示12小时制
+    temp_str = DateFormat("yyyy-MM-dd").format(dt);
+    return temp_str;
+  }
+
+  static String getShowDate(int millisecondsSinceEpoch) {
+    final dateTime =
+        DateTime.fromMillisecondsSinceEpoch(millisecondsSinceEpoch);
+    final nowDate = getNowDate();
+    final showDate = DateFormat("yyyy-MM-dd").format(dateTime);
+    if (nowDate.split("-")[0] == showDate.split("-")[0]) {
+      return DateFormat("MM-dd").format(dateTime);
+    }
+    return showDate;
+  }
+
+  static String getShowDateAndMinute(int millisecondsSinceEpoch) {
+    if (millisecondsSinceEpoch < 100) return "";
+    final nowDate = getNowDate();
+    final dateTime =
+        DateTime.fromMillisecondsSinceEpoch(millisecondsSinceEpoch);
+    final showDate = DateFormat("yyyy-MM-dd").format(dateTime);
+    if (nowDate.split("-")[0] == showDate.split("-")[0]) {
+      return DateFormat("yyyy-MM-dd HH:mm:ss").format(dateTime);
+    } else {
+      return DateFormat("MM-dd HH:mm").format(dateTime);
+    }
+  }
+
+  static bool isSameDay(int time1, int time2) {
+    if (time1.toString().length < 13) {
+      time1 = time1 * 1000;
+    }
+    if (time2.toString().length < 13) {
+      time2 = time2 * 1000;
+    }
+    return DateFormat("yyyyMMdd")
+            .format(DateTime.fromMicrosecondsSinceEpoch(time1)) ==
+        DateFormat("yyyyMMdd")
+            .format(DateTime.fromMicrosecondsSinceEpoch(time2));
   }
 }

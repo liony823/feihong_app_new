@@ -30,10 +30,18 @@
     "letsStartChattingLabel": "让我们开始聊天吧",
     "loadingChannelsError": "加载频道失败",
 
+    "launchUrlError": "不能打开此链接",
+
     "gender": [
         "其他",
         "男",
         "女"
+    ],
+
+    "onlineDevice":[
+        "手机端在线",
+        "Web端在线",
+        "电脑端在线"
     ],
 
     "dateFormat": {
@@ -49,7 +57,13 @@
             "周四",
             "周五",
             "周六"
-        ]
+        ],
+        "minute": "$minute分钟",
+        "hour": "$hour小时",
+        "day": "$day天",
+        "month": "$month月",
+        "year": "$year年",
+        "just": "刚刚"
     },
     
 
@@ -247,5 +261,15 @@
         "setGenderFailed":"修改性别失败",
         "introductionDefault":"暂无个性签名",
         "saveImage":"点击保存图片"
-    }
+    },
+
+    "connectStatus": [
+        "同步失败",
+        "链接成功",
+        "被其他设备登录",
+        "同步中",
+        "链接中",
+        "无网络",
+        "同步成功"
+    ]
 }

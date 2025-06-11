@@ -1,4 +1,4 @@
-# melos_managed_dependency_overrides: common,auth,chat,contact,intl
+# melos_managed_dependency_overrides: common,auth,chat,contact,intl,base,stream_ui
 dependency_overrides:
   common:
     path: ../common
@@ -9,3 +9,7 @@ dependency_overrides:
   contact:
     path: ../contact
   intl: ^0.20.2
+  base:
+    path: ../base
+  stream_ui:
+    path: ../stream_ui

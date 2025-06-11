@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:core/core.dart';
 import 'package:wukongimfluttersdk/entity/channel.dart';
 
-class ChannelAvatar extends StatelessWidget {
-  const ChannelAvatar({
+class StreamChannelAvatar extends StatelessWidget {
+  const StreamChannelAvatar({
     super.key,
     this.borderRadius,
     this.constraints,

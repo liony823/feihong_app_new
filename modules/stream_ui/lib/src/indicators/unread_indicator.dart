@@ -1,10 +1,10 @@
 import 'package:stream_ui/stream_ui.dart';
 import 'package:flutter/material.dart';
 
-class UnreadIndicator extends StatelessWidget {
+class StreamUnreadIndicator extends StatelessWidget {
   final int unreadCount;
   final bool isMuted;
-  const UnreadIndicator({
+  const StreamUnreadIndicator({
     super.key,
     required this.unreadCount,
     this.isMuted = false,

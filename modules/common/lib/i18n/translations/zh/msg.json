@@ -15,6 +15,9 @@
     "systemFileHelper":"文件传输助手",
     "systemTeam":"系统通知",
     "chat":"会话",
-    "ohter_typing":"对方正在输入",
-    "user_is_typing":"$name正在输入"
+    "ohterTyping":"对方正在输入",
+    "userIsTyping":"$name正在输入",
+    "groupMembers":"$count个成员",
+    "onlintCount":"$count人在线",
+    "lastSeenTime":"上次在线时间$time"
 }

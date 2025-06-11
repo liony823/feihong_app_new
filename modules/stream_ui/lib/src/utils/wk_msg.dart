@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:common/common.dart';
 import 'package:flutter/widgets.dart';
+import 'package:stream_ui/stream_ui.dart';
 import 'package:wukongimfluttersdk/entity/conversation.dart';
 import 'package:wukongimfluttersdk/entity/msg.dart';
 import 'package:wukongimfluttersdk/type/const.dart';
@@ -21,6 +22,18 @@ class WKSystemAccount {
   static bool isSystemAccount(String channelID) {
     return channelID == systemTeam || channelID == systemFileHelper;
   }
+}
+
+class WKChannelCustomExtras {
+  static const String memberCount = "member_count";
+  static const String onlineCount = "online_count";
+  static const String role = "role";
+}
+
+class WKChatContentSpanType {
+  static const String link = "link";
+  static const String mention = "mention";
+  static const String botCommand = "bot_command";
 }
 
 class WKGroupType {
@@ -72,6 +85,10 @@ class WKContentType extends WkMessageContentType {
 
   static bool isSystemMsg(int type) {
     return type >= 1000 && type <= 2000;
+  }
+
+  static bool isLocalMsg(int type){
+    return type <= 0;
   }
 }
 
@@ -311,5 +328,16 @@ class WKMsgUtils {
     }
 
     return content;
+  }
+
+  static WKUIChatMsgItem msg2UIMsg(WKMsg msg, int memberCount, bool showNickname, bool isChoose){
+    if (msg.wkMsgExtra?.readedCount == 0){
+      msg.wkMsgExtra?.unreadCount = memberCount - 1;
+    }
+    WKUIChatMsgItem msgItem = WKUIChatMsgItem();
+    msgItem.wkMsg = msg;
+    msgItem.isChoose = isChoose;
+    msgItem.showNickName = showNickname;
+    return msgItem;
   }
 }

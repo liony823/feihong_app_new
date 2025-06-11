@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:stream_ui/stream_ui.dart';
-import 'package:wukongimfluttersdk/entity/channel.dart';
 
 /// It shows the current [Channel] name using a [Text] widget.
 ///
 /// The widget uses a [StreamBuilder] to render the channel information
 /// image as soon as it updates.
-class ChannelName extends StatelessWidget {
+class StreamChannelName extends StatelessWidget {
   /// Instantiate a new ChannelName
-  const ChannelName({
+  const StreamChannelName({
     super.key,
     required this.channelState,
     this.textStyle,

@@ -1,4 +1,4 @@
-part of 'extensions.dart';
+ part of 'extensions.dart';
 
 /// String 字符串扩展
 extension StringExtensions on String {
@@ -121,16 +121,12 @@ extension StringExtensions on String {
 
   /// 判断字符串是否是有效的电子邮件
   bool get isValidEmail {
-    final emailRegExp = RegExp(
-      r'^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+',
-    );
-    return emailRegExp.hasMatch(this);
+    return Regex.EMAIL_PATTERN.hasMatch(this);
   }
 
   /// 判断字符串是否是有效的手机号码（简单验证）
   bool get isValidPhone {
-    final phoneRegExp = RegExp(r'^\d{11}$');
-    return phoneRegExp.hasMatch(this);
+    return Regex.PHONE_PATTERN.hasMatch(this);
   }
 
   /// 将字符串转换为驼峰命名

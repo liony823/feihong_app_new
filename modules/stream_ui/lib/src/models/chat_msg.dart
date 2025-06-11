@@ -1,23 +1,25 @@
+
 import 'package:common/common.dart';
+import 'package:stream_ui/stream_ui.dart';
 import 'package:wukongimfluttersdk/entity/msg.dart';
+import 'package:wukongimfluttersdk/type/const.dart';
 
 class WKUIChatMsgItem {
-  final WKMsg? wkMsg; // 本条消息
-  final WKMsg? previousMsg; // 上一条消息
-  final WKMsg? nextMsg; // 下一条消息
+  WKMsg? wkMsg; // 本条消息
+  WKMsg? previousMsg; // 上一条消息
+  WKMsg? nextMsg; // 
+  bool showNickName; // 是否显示消息昵称
+  bool isPlaying; // 语音是否在播放
+  bool isChoose; // 是否选择消息
+  bool isChecked; // 是否选中消息
+  bool isShowTips; // 是否显示背景提示
+  bool isUpdateStatus;
+  bool isRefreshReaction;
+  bool isRefreshAvatarAndName;
+  bool isShowPinnedMessage;
 
-  final bool showNickName; // 是否显示消息昵称
-  final bool isPlaying; // 语音是否在播放
-  final bool isChoose; // 是否选择消息
-  final bool isChecked; // 是否选中消息
-  final bool isShowTips; // 是否显示背景提示
-  final bool isUpdateStatus;
-  final bool isRefreshReaction;
-  final bool isRefreshAvatarAndName;
-  final bool isShowPinnedMessage;
-
-  final int isPinned; // 是否置顶
-  final ILinkClick? iLinkClick;
+  int isPinned; // 是否置顶
+  ILinkClick? iLinkClick;
 
   WKUIChatMsgItem({
     this.wkMsg,
@@ -43,6 +45,27 @@ class WKUIChatMsgItem {
     }
 
     return showContent;
+  }
+
+  formatSpans(WKMsg wkMsg){
+    if (wkMsg.contentType != WkMessageContentType.text || wkMsg.messageContent == null){
+      return;
+    }
+    List<String> displaySpans = [];
+    displaySpans.add(content);
+    final entities = wkMsg.messageContent?.entities;
+    if (entities == null || entities.isEmpty){
+      return;
+    }
+    for (WKMsgEntity entity in entities){
+      if ((entity.offset + entity.length) > displaySpans.length || entity.offset > displaySpans.length){
+        continue;
+      }
+
+      if (entity.type == WKChatContentSpanType.link){
+        String t = content.substring(entity.offset, entity.offset + entity.length);
+      }
+    }
   }
 }
 

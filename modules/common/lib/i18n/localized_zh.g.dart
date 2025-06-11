@@ -80,10 +80,16 @@ class LocalizedCZh {
 	String get permanentlyDenied => '权限不允许';
 	String get letsStartChattingLabel => '让我们开始聊天吧';
 	String get loadingChannelsError => '加载频道失败';
+	String get launchUrlError => '不能打开此链接';
 	List<String> get gender => [
 		'其他',
 		'男',
 		'女',
+	];
+	List<String> get onlineDevice => [
+		'手机端在线',
+		'Web端在线',
+		'电脑端在线',
 	];
 	late final LocalizedCDateFormatZh dateFormat = LocalizedCDateFormatZh.internal(_root);
 	late final LocalizedCAgreementZh agreement = LocalizedCAgreementZh.internal(_root);
@@ -100,6 +106,15 @@ class LocalizedCZh {
 	late final LocalizedCSettingZh setting = LocalizedCSettingZh.internal(_root);
 	late final LocalizedCAccountZh account = LocalizedCAccountZh.internal(_root);
 	late final LocalizedCProfileZh profile = LocalizedCProfileZh.internal(_root);
+	List<String> get connectStatus => [
+		'同步失败',
+		'链接成功',
+		'被其他设备登录',
+		'同步中',
+		'链接中',
+		'无网络',
+		'同步成功',
+	];
 }
 
 // Path: contact
@@ -408,8 +423,11 @@ class LocalizedMsgZh {
 	String get systemFileHelper => '文件传输助手';
 	String get systemTeam => '系统通知';
 	String get chat => '会话';
-	String get ohter_typing => '对方正在输入';
-	String user_is_typing({required Object name}) => '${name}正在输入';
+	String get ohterTyping => '对方正在输入';
+	String userIsTyping({required Object name}) => '${name}正在输入';
+	String groupMembers({required Object count}) => '${count}个成员';
+	String onlintCount({required Object count}) => '${count}人在线';
+	String lastSeenTime({required Object time}) => '上次在线时间${time}';
 }
 
 // Path: c.dateFormat
@@ -432,6 +450,12 @@ class LocalizedCDateFormatZh {
 		'周五',
 		'周六',
 	];
+	String minute({required Object minute}) => '${minute}分钟';
+	String hour({required Object hour}) => '${hour}小时';
+	String day({required Object day}) => '${day}天';
+	String month({required Object month}) => '${month}月';
+	String year({required Object year}) => '${year}年';
+	String get just => '刚刚';
 }
 
 // Path: c.agreement
@@ -830,9 +854,13 @@ extension on Localized {
 			case 'c.permanentlyDenied': return '权限不允许';
 			case 'c.letsStartChattingLabel': return '让我们开始聊天吧';
 			case 'c.loadingChannelsError': return '加载频道失败';
+			case 'c.launchUrlError': return '不能打开此链接';
 			case 'c.gender.0': return '其他';
 			case 'c.gender.1': return '男';
 			case 'c.gender.2': return '女';
+			case 'c.onlineDevice.0': return '手机端在线';
+			case 'c.onlineDevice.1': return 'Web端在线';
+			case 'c.onlineDevice.2': return '电脑端在线';
 			case 'c.dateFormat.yesterday': return '昨天';
 			case 'c.dateFormat.am': return '上午';
 			case 'c.dateFormat.pm': return '下午';
@@ -844,6 +872,12 @@ extension on Localized {
 			case 'c.dateFormat.weeks.4': return '周四';
 			case 'c.dateFormat.weeks.5': return '周五';
 			case 'c.dateFormat.weeks.6': return '周六';
+			case 'c.dateFormat.minute': return ({required Object minute}) => '${minute}分钟';
+			case 'c.dateFormat.hour': return ({required Object hour}) => '${hour}小时';
+			case 'c.dateFormat.day': return ({required Object day}) => '${day}天';
+			case 'c.dateFormat.month': return ({required Object month}) => '${month}月';
+			case 'c.dateFormat.year': return ({required Object year}) => '${year}年';
+			case 'c.dateFormat.just': return '刚刚';
 			case 'c.agreement.userAgreement': return '《用户协议》';
 			case 'c.agreement.privacyPolicy': return '《隐私政策》';
 			case 'c.agreement.checkbox': return ({required InlineSpan userAgreement, required InlineSpan privacyPolicy}) => TextSpan(children: [
@@ -1007,6 +1041,13 @@ extension on Localized {
 			case 'c.profile.setGenderFailed': return '修改性别失败';
 			case 'c.profile.introductionDefault': return '暂无个性签名';
 			case 'c.profile.saveImage': return '点击保存图片';
+			case 'c.connectStatus.0': return '同步失败';
+			case 'c.connectStatus.1': return '链接成功';
+			case 'c.connectStatus.2': return '被其他设备登录';
+			case 'c.connectStatus.3': return '同步中';
+			case 'c.connectStatus.4': return '链接中';
+			case 'c.connectStatus.5': return '无网络';
+			case 'c.connectStatus.6': return '同步成功';
 			case 'contact.title': return '通讯录';
 			case 'contact.empty': return '暂无联系人';
 			case 'contact.newFriend': return '新的朋友';
@@ -1298,8 +1339,11 @@ extension on Localized {
 			case 'msg.systemFileHelper': return '文件传输助手';
 			case 'msg.systemTeam': return '系统通知';
 			case 'msg.chat': return '会话';
-			case 'msg.ohter_typing': return '对方正在输入';
-			case 'msg.user_is_typing': return ({required Object name}) => '${name}正在输入';
+			case 'msg.ohterTyping': return '对方正在输入';
+			case 'msg.userIsTyping': return ({required Object name}) => '${name}正在输入';
+			case 'msg.groupMembers': return ({required Object count}) => '${count}个成员';
+			case 'msg.onlintCount': return ({required Object count}) => '${count}人在线';
+			case 'msg.lastSeenTime': return ({required Object time}) => '上次在线时间${time}';
 			default: return null;
 		}
 	}

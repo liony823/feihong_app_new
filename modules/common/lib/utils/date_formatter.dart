@@ -19,6 +19,12 @@ String formatDate(BuildContext context, DateTime date) {
 
 /// Extension on [DateTime] to provide common date comparison utilities.
 extension DateTimeComparisonUtils on DateTime {
+  bool isSameDay(DateTime time) {
+    final jiffyDate = Jiffy.parseFromDateTime(this);
+    final jiffyDate2 = Jiffy.parseFromDateTime(time);
+    return jiffyDate.isSame(jiffyDate2, unit: Unit.day);
+  }
+
   /// Returns true if the date is today.
   bool get isToday {
     final jiffyDate = Jiffy.parseFromDateTime(this);

@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 class ImageUtil {
   ImageUtil._();
 
-  static const _package = "openim_common";
+  static const _package = "common";
 
   static Widget assetImage(
     String res, {

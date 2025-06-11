@@ -171,7 +171,7 @@ class HomeScreen extends HookConsumerWidget {
         PositionedDirectional(
               top: -4,
               start: 16,
-          child: UnreadIndicator(unreadCount: unReadCount),
+          child: StreamUnreadIndicator(unreadCount: unReadCount),
         ),
       ],
     );

@@ -60,9 +60,9 @@ class StreamTypingIndicator extends StatelessWidget {
                     child: Text(
                       channelState.conversationMsg.channelType ==
                               WKChannelType.group
-                          ? context.t.msg.user_is_typing(
+                          ? context.t.msg.userIsTyping(
                               name: channelState.typingUserName!)
-                          : context.t.msg.ohter_typing,
+                          : context.t.msg.ohterTyping,
                       maxLines: 1,
                       style: style,
                     ),

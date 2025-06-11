@@ -66,6 +66,7 @@ class StreamChannelHeaderThemeData with Diagnosticable {
     this.subtitleStyle,
     this.avatarTheme,
     this.color,
+    this.bottomBorderColor
   });
 
   /// Theme for title
@@ -80,18 +81,22 @@ class StreamChannelHeaderThemeData with Diagnosticable {
   /// Color for [StreamChannelHeaderThemeData]
   final Color? color;
 
+  final Color? bottomBorderColor;
+
   /// Copy with theme
   StreamChannelHeaderThemeData copyWith({
     TextStyle? titleStyle,
     TextStyle? subtitleStyle,
     StreamAvatarThemeData? avatarTheme,
     Color? color,
+    Color? bottomBorderColor,
   }) {
     return StreamChannelHeaderThemeData(
       titleStyle: titleStyle ?? this.titleStyle,
       subtitleStyle: subtitleStyle ?? this.subtitleStyle,
       avatarTheme: avatarTheme ?? this.avatarTheme,
       color: color ?? this.color,
+      bottomBorderColor: bottomBorderColor ?? this.bottomBorderColor
     );
   }
 
@@ -109,6 +114,7 @@ class StreamChannelHeaderThemeData with Diagnosticable {
       avatarTheme:
           const StreamAvatarThemeData().lerp(a.avatarTheme!, b.avatarTheme!, t),
       color: Color.lerp(a.color, b.color, t),
+      bottomBorderColor: Color.lerp(a.color, b.color, t),
     );
   }
 
@@ -121,6 +127,7 @@ class StreamChannelHeaderThemeData with Diagnosticable {
           subtitleStyle?.merge(other.subtitleStyle) ?? other.subtitleStyle,
       avatarTheme: avatarTheme?.merge(other.avatarTheme) ?? other.avatarTheme,
       color: other.color,
+      bottomBorderColor: other.bottomBorderColor,
     );
   }
 
@@ -132,14 +139,16 @@ class StreamChannelHeaderThemeData with Diagnosticable {
           titleStyle == other.titleStyle &&
           subtitleStyle == other.subtitleStyle &&
           avatarTheme == other.avatarTheme &&
-          color == other.color;
+          color == other.color && 
+          bottomBorderColor == other.bottomBorderColor;
 
   @override
   int get hashCode =>
       titleStyle.hashCode ^
       subtitleStyle.hashCode ^
       avatarTheme.hashCode ^
-      color.hashCode;
+      color.hashCode ^ 
+      bottomBorderColor.hashCode;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -148,6 +157,7 @@ class StreamChannelHeaderThemeData with Diagnosticable {
       ..add(DiagnosticsProperty('title', titleStyle))
       ..add(DiagnosticsProperty('subtitle', subtitleStyle))
       ..add(DiagnosticsProperty('avatarTheme', avatarTheme))
-      ..add(ColorProperty('color', color));
+      ..add(ColorProperty('color', color))
+      ..add(ColorProperty('bottomBorderColor', bottomBorderColor));
   }
 }

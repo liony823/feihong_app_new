@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:pinyin/pinyin.dart';
 
+
+
 class Utils {
-  
+
   /// 判断是否为空
   static bool isEmptyOrNull(dynamic s) {
     if (s == null){

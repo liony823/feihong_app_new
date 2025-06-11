@@ -19,6 +19,7 @@ dependencies:
 
   # 工具库
   path: ^1.8.3
+  path_provider: ^2.1.5
   intl: ^0.20.2
   device_info_plus: ^11.3.0
   package_info_plus: ^8.3.0
@@ -42,7 +43,7 @@ dependencies:
   extended_image: ^9.1.0
   azlistview: ^2.0.0
   easy_refresh: ^3.4.0
-  skeletonizer: ^1.4.3
+  skeletonizer: ^2.0.1
   flutter_advanced_avatar: ^1.5.2
   pretty_qr_code: ^3.3.0
   screenshot: ^3.0.0

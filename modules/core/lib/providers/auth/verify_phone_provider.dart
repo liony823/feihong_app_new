@@ -111,9 +111,9 @@ class VerifyPhoneController extends _$VerifyPhoneController {
           code: code,
           inviteCode: state.inviteCode,
           password: state.password,
-          deviceId: CommonModule.deviceID,
-          deviceName: CommonModule.deviceName,
-          deviceModel: CommonModule.deviceModel,
+          deviceId: AppConstants.deviceID,
+          deviceName: AppConstants.deviceName,
+          deviceModel: AppConstants.deviceModel,
         ),
       );
       if (result == null) {

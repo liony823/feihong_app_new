@@ -1,4 +1,5 @@
 import 'package:common/common.dart';
+import 'package:flutter_portal/flutter_portal.dart';
 import 'package:stream_ui/stream_ui.dart';
 import 'package:common/widgets/splash_screen.dart';
 import 'package:core/core.dart';
@@ -165,17 +166,19 @@ class _AppState extends ConsumerState<FeiApp>
                           GlobalMaterialLocalizations.delegate,
                           GlobalCupertinoLocalizations.delegate,
                         ],
-                        builder: (context, child) => Overlay(
-                          initialEntries: [
-                            OverlayEntry(
-                              builder: (context) => ToastificationConfigProvider(
-                                config: ToastificationConfig(
-                                  alignment: Alignment.topCenter,
+                        builder: (context, child) => Portal(
+                          child: Overlay(
+                            initialEntries: [
+                              OverlayEntry(
+                                builder: (context) => ToastificationConfigProvider(
+                                  config: ToastificationConfig(
+                                    alignment: Alignment.topCenter,
+                                  ),
+                                  child: child!,
                                 ),
-                                child: child!,
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                       if (!animationCompleted) buildAnimation(),

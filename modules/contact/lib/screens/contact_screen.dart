@@ -58,7 +58,7 @@ class ContactScreen extends HookConsumerWidget {
         children: [
           _buildItemView(context,
               extra: unreadFriendApplyCount > 0
-                  ? UnreadIndicator(unreadCount: unreadFriendApplyCount)
+                  ? StreamUnreadIndicator(unreadCount: unreadFriendApplyCount)
                   : null,
               avatar: _buildContactHeaderIcon(context,
                   icon: EvaIcons.person_add, color: Color(0xFFFA9C3E)),

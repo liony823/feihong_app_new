@@ -77,9 +77,9 @@ class LoginController extends _$LoginController {
       asyncFunction: () => _authService.loginByUsername(
         username: username,
         password: password,
-        deviceId: CommonModule.deviceID,
-        deviceName: CommonModule.deviceName,
-        deviceModel: CommonModule.deviceModel,
+        deviceId: AppConstants.deviceID,
+        deviceName: AppConstants.deviceName,
+        deviceModel: AppConstants.deviceModel,
       ),
     );
 
@@ -122,9 +122,9 @@ class LoginController extends _$LoginController {
       asyncFunction: () => _authService.loginByUsername(
           username: username,
           password: password,
-          deviceId: CommonModule.deviceID,
-          deviceName: CommonModule.deviceName,
-          deviceModel: CommonModule.deviceModel,
+          deviceId: AppConstants.deviceID,
+          deviceName: AppConstants.deviceName,
+          deviceModel: AppConstants.deviceModel,
         ),
     );
     if (result != null) {
@@ -141,9 +141,9 @@ class LoginController extends _$LoginController {
           zone: state.zone,
           phone: phone,
           password: password,
-          deviceId: CommonModule.deviceID,
-          deviceName: CommonModule.deviceName,
-          deviceModel: CommonModule.deviceModel,
+          deviceId: AppConstants.deviceID,
+          deviceName: AppConstants.deviceName,
+          deviceModel: AppConstants.deviceModel,
         ),
     );
     if (result != null) {

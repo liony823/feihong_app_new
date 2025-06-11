@@ -69,12 +69,12 @@ class ProfileScreen extends HookConsumerWidget {
                       height: 40.w
                     ),
                   ),
-                  onTap: () => _onTapMenu(context, 'avatar', value!),
+                  onTap: () => _onTapMenu(context, 'avatar', value),
                 ),
                 _buildItemView(
                   context,
                   title: context.t.c.profile.username,
-                  child: Text(value?.username ?? '')
+                  child: Text(value.username ?? '')
                       .textColor(
                         AppTheme.lightSecondaryTextColor,
                       )
@@ -83,22 +83,22 @@ class ProfileScreen extends HookConsumerWidget {
                 _buildItemView(
                   context,
                   title: context.t.c.profile.nickname,
-                  child: Text(value?.name ?? '')
+                  child: Text(value.name ?? '')
                       .textColor(
                         AppTheme.lightSecondaryTextColor,
                       )
                       .fontSize(15.sp),
-                  onTap: () => _onTapMenu(context, 'nickname', value!),
+                  onTap: () => _onTapMenu(context, 'nickname', value),
                 ),
                 _buildItemView(
                   context,
                   title: context.t.c.profile.sex,
-                  child: Text(context.t.c.gender[value?.sex ?? 1])
+                  child: Text(context.t.c.gender[value.sex ?? 1])
                       .textColor(
                         AppTheme.lightSecondaryTextColor,
                       )
                       .fontSize(15.sp),
-                  onTap: () => _onTapMenu(context, 'sex', value!),
+                  onTap: () => _onTapMenu(context, 'sex', value),
                 ),
                 _buildItemView(
                   context,
@@ -107,24 +107,24 @@ class ProfileScreen extends HookConsumerWidget {
                     ..width = 20.w
                     ..height = 20.w
                     ..color = AppTheme.lightSecondaryTextColor,
-                  onTap: () => _onTapMenu(context, 'qrCode', value!),
+                  onTap: () => _onTapMenu(context, 'qrCode', value),
                 ),
                 _buildItemView(context,
                     title: context.t.c.profile.introduction,
-                    child: Utils.isEmptyOrNull(value?.introduction)
+                    child: Utils.isEmptyOrNull(value.introduction)
                         ? Text(context.t.c.profile.introductionDefault)
                             .textColor(
                               AppTheme.lightSecondaryTextColor,
                             )
                             .fontSize(15.sp)
-                        : Text(value?.introduction ?? '')
+                        : Text(value.introduction ?? '')
                             .textColor(
                               AppTheme.lightSecondaryTextColor,
                             )
                             .fontSize(15.sp),
                     crossAxisAlignment: CrossAxisAlignment.start,
                     showDivider: false,
-                    onTap: () => _onTapMenu(context, 'introduction', value!)),
+                    onTap: () => _onTapMenu(context, 'introduction', value)),
               ],
             ),
           ),

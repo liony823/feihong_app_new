@@ -86,14 +86,14 @@ class AppTheme {
         backgroundColor: lightBackgroundColor,
         elevation: 0,
         iconTheme: IconThemeData(color: lightTextColor),
-        surfaceTintColor: brandColor.withValues(alpha: 0.2),
+        surfaceTintColor: Colors.transparent,
         titleTextStyle: TextStyle(
           color: lightTextColor,
           fontSize: 18.sp,
           fontWeight: FontWeight.w600,
         ),
       ),
-      dialogTheme: DialogTheme(
+      dialogTheme: DialogThemeData(
         backgroundColor: AppTheme.primaryLightColor,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12.r),

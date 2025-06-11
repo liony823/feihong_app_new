@@ -1,6 +1,5 @@
 import 'package:common/common.dart';
 import 'package:core/core.dart';
-import 'package:core/models/channel/channel_state.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:wukongimfluttersdk/common/options.dart';
 import 'package:wukongimfluttersdk/entity/channel.dart';
@@ -389,7 +388,7 @@ class IMService extends _$IMService {
         final result = await Apis.syncConversation(
             version: version,
             lastSsgSeqs: lastSsgSeqs,
-            deviceUUID: CommonModule.deviceID,
+            deviceUUID:  AppConstants.deviceID,
             msgCount: msgCount);
         if (result != null &&
             (result['uid'] as String).isNotEmpty &&
@@ -527,7 +526,19 @@ class IMService extends _$IMService {
   }
 
   void _ackDeviceUUID() {
-    Apis.ackCoverMsg(deviceUUID: CommonModule.deviceID);
+    Apis.ackCoverMsg(deviceUUID: AppConstants.deviceID);
+  }
+
+  void updateChanneStatus(int index, ChannelSimpleState channelStatus){
+    final newChannelStatus = List<ChannelSimpleState>.from(state.channelStatus);
+    newChannelStatus[index] = channelStatus;
+    state = state.copyWith(channelStatus: newChannelStatus);
+  }
+
+  void addChannelStatus(ChannelSimpleState channelStatus){
+    final newChannelStatus = List<ChannelSimpleState>.from(state.channelStatus);
+    newChannelStatus.add(channelStatus);
+    state = state.copyWith(channelStatus: newChannelStatus);
   }
 }
 

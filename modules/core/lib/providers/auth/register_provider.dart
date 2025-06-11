@@ -69,7 +69,7 @@ class RegisterController extends _$RegisterController {
           ToastUtil.simpleToast(context?.t.c.register.usernameEmpty ?? '');
           return false;
         }
-        if (!Regex.usernameReg.hasMatch(username)) {
+        if (!Regex.USERNAME_PATTERN.hasMatch(username)) {
           ToastUtil.simpleToast(context?.t.c.register.usernameError ?? '');
           return false;
         }
@@ -86,7 +86,7 @@ class RegisterController extends _$RegisterController {
         ToastUtil.simpleToast(context?.t.c.register.passwordEmpty ?? '');
         return false;
       }
-      if (!Regex.passwordReg.hasMatch(password)) {
+      if (!Regex.PASSWORD_PATTERN.hasMatch(password)) {
         ToastUtil.simpleToast(context?.t.c.register.passwordError ?? '');
         return false;
       }
@@ -115,9 +115,9 @@ class RegisterController extends _$RegisterController {
                 username: username,
                 password: password,
                 inviteCode: inviteCode,
-                deviceId: CommonModule.deviceID,
-                deviceName: CommonModule.deviceName,
-                deviceModel: CommonModule.deviceModel,
+                deviceId: AppConstants.deviceID,
+                deviceName: AppConstants.deviceName,
+                deviceModel: AppConstants.deviceModel,
               ));
       if (result == null) {
         return;

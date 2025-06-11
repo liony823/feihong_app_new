@@ -7,7 +7,7 @@ part of 'account_manager_provider.dart';
 // **************************************************************************
 
 String _$accountManagerControllerHash() =>
-    r'dc0c72f9aa74ff7838b5d40cdf6af7e149879ae3';
+    r'0fbaa7f25e9953c4f8cac6f8dd13f0074995e181';
 
 /// See also [AccountManagerController].
 @ProviderFor(AccountManagerController)

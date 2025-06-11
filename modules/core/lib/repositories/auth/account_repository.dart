@@ -2,7 +2,6 @@ import 'package:core/core.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../models/db/db_account.dart';
 
 part 'account_repository.g.dart';
 

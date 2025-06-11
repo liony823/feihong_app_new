@@ -112,7 +112,7 @@ class MineScreen extends HookConsumerWidget {
                 .fontSize(16.sp)
                 .fontWeight(FontWeight.w500),
             const Spacer(),
-            if (unReadCount > 0) UnreadIndicator(unreadCount: unReadCount),
+            if (unReadCount > 0) StreamUnreadIndicator(unreadCount: unReadCount),
             10.horizontalSpace,
             Icon(
               Icons.chevron_right_rounded,

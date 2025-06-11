@@ -33,3 +33,4 @@ part 'media_query_ext.dart';
 part 'string_ext.dart';
 part 'colors_ext.dart';
 part 'navigator_ext.dart';
+part 'uri_ext.dart';

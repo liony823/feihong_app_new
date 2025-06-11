@@ -1,9 +1,9 @@
 /// API配置类
 class ApiConfig {
   /// API基础URL
-  static const String baseUrl = 'http://172.16.175.168:8090/v1';
+  static const String baseUrl = 'http://192.168.2.52:8090/v1';
 
-  static const String baseIMUrl = 'http://172.16.175.168:5001';
+  static const String baseIMUrl = 'http://192.168.2.52:5001';
 
   static const String health = '/health'; // 健康检查
 
@@ -31,11 +31,16 @@ class ApiConfig {
   static const String syncConversation = '/conversation/sync';
   static const String ackConverMsg = '/conversation/syncack';
   static const String clearUnread = '/coversation/clearUnread';
+
+  // 频道模块
+  static const String getChannelState = '/channel/state';
   
   // 消息模块
   static const String syncMessage = '/message/sync';
   static const String syncChannelMessage = '/message/channel/sync';
+  static const String syncExtraMessage = '/message/extra/sync';
   static const String offsetMessage = '/message/offset';
+
 
   // 联系人模块
   static const String getFriendApplyUnreadCount =

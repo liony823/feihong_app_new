@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:common/common.dart';
 import 'package:core/api/apis.dart';
 import 'package:flutter/material.dart';
@@ -209,5 +211,17 @@ class ViewHelper {
       }
     }
     return {'path': cropFile?.path ?? path, 'url': url};
+  }
+
+  static Future<String> getAvatarUrl(String channelID, int channelType) async {
+    String filePath =
+        "${AppConstants.avatarCacheDir}${channelType}_$channelID";
+    final file = File(filePath);
+    if (await file.exists()) {
+      return filePath;
+    } else {
+      String url = Apis.getShowAvatar(channelID, channelType);
+      return url;
+    }
   }
 }

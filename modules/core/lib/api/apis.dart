@@ -1,23 +1,25 @@
 import 'package:common/common.dart';
+import 'package:core/models/channel/channel_state.dart';
 import 'package:dio/dio.dart';
+import 'package:wukongimfluttersdk/entity/channel_member.dart';
+import 'package:wukongimfluttersdk/type/const.dart';
+import 'package:wukongimfluttersdk/wkim.dart';
 
 import '../models/channel/channel_info.dart';
 import 'api_client.dart';
 import 'api_config.dart';
 
 class Apis {
-  static String getAvatarUrl(String uid, {String cacheKey = ""}) {
-    if (cacheKey.isNotEmpty) {
-      return "${ApiConfig.baseUrl}/users/$uid/avatar?cacheKey=$cacheKey";
-    }
-    return "${ApiConfig.baseUrl}/users/$uid/avatar";
-  }
+  static String getAvatarUrl(String uid) =>
+      "${ApiConfig.baseUrl}/users/$uid/avatar";
 
-  static String getGroupAvatarUrl(String gid, {String cacheKey = ""}) {
-    if (cacheKey.isNotEmpty) {
-      return "${ApiConfig.baseUrl}/groups/$gid/avatar?cacheKey=$cacheKey";
-    }
-    return "${ApiConfig.baseUrl}/groups/$gid/avatar";
+  static String getGroupAvatarUrl(String gid, {String cacheKey = ""}) =>
+      "${ApiConfig.baseUrl}/groups/$gid/avatar";
+
+  static String getShowAvatar(String channelID, int channelType) {
+    return channelType == WKChannelType.personal
+        ? getAvatarUrl(channelID)
+        : getGroupAvatarUrl(channelID);
   }
 
   /// 上传文件
@@ -106,6 +108,38 @@ class Apis {
     }
   }
 
+  /// 同步某个会话的扩展消息
+  static Future syncExtraMsg(
+      {required String channelID,
+      required int channelType,
+      int limit = 100}) async {
+    try {
+      final maxExtraVersion = await WKIM.shared.messageManager
+          .getMaxExtraVersionWithChannel(channelID, channelType);
+      Map<String, dynamic> data = {
+        "channel_id": channelID,
+        "channel_type": channelType,
+        "extra_version": maxExtraVersion,
+        "limit": limit,
+        "source": AppConstants.deviceID
+      };
+      final result =
+          await ApiClient.instance.post(ApiConfig.syncExtraMessage, data: data);
+
+      if (result.data != null &&
+          result.data is List &&
+          result.data.isNotEmpty) {
+        WKIM.shared.messageManager.saveRemoteExtraMsg(result.data);
+        // 延迟500毫秒调用自己
+        Future.delayed(Duration(milliseconds: 500), () {
+          syncExtraMsg(channelID: channelID, channelType: channelType);
+        });
+      }
+    } catch (e) {
+      AppLogger.e("同步扩展消息失败");
+    }
+  }
+
   ///
   /// 同步某个频道的消息
   /// @param channelID           频道ID
@@ -155,6 +189,25 @@ class Apis {
     }
   }
 
+  // 获取频道状态
+  static Future<WKChannelState?> getChannelState(
+      {required String channelId, required int channelType}) async {
+    try {
+      final result = await ApiClient.instance.get(ApiConfig.getChannelState,
+          queryParameters: {
+            "channel_id": channelId,
+            "channel_type": channelType
+          });
+      if (result.data != null) {
+        return WKChannelState.fromJson(result.data);
+      }
+      return null;
+    } catch (e) {
+      AppLogger.e("获取频道状态失败");
+      return null;
+    }
+  }
+
   /// 同步设备消息
   static Future ackCoverMsg({required String deviceUUID}) async {
     try {
@@ -164,6 +217,58 @@ class Apis {
     } catch (e) {
       AppLogger.e("同步设备消息失败");
       return null;
+    }
+  }
+
+  /// 同步群组成员
+  static Future<bool> syncGroupMembers(
+      {required String groupNo, int limit = 1000}) async {
+    try {
+      final maxVersion = WKIM.shared.channelMemberManager
+          .getMaxVersion(groupNo, WKChannelType.group);
+      final result = await ApiClient.instance
+          .get("/groups/$groupNo/membersync", queryParameters: {
+        "version": maxVersion,
+        "limit": limit,
+      });
+      if (result.data != null && result.data is List) {
+        final list = (result.data as List).map((e) => GroupMember.fromJson(e));
+        List<WKChannelMember> wkChannelMembers = [];
+        for (var element in list) {
+          WKChannelMember member = WKChannelMember();
+          member.memberUID = element.uid;
+          member.memberRemark = element.remark;
+          member.memberName = element.name;
+          member.channelID = element.groupNo;
+          member.channelType = WKChannelType.group;
+          member.isDeleted = element.isDeleted;
+          member.version = element.version;
+          member.role = element.role;
+          member.status = element.status;
+          member.memberInviteUID = element.inviteUid;
+          member.robot = element.robot;
+          member.forbiddenExpirationTime = element.forbiddenExpirTime;
+          if (member.robot == 1 && element.username.isNotEmpty) {
+            member.memberName = element.username;
+          }
+          member.updatedAt = element.updatedAt;
+          member.createdAt = element.createdAt;
+          Map<String, dynamic> hashMap = {
+            "code": element.vercode,
+          };
+          member.extraMap = hashMap;
+          wkChannelMembers.add(member);
+        }
+        WKIM.shared.channelMemberManager.saveOrUpdateList(wkChannelMembers);
+        Future.delayed(Duration(milliseconds: 500), () {
+          syncGroupMembers(groupNo: groupNo);
+        });
+        return true;
+      }
+      return false;
+    } catch (e) {
+      AppLogger.e("同步群组成员失败");
+      return false;
     }
   }
 
@@ -192,11 +297,40 @@ class Apis {
   }
 
   /// 获取用户信息
-  static Future<UserInfo?> getUserInfo({required String uid}) async {
+  static Future<UserInfo?> getUserInfo(
+      {required String uid, String? groupNo}) async {
     try {
-      final response = await ApiClient.instance.get("/users/$uid");
+      final response = await ApiClient.instance.get("/users/$uid",
+          queryParameters: groupNo != null ? {"group_no": groupNo} : null);
       if (response.data != null) {
-        return UserInfo.fromJson(response.data);
+        final userInfo = UserInfo.fromJson(response.data);
+        if (userInfo.groupMember != null) {
+          WKChannelMember member = WKChannelMember();
+          final element = userInfo.groupMember as GroupMember;
+          member.memberUID = element.uid;
+          member.memberRemark = element.remark;
+          member.memberName = element.name;
+          member.channelID = element.groupNo;
+          member.channelType = WKChannelType.group;
+          member.isDeleted = element.isDeleted;
+          member.version = element.version;
+          member.role = element.role;
+          member.status = element.status;
+          member.memberInviteUID = element.inviteUid;
+          member.robot = element.robot;
+          member.forbiddenExpirationTime = element.forbiddenExpirTime;
+          if (member.robot == 1 && element.username.isNotEmpty) {
+            member.memberName = element.username;
+          }
+          member.updatedAt = element.updatedAt;
+          member.createdAt = element.createdAt;
+          Map<String, dynamic> hashMap = {
+            "code": element.vercode,
+          };
+          member.extraMap = hashMap;
+          WKIM.shared.channelMemberManager.saveOrUpdateList([member]);
+        }
+        return userInfo;
       }
       return null;
     } catch (e) {

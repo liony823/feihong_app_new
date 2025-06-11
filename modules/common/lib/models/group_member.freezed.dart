@@ -18,6 +18,7 @@ mixin _$GroupMember {
   String get uid;
   String get groupNo;
   String get name;
+  String get username;
   String get remark;
   int get role;
   int get isDeleted;
@@ -28,6 +29,7 @@ mixin _$GroupMember {
   int get forbiddenExpirTime;
   String get createdAt;
   String get updatedAt;
+  int get version;
 
   /// Create a copy of GroupMember
   /// with the given fields replaced by the non-null parameter values.
@@ -47,6 +49,8 @@ mixin _$GroupMember {
             (identical(other.uid, uid) || other.uid == uid) &&
             (identical(other.groupNo, groupNo) || other.groupNo == groupNo) &&
             (identical(other.name, name) || other.name == name) &&
+            (identical(other.username, username) ||
+                other.username == username) &&
             (identical(other.remark, remark) || other.remark == remark) &&
             (identical(other.role, role) || other.role == role) &&
             (identical(other.isDeleted, isDeleted) ||
@@ -61,7 +65,8 @@ mixin _$GroupMember {
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
-                other.updatedAt == updatedAt));
+                other.updatedAt == updatedAt) &&
+            (identical(other.version, version) || other.version == version));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -71,6 +76,7 @@ mixin _$GroupMember {
       uid,
       groupNo,
       name,
+      username,
       remark,
       role,
       isDeleted,
@@ -80,11 +86,12 @@ mixin _$GroupMember {
       robot,
       forbiddenExpirTime,
       createdAt,
-      updatedAt);
+      updatedAt,
+      version);
 
   @override
   String toString() {
-    return 'GroupMember(uid: $uid, groupNo: $groupNo, name: $name, remark: $remark, role: $role, isDeleted: $isDeleted, status: $status, vercode: $vercode, inviteUid: $inviteUid, robot: $robot, forbiddenExpirTime: $forbiddenExpirTime, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'GroupMember(uid: $uid, groupNo: $groupNo, name: $name, username: $username, remark: $remark, role: $role, isDeleted: $isDeleted, status: $status, vercode: $vercode, inviteUid: $inviteUid, robot: $robot, forbiddenExpirTime: $forbiddenExpirTime, createdAt: $createdAt, updatedAt: $updatedAt, version: $version)';
   }
 }
 
@@ -98,6 +105,7 @@ abstract mixin class $GroupMemberCopyWith<$Res> {
       {String uid,
       String groupNo,
       String name,
+      String username,
       String remark,
       int role,
       int isDeleted,
@@ -107,7 +115,8 @@ abstract mixin class $GroupMemberCopyWith<$Res> {
       int robot,
       int forbiddenExpirTime,
       String createdAt,
-      String updatedAt});
+      String updatedAt,
+      int version});
 }
 
 /// @nodoc
@@ -125,6 +134,7 @@ class _$GroupMemberCopyWithImpl<$Res> implements $GroupMemberCopyWith<$Res> {
     Object? uid = null,
     Object? groupNo = null,
     Object? name = null,
+    Object? username = null,
     Object? remark = null,
     Object? role = null,
     Object? isDeleted = null,
@@ -135,6 +145,7 @@ class _$GroupMemberCopyWithImpl<$Res> implements $GroupMemberCopyWith<$Res> {
     Object? forbiddenExpirTime = null,
     Object? createdAt = null,
     Object? updatedAt = null,
+    Object? version = null,
   }) {
     return _then(_self.copyWith(
       uid: null == uid
@@ -148,6 +159,10 @@ class _$GroupMemberCopyWithImpl<$Res> implements $GroupMemberCopyWith<$Res> {
       name: null == name
           ? _self.name
           : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      username: null == username
+          ? _self.username
+          : username // ignore: cast_nullable_to_non_nullable
               as String,
       remark: null == remark
           ? _self.remark
@@ -189,6 +204,10 @@ class _$GroupMemberCopyWithImpl<$Res> implements $GroupMemberCopyWith<$Res> {
           ? _self.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as String,
+      version: null == version
+          ? _self.version
+          : version // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -199,17 +218,19 @@ class _GroupMember implements GroupMember {
   const _GroupMember(
       {required this.uid,
       required this.groupNo,
-      required this.name,
-      required this.remark,
-      required this.role,
-      required this.isDeleted,
-      required this.status,
-      required this.vercode,
-      required this.inviteUid,
-      required this.robot,
-      required this.forbiddenExpirTime,
-      required this.createdAt,
-      required this.updatedAt});
+      this.name = "",
+      this.username = "",
+      this.remark = "",
+      this.role = 0,
+      this.isDeleted = 0,
+      this.status = 0,
+      this.vercode = "",
+      this.inviteUid = "",
+      this.robot = 0,
+      this.forbiddenExpirTime = 0,
+      this.createdAt = "",
+      this.updatedAt = "",
+      this.version = 0});
   factory _GroupMember.fromJson(Map<String, dynamic> json) =>
       _$GroupMemberFromJson(json);
 
@@ -218,27 +239,44 @@ class _GroupMember implements GroupMember {
   @override
   final String groupNo;
   @override
+  @JsonKey()
   final String name;
   @override
+  @JsonKey()
+  final String username;
+  @override
+  @JsonKey()
   final String remark;
   @override
+  @JsonKey()
   final int role;
   @override
+  @JsonKey()
   final int isDeleted;
   @override
+  @JsonKey()
   final int status;
   @override
+  @JsonKey()
   final String vercode;
   @override
+  @JsonKey()
   final String inviteUid;
   @override
+  @JsonKey()
   final int robot;
   @override
+  @JsonKey()
   final int forbiddenExpirTime;
   @override
+  @JsonKey()
   final String createdAt;
   @override
+  @JsonKey()
   final String updatedAt;
+  @override
+  @JsonKey()
+  final int version;
 
   /// Create a copy of GroupMember
   /// with the given fields replaced by the non-null parameter values.
@@ -263,6 +301,8 @@ class _GroupMember implements GroupMember {
             (identical(other.uid, uid) || other.uid == uid) &&
             (identical(other.groupNo, groupNo) || other.groupNo == groupNo) &&
             (identical(other.name, name) || other.name == name) &&
+            (identical(other.username, username) ||
+                other.username == username) &&
             (identical(other.remark, remark) || other.remark == remark) &&
             (identical(other.role, role) || other.role == role) &&
             (identical(other.isDeleted, isDeleted) ||
@@ -277,7 +317,8 @@ class _GroupMember implements GroupMember {
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
-                other.updatedAt == updatedAt));
+                other.updatedAt == updatedAt) &&
+            (identical(other.version, version) || other.version == version));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -287,6 +328,7 @@ class _GroupMember implements GroupMember {
       uid,
       groupNo,
       name,
+      username,
       remark,
       role,
       isDeleted,
@@ -296,11 +338,12 @@ class _GroupMember implements GroupMember {
       robot,
       forbiddenExpirTime,
       createdAt,
-      updatedAt);
+      updatedAt,
+      version);
 
   @override
   String toString() {
-    return 'GroupMember(uid: $uid, groupNo: $groupNo, name: $name, remark: $remark, role: $role, isDeleted: $isDeleted, status: $status, vercode: $vercode, inviteUid: $inviteUid, robot: $robot, forbiddenExpirTime: $forbiddenExpirTime, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'GroupMember(uid: $uid, groupNo: $groupNo, name: $name, username: $username, remark: $remark, role: $role, isDeleted: $isDeleted, status: $status, vercode: $vercode, inviteUid: $inviteUid, robot: $robot, forbiddenExpirTime: $forbiddenExpirTime, createdAt: $createdAt, updatedAt: $updatedAt, version: $version)';
   }
 }
 
@@ -316,6 +359,7 @@ abstract mixin class _$GroupMemberCopyWith<$Res>
       {String uid,
       String groupNo,
       String name,
+      String username,
       String remark,
       int role,
       int isDeleted,
@@ -325,7 +369,8 @@ abstract mixin class _$GroupMemberCopyWith<$Res>
       int robot,
       int forbiddenExpirTime,
       String createdAt,
-      String updatedAt});
+      String updatedAt,
+      int version});
 }
 
 /// @nodoc
@@ -343,6 +388,7 @@ class __$GroupMemberCopyWithImpl<$Res> implements _$GroupMemberCopyWith<$Res> {
     Object? uid = null,
     Object? groupNo = null,
     Object? name = null,
+    Object? username = null,
     Object? remark = null,
     Object? role = null,
     Object? isDeleted = null,
@@ -353,6 +399,7 @@ class __$GroupMemberCopyWithImpl<$Res> implements _$GroupMemberCopyWith<$Res> {
     Object? forbiddenExpirTime = null,
     Object? createdAt = null,
     Object? updatedAt = null,
+    Object? version = null,
   }) {
     return _then(_GroupMember(
       uid: null == uid
@@ -366,6 +413,10 @@ class __$GroupMemberCopyWithImpl<$Res> implements _$GroupMemberCopyWith<$Res> {
       name: null == name
           ? _self.name
           : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      username: null == username
+          ? _self.username
+          : username // ignore: cast_nullable_to_non_nullable
               as String,
       remark: null == remark
           ? _self.remark
@@ -407,6 +458,10 @@ class __$GroupMemberCopyWithImpl<$Res> implements _$GroupMemberCopyWith<$Res> {
           ? _self.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as String,
+      version: null == version
+          ? _self.version
+          : version // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }

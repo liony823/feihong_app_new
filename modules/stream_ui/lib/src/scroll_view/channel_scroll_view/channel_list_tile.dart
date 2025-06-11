@@ -1,9 +1,7 @@
 import 'package:common/common.dart';
 import 'package:stream_ui/stream_ui.dart';
 import 'package:flutter/material.dart';
-import 'package:wukongimfluttersdk/entity/channel.dart';
 import 'package:wukongimfluttersdk/entity/conversation.dart';
-import 'package:wukongimfluttersdk/entity/msg.dart';
 import 'package:wukongimfluttersdk/entity/reminder.dart';
 import 'package:wukongimfluttersdk/wkim.dart';
 
@@ -152,12 +150,12 @@ class ChannelListTile extends StatelessWidget {
             final channel = snapshot.data;
             if (channel != null) {
               final leading = this.leading ??
-                  ChannelAvatar(
+                  StreamChannelAvatar(
                     channel: channel,
                   );
 
               final title = this.title ??
-                  ChannelName(
+                  StreamChannelName(
                     channelState: channelState,
                     textStyle: channelPreviewTheme.titleStyle,
                   );
@@ -229,7 +227,7 @@ class ChannelListTile extends StatelessWidget {
                         ),
                       ),
                       unreadIndicatorBuilder?.call(context) ??
-                          UnreadIndicator(
+                          StreamUnreadIndicator(
                               unreadCount: msg.unreadCount,
                               isMuted: channel.mute == 1)
                     ],

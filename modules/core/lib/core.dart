@@ -23,32 +23,31 @@ export 'models/contact/friend_apply.dart';
 export 'models/applet/applet.dart';
 export 'models/db/db_account.dart';
 export 'models/channel/channel_info.dart';
+export 'models/channel/channel_state.dart';
+export 'models/endpoint/read_msg_menu.dart';
 
 // 导出状态管理
 export 'providers/base/home_provider.dart';
 export 'providers/base/locale_provider.dart';
 export 'providers/base/setting_provider.dart';  
-
 export 'providers/contact/contact_provider.dart';
 export 'providers/contact/add_friend_provider.dart';
 export 'providers/contact/friend_apply_provider.dart';
 export 'providers/contact/search_user_provider.dart';
 export 'providers/contact/user_profile_provider.dart';
-
 export 'providers/auth/login_provider.dart';
 export 'providers/auth/register_provider.dart';
 export 'providers/auth/set_self_info_provider.dart';
 export 'providers/auth/account_manager_provider.dart';
 export 'providers/auth/set_self_security_provider.dart';
 export 'providers/auth/verify_phone_provider.dart';
-
 export 'providers/applet/applet_provider.dart';
-
 export 'providers/chat/channel_provider.dart';
-
+export 'providers/chat/chat_provider.dart';
 export 'providers/profile/set_avatar_provider.dart';
 export 'providers/profile/set_nickname_provider.dart';
 export 'providers/profile/set_intro_provider.dart';
+export 'providers/endpoint_manager.dart';
 
 
 // 导出仓库

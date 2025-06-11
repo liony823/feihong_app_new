@@ -36,6 +36,7 @@ dependencies:
   # UI组件
   toastification: ^3.0.1
   oktoast: ^3.4.0
+  flutter_portal: ^1.1.4
 
   #路由
   auto_route: ^10.0.1
